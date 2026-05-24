@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <title>Получить разбор — Mentori</title>
+  <meta name="description" content="Запишитесь на бесплатный разбор бизнеса. 45 минут — и план первых 30 дней." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor-glow" aria-hidden="true"></div>
+
+  <header class="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__brand" aria-label="Mentori">
+        <span class="nav__brand-text">Mentori</span>
+        <span class="nav__brand-suffix">/agency</span>
+      </a>
+      <nav class="nav__links" aria-label="Главная навигация">
+        <a href="services.html">Что делаем</a>
+        <a href="process.html">Как работаем</a>
+        <a href="cases.html">Кейсы</a>
+        <a href="contact.html" class="is-active">Контакт</a>
+      </nav>
+      <a href="contact.html" class="nav__cta" data-magnetic>
+        <span>Получить разбор</span>
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <!-- ═══════════════ CONTACT HERO + FORM ═══════════════ -->
+  <section class="contact-hero">
+    <div class="contact-hero__bg">
+      <div class="hero__mesh hero__mesh--orange"></div>
+      <div class="hero__mesh hero__mesh--amber"></div>
+      <div class="hero__grid"></div>
+    </div>
+    <div class="contact-hero__inner">
+      <div class="contact-hero__copy">
+        <div class="eyebrow" data-reveal>
+          <span class="eyebrow__pulse"></span>
+          <span>принимаем 3 проекта в&nbsp;месяц</span>
+        </div>
+        <h1 class="contact-hero__title" data-reveal>
+          Расскажите о&nbsp;бизнесе&nbsp;—<br/><em>покажем, где&nbsp;деньги</em>
+        </h1>
+        <p class="contact-hero__lead" data-reveal>
+          45&nbsp;минут разговора. Смотрим вашу&nbsp;воронку, считаем потери, говорим, что&nbsp;можно автоматизировать&nbsp;первым и&nbsp;сколько это&nbsp;принесёт. Никаких презентаций и&nbsp;«у&nbsp;вас всё&nbsp;плохо».
+        </p>
+
+        <ul class="contact-hero__ways" data-reveal>
+          <li>
+            <span class="contact-hero__way-h">Telegram</span>
+            <a href="https://t.me/mentori_team" target="_blank" rel="noopener">@mentori_team</a>
+            <span class="contact-hero__way-meta">отвечаем&nbsp;в&nbsp;течение&nbsp;часа</span>
+          </li>
+          <li>
+            <span class="contact-hero__way-h">Email</span>
+            <a href="mailto:hello@mentori.tech">hello@mentori.tech</a>
+            <span class="contact-hero__way-meta">для&nbsp;официальной&nbsp;переписки</span>
+          </li>
+          <li>
+            <span class="contact-hero__way-h">Звонок</span>
+            <a href="tel:+74951234567">+7 495 123 45 67</a>
+            <span class="contact-hero__way-meta">пн—пт, 10:00 — 19:00 МСК</span>
+          </li>
+        </ul>
+      </div>
+
+      <form class="contact-form" id="contactForm" data-reveal>
+        <div class="contact-form__head">
+          <div class="contact-form__h">Заявка на&nbsp;разбор</div>
+          <div class="contact-form__sub">ответим&nbsp;в&nbsp;течение часа в&nbsp;рабочее&nbsp;время</div>
+        </div>
+
+        <div class="contact-form__field">
+          <label for="name">Как вас зовут?</label>
+          <input type="text" id="name" name="name" required placeholder="Артём" autocomplete="name" />
+        </div>
+
+        <div class="contact-form__field">
+          <label for="company">Чем занимается ваш бизнес?</label>
+          <input type="text" id="company" name="company" required placeholder="строим загородные дома под ключ" autocomplete="organization" />
+        </div>
+
+        <div class="contact-form__row">
+          <div class="contact-form__field">
+            <label for="contact">Куда&nbsp;писать&nbsp;ответ?</label>
+            <input type="text" id="contact" name="contact" required placeholder="@telegram или почта" />
+          </div>
+          <div class="contact-form__field">
+            <label for="leads">Сколько заявок в&nbsp;день?</label>
+            <select id="leads" name="leads" required>
+              <option value="">Выберите</option>
+              <option>меньше 10</option>
+              <option>10 — 30</option>
+              <option>30 — 100</option>
+              <option>больше 100</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="contact-form__field">
+          <label for="message">Что хотите изменить? (необязательно)</label>
+          <textarea id="message" name="message" rows="3" placeholder="теряем ночные заявки, менеджеры не успевают..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn--primary btn--block" data-magnetic>
+          <span>Отправить и&nbsp;получить разбор</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 12.5L12.5 3.5M12.5 3.5H5.5M12.5 3.5V10.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+
+        <div class="contact-form__note">
+          Нажимая кнопку, вы&nbsp;соглашаетесь с&nbsp;<a href="#">политикой обработки персональных данных</a>.
+        </div>
+
+        <div class="contact-form__success" id="formSuccess" hidden>
+          <div class="contact-form__success-icon">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M8 16.5L13 21.5L24 10.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="contact-form__success-h">Заявка принята</div>
+          <div class="contact-form__success-text">Свяжемся в&nbsp;течение часа в&nbsp;рабочее&nbsp;время. Если&nbsp;срочно&nbsp;— пишите сразу&nbsp;в&nbsp;Telegram&nbsp;<a href="https://t.me/mentori_team">@mentori_team</a>.</div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <div class="foot__inner">
+      <div class="foot__brand">
+        <div>
+          <div class="foot__name">Mentori</div>
+          <div class="foot__tag">агентство автоматизации продаж · 2026</div>
+        </div>
+      </div>
+      <div class="foot__cols">
+        <div>
+          <div class="foot__h">Контакт</div>
+          <a href="mailto:hello@mentori.tech">hello@mentori.tech</a>
+          <a href="https://t.me/mentori_team">@mentori_team</a>
+        </div>
+        <div>
+          <div class="foot__h">Разделы</div>
+          <a href="services.html">Что делаем</a>
+          <a href="cases.html">Кейсы</a>
+          <a href="process.html">Как работаем</a>
+          <a href="contact.html">Контакт</a>
+        </div>
+        <div>
+          <div class="foot__h">Юридическое</div>
+          <a href="#">Политика конфиденциальности</a>
+          <a href="#">Договор оферты</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot__bottom">
+      <span>© Mentori, 2026</span>
+      <span>работаем по&nbsp;всей России и&nbsp;СНГ</span>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="main.js" defer></script>
+</body>
+</html>
