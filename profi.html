@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <title>Продвижение на Profi.ru — Mentori</title>
+  <meta name="description" content="Упаковываем и ведём профили специалистов на Profi.ru. Поднимаем эффективность откликов, заявки растут в 3–7 раз." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor-glow" aria-hidden="true"></div>
+
+  <header class="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__brand" aria-label="Mentori">
+        <span class="nav__brand-text">Mentori</span>
+        <span class="nav__brand-suffix">/agency</span>
+      </a>
+      <nav class="nav__links" aria-label="Главная навигация">
+        <a href="services.html">Что делаем</a>
+        <a href="process.html">Как работаем</a>
+        <a href="cases.html">Кейсы</a>
+        <a href="profi.html" class="is-active">Profi.ru</a>
+        <a href="about.html">О нас</a>
+        <a href="blog.html">Блог</a>
+        <a href="contact.html">Контакт</a>
+      </nav>
+      <a href="https://t.me/Mento_ri" class="nav__cta" data-magnetic>
+        <span>Получить разбор</span>
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <button class="nav__burger" id="navBurger" aria-label="Меню" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <nav class="mobile-menu__nav">
+      <a href="services.html">Что делаем</a>
+      <a href="process.html">Как работаем</a>
+      <a href="cases.html">Кейсы</a>
+      <a href="profi.html" class="is-active">Profi.ru</a>
+      <a href="about.html">О нас</a>
+      <a href="blog.html">Блог</a>
+      <a href="contact.html">Контакт</a>
+    </nav>
+    <div class="mobile-menu__cta">
+      <a href="https://t.me/Mento_ri" class="btn btn--primary btn--block">
+        <span>Получить разбор</span>
+      </a>
+      <div class="mobile-menu__contact">
+        <a href="https://t.me/Mento_ri">@Mento_ri</a>
+        <a href="mailto:hello@mentori.tech">hello@mentori.tech</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ PAGE HERO ═══════════════ -->
+  <section class="page-hero page-hero--profi">
+    <div class="page-hero__bg">
+      <div class="hero__mesh hero__mesh--orange"></div>
+      <div class="hero__mesh hero__mesh--amber"></div>
+      <div class="hero__grid"></div>
+      <!-- декоративная сетка-волна (canvas-style svg) -->
+      <svg class="page-hero__wave" viewBox="0 0 1200 600" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="waveGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#ff5e1a" stop-opacity="0"/>
+            <stop offset="50%" stop-color="#ff5e1a" stop-opacity="0.5"/>
+            <stop offset="100%" stop-color="#ff5e1a" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <g stroke="url(#waveGrad)" stroke-width="1" fill="none">
+          <path d="M0,300 Q300,180 600,260 T1200,200"><animate attributeName="d" dur="14s" repeatCount="indefinite" values="M0,300 Q300,180 600,260 T1200,200;M0,260 Q300,340 600,200 T1200,280;M0,300 Q300,180 600,260 T1200,200"/></path>
+          <path d="M0,360 Q300,260 600,340 T1200,280" opacity="0.6"><animate attributeName="d" dur="18s" repeatCount="indefinite" values="M0,360 Q300,260 600,340 T1200,280;M0,320 Q300,400 600,280 T1200,340;M0,360 Q300,260 600,340 T1200,280"/></path>
+          <path d="M0,420 Q300,340 600,420 T1200,360" opacity="0.3"><animate attributeName="d" dur="22s" repeatCount="indefinite" values="M0,420 Q300,340 600,420 T1200,360;M0,380 Q300,460 600,360 T1200,420;M0,420 Q300,340 600,420 T1200,360"/></path>
+        </g>
+      </svg>
+    </div>
+    <div class="page-hero__inner">
+      <div class="eyebrow" data-reveal>
+        <span class="eyebrow__pulse"></span>
+        <span>платформенный маркетинг · profi.ru</span>
+      </div>
+      <h1 class="page-hero__title" data-reveal>
+        Профиль на&nbsp;Profi.ru,<br/>с&nbsp;которого <em>идут&nbsp;заказы</em>
+      </h1>
+      <p class="page-hero__lead" data-reveal>
+        Упаковываем и&nbsp;ведём анкеты специалистов так, чтобы&nbsp;система Profi.ru показывала&nbsp;ваши&nbsp;отклики раньше конкурентов. Заявки растут&nbsp;в&nbsp;3–7&nbsp;раз, и&nbsp;вы&nbsp;занимаетесь&nbsp;работой, а&nbsp;не&nbsp;текстами&nbsp;и&nbsp;откликами.
+      </p>
+      <div class="page-hero__filters" data-reveal>
+        <a href="#pricing" class="btn btn--primary" data-magnetic>
+          <span>Смотреть тарифы</span>
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="https://t.me/Mento_ri" class="btn btn--ghost" data-magnetic target="_blank" rel="noopener">
+          <span>Бесплатный разбор анкеты</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ ALGORITHM EXPLANATION ═══════════════ -->
+  <section class="algo">
+    <div class="section__head">
+      <h2 class="section__title" data-reveal>Скрытый показатель,<br/><em>который решает всё</em></h2>
+      <p class="section__lead" data-reveal>На&nbsp;Profi.ru работает алгоритм эффективности откликов. Это&nbsp;показатель, который определяет, увидите&nbsp;ли вы&nbsp;заказы раньше конкурентов&nbsp;— или&nbsp;последним. Большинство специалистов даже&nbsp;не&nbsp;знают, что&nbsp;этот показатель&nbsp;есть.</p>
+    </div>
+
+    <div class="algo__inner">
+      <div class="algo__numbers" data-reveal>
+        <div class="algo__num-block">
+          <div class="algo__num">1.3 — 3.6%</div>
+          <div class="algo__num-label">среднее по&nbsp;рынку</div>
+          <div class="algo__num-desc">если ваш показатель в&nbsp;этом коридоре&nbsp;— заказы&nbsp;вы&nbsp;видите наравне с&nbsp;конкурентами</div>
+        </div>
+        <div class="algo__num-block algo__num-block--bad">
+          <div class="algo__num">&lt; 1%</div>
+          <div class="algo__num-label">алгоритм наказывает</div>
+          <div class="algo__num-desc">система выкидывает вас в&nbsp;конец очереди&nbsp;— заказы получают другие</div>
+        </div>
+        <div class="algo__num-block algo__num-block--good">
+          <div class="algo__num">7 — 12%</div>
+          <div class="algo__num-label">наш результат для&nbsp;клиентов</div>
+          <div class="algo__num-desc">средний показатель после&nbsp;нашей&nbsp;работы&nbsp;— профиль попадает в&nbsp;топ&nbsp;10% категории</div>
+        </div>
+      </div>
+
+      <figure class="algo__screen" data-reveal>
+        <img src="assets/profi_screen.jpg" alt="Эффективность отклика на Profi.ru" loading="lazy" />
+        <figcaption>скриншот из&nbsp;личного&nbsp;кабинета&nbsp;— показатель эффективности отклика, который видят&nbsp;только специалисты</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ═══════════════ PRICING ═══════════════ -->
+  <section class="pricing-profi" id="pricing">
+    <div class="section__head">
+      <h2 class="section__title" data-reveal>Тарифы<br/>по&nbsp;<em>работе с&nbsp;Profi.ru</em></h2>
+      <p class="section__lead" data-reveal>Четыре варианта&nbsp;— от&nbsp;бесплатного разового разбора до&nbsp;полного ведения профиля. Все&nbsp;тарифы оплачиваются помесячно, можно остановить в&nbsp;любой&nbsp;момент.</p>
+    </div>
+
+    <div class="pricing__grid">
+      <!-- 0 ₽ -->
+      <article class="price-card" data-tilt data-reveal>
+        <div class="price-card__tag">первый&nbsp;шаг</div>
+        <div class="price-card__name">Бесплатный разбор</div>
+        <div class="price-card__amount">0&nbsp;<i>₽</i></div>
+        <div class="price-card__period">разово, без&nbsp;обязательств</div>
+        <ul class="price-card__list">
+          <li>Анализ вашей анкеты</li>
+          <li>Позиции конкурентов</li>
+          <li>Цены в&nbsp;категории</li>
+          <li>Стратегия отзывов</li>
+        </ul>
+        <a href="https://t.me/Mento_ri?text=Здравствуйте!%20Хочу%20бесплатный%20разбор%20профиля%20на%20Profi.ru" class="btn btn--ghost btn--block" data-magnetic target="_blank" rel="noopener">
+          <span>Получить разбор</span>
+        </a>
+      </article>
+
+      <!-- 1 500 ₽ -->
+      <article class="price-card" data-tilt data-reveal>
+        <div class="price-card__tag">разовый аудит</div>
+        <div class="price-card__name">Разбор + рекомендации</div>
+        <div class="price-card__amount">1&nbsp;500&nbsp;<i>₽</i></div>
+        <div class="price-card__period">разово</div>
+        <ul class="price-card__list">
+          <li>Глубокий аудит профиля</li>
+          <li>План улучшений</li>
+          <li>Стратегия отзывов</li>
+          <li>Рекомендации по&nbsp;текстам</li>
+        </ul>
+        <a href="https://t.me/Mento_ri?text=Здравствуйте!%20Хочу%20заказать%20разбор%20профиля%20на%20Profi.ru" class="btn btn--ghost btn--block" data-magnetic target="_blank" rel="noopener">
+          <span>Заказать</span>
+        </a>
+      </article>
+
+      <!-- 8 290 ₽ / мес -->
+      <article class="price-card price-card--featured" data-tilt data-reveal>
+        <div class="price-card__glow"></div>
+        <div class="price-card__tag price-card__tag--pop">самый&nbsp;популярный</div>
+        <div class="price-card__name">Поддержка профиля</div>
+        <div class="price-card__amount">8&nbsp;290&nbsp;<i>₽</i></div>
+        <div class="price-card__period">в&nbsp;месяц</div>
+        <ul class="price-card__list">
+          <li>До&nbsp;<b>6&nbsp;отзывов</b> в&nbsp;месяц</li>
+          <li>Разбор и&nbsp;корректировка анкеты</li>
+          <li>Анализ 3–5&nbsp;конкурентов</li>
+          <li>Анализ цен в&nbsp;категории</li>
+          <li>Перепаковка профиля</li>
+          <li>Рекомендации по&nbsp;откликам</li>
+        </ul>
+        <a href="https://t.me/Mento_ri?text=Здравствуйте!%20Хочу%20тариф%20Поддержка%20профиля" class="btn btn--primary btn--block" data-magnetic target="_blank" rel="noopener">
+          <span>Выбрать тариф</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 12.5L12.5 3.5M12.5 3.5H5.5M12.5 3.5V10.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </article>
+
+      <!-- 15 490 ₽ / мес -->
+      <article class="price-card" data-tilt data-reveal>
+        <div class="price-card__tag">для&nbsp;роста</div>
+        <div class="price-card__name">Развитие профиля</div>
+        <div class="price-card__amount">15&nbsp;490&nbsp;<i>₽</i></div>
+        <div class="price-card__period">в&nbsp;месяц</div>
+        <ul class="price-card__list">
+          <li>До&nbsp;<b>12&nbsp;отзывов</b> в&nbsp;месяц</li>
+          <li>Полный аудит анкеты</li>
+          <li>Расширенный анализ конкурентов</li>
+          <li>Стратегия повышения чека</li>
+          <li>Полная перепаковка</li>
+          <li>Индивидуальная стратегия</li>
+        </ul>
+        <a href="https://t.me/Mento_ri?text=Здравствуйте!%20Хочу%20тариф%20Развитие%20профиля" class="btn btn--ghost btn--block" data-magnetic target="_blank" rel="noopener">
+          <span>Выбрать тариф</span>
+        </a>
+      </article>
+    </div>
+
+    <!-- VIP / ведение -->
+    <div class="pricing-vip" data-reveal>
+      <div class="pricing-vip__inner">
+        <div class="pricing-vip__copy">
+          <div class="pricing-vip__tag">vip · ведение&nbsp;«под&nbsp;ключ»</div>
+          <h3 class="pricing-vip__name">Полное ведение&nbsp;профиля</h3>
+          <p class="pricing-vip__text">
+            Мы&nbsp;садимся за&nbsp;ваш&nbsp;профиль, ищем подходящие заказы и&nbsp;пишем отклики&nbsp;от&nbsp;вашего&nbsp;имени. Вы&nbsp;занимаетесь работой&nbsp;с&nbsp;клиентами&nbsp;— мы&nbsp;занимаемся всем&nbsp;остальным.
+          </p>
+          <ul class="pricing-vip__list">
+            <li>Ежедневная работа с&nbsp;откликами</li>
+            <li>Стратегия закрытия максимума&nbsp;заказов</li>
+            <li>Управление рейтингом и&nbsp;отзывами</li>
+            <li>Персональный менеджер на&nbsp;связи</li>
+          </ul>
+        </div>
+        <div class="pricing-vip__action">
+          <div class="pricing-vip__price">от&nbsp;<b>26&nbsp;000&nbsp;₽</b><span>в&nbsp;месяц</span></div>
+          <a href="https://t.me/Mento_ri?text=Здравствуйте!%20Интересует%20полное%20ведение%20профиля%20на%20Profi.ru" class="btn btn--primary" data-magnetic target="_blank" rel="noopener">
+            <span>Обсудить ведение</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 12.5L12.5 3.5M12.5 3.5H5.5M12.5 3.5V10.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ REAL CLIENTS ═══════════════ -->
+  <section class="profi-clients">
+    <div class="section__head">
+      <h2 class="section__title" data-reveal>Реальные клиенты<br/>на&nbsp;<em>Profi.ru</em></h2>
+      <p class="section__lead" data-reveal>Это&nbsp;не&nbsp;«успешные кейсы из&nbsp;интернета». Это&nbsp;живые анкеты, которые мы&nbsp;ведём прямо&nbsp;сейчас. На&nbsp;разборе показываем личные кабинеты целиком&nbsp;— с&nbsp;цифрами эффективности и&nbsp;откликов.</p>
+    </div>
+
+    <div class="profi-clients__grid">
+      <article class="profi-client" data-reveal>
+        <div class="profi-client__photo">
+          <img src="assets/case-zamyatin.jpg" alt="Иван Замятин · кондиционеры" loading="lazy" />
+        </div>
+        <div class="profi-client__body">
+          <div class="profi-client__niche">установка кондиционеров · Москва</div>
+          <div class="profi-client__name">Иван Замятин</div>
+          <div class="profi-client__stats">
+            <span><b>64</b> отзыва</span>
+            <span><b>4.44★</b></span>
+            <span>опыт <b>16&nbsp;лет</b></span>
+          </div>
+          <p class="profi-client__text">Было: 1&nbsp;фото, конфликтные ответы на&nbsp;отзывы, профиль внизу выдачи. Стало: топ&nbsp;5&nbsp;по&nbsp;категории, +47% заявок за&nbsp;месяц.</p>
+        </div>
+      </article>
+
+      <article class="profi-client" data-reveal>
+        <div class="profi-client__photo">
+          <img src="assets/case-pashkova.jpg" alt="Дарья Пашкова · косметология" loading="lazy" />
+        </div>
+        <div class="profi-client__body">
+          <div class="profi-client__niche">косметология · Москва</div>
+          <div class="profi-client__name">Дарья Пашкова</div>
+          <div class="profi-client__stats">
+            <span><b>12</b> отзывов</span>
+            <span><b>5.0★</b></span>
+            <span>идеальный&nbsp;рейтинг</span>
+          </div>
+          <p class="profi-client__text">Было: нет описания, 6&nbsp;фото без&nbsp;структуры. Стало: переписали анкету под&nbsp;услуги&nbsp;премиум&nbsp;сегмента&nbsp;— чек&nbsp;вырос&nbsp;в&nbsp;2.3&nbsp;раза.</p>
+        </div>
+      </article>
+
+      <article class="profi-client" data-reveal>
+        <div class="profi-client__photo">
+          <img src="assets/case-chernov.jpg" alt="Николай Чернов · стройка" loading="lazy" />
+        </div>
+        <div class="profi-client__body">
+          <div class="profi-client__niche">строительство · Москва и&nbsp;область</div>
+          <div class="profi-client__name">Николай Чернов</div>
+          <div class="profi-client__stats">
+            <span>опыт <b>20+ лет</b></span>
+            <span>с&nbsp;нуля</span>
+          </div>
+          <p class="profi-client__text">Пришёл с&nbsp;0&nbsp;отзывов и&nbsp;хаотичным описанием. За&nbsp;2&nbsp;месяца&nbsp;— первые 8&nbsp;отзывов, выход на&nbsp;стабильные 3–4&nbsp;заявки в&nbsp;неделю.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ═══════════════ STEPS ═══════════════ -->
+  <section class="profi-steps">
+    <div class="section__head">
+      <h2 class="section__title" data-reveal>Как мы<br/><em>работаем по&nbsp;Profi.ru</em></h2>
+      <p class="section__lead" data-reveal>Четыре простых шага&nbsp;— от&nbsp;первого разговора до&nbsp;стабильного потока заказов.</p>
+    </div>
+
+    <div class="profi-steps__grid">
+      <div class="profi-step" data-reveal>
+        <div class="profi-step__num">01</div>
+        <h3 class="profi-step__title">Разбор анкеты</h3>
+        <p class="profi-step__text">Смотрим, что&nbsp;у&nbsp;вас уже&nbsp;есть, сравниваем с&nbsp;конкурентами в&nbsp;категории, считаем эффективность откликов. Подбираем тариф под&nbsp;ваши&nbsp;цели.</p>
+      </div>
+      <div class="profi-step" data-reveal>
+        <div class="profi-step__num">02</div>
+        <h3 class="profi-step__title">Перепаковка</h3>
+        <p class="profi-step__text">Переписываем анкету, оформляем фото, выстраиваем структуру описания так, как&nbsp;любит алгоритм платформы&nbsp;и&nbsp;клиенты.</p>
+      </div>
+      <div class="profi-step" data-reveal>
+        <div class="profi-step__num">03</div>
+        <h3 class="profi-step__title">Запуск работы</h3>
+        <p class="profi-step__text">Начинаем ведение профиля&nbsp;по&nbsp;вашему&nbsp;тарифу: отзывы, корректировки, отклики. Уже&nbsp;через 7&nbsp;дней&nbsp;— первые заметные результаты.</p>
+      </div>
+      <div class="profi-step" data-reveal>
+        <div class="profi-step__num">04</div>
+        <h3 class="profi-step__title">Рост и&nbsp;удержание</h3>
+        <p class="profi-step__text">Поднимаемся в&nbsp;топ&nbsp;категории, удерживаем позиции. Раз в&nbsp;неделю&nbsp;— отчёт по&nbsp;цифрам. Корректируем стратегию по&nbsp;ситуации.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ FAQ ═══════════════ -->
+  <section class="faq">
+    <div class="section__head">
+      <h2 class="section__title" data-reveal>Часто<br/><em>спрашивают</em></h2>
+      <p class="section__lead" data-reveal>Если вашего вопроса нет&nbsp;— напишите в&nbsp;Telegram, ответим лично.</p>
+    </div>
+
+    <div class="faq__list">
+      <details class="faq__item" data-reveal>
+        <summary>«Как понять, какой тариф выбрать?»</summary>
+        <p>Если у&nbsp;вас уже&nbsp;есть анкета с&nbsp;отзывами&nbsp;— берите «Поддержку профиля». Если&nbsp;вы&nbsp;новичок и&nbsp;хотите выйти в&nbsp;топ&nbsp;— «Развитие профиля». Если&nbsp;вообще не&nbsp;готовы платить&nbsp;— начните с&nbsp;бесплатного разбора, поймём вместе.</p>
+      </details>
+      <details class="faq__item" data-reveal>
+        <summary>«Как быстро увижу результаты?»</summary>
+        <p>Первые изменения заметны уже&nbsp;через&nbsp;7&nbsp;дней. Полный эффект&nbsp;— 1–2&nbsp;месяца, зависит от&nbsp;вашей категории и&nbsp;тарифа. У&nbsp;нас есть кейсы с&nbsp;первой заявкой на&nbsp;3-й день после&nbsp;перепаковки.</p>
+      </details>
+      <details class="faq__item" data-reveal>
+        <summary>«Что такое “ведение профиля”?»</summary>
+        <p>Мы&nbsp;получаем доступ к&nbsp;вашему профилю на&nbsp;Profi.ru, ищем подходящие заказы и&nbsp;пишем отклики&nbsp;от&nbsp;вашего имени. Вы&nbsp;только&nbsp;принимаете клиентов и&nbsp;выполняете&nbsp;работу&nbsp;— мы&nbsp;приводим этих клиентов.</p>
+      </details>
+      <details class="faq__item" data-reveal>
+        <summary>«Влияет ли активность на&nbsp;позицию профиля?»</summary>
+        <p>Да, напрямую. Алгоритм Profi.ru учитывает эффективность откликов&nbsp;— чем&nbsp;она&nbsp;выше, тем раньше вы&nbsp;видите популярные заказы. Именно поэтому важно вести профиль регулярно, а&nbsp;не&nbsp;«один раз настроить».</p>
+      </details>
+      <details class="faq__item" data-reveal>
+        <summary>«Безопасно ли давать доступ к&nbsp;профилю?»</summary>
+        <p>Полностью. По&nbsp;договору и&nbsp;NDA. Вы&nbsp;можете в&nbsp;любой момент отозвать доступ&nbsp;— мы&nbsp;ничего не&nbsp;трогаем кроме того, что&nbsp;нужно для&nbsp;работы. Все&nbsp;ваши контакты с&nbsp;клиентами остаются у&nbsp;вас.</p>
+      </details>
+      <details class="faq__item" data-reveal>
+        <summary>«А&nbsp;что если у&nbsp;меня плохие отзывы?»</summary>
+        <p>Работаем и&nbsp;с&nbsp;этим. Сначала разбираем, почему отзывы плохие, переписываем ответы на&nbsp;них (это&nbsp;тоже&nbsp;влияет на&nbsp;алгоритм), потом стратегия&nbsp;на&nbsp;новые отзывы. За&nbsp;1–2&nbsp;месяца ситуация выправляется.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- ═══════════════ CROSS-SELL — НОВЫЕ УСЛУГИ ═══════════════ -->
+  <section class="cross-sell">
+    <div class="cross-sell__bg"><div class="cross-sell__glow"></div></div>
+    <div class="cross-sell__inner">
+      <div class="eyebrow eyebrow--center" data-reveal>
+        <span class="eyebrow__pulse"></span>
+        <span>а ещё в&nbsp;mentori</span>
+      </div>
+      <h2 class="cross-sell__title" data-reveal>
+        Profi.ru — это&nbsp;только начало.<br/>Внутри Mentori есть<br/><em>системы для&nbsp;всего&nbsp;бизнеса</em>
+      </h2>
+      <p class="cross-sell__lead" data-reveal>
+        Если у&nbsp;вас не&nbsp;просто анкета на&nbsp;платформе, а&nbsp;уже&nbsp;есть&nbsp;бизнес&nbsp;— Mentori может построить под&nbsp;него систему обработки клиентов, автоматизации продаж и&nbsp;аналитики. Заходите в&nbsp;основной&nbsp;раздел&nbsp;услуг.
+      </p>
+      <div class="cta__actions" data-reveal>
+        <a href="services.html" class="btn btn--primary btn--xl" data-magnetic>
+          <span>Услуги для&nbsp;бизнеса</span>
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 14L14 4M14 4H6.5M14 4V11.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="cases.html" class="btn btn--ghost btn--xl" data-magnetic>
+          <span>Смотреть кейсы&nbsp;по&nbsp;AI</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <div class="foot__inner">
+      <div class="foot__brand">
+        <div>
+          <div class="foot__name">Mentori</div>
+          <div class="foot__tag">агентство автоматизации продаж · с&nbsp;2023</div>
+        </div>
+      </div>
+      <div class="foot__cols">
+        <div>
+          <div class="foot__h">Контакт</div>
+          <a href="mailto:hello@mentori.tech">hello@mentori.tech</a>
+          <a href="https://t.me/Mento_ri">@Mento_ri</a>
+        </div>
+        <div>
+          <div class="foot__h">Разделы</div>
+          <a href="services.html">Что делаем</a>
+          <a href="cases.html">Кейсы</a>
+          <a href="process.html">Как работаем</a>
+          <a href="profi.html">Profi.ru</a>
+          <a href="about.html">О нас</a>
+          <a href="blog.html">Блог</a>
+          <a href="contact.html">Контакт</a>
+        </div>
+        <div>
+          <div class="foot__h">Юридическое</div>
+          <a href="#">Политика конфиденциальности</a>
+          <a href="#">Договор оферты</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot__bottom">
+      <span>© Mentori, 2026</span>
+      <span>работаем по&nbsp;всей России и&nbsp;СНГ</span>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="main.js" defer></script>
+</body>
+</html>
