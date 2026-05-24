@@ -33,8 +33,29 @@
         <span>Получить разбор</span>
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
+      <button class="nav__burger" id="navBurger" aria-label="Меню" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </header>
+
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <nav class="mobile-menu__nav">
+      <a href="services.html">Что делаем</a>
+      <a href="process.html">Как работаем</a>
+      <a href="cases.html" class="is-active">Кейсы</a>
+      <a href="contact.html">Контакт</a>
+    </nav>
+    <div class="mobile-menu__cta">
+      <a href="contact.html" class="btn btn--primary btn--block">
+        <span>Получить разбор</span>
+      </a>
+      <div class="mobile-menu__contact">
+        <a href="https://t.me/mentori_team">@mentori_team</a>
+        <a href="mailto:hello@mentori.tech">hello@mentori.tech</a>
+      </div>
+    </div>
+  </div>
 
   <!-- ═══════════════ PAGE HERO ═══════════════ -->
   <section class="page-hero">
@@ -51,7 +72,7 @@
         Цифры, которые<br/><em>пишутся в&nbsp;кассе</em>
       </h1>
       <p class="page-hero__lead" data-reveal>
-        Названия скрыты под&nbsp;NDA, но&nbsp;на&nbsp;встрече показываем скриншоты CRM, переписки и&nbsp;реальные цифры. Без&nbsp;«успешных&nbsp;успехов»&nbsp;— только то, что&nbsp;считается в&nbsp;деньгах.
+        Названия скрыты под&nbsp;NDA, но&nbsp;на&nbsp;встрече показываем скриншоты CRM, переписки и&nbsp;реальные цифры. Кликни по&nbsp;карточке&nbsp;— раскроется полный разбор.
       </p>
       <div class="page-hero__filters" data-reveal>
         <button class="page-hero__filter is-active">Все</button>
@@ -63,179 +84,462 @@
     </div>
   </section>
 
-  <!-- ═══════════════ CASES LIST ═══════════════ -->
-  <section class="cases-list">
-    <div class="cases-list__inner">
+  <!-- ═══════════════ CASES GRID — COMPACT ═══════════════ -->
+  <section class="cases-grid">
+    <div class="cases-grid__inner">
 
-      <article class="case-big" data-reveal>
-        <div class="case-big__meta">
-          <div class="case-big__tag">сеть косметологических клиник · Москва, Питер</div>
-          <div class="case-big__years">январь 2025 → октябрь 2026</div>
-        </div>
-        <h2 class="case-big__title">Сократили время ответа<br/>с&nbsp;46&nbsp;минут до&nbsp;<em>9&nbsp;секунд</em></h2>
-        <div class="case-big__metrics">
-          <div class="case-big__metric">
-            <div class="case-big__metric-num">+312%</div>
-            <div class="case-big__metric-label">рост выручки за&nbsp;3&nbsp;месяца</div>
-          </div>
-          <div class="case-big__metric">
-            <div class="case-big__metric-num">×2.1</div>
-            <div class="case-big__metric-label">больше повторных визитов</div>
-          </div>
-          <div class="case-big__metric">
-            <div class="case-big__metric-num">+184%</div>
-            <div class="case-big__metric-label">записей через&nbsp;соцсети</div>
-          </div>
-          <div class="case-big__metric">
-            <div class="case-big__metric-num">−92%</div>
-            <div class="case-big__metric-label">потерянных&nbsp;заявок</div>
-          </div>
-        </div>
-        <div class="case-big__chart">
-          <svg viewBox="0 0 800 240" preserveAspectRatio="none">
+      <article class="case-card" data-case-trigger="clinics" data-reveal tabindex="0" role="button" aria-label="Открыть кейс: сеть клиник">
+        <div class="case-card__chart" aria-hidden="true">
+          <svg viewBox="0 0 320 100" preserveAspectRatio="none">
             <defs>
-              <linearGradient id="bigGrad1" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#ff5e1a" stop-opacity="0.55"/>
+              <linearGradient id="ccGrad1" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#ff5e1a" stop-opacity="0.45"/>
                 <stop offset="100%" stop-color="#ff5e1a" stop-opacity="0"/>
               </linearGradient>
             </defs>
-            <path d="M0,210 L80,200 L160,196 L240,182 L320,178 L400,160 L480,140 L560,108 L640,70 L720,38 L800,12 L800,240 L0,240 Z" fill="url(#bigGrad1)"/>
-            <path d="M0,210 L80,200 L160,196 L240,182 L320,178 L400,160 L480,140 L560,108 L640,70 L720,38 L800,12" stroke="#ff7a3d" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-            <g font-family="Geist Mono, monospace" font-size="10" fill="rgba(250,250,247,0.4)">
-              <text x="0" y="234">янв</text>
-              <text x="200" y="234">апр</text>
-              <text x="400" y="234">июл</text>
-              <text x="600" y="234">окт</text>
-              <text x="755" y="234">сейчас</text>
-            </g>
+            <path d="M0,88 L40,82 L80,76 L120,64 L160,52 L200,38 L240,24 L280,12 L320,4 L320,100 L0,100 Z" fill="url(#ccGrad1)"/>
+            <path d="M0,88 L40,82 L80,76 L120,64 L160,52 L200,38 L240,24 L280,12 L320,4" stroke="#ff7a3d" stroke-width="1.6" fill="none" stroke-linecap="round"/>
           </svg>
         </div>
-        <div class="case-big__body">
-          <div class="case-big__col">
-            <div class="case-big__h">Что было</div>
-            <p>6&nbsp;клиник в&nbsp;Москве и&nbsp;Питере. Заявки приходили в&nbsp;Instagram, WhatsApp, на&nbsp;сайт. Администратор отвечала только&nbsp;днём, в&nbsp;среднем через 46&nbsp;минут после сообщения. Половина клиентов к&nbsp;этому моменту уже&nbsp;записалась в&nbsp;соседнюю&nbsp;клинику.</p>
-          </div>
-          <div class="case-big__col">
-            <div class="case-big__h">Что сделали</div>
-            <p>Подключили автоматический ответ во&nbsp;всех каналах. Программа знает прайс, расписание мастеров, противопоказания. Сразу записывает в&nbsp;YClients и&nbsp;шлёт клиенту подтверждение. Через 2&nbsp;дня&nbsp;— напоминание, через 3&nbsp;недели&nbsp;— приглашение на&nbsp;повтор.</p>
-          </div>
-          <div class="case-big__col">
-            <div class="case-big__h">Что получилось</div>
-            <p>За&nbsp;первые 3&nbsp;месяца выручка сети выросла в&nbsp;3&nbsp;раза. Главное&nbsp;— перестали терять «ночные» заявки, которых&nbsp;было&nbsp;42%. И&nbsp;администраторы теперь занимаются клиентами в&nbsp;кресле, а&nbsp;не&nbsp;перепиской.</p>
-          </div>
+        <div class="case-card__body">
+          <div class="case-card__tag">сеть косметологических клиник</div>
+          <div class="case-card__metric">+312<i>%</i></div>
+          <div class="case-card__label">рост выручки за&nbsp;3&nbsp;месяца</div>
+        </div>
+        <div class="case-card__open">
+          <span>смотреть кейс</span>
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
       </article>
 
-      <article class="case-big" data-reveal>
-        <div class="case-big__meta">
-          <div class="case-big__tag">строительная компания · загородные дома</div>
-          <div class="case-big__years">март 2025 → продолжается</div>
-        </div>
-        <h2 class="case-big__title">Менеджеры перестали тратить день<br/>на&nbsp;<em>«не&nbsp;тех» клиентов</em></h2>
-        <div class="case-big__metrics">
-          <div class="case-big__metric">
-            <div class="case-big__metric-num">−47%</div>
-            <div class="case-big__metric-label">стоимость заявки</div>
-          </div>
-          <div class="case-big__metric">
-            <div class="case-big__metric-num">+62%</div>
-            <div class="case-big__metric-label">встреч с&nbsp;живыми клиентами</div>
-          </div>
-          <div class="case-big__metric">
-            <div class="case-big__metric-num">38&nbsp;ч</div>
-            <div class="case-big__metric-label">в&nbsp;неделю освободили команде</div>
-          </div>
-          <div class="case-big__metric">
-            <div class="case-big__metric-num">+2.4×</div>
-            <div class="case-big__metric-label">контрактов&nbsp;с&nbsp;того&nbsp;же&nbsp;бюджета</div>
-          </div>
-        </div>
-        <div class="case-big__chart">
-          <svg viewBox="0 0 800 240" preserveAspectRatio="none">
+      <article class="case-card" data-case-trigger="construction" data-reveal tabindex="0" role="button" aria-label="Открыть кейс: строительная компания">
+        <div class="case-card__chart" aria-hidden="true">
+          <svg viewBox="0 0 320 100" preserveAspectRatio="none">
             <defs>
-              <linearGradient id="bigGrad2" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#ffa940" stop-opacity="0.45"/>
+              <linearGradient id="ccGrad2" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#ffa940" stop-opacity="0.4"/>
                 <stop offset="100%" stop-color="#ffa940" stop-opacity="0"/>
               </linearGradient>
             </defs>
-            <path d="M0,40 L100,60 L200,80 L300,108 L400,134 L500,160 L600,184 L700,200 L800,212 L800,240 L0,240 Z" fill="url(#bigGrad2)"/>
-            <path d="M0,40 L100,60 L200,80 L300,108 L400,134 L500,160 L600,184 L700,200 L800,212" stroke="#ffb86a" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-            <g font-family="Geist Mono, monospace" font-size="10" fill="rgba(250,250,247,0.4)">
-              <text x="20" y="30">было&nbsp;1820&nbsp;₽/клиент</text>
-              <text x="640" y="226">стало&nbsp;540&nbsp;₽</text>
-            </g>
+            <path d="M0,18 L40,24 L80,32 L120,40 L160,52 L200,64 L240,72 L280,82 L320,90 L320,100 L0,100 Z" fill="url(#ccGrad2)"/>
+            <path d="M0,18 L40,24 L80,32 L120,40 L160,52 L200,64 L240,72 L280,82 L320,90" stroke="#ffb86a" stroke-width="1.6" fill="none" stroke-linecap="round"/>
           </svg>
         </div>
-        <div class="case-big__body">
-          <div class="case-big__col">
-            <div class="case-big__h">Что было</div>
-            <p>Компания строит загородные дома под&nbsp;ключ. Средний чек&nbsp;— от&nbsp;4&nbsp;млн. На&nbsp;каждую заявку менеджер тратит 1.5&nbsp;часа&nbsp;разговора. 80% заявок&nbsp;— «просто посмотреть», без&nbsp;участка и&nbsp;бюджета.</p>
-          </div>
-          <div class="case-big__col">
-            <div class="case-big__h">Что сделали</div>
-            <p>Программа перед менеджером уточняет&nbsp;15&nbsp;вещей: есть&nbsp;ли участок, какой бюджет, когда планируют&nbsp;строить, что&nbsp;уже&nbsp;смотрели. Только готовых клиентов передаёт менеджеру с&nbsp;кратким&nbsp;досье.</p>
-          </div>
-          <div class="case-big__col">
-            <div class="case-big__h">Что получилось</div>
-            <p>Менеджеры начали проводить 6&nbsp;встреч в&nbsp;неделю вместо&nbsp;2, потому что не&nbsp;тратят&nbsp;время на&nbsp;неквалифицированных. Конверсия в&nbsp;контракт выросла&nbsp;с&nbsp;8% до&nbsp;19%.</p>
-          </div>
+        <div class="case-card__body">
+          <div class="case-card__tag">загородные дома · под&nbsp;ключ</div>
+          <div class="case-card__metric">−47<i>%</i></div>
+          <div class="case-card__label">стоимость заявки на&nbsp;строительство</div>
+        </div>
+        <div class="case-card__open">
+          <span>смотреть кейс</span>
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
       </article>
 
-      <article class="case-big" data-reveal>
-        <div class="case-big__meta">
-          <div class="case-big__tag">интернет&#8209;магазин премиум посуды</div>
-          <div class="case-big__years">июнь 2025 → продолжается</div>
-        </div>
-        <h2 class="case-big__title">Помощник на&nbsp;сайте поднял<br/>средний&nbsp;чек&nbsp;<em>в&nbsp;2.3&nbsp;раза</em></h2>
-        <div class="case-big__metrics">
-          <div class="case-big__metric">
-            <div class="case-big__metric-num">×2.3</div>
-            <div class="case-big__metric-label">средний чек</div>
-          </div>
-          <div class="case-big__metric">
-            <div class="case-big__metric-num">×2.4</div>
-            <div class="case-big__metric-label">больше посетителей&nbsp;покупают</div>
-          </div>
-          <div class="case-big__metric">
-            <div class="case-big__metric-num">+71%</div>
-            <div class="case-big__metric-label">возврат к&nbsp;брошенной&nbsp;корзине</div>
-          </div>
-          <div class="case-big__metric">
-            <div class="case-big__metric-num">28&nbsp;760</div>
-            <div class="case-big__metric-label">средний чек, ₽&nbsp;(было&nbsp;12&nbsp;500)</div>
-          </div>
-        </div>
-        <div class="case-big__chart">
-          <svg viewBox="0 0 800 240" preserveAspectRatio="none">
+      <article class="case-card" data-case-trigger="ecom" data-reveal tabindex="0" role="button" aria-label="Открыть кейс: магазин премиум посуды">
+        <div class="case-card__chart" aria-hidden="true">
+          <svg viewBox="0 0 320 100" preserveAspectRatio="none">
             <defs>
-              <linearGradient id="bigGrad3" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#ff5e1a" stop-opacity="0.5"/>
+              <linearGradient id="ccGrad3" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#ff5e1a" stop-opacity="0.4"/>
                 <stop offset="100%" stop-color="#ff5e1a" stop-opacity="0"/>
               </linearGradient>
             </defs>
-            <path d="M0,200 L100,184 L200,188 L300,160 L400,154 L500,118 L600,98 L700,52 L800,20 L800,240 L0,240 Z" fill="url(#bigGrad3)"/>
-            <path d="M0,200 L100,184 L200,188 L300,160 L400,154 L500,118 L600,98 L700,52 L800,20" stroke="#ff7a3d" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+            <path d="M0,78 L40,70 L80,72 L120,58 L160,60 L200,42 L240,38 L280,22 L320,8 L320,100 L0,100 Z" fill="url(#ccGrad3)"/>
+            <path d="M0,78 L40,70 L80,72 L120,58 L160,60 L200,42 L240,38 L280,22 L320,8" stroke="#ff7a3d" stroke-width="1.6" fill="none" stroke-linecap="round"/>
           </svg>
         </div>
-        <div class="case-big__body">
-          <div class="case-big__col">
-            <div class="case-big__h">Что было</div>
-            <p>Магазин премиум посуды. Покупатели приходили, добавляли одну сковородку в&nbsp;корзину, оплачивали и&nbsp;уходили. Никто не&nbsp;знал, что&nbsp;продаётся целая&nbsp;серия в&nbsp;комплекте дешевле.</p>
-          </div>
-          <div class="case-big__col">
-            <div class="case-big__h">Что сделали</div>
-            <p>Сделали помощника на&nbsp;сайте, который при первом заходе задаёт&nbsp;4&nbsp;вопроса: для&nbsp;кого выбираете, как&nbsp;часто готовите, что&nbsp;уже&nbsp;есть, какой бюджет. И&nbsp;показывает подходящий набор с&nbsp;объяснением.</p>
-          </div>
-          <div class="case-big__col">
-            <div class="case-big__h">Что получилось</div>
-            <p>Клиенты стали покупать сразу набор вместо&nbsp;одной&nbsp;позиции. Чек вырос с&nbsp;12&nbsp;500 до&nbsp;28&nbsp;760&nbsp;руб. Конверсия&nbsp;— с&nbsp;1.8% до&nbsp;4.3%. Реклама&nbsp;стала окупаться в&nbsp;3&nbsp;раза&nbsp;лучше.</p>
-          </div>
+        <div class="case-card__body">
+          <div class="case-card__tag">интернет&#8209;магазин премиум посуды</div>
+          <div class="case-card__metric">×2.3</div>
+          <div class="case-card__label">средний чек после&nbsp;ИИ&#8209;помощника</div>
+        </div>
+        <div class="case-card__open">
+          <span>смотреть кейс</span>
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
       </article>
 
     </div>
   </section>
+
+  <!-- ═══════════════ CASE MODALS ═══════════════ -->
+
+  <!-- ─── MODAL: CLINICS ─── -->
+  <dialog class="case-modal" id="case-clinics" aria-labelledby="case-clinics-title">
+    <div class="case-modal__shell" data-lenis-prevent>
+      <button class="case-modal__close" data-modal-close aria-label="Закрыть">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 5L15 15M15 5L5 15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </button>
+      <div class="case-modal__content">
+        <div class="case-modal__head">
+          <div class="case-modal__tag">сеть косметологических клиник · Москва, Питер</div>
+          <h2 id="case-clinics-title" class="case-modal__title">
+            Сократили время ответа<br/>с&nbsp;46&nbsp;минут до&nbsp;<em>9&nbsp;секунд</em>
+          </h2>
+          <div class="case-modal__years">январь 2025 → октябрь 2026 · продолжается</div>
+        </div>
+
+        <div class="case-modal__metrics">
+          <div class="case-modal__metric">
+            <div class="case-modal__metric-num">+312%</div>
+            <div class="case-modal__metric-label">рост выручки за&nbsp;3&nbsp;месяца</div>
+          </div>
+          <div class="case-modal__metric">
+            <div class="case-modal__metric-num">×2.1</div>
+            <div class="case-modal__metric-label">больше повторных визитов</div>
+          </div>
+          <div class="case-modal__metric">
+            <div class="case-modal__metric-num">+184%</div>
+            <div class="case-modal__metric-label">записей через&nbsp;соцсети</div>
+          </div>
+          <div class="case-modal__metric">
+            <div class="case-modal__metric-num">−92%</div>
+            <div class="case-modal__metric-label">потерянных&nbsp;заявок</div>
+          </div>
+        </div>
+
+        <div class="case-modal__chart">
+          <svg viewBox="0 0 800 280" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="mGrad1" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#ff5e1a" stop-opacity="0.5"/>
+                <stop offset="100%" stop-color="#ff5e1a" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <g stroke="rgba(255,255,255,0.04)" stroke-width="1">
+              <line x1="0" y1="70" x2="800" y2="70"/>
+              <line x1="0" y1="140" x2="800" y2="140"/>
+              <line x1="0" y1="210" x2="800" y2="210"/>
+            </g>
+            <path d="M0,250 L80,238 L160,232 L240,214 L320,206 L400,184 L480,158 L560,122 L640,80 L720,42 L800,14 L800,280 L0,280 Z" fill="url(#mGrad1)"/>
+            <path d="M0,250 L80,238 L160,232 L240,214 L320,206 L400,184 L480,158 L560,122 L640,80 L720,42 L800,14" stroke="#ff7a3d" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <g fill="#ff7a3d">
+              <circle cx="160" cy="232" r="3"/>
+              <circle cx="320" cy="206" r="3"/>
+              <circle cx="480" cy="158" r="3"/>
+              <circle cx="640" cy="80" r="3"/>
+              <circle cx="800" cy="14" r="6" fill="#ffa940"/>
+            </g>
+            <g font-family="Geist Mono, monospace" font-size="10" fill="rgba(250,250,247,0.4)">
+              <text x="0" y="270">янв</text>
+              <text x="200" y="270">апр</text>
+              <text x="400" y="270">июл</text>
+              <text x="600" y="270">окт</text>
+              <text x="745" y="270">сейчас</text>
+            </g>
+          </svg>
+        </div>
+
+        <div class="case-modal__story">
+          <div class="case-modal__col">
+            <div class="case-modal__h">Что было</div>
+            <p>6&nbsp;клиник в&nbsp;Москве и&nbsp;Питере. Заявки приходили в&nbsp;Instagram, WhatsApp, на&nbsp;сайт. Администратор отвечала только&nbsp;днём, в&nbsp;среднем через 46&nbsp;минут после сообщения. Половина клиентов&nbsp;к&nbsp;этому моменту уже&nbsp;записалась в&nbsp;соседнюю&nbsp;клинику.</p>
+            <p>Дополнительно: 42% заявок приходили ночью и&nbsp;на&nbsp;выходных&nbsp;— они&nbsp;вообще не&nbsp;обрабатывались до&nbsp;понедельника.</p>
+          </div>
+          <div class="case-modal__col">
+            <div class="case-modal__h">Что сделали</div>
+            <p>Подключили автоматический ответ во&nbsp;всех каналах. Программа знает прайс, расписание мастеров, противопоказания. Сразу записывает в&nbsp;YClients и&nbsp;шлёт клиенту подтверждение.</p>
+            <p>Через 2&nbsp;дня&nbsp;— напоминание о&nbsp;визите. Через 3&nbsp;недели&nbsp;— приглашение на&nbsp;повторную процедуру. Если клиент молчит&nbsp;— ещё одно касание через&nbsp;месяц.</p>
+          </div>
+          <div class="case-modal__col">
+            <div class="case-modal__h">Что получилось</div>
+            <p>За&nbsp;первые 3&nbsp;месяца выручка сети выросла в&nbsp;3&nbsp;раза. Главное&nbsp;— перестали терять «ночные» заявки. Администраторы теперь занимаются клиентами в&nbsp;кресле, а&nbsp;не&nbsp;перепиской.</p>
+            <p>Сеть открыла 2&nbsp;новые клиники на&nbsp;освободившихся ресурсах команды.</p>
+          </div>
+        </div>
+
+        <div class="case-modal__deep">
+          <div class="case-modal__deep-block">
+            <div class="case-modal__deep-h">технологии</div>
+            <div class="case-modal__chips">
+              <span>OpenAI&nbsp;GPT‑4</span>
+              <span>Anthropic Claude</span>
+              <span>WhatsApp Business&nbsp;API</span>
+              <span>YClients</span>
+              <span>Telegram&nbsp;Bot&nbsp;API</span>
+              <span>Supabase</span>
+              <span>n8n</span>
+            </div>
+          </div>
+          <div class="case-modal__deep-block">
+            <div class="case-modal__deep-h">этапы внедрения</div>
+            <ol class="case-modal__steps">
+              <li><b>Неделя 1:</b> аудит CRM, разбор 200 диалогов администраторов</li>
+              <li><b>Неделя 2:</b> база знаний на&nbsp;все 6&nbsp;клиник, обучение сценариев</li>
+              <li><b>Неделя 3:</b> мягкий запуск в&nbsp;WhatsApp с&nbsp;ручным контролем</li>
+              <li><b>Неделя 4:</b> подключение Instagram + автономный режим</li>
+              <li><b>Месяц 2:</b> сценарии возврата на&nbsp;повторные процедуры</li>
+              <li><b>Месяц 3:</b> голосовой агент для&nbsp;входящих звонков</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="case-modal__quote">
+          <div class="case-modal__quote-text">
+            «Боялись, что&nbsp;клиенты будут писать “я&nbsp;что, с&nbsp;роботом разговариваю?”&nbsp;— такого не&nbsp;случилось ни&nbsp;разу за&nbsp;год. А&nbsp;деньги&nbsp;— ну&nbsp;вы&nbsp;видите цифры.»
+          </div>
+          <div class="case-modal__quote-author">
+            <div class="case-modal__quote-avatar" style="--c1:#ff8a3d;--c2:#d94a1c">МК</div>
+            <div>
+              <div class="case-modal__quote-name">Мария Кантария</div>
+              <div class="case-modal__quote-role">владелица сети, 6&nbsp;клиник</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="case-modal__cta">
+          <div class="case-modal__cta-text">
+            Хотите такой&nbsp;же результат у&nbsp;себя?
+          </div>
+          <a href="contact.html" class="btn btn--primary" data-magnetic>
+            <span>Получить разбор</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 12.5L12.5 3.5M12.5 3.5H5.5M12.5 3.5V10.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ─── MODAL: CONSTRUCTION ─── -->
+  <dialog class="case-modal" id="case-construction" aria-labelledby="case-construction-title">
+    <div class="case-modal__shell" data-lenis-prevent>
+      <button class="case-modal__close" data-modal-close aria-label="Закрыть">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 5L15 15M15 5L5 15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </button>
+      <div class="case-modal__content">
+        <div class="case-modal__head">
+          <div class="case-modal__tag">строительная компания · загородные дома под&nbsp;ключ</div>
+          <h2 id="case-construction-title" class="case-modal__title">
+            Менеджеры перестали тратить день<br/>на&nbsp;<em>«не&nbsp;тех» клиентов</em>
+          </h2>
+          <div class="case-modal__years">март 2025 → продолжается</div>
+        </div>
+
+        <div class="case-modal__metrics">
+          <div class="case-modal__metric">
+            <div class="case-modal__metric-num">−47%</div>
+            <div class="case-modal__metric-label">стоимость заявки</div>
+          </div>
+          <div class="case-modal__metric">
+            <div class="case-modal__metric-num">+62%</div>
+            <div class="case-modal__metric-label">встреч с&nbsp;живыми клиентами</div>
+          </div>
+          <div class="case-modal__metric">
+            <div class="case-modal__metric-num">38&nbsp;ч</div>
+            <div class="case-modal__metric-label">в&nbsp;неделю освободили команде</div>
+          </div>
+          <div class="case-modal__metric">
+            <div class="case-modal__metric-num">+2.4×</div>
+            <div class="case-modal__metric-label">контрактов с&nbsp;того&nbsp;же бюджета</div>
+          </div>
+        </div>
+
+        <div class="case-modal__chart">
+          <svg viewBox="0 0 800 280" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="mGrad2" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#ffa940" stop-opacity="0.45"/>
+                <stop offset="100%" stop-color="#ffa940" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <g stroke="rgba(255,255,255,0.04)" stroke-width="1">
+              <line x1="0" y1="70" x2="800" y2="70"/>
+              <line x1="0" y1="140" x2="800" y2="140"/>
+              <line x1="0" y1="210" x2="800" y2="210"/>
+            </g>
+            <path d="M0,38 L100,60 L200,82 L300,108 L400,134 L500,160 L600,184 L700,200 L800,218 L800,280 L0,280 Z" fill="url(#mGrad2)"/>
+            <path d="M0,38 L100,60 L200,82 L300,108 L400,134 L500,160 L600,184 L700,200 L800,218" stroke="#ffb86a" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <g font-family="Geist Mono, monospace" font-size="10" fill="rgba(250,250,247,0.4)">
+              <text x="20" y="30">было: 1820 ₽/клиент</text>
+              <text x="640" y="234">стало: 540 ₽</text>
+            </g>
+          </svg>
+        </div>
+
+        <div class="case-modal__story">
+          <div class="case-modal__col">
+            <div class="case-modal__h">Что было</div>
+            <p>Компания строит загородные дома под&nbsp;ключ. Средний чек&nbsp;— от&nbsp;4&nbsp;млн. На&nbsp;каждую заявку менеджер тратит 1.5&nbsp;часа разговора. 80% заявок&nbsp;— «просто посмотреть», без&nbsp;участка и&nbsp;бюджета.</p>
+            <p>Двое менеджеров еле справлялись с&nbsp;потоком. Хорошие лиды&nbsp;терялись среди шума.</p>
+          </div>
+          <div class="case-modal__col">
+            <div class="case-modal__h">Что сделали</div>
+            <p>Программа перед менеджером уточняет&nbsp;15&nbsp;вещей: есть&nbsp;ли участок и&nbsp;где, какой бюджет, когда планируют&nbsp;строить, есть&nbsp;ли разрешение на&nbsp;строительство, рассматривали&nbsp;ли уже&nbsp;другие компании.</p>
+            <p>Только клиентов с&nbsp;участком и&nbsp;бюджетом передаёт менеджеру&nbsp;— с&nbsp;кратким досье на&nbsp;1&nbsp;экран.</p>
+          </div>
+          <div class="case-modal__col">
+            <div class="case-modal__h">Что получилось</div>
+            <p>Менеджеры начали проводить 6&nbsp;встреч в&nbsp;неделю вместо&nbsp;2, потому&nbsp;что не&nbsp;тратят время на&nbsp;неквалифицированных. Конверсия в&nbsp;контракт выросла с&nbsp;8% до&nbsp;19%.</p>
+            <p>Компания взяла третьего менеджера на&nbsp;освободившихся&nbsp;ресурсах.</p>
+          </div>
+        </div>
+
+        <div class="case-modal__deep">
+          <div class="case-modal__deep-block">
+            <div class="case-modal__deep-h">технологии</div>
+            <div class="case-modal__chips">
+              <span>Anthropic Claude</span>
+              <span>AmoCRM</span>
+              <span>WhatsApp Business&nbsp;API</span>
+              <span>Авито&nbsp;API</span>
+              <span>Tilda&nbsp;Forms</span>
+              <span>Google&nbsp;Calendar</span>
+            </div>
+          </div>
+          <div class="case-modal__deep-block">
+            <div class="case-modal__deep-h">этапы внедрения</div>
+            <ol class="case-modal__steps">
+              <li><b>Неделя 1:</b> разбор 150&nbsp;последних диалогов, составление списка&nbsp;15&nbsp;квалификационных вопросов</li>
+              <li><b>Неделя 2:</b> прототип квалификатора, тесты на&nbsp;истории</li>
+              <li><b>Неделя 3:</b> запуск в&nbsp;WhatsApp + Авито с&nbsp;контролем</li>
+              <li><b>Неделя 4:</b> автономный режим, аналитика по&nbsp;типам клиентов</li>
+              <li><b>Месяц 2:</b> подключение голосового агента для&nbsp;звонков</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="case-modal__quote">
+          <div class="case-modal__quote-text">
+            «Раньше я&nbsp;тратил день на&nbsp;разговоры с&nbsp;людьми, которые ничего не&nbsp;купят. Сейчас открываю CRM утром&nbsp;— у&nbsp;меня&nbsp;6&nbsp;запланированных встреч с&nbsp;людьми, у&nbsp;которых&nbsp;уже&nbsp;есть участок и&nbsp;деньги.»
+          </div>
+          <div class="case-modal__quote-author">
+            <div class="case-modal__quote-avatar" style="--c1:#d97757;--c2:#7a3318">АП</div>
+            <div>
+              <div class="case-modal__quote-name">Александр Подгорный</div>
+              <div class="case-modal__quote-role">руководитель отдела&nbsp;продаж</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="case-modal__cta">
+          <div class="case-modal__cta-text">У&nbsp;вас похожая ситуация?</div>
+          <a href="contact.html" class="btn btn--primary" data-magnetic>
+            <span>Получить разбор</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 12.5L12.5 3.5M12.5 3.5H5.5M12.5 3.5V10.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ─── MODAL: ECOM ─── -->
+  <dialog class="case-modal" id="case-ecom" aria-labelledby="case-ecom-title">
+    <div class="case-modal__shell" data-lenis-prevent>
+      <button class="case-modal__close" data-modal-close aria-label="Закрыть">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 5L15 15M15 5L5 15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </button>
+      <div class="case-modal__content">
+        <div class="case-modal__head">
+          <div class="case-modal__tag">интернет&#8209;магазин премиум посуды</div>
+          <h2 id="case-ecom-title" class="case-modal__title">
+            Помощник на&nbsp;сайте поднял<br/>средний чек <em>в&nbsp;2.3&nbsp;раза</em>
+          </h2>
+          <div class="case-modal__years">июнь 2025 → продолжается</div>
+        </div>
+
+        <div class="case-modal__metrics">
+          <div class="case-modal__metric">
+            <div class="case-modal__metric-num">×2.3</div>
+            <div class="case-modal__metric-label">средний чек</div>
+          </div>
+          <div class="case-modal__metric">
+            <div class="case-modal__metric-num">×2.4</div>
+            <div class="case-modal__metric-label">больше посетителей&nbsp;покупают</div>
+          </div>
+          <div class="case-modal__metric">
+            <div class="case-modal__metric-num">+71%</div>
+            <div class="case-modal__metric-label">возврат к&nbsp;брошенной&nbsp;корзине</div>
+          </div>
+          <div class="case-modal__metric">
+            <div class="case-modal__metric-num">28&nbsp;760</div>
+            <div class="case-modal__metric-label">средний чек, ₽&nbsp;(было&nbsp;12&nbsp;500)</div>
+          </div>
+        </div>
+
+        <div class="case-modal__chart">
+          <svg viewBox="0 0 800 280" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="mGrad3" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#ff5e1a" stop-opacity="0.5"/>
+                <stop offset="100%" stop-color="#ff5e1a" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <g stroke="rgba(255,255,255,0.04)" stroke-width="1">
+              <line x1="0" y1="70" x2="800" y2="70"/>
+              <line x1="0" y1="140" x2="800" y2="140"/>
+              <line x1="0" y1="210" x2="800" y2="210"/>
+            </g>
+            <path d="M0,230 L100,210 L200,216 L300,180 L400,170 L500,128 L600,102 L700,58 L800,24 L800,280 L0,280 Z" fill="url(#mGrad3)"/>
+            <path d="M0,230 L100,210 L200,216 L300,180 L400,170 L500,128 L600,102 L700,58 L800,24" stroke="#ff7a3d" stroke-width="2" fill="none" stroke-linecap="round"/>
+          </svg>
+        </div>
+
+        <div class="case-modal__story">
+          <div class="case-modal__col">
+            <div class="case-modal__h">Что было</div>
+            <p>Магазин премиум посуды. Покупатели приходили, добавляли одну сковородку в&nbsp;корзину, оплачивали и&nbsp;уходили. Никто не&nbsp;знал, что&nbsp;продаётся целая&nbsp;серия в&nbsp;комплекте дешевле.</p>
+            <p>Конверсия 1.8%, средний чек 12&nbsp;500&nbsp;руб. Реклама еле&nbsp;окупалась.</p>
+          </div>
+          <div class="case-modal__col">
+            <div class="case-modal__h">Что сделали</div>
+            <p>Сделали помощника на&nbsp;сайте, который при первом заходе задаёт&nbsp;4&nbsp;вопроса: для&nbsp;кого выбираете, как&nbsp;часто готовите, что&nbsp;уже&nbsp;есть, какой бюджет.</p>
+            <p>И&nbsp;показывает подходящий набор с&nbsp;объяснением, почему именно&nbsp;этот.</p>
+          </div>
+          <div class="case-modal__col">
+            <div class="case-modal__h">Что получилось</div>
+            <p>Клиенты стали покупать сразу набор вместо&nbsp;одной&nbsp;позиции. Чек вырос с&nbsp;12&nbsp;500 до&nbsp;28&nbsp;760&nbsp;руб. Конверсия&nbsp;— с&nbsp;1.8% до&nbsp;4.3%.</p>
+            <p>Реклама стала окупаться в&nbsp;3&nbsp;раза лучше&nbsp;— открыли 2&nbsp;новых направления.</p>
+          </div>
+        </div>
+
+        <div class="case-modal__deep">
+          <div class="case-modal__deep-block">
+            <div class="case-modal__deep-h">технологии</div>
+            <div class="case-modal__chips">
+              <span>OpenAI GPT‑4o</span>
+              <span>RetailCRM</span>
+              <span>Tilda</span>
+              <span>Яндекс.Метрика</span>
+              <span>Pinecone (база товаров)</span>
+              <span>Resend (email)</span>
+            </div>
+          </div>
+          <div class="case-modal__deep-block">
+            <div class="case-modal__deep-h">этапы внедрения</div>
+            <ol class="case-modal__steps">
+              <li><b>Неделя 1:</b> анализ воронки, выявили 7&nbsp;точек выхода клиентов</li>
+              <li><b>Неделя 2:</b> прототип помощника на&nbsp;сайте, A/B&#8209;тест на&nbsp;5% трафика</li>
+              <li><b>Неделя 3:</b> загрузка всех 1&nbsp;200 товаров в&nbsp;базу, обучение рекомендаций</li>
+              <li><b>Неделя 4:</b> запуск на&nbsp;100% трафика, подключение брошенных&nbsp;корзин</li>
+              <li><b>Месяц 2:</b> персональные email&#8209;цепочки на&nbsp;основе диалога с&nbsp;помощником</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="case-modal__quote">
+          <div class="case-modal__quote-text">
+            «Думал, что&nbsp;помощник — это&nbsp;баловство, у&nbsp;нас всё-таки посуда, не&nbsp;банки. Оказалось, что&nbsp;людям нужен совет даже&nbsp;при выборе кастрюли. Я&nbsp;этого не&nbsp;понимал.»
+          </div>
+          <div class="case-modal__quote-author">
+            <div class="case-modal__quote-avatar" style="--c1:#f4b860;--c2:#a8650d">ВЛ</div>
+            <div>
+              <div class="case-modal__quote-name">Виталий Литвиненко</div>
+              <div class="case-modal__quote-role">основатель магазина</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="case-modal__cta">
+          <div class="case-modal__cta-text">У&nbsp;вас интернет&#8209;магазин?</div>
+          <a href="contact.html" class="btn btn--primary" data-magnetic>
+            <span>Получить разбор</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 12.5L12.5 3.5M12.5 3.5H5.5M12.5 3.5V10.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </dialog>
 
   <!-- ═══════════════ CTA ═══════════════ -->
   <section class="cta">
@@ -251,7 +555,7 @@
         Покажем кейсы<br/><em>вашей&nbsp;ниши на&nbsp;встрече</em>
       </h2>
       <p class="cta__lead" data-reveal>
-        У&nbsp;нас наверняка есть проект, похожий на&nbsp;ваш. Расскажем, что&nbsp;именно&nbsp;сработало, чтобы&nbsp;не&nbsp;повторять ошибок и&nbsp;не&nbsp;тратить&nbsp;время на&nbsp;«пробу».
+        У&nbsp;нас наверняка есть проект, похожий на&nbsp;ваш. Расскажем, что&nbsp;именно сработало, чтобы&nbsp;не&nbsp;повторять ошибок и&nbsp;не&nbsp;тратить время на&nbsp;«пробу».
       </p>
       <div class="cta__actions" data-reveal>
         <a href="contact.html" class="btn btn--primary btn--xl" data-magnetic>

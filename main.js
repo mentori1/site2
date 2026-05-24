@@ -47,6 +47,39 @@
     });
   }
 
+  /* ─── 2a. MOBILE MENU ───────────────────────────────── */
+  const burger = document.getElementById("navBurger");
+  const mobileMenu = document.getElementById("mobileMenu");
+  if (burger && mobileMenu) {
+    const closeMenu = () => {
+      burger.classList.remove("is-open");
+      mobileMenu.classList.remove("is-open");
+      mobileMenu.setAttribute("aria-hidden", "true");
+      burger.setAttribute("aria-expanded", "false");
+      document.body.classList.remove("menu-open");
+      if (lenis) lenis.start();
+    };
+    const toggleMenu = () => {
+      const isOpen = mobileMenu.classList.toggle("is-open");
+      burger.classList.toggle("is-open", isOpen);
+      mobileMenu.setAttribute("aria-hidden", String(!isOpen));
+      burger.setAttribute("aria-expanded", String(isOpen));
+      document.body.classList.toggle("menu-open", isOpen);
+      if (lenis) (isOpen ? lenis.stop() : lenis.start());
+    };
+    burger.addEventListener("click", toggleMenu);
+    // закрытие при клике по любой ссылке
+    mobileMenu.querySelectorAll("a").forEach((a) => {
+      a.addEventListener("click", closeMenu);
+    });
+    // закрытие по Esc
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && mobileMenu.classList.contains("is-open")) {
+        closeMenu();
+      }
+    });
+  }
+
   /* ─── 2. NAV SCROLL STATE ─────────────────────────────── */
   const nav = document.querySelector(".nav");
   const onScroll = () => {
@@ -335,7 +368,99 @@
     });
   }
 
-  /* ─── 15. ACCESSIBILITY: focus management ─────────────── */
+  /* ─── 15. CINEMA · pinned scenes ────────────────────── */
+  const cinema = document.querySelector(".cinema");
+  // На мобиле (≤960px) cinema показывается как обычный stack — pin-эффект не нужен,
+  // scroll-handler тоже отключаем, чтобы не было лишней работы.
+  if (cinema && !prefersReducedMotion && window.matchMedia("(min-width: 961px)").matches) {
+    const scenes = cinema.querySelectorAll(".cinema__scene");
+    const total = scenes.length;
+    const fill = document.getElementById("cinemaFill");
+    const currentLabel = document.getElementById("cinemaCurrent");
+    const marks = cinema.querySelectorAll(".cinema__rail-marks span");
+    let activeIdx = 0;
+
+    const clamp01 = (n) => Math.min(1, Math.max(0, n));
+    const onCinemaScroll = () => {
+      const rect = cinema.getBoundingClientRect();
+      const total_scroll = cinema.offsetHeight - window.innerHeight;
+      if (total_scroll <= 0) return;
+      const progress = clamp01(-rect.top / total_scroll);
+
+      // fill bar
+      if (fill) fill.style.transform = `scaleY(${progress})`;
+
+      // активная сцена
+      // мы делим прогресс на N сегментов, активна — текущий сегмент
+      const idx = Math.min(Math.floor(progress * total * 0.9999), total - 1);
+      if (idx !== activeIdx) {
+        activeIdx = idx;
+        scenes.forEach((s, i) => s.classList.toggle("is-active", i === idx));
+        if (currentLabel)
+          currentLabel.textContent = String(idx + 1).padStart(2, "0");
+        marks.forEach((m, i) => m.classList.toggle("is-current", i === idx));
+      }
+    };
+
+    onCinemaScroll();
+    window.addEventListener("scroll", onCinemaScroll, { passive: true });
+  }
+
+  /* ─── 16. CASE MODAL ───────────────────────────────────── */
+  const openCaseModal = (trigger) => {
+    const id = "case-" + trigger.dataset.caseTrigger;
+    const modal = document.getElementById(id);
+    if (modal && typeof modal.showModal === "function") {
+      modal.showModal();
+      document.body.style.overflow = "hidden";
+      // НЕ останавливаем Lenis — он сам игнорирует элементы с data-lenis-prevent.
+      // Внутренний scroll модалки работает через нативный браузерный wheel.
+      requestAnimationFrame(() => {
+        const closeBtn = modal.querySelector("[data-modal-close]");
+        if (closeBtn) closeBtn.focus({ preventScroll: true });
+      });
+    }
+  };
+  document.querySelectorAll("[data-case-trigger]").forEach((trigger) => {
+    trigger.addEventListener("click", (e) => {
+      if (e.target.closest("a, button:not([data-case-trigger])")) return;
+      openCaseModal(trigger);
+    });
+    trigger.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        openCaseModal(trigger);
+      }
+    });
+  });
+  document.querySelectorAll(".case-modal").forEach((modal) => {
+    const close = () => {
+      modal.close();
+      document.body.style.overflow = "";
+    };
+    modal.querySelectorAll("[data-modal-close]").forEach((btn) =>
+      btn.addEventListener("click", close)
+    );
+    modal.addEventListener("click", (e) => {
+      // клик по backdrop (вне content) — закрыть
+      const rect = modal.querySelector(".case-modal__shell")?.getBoundingClientRect();
+      if (!rect) return;
+      if (
+        e.clientX < rect.left ||
+        e.clientX > rect.right ||
+        e.clientY < rect.top ||
+        e.clientY > rect.bottom
+      ) {
+        close();
+      }
+    });
+    modal.addEventListener("cancel", (e) => {
+      e.preventDefault();
+      close();
+    });
+  });
+
+  /* ─── 17. ACCESSIBILITY: focus management ─────────────── */
   document.addEventListener("keydown", (e) => {
     if (e.key === "Tab") document.body.classList.add("is-tabbing");
   });
