@@ -90,7 +90,12 @@
   window.addEventListener("scroll", onScroll, { passive: true });
 
   /* ─── 3. INTERSECTION REVEAL ─────────────────────────── */
-  const revealEls = document.querySelectorAll("[data-reveal], .timeline, .case");
+  // На мобиле также включаем reveal для cinema-сцен (на десктопе они управляются pin-логикой)
+  const isMobileViewport = window.matchMedia("(max-width: 960px)").matches;
+  const revealSelector = isMobileViewport
+    ? "[data-reveal], .timeline, .case, .cinema__scene"
+    : "[data-reveal], .timeline, .case";
+  const revealEls = document.querySelectorAll(revealSelector);
   const io = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -172,28 +177,92 @@
   }
 
   /* ─── 7. 3D TILT (cards + dashboard) ─────────────────── */
-  if (!prefersReducedMotion && window.matchMedia("(pointer: fine)").matches) {
+  if (!prefersReducedMotion) {
     const tiltEls = document.querySelectorAll("[data-tilt]");
-    tiltEls.forEach((el) => {
-      const max = el.classList.contains("hero__dashboard") ? 6 : 5;
-      const child = el.firstElementChild || el;
-      let raf = null;
-      const update = (e) => {
-        const r = el.getBoundingClientRect();
-        const x = (e.clientX - r.left) / r.width - 0.5;
-        const y = (e.clientY - r.top) / r.height - 0.5;
-        if (raf) cancelAnimationFrame(raf);
-        raf = requestAnimationFrame(() => {
-          child.style.transform = `perspective(2400px) rotateX(${-y * max}deg) rotateY(${x * max}deg) translateZ(0)`;
+    const isFinePointer = window.matchMedia("(pointer: fine)").matches;
+
+    if (isFinePointer) {
+      // ДЕСКТОП: tilt по mouse position
+      tiltEls.forEach((el) => {
+        const max = el.classList.contains("hero__dashboard") ? 6 : 5;
+        const child = el.firstElementChild || el;
+        let raf = null;
+        const update = (e) => {
+          const r = el.getBoundingClientRect();
+          const x = (e.clientX - r.left) / r.width - 0.5;
+          const y = (e.clientY - r.top) / r.height - 0.5;
+          if (raf) cancelAnimationFrame(raf);
+          raf = requestAnimationFrame(() => {
+            child.style.transform = `perspective(2400px) rotateX(${-y * max}deg) rotateY(${x * max}deg) translateZ(0)`;
+          });
+        };
+        const reset = () => {
+          if (raf) cancelAnimationFrame(raf);
+          child.style.transform = "perspective(2400px) rotateX(0) rotateY(0)";
+        };
+        el.addEventListener("mousemove", update);
+        el.addEventListener("mouseleave", reset);
+      });
+    } else if (tiltEls.length) {
+      // МОБАЙЛ: лёгкий 3D tilt по гироскопу + auto-float только для видимых карточек
+      const floatTargets = Array.from(tiltEls).filter(
+        (el) => !el.classList.contains("hero__dashboard")
+      );
+      // Отслеживаем, какие элементы реально в viewport, чтобы не крутить rAF впустую
+      const visibleSet = new Set();
+      const visIO = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) visibleSet.add(e.target);
+            else visibleSet.delete(e.target);
+          });
+        },
+        { threshold: 0.2 }
+      );
+      floatTargets.forEach((el) => visIO.observe(el));
+
+      const startedAt = performance.now();
+      const tick = (t) => {
+        const elapsed = t - startedAt;
+        floatTargets.forEach((el, i) => {
+          if (!visibleSet.has(el)) return;
+          const child = el.firstElementChild || el;
+          const phase = ((elapsed + i * 600) % 7000) / 7000;
+          const rx = Math.sin(phase * Math.PI * 2) * 1.4;
+          const ry = Math.cos(phase * Math.PI * 2) * 1.8;
+          child.style.transform = `perspective(2400px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+        });
+        requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+
+      // гироскоп (если разрешён)
+      const handleOrient = (e) => {
+        if (e.beta == null || e.gamma == null) return;
+        const x = Math.max(-15, Math.min(15, e.gamma)) / 5;
+        const y = Math.max(-15, Math.min(15, e.beta - 45)) / 5;
+        tiltEls.forEach((el) => {
+          const child = el.firstElementChild || el;
+          child.style.transform = `perspective(2400px) rotateX(${-y}deg) rotateY(${x}deg)`;
         });
       };
-      const reset = () => {
-        if (raf) cancelAnimationFrame(raf);
-        child.style.transform = "perspective(2400px) rotateX(0) rotateY(0)";
-      };
-      el.addEventListener("mousemove", update);
-      el.addEventListener("mouseleave", reset);
-    });
+      if (window.DeviceOrientationEvent) {
+        if (typeof DeviceOrientationEvent.requestPermission === "function") {
+          // iOS 13+ требует user-gesture для разрешения
+          document.addEventListener("touchend", function once() {
+            DeviceOrientationEvent.requestPermission()
+              .then((p) => {
+                if (p === "granted")
+                  window.addEventListener("deviceorientation", handleOrient);
+              })
+              .catch(() => {});
+            document.removeEventListener("touchend", once);
+          }, { once: true });
+        } else {
+          window.addEventListener("deviceorientation", handleOrient);
+        }
+      }
+    }
   }
 
   /* ─── 8. HERO DASHBOARD INITIAL TILT ──────────────────── */
@@ -301,21 +370,22 @@
   if (!prefersReducedMotion && window.VANTA && window.VANTA.NET) {
     const webglEl = document.getElementById("heroWebgl");
     if (webglEl) {
+      const isMobile = window.matchMedia("(max-width: 900px)").matches;
       try {
         window.__vantaNet = VANTA.NET({
           el: webglEl,
-          mouseControls: true,
-          touchControls: false,
-          gyroControls: false,
+          mouseControls: !isMobile,
+          touchControls: true,
+          gyroControls: isMobile, // на мобиле — реагируем на наклон устройства
           minHeight: 200.0,
           minWidth: 200.0,
           scale: 1.0,
-          scaleMobile: 1.0,
+          scaleMobile: 0.7, // на мобиле — пореже сетка, чтобы не тормозить
           color: 0xff5e1a,
           backgroundColor: 0x0a0a0a,
-          points: 11.0,
-          maxDistance: 22.0,
-          spacing: 17.0,
+          points: isMobile ? 7.0 : 11.0,
+          maxDistance: isMobile ? 18.0 : 22.0,
+          spacing: isMobile ? 20.0 : 17.0,
           showDots: false,
         });
       } catch (e) {
