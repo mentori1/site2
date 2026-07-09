@@ -287,6 +287,109 @@
     });
   }
 
+  /* ─── 8.4. PRICING DECK · колода-степпер 01→02→03 ───── */
+  const pkgStage = document.querySelector("[data-pkg-stage]");
+  if (pkgStage) {
+    const steps = Array.from(pkgStage.querySelectorAll(".pkg__step"));
+    const dots = Array.from(pkgStage.querySelectorAll(".pkg__dot"));
+    const lines = Array.from(pkgStage.querySelectorAll(".pkg__dot-line"));
+    const prevBtn = pkgStage.querySelector("[data-pkg-prev]");
+    const nextBtn = pkgStage.querySelector("[data-pkg-next]");
+    let cur = 0;
+
+    const render = () => {
+      steps.forEach((s, i) => {
+        s.classList.toggle("is-active", i === cur);
+        s.classList.toggle("is-done", i < cur);
+        s.setAttribute("aria-hidden", i === cur ? "false" : "true");
+      });
+      dots.forEach((d, i) => {
+        d.classList.toggle("is-active", i === cur);
+        d.classList.toggle("is-done", i < cur);
+        d.setAttribute("aria-selected", i === cur ? "true" : "false");
+        d.setAttribute("tabindex", i === cur ? "0" : "-1");
+      });
+      lines.forEach((l, i) => {
+        // линия после dot i считается пройденной, если cur > i
+        l.classList.toggle("is-done", cur > i);
+      });
+      if (prevBtn) prevBtn.disabled = cur === 0;
+      if (nextBtn) nextBtn.disabled = cur === steps.length - 1;
+    };
+
+    const goTo = (i) => {
+      const next = Math.max(0, Math.min(steps.length - 1, i));
+      if (next === cur) return;
+      cur = next;
+      render();
+    };
+
+    if (prevBtn) prevBtn.addEventListener("click", () => goTo(cur - 1));
+    if (nextBtn) nextBtn.addEventListener("click", () => goTo(cur + 1));
+    dots.forEach((d) => {
+      const target = parseInt(d.getAttribute("data-pkg-go"), 10);
+      d.addEventListener("click", () => goTo(target));
+    });
+
+    // клик по заблюренной карточке — открывает её
+    steps.forEach((s, i) => {
+      s.addEventListener("click", (e) => {
+        if (i === cur) return; // активная — не перехватываем (CTA внутри неё работает)
+        // если клик пришёл по интерактиву внутри (на всякий случай) — пропускаем
+        const t = e.target.closest("a, button");
+        if (t && t !== s) return;
+        goTo(i);
+      });
+    });
+
+    // клавиатура — только когда колода в области видимости
+    const stageInView = () => {
+      const r = pkgStage.getBoundingClientRect();
+      return r.top < window.innerHeight * 0.85 && r.bottom > window.innerHeight * 0.15;
+    };
+    window.addEventListener("keydown", (e) => {
+      if (!stageInView()) return;
+      // не перехватываем стрелки, если фокус в инпуте/textarea
+      const tag = (document.activeElement && document.activeElement.tagName) || "";
+      if (tag === "INPUT" || tag === "TEXTAREA") return;
+      if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+        if (cur < steps.length - 1) { e.preventDefault(); goTo(cur + 1); }
+      } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+        if (cur > 0) { e.preventDefault(); goTo(cur - 1); }
+      }
+    });
+
+    // свайп на тач-устройствах
+    let touchStartX = 0;
+    pkgStage.addEventListener("touchstart", (e) => {
+      touchStartX = e.changedTouches[0].clientX;
+    }, { passive: true });
+    pkgStage.addEventListener("touchend", (e) => {
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) < 60) return;
+      if (dx < 0) goTo(cur + 1);
+      else goTo(cur - 1);
+    }, { passive: true });
+
+    render();
+  }
+
+  /* ─── 8.5. HERO HEADLINE ROTATOR ──────────────────────── */
+  const heroRotator = document.querySelector(".hero__rotator");
+  if (heroRotator) {
+    const lines = Array.from(heroRotator.querySelectorAll(".hero__line"));
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (lines.length > 1 && !reduceMotion) {
+      let idx = 0;
+      const ROTATE_MS = 5200;
+      setInterval(() => {
+        lines[idx].classList.remove("is-active");
+        idx = (idx + 1) % lines.length;
+        lines[idx].classList.add("is-active");
+      }, ROTATE_MS);
+    }
+  }
+
   /* ─── 9. TYPEWRITER ───────────────────────────────────── */
   const tw = document.querySelector("[data-typewriter]");
   if (tw) {
@@ -366,11 +469,29 @@
     );
   }
 
+  /* ─── 11.5. THEME — текущая тема из атрибута data-theme ── */
+  const isLightTheme = () =>
+    document.documentElement.getAttribute("data-theme") === "light";
+
+  // перекраска Vanta-фона под тему (вызывается при инициализации и при toggle)
+  const skinVanta = () => {
+    if (!window.__vantaNet) return;
+    const light = isLightTheme();
+    try {
+      window.__vantaNet.setOptions({
+        color: light ? 0xea4f10 : 0xff5e1a,
+        backgroundColor: light ? 0xfafaf7 : 0x0a0a0a,
+      });
+    } catch (e) {}
+  };
+  window.__skinVanta = skinVanta;
+
   /* ─── 12. VANTA.NET WebGL HERO BACKGROUND ─────────────── */
   if (!prefersReducedMotion && window.VANTA && window.VANTA.NET) {
     const webglEl = document.getElementById("heroWebgl");
     if (webglEl) {
       const isMobile = window.matchMedia("(max-width: 900px)").matches;
+      const light = isLightTheme();
       try {
         window.__vantaNet = VANTA.NET({
           el: webglEl,
@@ -381,8 +502,8 @@
           minWidth: 200.0,
           scale: 1.0,
           scaleMobile: 0.7, // на мобиле — пореже сетка, чтобы не тормозить
-          color: 0xff5e1a,
-          backgroundColor: 0x0a0a0a,
+          color: light ? 0xea4f10 : 0xff5e1a,
+          backgroundColor: light ? 0xfafaf7 : 0x0a0a0a,
           points: isMobile ? 7.0 : 11.0,
           maxDistance: isMobile ? 18.0 : 22.0,
           spacing: isMobile ? 20.0 : 17.0,
@@ -393,6 +514,37 @@
       }
     }
   }
+
+  /* ─── 12.5. THEME TOGGLE — ручной переключатель + системная тема ── */
+  (function () {
+    const root = document.documentElement;
+    const toggle = document.getElementById("themeToggle");
+    const metaDark = document.querySelector('meta[name="theme-color"][media*="dark"]');
+
+    const setTheme = (theme, persist) => {
+      root.setAttribute("data-theme", theme);
+      if (persist) {
+        try { localStorage.setItem("mentra-theme", theme); } catch (e) {}
+      }
+      skinVanta();
+    };
+
+    if (toggle) {
+      toggle.addEventListener("click", () => {
+        setTheme(isLightTheme() ? "dark" : "light", true);
+      });
+    }
+
+    // если пользователь НЕ выбирал тему вручную — следуем за системной
+    const sysMQ = window.matchMedia("(prefers-color-scheme: light)");
+    const onSysChange = () => {
+      let saved = null;
+      try { saved = localStorage.getItem("mentra-theme"); } catch (e) {}
+      if (!saved) setTheme(sysMQ.matches ? "light" : "dark", false);
+    };
+    if (sysMQ.addEventListener) sysMQ.addEventListener("change", onSysChange);
+    else if (sysMQ.addListener) sysMQ.addListener(onSysChange);
+  })();
 
   /* ─── 13. STICKY SCROLL-STACK ─────────────────────────── */
   if (!prefersReducedMotion && window.gsap && window.ScrollTrigger) {

@@ -3,15 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#0a0a0a" />
+  <meta name="color-scheme" content="dark light" />
+  <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#fafaf7" media="(prefers-color-scheme: light)" />
   <title>Mentra — продажи и обработка клиентов на автомате</title>
+
+  <!-- Тема: ставим до отрисовки (выбор пользователя > системная тема) — без мигания -->
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('mentra-theme');
+        var sys = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', saved || sys);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
   <meta name="description" content="Mentra делает так, чтобы клиентам отвечали за вас, заявки не терялись, а продажи росли без ручной работы." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=28" />
 </head>
 <body>
   <div class="grain" aria-hidden="true"></div>
@@ -31,6 +46,10 @@
         <a href="blog.html">Блог</a>
         <a href="contact.html">Контакт</a>
       </nav>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Переключить тему" title="Светлая / тёмная тема">
+        <svg class="theme-toggle__sun" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.7"/><path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M5 5l1.7 1.7M17.3 17.3 19 19M19 5l-1.7 1.7M6.7 17.3 5 19" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+        <svg class="theme-toggle__moon" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.3 6.3 0 0 0 10.5 10.5z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+      </button>
       <a href="contact.html" class="nav__cta" data-magnetic>
         <span>Получить разбор</span>
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -74,16 +93,28 @@
       <div class="hero__copy">
         <div class="eyebrow" data-reveal>
           <span class="eyebrow__pulse"></span>
-          <span>агентство автоматизации продаж</span>
+          <span>операционная система бизнеса</span>
         </div>
 
-        <h1 class="hero__title" data-reveal>
-          Продажи, которые<br />
-          работают <em class="hero__title-em">пока вы спите</em>
+        <h1 class="hero__title hero__title--rotator" data-reveal>
+          <span class="hero__rotator" aria-live="polite" aria-atomic="true">
+            <span class="hero__line is-active">
+              Компания держится<br/>на&nbsp;<em class="hero__title-em">вас</em>. И&nbsp;это&nbsp;проблема.
+            </span>
+            <span class="hero__line">
+              Вы&nbsp;управляете бизнесом<br/>или <em class="hero__title-em">тушите&nbsp;пожары</em>?
+            </span>
+            <span class="hero__line">
+              Каждый день вы&nbsp;теряете клиентов<br/><em class="hero__title-em">ещё&nbsp;до&nbsp;того</em>, как&nbsp;менеджер открыл&nbsp;заявку.
+            </span>
+            <span class="hero__line">
+              Пока вы&nbsp;это&nbsp;читаете,<br/>кто-то <em class="hero__title-em">уходит к&nbsp;конкурентам</em>.
+            </span>
+          </span>
         </h1>
 
         <p class="hero__lead" data-reveal>
-          Делаем так, чтобы клиенту отвечали через 10&nbsp;секунд, заявки не&nbsp;терялись, а&nbsp;менеджеры приходили только на&nbsp;готовые встречи. Всё остальное за&nbsp;них делает программа.
+          Заявки, клиенты, производство и&nbsp;команда&nbsp;— в&nbsp;одной системе, которая отвечает за&nbsp;секунды, ничего не&nbsp;теряет и&nbsp;работает без&nbsp;вашего ручного контроля.
         </p>
 
         <div class="hero__actions" data-reveal>
@@ -217,237 +248,89 @@
     </div>
   </section>
 
-  <!-- ───────────────── RESULTS ───────────────── -->
-  <section class="results" id="results">
+  <!-- ───────────────── LOSSES — где бизнес теряет деньги ───────────────── -->
+  <section class="results losses" id="results">
     <div class="section__head">
-      <h2 class="section__title" data-reveal>Что меняется<br/><em>у&nbsp;наших клиентов</em></h2>
-      <p class="section__lead" data-reveal>Цифры из&nbsp;14&nbsp;проектов за&nbsp;последний год. Малый и&nbsp;средний бизнес: стройка, услуги, магазины, клиники.</p>
+      <h2 class="section__title" data-reveal>Где бизнес<br/><em>теряет деньги</em><br/>каждый&nbsp;день</h2>
+      <p class="section__lead" data-reveal>Не&nbsp;на&nbsp;рекламе и&nbsp;не&nbsp;на&nbsp;ценах. Деньги уходят на&nbsp;тех мелочах, которые&nbsp;не&nbsp;видно из&nbsp;кабинета руководителя. Вот три самые&nbsp;дорогие&nbsp;дыры&nbsp;— и&nbsp;что&nbsp;на&nbsp;их&nbsp;месте появляется после&nbsp;внедрения Mentra.</p>
     </div>
 
-    <div class="results__grid">
-      <article class="result" data-reveal>
-        <div class="result__big"><span data-counter="312" data-suffix="%">0</span></div>
-        <div class="result__label">рост выручки за&nbsp;первые 3&nbsp;месяца после&nbsp;запуска</div>
-      </article>
-      <article class="result" data-reveal>
-        <div class="result__big"><span data-counter="11" data-suffix=" сек">0</span></div>
-        <div class="result__label">скорость ответа клиенту вместо&nbsp;часа&nbsp;ожидания</div>
-      </article>
-      <article class="result" data-reveal>
-        <div class="result__big"><span data-counter="2.4" data-suffix="×">0</span></div>
-        <div class="result__label">больше клиентов доходит до&nbsp;покупки с&nbsp;того&nbsp;же&nbsp;трафика</div>
-      </article>
-      <article class="result" data-reveal>
-        <div class="result__big"><span data-counter="38" data-suffix=" ч">0</span></div>
-        <div class="result__label">в&nbsp;неделю освобождаем команде на&nbsp;важные&nbsp;задачи</div>
-      </article>
-    </div>
-  </section>
-
-  <!-- ───────────────── ABOUT / FOUNDER ───────────────── -->
-  <section class="about" id="about">
-    <div class="about__bg">
-      <div class="about__mesh"></div>
-    </div>
-    <div class="about__inner">
-      <div class="about__media">
-        <div class="about__photo-wrap" data-tilt>
-          <img class="about__photo" src="assets/founder.jpg" alt="Данила Родионов — основатель Mentra" loading="lazy" />
-          <div class="about__photo-frame"></div>
-          <div class="about__badge">
-            <span class="about__badge-dot"></span>
-            <span>основатель · founder</span>
-          </div>
+    <div class="losses__grid">
+      <article class="loss" data-reveal>
+        <div class="loss__badge">по&nbsp;нашим&nbsp;замерам в&nbsp;14&nbsp;проектах</div>
+        <div class="loss__pain">
+          <span class="loss__mark loss__mark--pain" aria-hidden="true">×</span>
+          <div class="loss__txt">Заявка ждёт ответа <b>2&nbsp;часа</b>. <b>1&nbsp;из&nbsp;3&nbsp;клиентов</b> уходит к&nbsp;тому, кто ответил первым.</div>
         </div>
-        <div class="about__quote-card">
-          <div class="about__quote-mark">"</div>
-          <p>Я&nbsp;строю инфраструктуру, в&nbsp;которой бизнес не&nbsp;теряет клиентов&nbsp;— ни&nbsp;ночью, ни&nbsp;в&nbsp;отпуске, ни&nbsp;при&nbsp;росте в&nbsp;10&nbsp;раз. Это&nbsp;не&nbsp;«поставить чат-бота». Это&nbsp;система, которая работает, пока&nbsp;вы&nbsp;занимаетесь&nbsp;продуктом.</p>
+        <div class="loss__arrow" aria-hidden="true">
+          <svg width="22" height="40" viewBox="0 0 22 40" fill="none"><path d="M11 2 L11 33 M3 26 L11 34 L19 26" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="loss__fix">
+          <span class="loss__mark loss__mark--fix" aria-hidden="true">✓</span>
+          <div class="loss__txt">Ответ за&nbsp;<b>30&nbsp;секунд</b>&nbsp;— в&nbsp;любое&nbsp;время дня и&nbsp;ночи. <b>+40&nbsp;%</b> заявок доходят до&nbsp;встречи.</div>
+        </div>
+      </article>
+
+      <article class="loss" data-reveal>
+        <div class="loss__badge">по&nbsp;нашим&nbsp;замерам в&nbsp;14&nbsp;проектах</div>
+        <div class="loss__pain">
+          <span class="loss__mark loss__mark--pain" aria-hidden="true">×</span>
+          <div class="loss__txt">Менеджер <b>забыл перезвонить</b>. <b>Каждая&nbsp;2-я&nbsp;смета</b> умирает в&nbsp;«обещал&nbsp;подумать».</div>
+        </div>
+        <div class="loss__arrow" aria-hidden="true">
+          <svg width="22" height="40" viewBox="0 0 22 40" fill="none"><path d="M11 2 L11 33 M3 26 L11 34 L19 26" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="loss__fix">
+          <span class="loss__mark loss__mark--fix" aria-hidden="true">✓</span>
+          <div class="loss__txt">Система <b>сама напоминает</b> в&nbsp;нужный день. Ни&nbsp;один клиент не&nbsp;выпадает&nbsp;— <b>+2.4×</b> закрытых сделок.</div>
+        </div>
+      </article>
+
+      <article class="loss" data-reveal>
+        <div class="loss__badge">по&nbsp;нашим&nbsp;замерам в&nbsp;14&nbsp;проектах</div>
+        <div class="loss__pain">
+          <span class="loss__mark loss__mark--pain" aria-hidden="true">×</span>
+          <div class="loss__txt">Руководитель смотрит <b>10&nbsp;таблиц</b>, чаты и&nbsp;звонит бухгалтеру. До&nbsp;<b>5&nbsp;часов в&nbsp;неделю</b>&nbsp;— на&nbsp;поиск цифр.</div>
+        </div>
+        <div class="loss__arrow" aria-hidden="true">
+          <svg width="22" height="40" viewBox="0 0 22 40" fill="none"><path d="M11 2 L11 33 M3 26 L11 34 L19 26" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="loss__fix">
+          <span class="loss__mark loss__mark--fix" aria-hidden="true">✓</span>
+          <div class="loss__txt">Заявки, сделки, склад и&nbsp;оплаты&nbsp;— в&nbsp;<b>одной системе</b>. Ответ на&nbsp;любой вопрос&nbsp;— <b>за&nbsp;секунды</b>.</div>
+        </div>
+      </article>
+    </div>
+
+    <!-- маленький proof-strip: цифры из реальных проектов -->
+    <div class="losses__proof" data-reveal>
+      <div class="losses__proof-head">У&nbsp;наших клиентов после&nbsp;внедрения&nbsp;—</div>
+      <div class="losses__proof-grid">
+        <div class="losses__proof-item">
+          <span class="losses__proof-num"><span data-counter="312" data-suffix="%">0</span></span>
+          <span class="losses__proof-lbl">рост выручки за&nbsp;первые 3&nbsp;месяца</span>
+        </div>
+        <div class="losses__proof-item">
+          <span class="losses__proof-num"><span data-counter="11" data-suffix=" сек">0</span></span>
+          <span class="losses__proof-lbl">скорость ответа клиенту вместо&nbsp;часа</span>
+        </div>
+        <div class="losses__proof-item">
+          <span class="losses__proof-num"><span data-counter="2.4" data-suffix="×">0</span></span>
+          <span class="losses__proof-lbl">больше клиентов доходит до&nbsp;покупки</span>
+        </div>
+        <div class="losses__proof-item">
+          <span class="losses__proof-num"><span data-counter="38" data-suffix=" ч">0</span></span>
+          <span class="losses__proof-lbl">в&nbsp;неделю команда тратит на&nbsp;важное</span>
         </div>
       </div>
-
-      <div class="about__copy">
-        <div class="eyebrow" data-reveal>
-          <span class="eyebrow__pulse"></span>
-          <span>кто за&nbsp;mentori</span>
-        </div>
-        <h2 class="about__title" data-reveal>
-          Данила<br/><em>Родионов</em>
-        </h2>
-        <div class="about__role" data-reveal>основатель Mentra · marketing&nbsp;&amp;&nbsp;AI&#8209;systems architect</div>
-
-        <div class="about__story" data-reveal>
-          <p>Mentra основан <b>10 декабря 2023</b>. Стартовали как&nbsp;агентство по&nbsp;<b>платформенному маркетингу</b>&nbsp;— упаковывали и&nbsp;вели профили специалистов на&nbsp;Profi.ru. Прошли через сотни анкет и&nbsp;увидели одну&nbsp;вещь&nbsp;— большинство бизнесов теряют клиентов не&nbsp;на&nbsp;трафике, а&nbsp;на&nbsp;скорости и&nbsp;качестве обработки.</p>
-          <p>Когда зрелые AI&#8209;модели стали реально способны вести продажу&nbsp;— стало очевидно, где&nbsp;ответ. Mentra эволюционировал в&nbsp;<b>AI&#8209;агентство</b>, которое собирает системы под&nbsp;ключ: от&nbsp;первого касания клиента до&nbsp;повторной продажи.</p>
-          <p>Сегодня мы&nbsp;соединяем опыт в&nbsp;трафике и&nbsp;трасте с&nbsp;современными AI&#8209;инструментами&nbsp;— и&nbsp;строим то, что&nbsp;реально приносит выручку, а&nbsp;не&nbsp;«технологию&nbsp;ради&nbsp;технологии».</p>
-        </div>
-
-        <div class="about__stats" data-reveal>
-          <div class="about__stat">
-            <div class="about__stat-num">10.12.23</div>
-            <div class="about__stat-label">дата основания<br/>Mentra</div>
-          </div>
-          <div class="about__stat">
-            <div class="about__stat-num">14</div>
-            <div class="about__stat-label">проектов запустили<br/>за&nbsp;последний&nbsp;год</div>
-          </div>
-          <div class="about__stat">
-            <div class="about__stat-num">200+</div>
-            <div class="about__stat-label">профилей упаковано<br/>на&nbsp;Profi.ru</div>
-          </div>
-        </div>
-
-        <div class="about__principles" data-reveal>
-          <div class="about__principles-h">философия Mentra</div>
-          <ul>
-            <li><b>Делаем то, что&nbsp;считается в&nbsp;деньгах.</b> Не&nbsp;«внедрили AI», а&nbsp;«+312% выручки за&nbsp;3&nbsp;месяца».</li>
-            <li><b>Один проект&nbsp;— одна команда.</b> Не&nbsp;конвейер из&nbsp;30&nbsp;клиентов на&nbsp;одного менеджера.</li>
-            <li><b>Объясняем человеческим языком.</b> Никаких «омникальных пайплайнов с&nbsp;ML&#8209;инференсом».</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ───────────────── SERVICES · STICKY STACK ───────────────── -->
-  <section class="services-stack" id="services">
-    <div class="section__head">
-      <h2 class="section__title" data-reveal>Система<br/><em>Mentra</em></h2>
-      <p class="section__lead" data-reveal>Не&nbsp;«поставили чат-бота и&nbsp;ушли». Mentra&nbsp;— это&nbsp;экосистема инструментов для&nbsp;привлечения, обработки и&nbsp;удержания клиентов. Каждый модуль подключается отдельно и&nbsp;только если&nbsp;он&nbsp;действительно нужен вашему&nbsp;бизнесу.</p>
-    </div>
-
-    <div class="stack" data-stack>
-      <article class="stack__card" data-stack-card>
-        <div class="stack__num">01</div>
-        <div class="stack__body">
-          <h3 class="stack__title">Программа<br/>отвечает за&nbsp;вас</h3>
-          <p class="stack__text">Клиент пишет в&nbsp;WhatsApp или&nbsp;Instagram&nbsp;— ему&nbsp;отвечают за&nbsp;10&nbsp;секунд, в&nbsp;любое&nbsp;время&nbsp;дня&nbsp;и&nbsp;ночи. Узнают, что&nbsp;нужно, отвечают на&nbsp;вопросы и&nbsp;записывают на&nbsp;встречу. Менеджер видит уже&nbsp;готовый диалог и&nbsp;время в&nbsp;календаре.</p>
-          <ul class="stack__bullets">
-            <li>WhatsApp · Telegram · Instagram · Авито · ВКонтакте</li>
-            <li>Голосовые звонки, как живой человек</li>
-            <li>Сразу попадает в&nbsp;вашу CRM</li>
-          </ul>
-        </div>
-        <div class="stack__visual">
-          <div class="stack__chat">
-            <div class="stack__chat-msg stack__chat-msg--in">Здравствуйте, сколько стоит&nbsp;ремонт ванной&nbsp;15&nbsp;м²?</div>
-            <div class="stack__chat-msg stack__chat-msg--out">Добрый день! Зависит от&nbsp;материалов. Подскажите&nbsp;— под&nbsp;ключ или&nbsp;только работа?</div>
-            <div class="stack__chat-msg stack__chat-msg--in">Под ключ</div>
-            <div class="stack__chat-msg stack__chat-msg--out">Бюджет уровня «эконом» от&nbsp;185&nbsp;тыс, «средний» от&nbsp;280&nbsp;тыс. Удобно созвониться в&nbsp;четверг 14:30 с&nbsp;нашим прорабом?</div>
-            <div class="stack__chat-time">ответ занял&nbsp;9&nbsp;секунд</div>
-          </div>
-        </div>
-      </article>
-
-      <article class="stack__card" data-stack-card>
-        <div class="stack__num">02</div>
-        <div class="stack__body">
-          <h3 class="stack__title">Возвращаем тех,<br/>кто&nbsp;ушёл&nbsp;думать</h3>
-          <p class="stack__text">У&nbsp;вас в&nbsp;базе сотни клиентов, которые&nbsp;«подумают и&nbsp;вернутся»&nbsp;— и&nbsp;не&nbsp;возвращаются. Программа сама&nbsp;пишет каждому в&nbsp;нужный момент: кому&nbsp;через 3&nbsp;дня, кому&nbsp;через&nbsp;3&nbsp;недели, кому&nbsp;с&nbsp;другим предложением.</p>
-          <ul class="stack__bullets">
-            <li>Сообщения, которые срабатывают на&nbsp;поведение клиента</li>
-            <li>Прогрев тех, кто&nbsp;не&nbsp;готов&nbsp;покупать&nbsp;прямо&nbsp;сейчас</li>
-            <li>Реактивация старой базы, о&nbsp;которой&nbsp;все&nbsp;забыли</li>
-          </ul>
-        </div>
-        <div class="stack__visual">
-          <div class="stack__pipe">
-            <div class="stack__pipe-row"><span>спящих в&nbsp;базе</span><span><b>2&nbsp;417</b></span></div>
-            <div class="stack__pipe-bar"><i style="--w:100%"></i></div>
-            <div class="stack__pipe-row"><span>прочитали наше&nbsp;письмо</span><span><b>1&nbsp;284</b></span></div>
-            <div class="stack__pipe-bar"><i style="--w:53%"></i></div>
-            <div class="stack__pipe-row"><span>ответили</span><span><b>347</b></span></div>
-            <div class="stack__pipe-bar"><i style="--w:24%"></i></div>
-            <div class="stack__pipe-row stack__pipe-row--accent"><span>купили повторно</span><span><b>89</b></span></div>
-            <div class="stack__pipe-bar stack__pipe-bar--accent"><i style="--w:14%"></i></div>
-          </div>
-        </div>
-      </article>
-
-      <article class="stack__card" data-stack-card>
-        <div class="stack__num">03</div>
-        <div class="stack__body">
-          <h3 class="stack__title">Показываем,<br/>куда уходят&nbsp;деньги</h3>
-          <p class="stack__text">Видно, какая реклама приводит покупателей, а&nbsp;какая&nbsp;— зевак. Какие&nbsp;клиенты вернутся, а&nbsp;какие&nbsp;нет. Перестаёте сливать бюджет туда, где&nbsp;денег&nbsp;нет, и&nbsp;вкладываете в&nbsp;то, что&nbsp;работает.</p>
-          <ul class="stack__bullets">
-            <li>Видно, откуда пришли клиенты, которые&nbsp;реально&nbsp;купили</li>
-            <li>Прогноз, кто&nbsp;уйдёт в&nbsp;ближайший месяц&nbsp;и&nbsp;почему</li>
-            <li>Куда лучше вложить рекламный бюджет в&nbsp;следующем&nbsp;месяце</li>
-          </ul>
-        </div>
-        <div class="stack__visual">
-          <div class="stack__stats">
-            <div class="stack__stat">
-              <div class="stack__stat-label">Instagram&nbsp;ads</div>
-              <div class="stack__stat-bar"><i style="--w:84%;--c:#ff5e1a"></i></div>
-              <div class="stack__stat-meta"><b>312&nbsp;₽</b> на&nbsp;клиента · <span class="up">+ROI&nbsp;240%</span></div>
-            </div>
-            <div class="stack__stat">
-              <div class="stack__stat-label">Яндекс.Директ</div>
-              <div class="stack__stat-bar"><i style="--w:62%;--c:#ffa940"></i></div>
-              <div class="stack__stat-meta"><b>540&nbsp;₽</b> на&nbsp;клиента · <span class="up">+ROI&nbsp;180%</span></div>
-            </div>
-            <div class="stack__stat">
-              <div class="stack__stat-label">VK&nbsp;Реклама</div>
-              <div class="stack__stat-bar"><i style="--w:24%;--c:#777"></i></div>
-              <div class="stack__stat-meta"><b>1&nbsp;820&nbsp;₽</b> на&nbsp;клиента · <span class="down">−ROI&nbsp;30%</span></div>
-            </div>
-            <div class="stack__verdict">Рекомендация: перенести 60% бюджета с&nbsp;VK на&nbsp;Instagram</div>
-          </div>
-        </div>
-      </article>
-
-      <article class="stack__card" data-stack-card>
-        <div class="stack__num">04</div>
-        <div class="stack__body">
-          <h3 class="stack__title">Подключаемся<br/>к&nbsp;вашей&nbsp;CRM</h3>
-          <p class="stack__text">Не&nbsp;нужно ничего ломать или&nbsp;переучивать&nbsp;команду. Mentra становится надстройкой над&nbsp;тем, что&nbsp;у&nbsp;вас&nbsp;уже&nbsp;есть&nbsp;— и&nbsp;делает&nbsp;это&nbsp;быстрее. Если CRM нет&nbsp;— поможем выбрать&nbsp;и&nbsp;настроить.</p>
-          <ul class="stack__bullets stack__bullets--row">
-            <li>AmoCRM</li>
-            <li>Bitrix24</li>
-            <li>1С</li>
-            <li>YClients</li>
-            <li>Альтегио</li>
-            <li>МойСклад</li>
-            <li>любая&nbsp;другая</li>
-          </ul>
-        </div>
-        <div class="stack__visual">
-          <div class="stack__diagram">
-            <div class="stack__node stack__node--main">Mentra</div>
-            <div class="stack__node stack__node--src" style="--x:-130px;--y:-90px">WhatsApp</div>
-            <div class="stack__node stack__node--src" style="--x:130px;--y:-90px">Instagram</div>
-            <div class="stack__node stack__node--src" style="--x:-160px;--y:40px">Сайт</div>
-            <div class="stack__node stack__node--src" style="--x:160px;--y:40px">Авито</div>
-            <div class="stack__node stack__node--dst" style="--x:-90px;--y:130px">AmoCRM</div>
-            <div class="stack__node stack__node--dst" style="--x:90px;--y:130px">1С</div>
-            <svg class="stack__diagram-lines" viewBox="-200 -150 400 320">
-              <g stroke="rgba(255,255,255,0.12)" stroke-width="1" fill="none">
-                <path d="M-130,-90 Q-65,-45 0,0"/>
-                <path d="M130,-90 Q65,-45 0,0"/>
-                <path d="M-160,40 Q-80,20 0,0"/>
-                <path d="M160,40 Q80,20 0,0"/>
-                <path d="M0,0 Q-45,65 -90,130" stroke="rgba(255,94,26,0.5)"/>
-                <path d="M0,0 Q45,65 90,130" stroke="rgba(255,94,26,0.5)"/>
-              </g>
-            </svg>
-          </div>
-        </div>
-      </article>
-    </div>
-
-    <div class="services-stack__bottom">
-      <a href="services.html" class="btn btn--ghost" data-magnetic>
-        <span>Подробнее о&nbsp;системе&nbsp;Mentra</span>
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 12.5L12.5 3.5M12.5 3.5H5.5M12.5 3.5V10.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
     </div>
   </section>
 
   <!-- ───────────────── PROCESS ───────────────── -->
   <section class="process" id="process">
     <div class="section__head">
-      <h2 class="section__title" data-reveal>Как мы<br/><em>запускаем систему</em></h2>
-      <p class="section__lead" data-reveal>Никаких «дадим решение через 3&nbsp;месяца». Первая часть начинает работать через 2&nbsp;недели. Каждый этап&nbsp;— понятный результат, не&nbsp;отчёт на&nbsp;40&nbsp;страниц.</p>
+      <h2 class="section__title" data-reveal>За 2&nbsp;недели у&nbsp;вас<br/><em>уже не&nbsp;теряются</em><br/>заявки</h2>
+      <p class="section__lead" data-reveal>Не&nbsp;«дадим решение через 3&nbsp;месяца» и&nbsp;не&nbsp;«давайте сначала пропишем процессы». Через 14&nbsp;дней у&nbsp;вас уже работает первая часть системы: заявки попадают в&nbsp;одно окно, никто их&nbsp;не&nbsp;теряет, менеджеры видят, кому позвонить сегодня. Дальше&nbsp;— расширяем по&nbsp;неделе.</p>
     </div>
 
     <ol class="timeline">
@@ -471,8 +354,8 @@
       <li class="timeline__step" data-reveal>
         <div class="timeline__dot"></div>
         <div class="timeline__meta">2&nbsp;недели</div>
-        <h3 class="timeline__title">Запускаем основное</h3>
-        <p class="timeline__text">Подключаем автоматический ответ клиентам и&nbsp;первый сценарий продажи. Уже&nbsp;через 14&nbsp;дней реальные диалоги ведёт программа&nbsp;— не&nbsp;ваш&nbsp;менеджер.</p>
+        <h3 class="timeline__title">Заявки перестают теряться</h3>
+        <p class="timeline__text">Подключаем автоматический ответ клиентам и&nbsp;первый сценарий продажи. Через 14&nbsp;дней все заявки&nbsp;— в&nbsp;одном окне, на&nbsp;каждую отвечают за&nbsp;секунды, ни&nbsp;одна не&nbsp;падает между WhatsApp и&nbsp;CRM.</p>
       </li>
 
       <li class="timeline__step" data-reveal>
@@ -491,105 +374,294 @@
     </ol>
   </section>
 
-  <!-- ───────────────── OWN TECHNOLOGIES ───────────────── -->
-  <section class="own-tech" id="own-tech">
+  <!-- ───────────────── EXPERTISE — где у нас основной опыт ───────────────── -->
+  <section class="expertise" id="expertise">
+    <div class="expertise__bg" aria-hidden="true">
+      <div class="expertise__mesh"></div>
+    </div>
+    <div class="expertise__inner">
+      <div class="expertise__copy">
+        <div class="eyebrow" data-reveal>
+          <span class="eyebrow__pulse"></span>
+          <span>где у&nbsp;нас основной опыт</span>
+        </div>
+        <h2 class="expertise__title" data-reveal>
+          Наш основной&nbsp;опыт&nbsp;—<br/><em>стройка и&nbsp;производство</em>
+        </h2>
+        <p class="expertise__lead" data-reveal>
+          Больше всего проектов мы&nbsp;делаем там, где сложные процессы продаж, длинный цикл сделки, склад и&nbsp;команда на&nbsp;ручном контроле. Именно тут хаос обходится дороже всего&nbsp;— и&nbsp;именно тут наша система даёт максимальный эффект.
+        </p>
+      </div>
+
+      <div class="expertise__chips" data-reveal>
+        <div class="expertise__chip">
+          <span class="expertise__chip-ico" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 21h18M5 21V8l7-4 7 4v13M9 21v-7h6v7M9 8h.01M12 8h.01M15 8h.01" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span>Строительство</span>
+        </div>
+        <div class="expertise__chip">
+          <span class="expertise__chip-ico" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M2 21h20M4 21V11l5 3V8l5 3V6l6 4v11M7 17h.01M11 17h.01M15 17h.01M19 17h.01" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span>Производство</span>
+        </div>
+        <div class="expertise__chip">
+          <span class="expertise__chip-ico" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="2" y="7" width="11" height="9" rx="1" stroke="currentColor" stroke-width="1.6"/><path d="M13 10h4l3 3v3h-7z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="6" cy="18" r="2" stroke="currentColor" stroke-width="1.6"/><circle cx="17" cy="18" r="2" stroke="currentColor" stroke-width="1.6"/></svg>
+          </span>
+          <span>Логистика и&nbsp;склад</span>
+        </div>
+        <div class="expertise__chip">
+          <span class="expertise__chip-ico" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="1.5" stroke="currentColor" stroke-width="1.6"/><path d="M12 3v18M3 12h18" stroke="currentColor" stroke-width="1.6"/></svg>
+          </span>
+          <span>Окна и&nbsp;двери</span>
+        </div>
+        <div class="expertise__chip">
+          <span class="expertise__chip-ico" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 18h18M6 6v12M18 6v12M9 6v12M15 6v12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </span>
+          <span>Металлоконструкции</span>
+        </div>
+        <div class="expertise__chip expertise__chip--ghost">
+          <span class="expertise__chip-ico" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M8 12h8M12 8v8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </span>
+          <span>Ваша&nbsp;ниша</span>
+        </div>
+      </div>
+
+      <p class="expertise__verdict" data-reveal>
+        <b>Если вашей ниши&nbsp;нет в&nbsp;списке&nbsp;— это&nbsp;не&nbsp;значит&nbsp;«нет».</b> Принципы системного управления работают везде, где есть заявки, длинный цикл сделки и&nbsp;ручное управление командой. Опишите задачу&nbsp;— разберёмся.
+      </p>
+    </div>
+  </section>
+
+  <!-- ───────────────── СЦЕНАРИИ ПОТЕРЬ · STICKY STACK ───────────────── -->
+  <section class="services-stack" id="services">
     <div class="section__head">
-      <h2 class="section__title" data-reveal>Собственные<br/><em>системы Mentra</em></h2>
-      <p class="section__lead" data-reveal>Мы&nbsp;не&nbsp;перепродаём чужие SaaS. Внутри Mentra&nbsp;— два&nbsp;ключевых продукта, которые мы&nbsp;построили&nbsp;для&nbsp;себя, потому&nbsp;что готовые решения не&nbsp;закрывали&nbsp;нужные&nbsp;задачи. Сегодня они&nbsp;стоят за&nbsp;каждым клиентским проектом.</p>
+      <h2 class="section__title" data-reveal>Четыре сценария,<br/>по&nbsp;которым каждый&nbsp;день<br/><em>уходят деньги</em></h2>
+      <p class="section__lead" data-reveal>Узнаёте хотя&nbsp;бы один&nbsp;— значит, теряете больше, чем&nbsp;кажется. Примеры&nbsp;— из&nbsp;строительных и&nbsp;производственных проектов, но&nbsp;паттерн встречается везде, где есть длинный цикл сделки и&nbsp;команда на&nbsp;ручном контроле.</p>
     </div>
 
-    <div class="own-tech__grid">
-
-      <!-- ─── Mentra CRM ─── -->
-      <article class="own-tech__card" data-reveal>
-        <div class="own-tech__card-h">
-          <div class="own-tech__logo">
-            <span class="own-tech__logo-mark">M</span>
-            <div>
-              <div class="own-tech__logo-name">Mentra&nbsp;CRM</div>
-              <div class="own-tech__logo-sub">собственная инфраструктура</div>
-            </div>
-          </div>
-          <div class="own-tech__badge own-tech__badge--prod">
-            <span></span><span>v&nbsp;2.4 · в&nbsp;production</span>
-          </div>
+    <div class="stack" data-stack>
+      <!-- 01 — заявка остыла -->
+      <article class="stack__card" data-stack-card>
+        <div class="stack__num">01</div>
+        <div class="stack__body">
+          <h3 class="stack__title">Клиент оставил<br/>заявку</h3>
+          <p class="stack__text">Менеджер увидел&nbsp;её&nbsp;через час. За&nbsp;это&nbsp;время клиент уже&nbsp;получил коммерческое предложение у&nbsp;конкурента и&nbsp;закрыл сделку.</p>
+          <ul class="stack__bullets">
+            <li>в&nbsp;стройке решение принимается за&nbsp;первые 30&nbsp;минут</li>
+            <li>каждая 3-я заявка уходит, потому&nbsp;что не&nbsp;ответили первыми</li>
+            <li>реклама привела клиента&nbsp;— и&nbsp;слили в&nbsp;ноль</li>
+          </ul>
         </div>
-
-        <h3 class="own-tech__title">Создаём системы под&nbsp;бизнес&nbsp;— не&nbsp;подгоняем бизнес&nbsp;под&nbsp;шаблонные&nbsp;CRM</h3>
-        <p class="own-tech__text">
-          Собрали свою CRM, потому&nbsp;что Bitrix и&nbsp;AmoCRM не&nbsp;давали гибкости для&nbsp;нестандартных воронок и&nbsp;automation-сценариев. Теперь это&nbsp;ядро, на&nbsp;котором&nbsp;мы&nbsp;собираем&nbsp;кастомные системы&nbsp;для&nbsp;клиентов.
-        </p>
-
-        <ul class="own-tech__features">
-          <li><b>Гибкие воронки</b> · любая&nbsp;логика, не&nbsp;ограничены шаблоном</li>
-          <li><b>Встроенная автоматизация</b> · триггеры, сценарии, очереди без&nbsp;внешних&nbsp;Zapier</li>
-          <li><b>Realtime&#8209;аналитика</b> · видим LTV, churn, конверсии без&nbsp;импорта в&nbsp;Метабейс</li>
-          <li><b>Адаптация под&nbsp;нишу</b> · для&nbsp;клиники, стройки и&nbsp;e&#8209;com&nbsp;— разные сущности</li>
-        </ul>
-
-        <div class="own-tech__viz own-tech__viz--crm">
-          <div class="own-tech__viz-bar">
-            <span>Lead</span>
-            <i style="--w:100%"></i><b>1&nbsp;284</b>
-          </div>
-          <div class="own-tech__viz-bar">
-            <span>Qualified</span>
-            <i style="--w:68%"></i><b>873</b>
-          </div>
-          <div class="own-tech__viz-bar">
-            <span>Meeting</span>
-            <i style="--w:42%"></i><b>540</b>
-          </div>
-          <div class="own-tech__viz-bar own-tech__viz-bar--accent">
-            <span>Won</span>
-            <i style="--w:24%"></i><b>308</b>
+        <div class="stack__visual">
+          <div class="stack__chat">
+            <div class="stack__chat-msg stack__chat-msg--in">Здравствуйте, сколько стоит остекление балкона 6&nbsp;м²?</div>
+            <div class="stack__chat-time" style="opacity:.5;margin:6px 0">14:02 · заявка получена</div>
+            <div class="stack__chat-msg stack__chat-msg--out" style="opacity:.4">Добрый день! Сейчас уточню у&nbsp;технолога…</div>
+            <div class="stack__chat-time" style="color:#ff8074">15:14 · менеджер увидел заявку</div>
+            <div class="stack__chat-time" style="color:#ff8074">конкурент ответил за&nbsp;4&nbsp;минуты&nbsp;— клиент ушёл к&nbsp;нему</div>
           </div>
         </div>
       </article>
 
-      <!-- ─── Telegram Funnel System ─── -->
-      <article class="own-tech__card" data-reveal>
-        <div class="own-tech__card-h">
-          <div class="own-tech__logo">
-            <span class="own-tech__logo-mark own-tech__logo-mark--tg">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M21.4 4.6L17.7 21.4c-.3 1.3-1 1.6-2 1l-5.5-4-2.7 2.6c-.3.3-.6.6-1.1.6L7 16l8.6-7.8c.4-.3-.1-.5-.6-.2L4.4 14.7l-4.5-1.5c-1-.3-1-1 .2-1.5L20.6 3.1c.8-.3 1.6.2 1.3 1.5z" fill="currentColor"/></svg>
-            </span>
-            <div>
-              <div class="own-tech__logo-name">Telegram Funnel System</div>
-              <div class="own-tech__logo-sub">intelligent client processing</div>
-            </div>
-          </div>
-          <div class="own-tech__badge own-tech__badge--ai">
-            <span></span><span>AI inside</span>
-          </div>
+      <!-- 02 — забыли напомнить про замер -->
+      <article class="stack__card" data-stack-card>
+        <div class="stack__num">02</div>
+        <div class="stack__body">
+          <h3 class="stack__title">Замер<br/>назначили</h3>
+          <p class="stack__text">Но&nbsp;никто не&nbsp;напомнил клиенту накануне и&nbsp;утром. Замерщик приехал&nbsp;— клиент не&nbsp;взял трубку. Потеряли день, бензин и&nbsp;сделку на&nbsp;180&nbsp;тысяч.</p>
+          <ul class="stack__bullets">
+            <li>30&nbsp;% сорванных замеров&nbsp;— из-за того, что&nbsp;не&nbsp;напомнили</li>
+            <li>замерщик уехал впустую&nbsp;— минус оплаченный час и&nbsp;бензин</li>
+            <li>клиент сам не&nbsp;перезванивает&nbsp;— стесняется/забыл</li>
+          </ul>
         </div>
-
-        <h3 class="own-tech__title">Не&nbsp;«рассылка в&nbsp;Telegram», а&nbsp;система&nbsp;обработки&nbsp;каждого&nbsp;клиента</h3>
-        <p class="own-tech__text">
-          Многошаговая воронка, которая анализирует ответы клиента, тестирует сценарии, перекидывает между ботом и&nbsp;менеджером, и&nbsp;ведёт к&nbsp;продаже. Конверсия с&nbsp;шага «трафик»&nbsp;до&nbsp;«встреча» в&nbsp;3 — 5&nbsp;раз выше&nbsp;«просто канала».
-        </p>
-
-        <ul class="own-tech__features">
-          <li><b>Behavior analysis</b> · реагируем на&nbsp;то, что&nbsp;клиент пишет, а&nbsp;не&nbsp;по&nbsp;расписанию</li>
-          <li><b>A/B сценариев</b> · автоматически выбираем работающий&nbsp;скрипт</li>
-          <li><b>Бесшовная передача</b> · бот&nbsp;→&nbsp;канал&nbsp;→&nbsp;менеджер&nbsp;→&nbsp;консультация</li>
-          <li><b>Аналитика на&nbsp;каждом&nbsp;шаге</b> · видно, где&nbsp;именно теряется конверсия</li>
-        </ul>
-
-        <div class="own-tech__viz own-tech__viz--flow">
-          <div class="own-tech__flow-node">Трафик</div>
-          <div class="own-tech__flow-arrow"></div>
-          <div class="own-tech__flow-node">Telegram</div>
-          <div class="own-tech__flow-arrow"></div>
-          <div class="own-tech__flow-node">Multi&#8209;step</div>
-          <div class="own-tech__flow-arrow"></div>
-          <div class="own-tech__flow-node">AI&nbsp;анализ</div>
-          <div class="own-tech__flow-arrow"></div>
-          <div class="own-tech__flow-node">Бот / менеджер</div>
-          <div class="own-tech__flow-arrow"></div>
-          <div class="own-tech__flow-node own-tech__flow-node--accent">Продажа</div>
+        <div class="stack__visual">
+          <div class="stack__pipe">
+            <div class="stack__pipe-row"><span>замер · вт&nbsp;17:00</span><span><b>назначен</b></span></div>
+            <div class="stack__pipe-bar"><i style="--w:100%"></i></div>
+            <div class="stack__pipe-row" style="opacity:.55"><span>пн&nbsp;вечером — напомнить</span><span><b>не&nbsp;сделано</b></span></div>
+            <div class="stack__pipe-bar" style="opacity:.3"><i style="--w:0%"></i></div>
+            <div class="stack__pipe-row" style="opacity:.55"><span>вт&nbsp;утром — подтвердить</span><span><b>не&nbsp;сделано</b></span></div>
+            <div class="stack__pipe-bar" style="opacity:.3"><i style="--w:0%"></i></div>
+            <div class="stack__pipe-row" style="color:#ff8074"><span>замерщик приехал</span><span><b>клиент не&nbsp;вышел</b></span></div>
+            <div class="stack__pipe-bar" style="background:rgba(255,128,116,.18)"><i style="--w:100%;background:#ff8074"></i></div>
+          </div>
         </div>
       </article>
+
+      <!-- 03 — смета ушла думать -->
+      <article class="stack__card" data-stack-card>
+        <div class="stack__num">03</div>
+        <div class="stack__body">
+          <h3 class="stack__title">Смету<br/>отправили</h3>
+          <p class="stack__text">Клиент сказал «подумаю». Через&nbsp;неделю менеджер про&nbsp;него забыл&nbsp;— дел много. Клиент тоже забыл&nbsp;— и&nbsp;нашёл другую бригаду. Так уходит каждая вторая смета.</p>
+          <ul class="stack__bullets">
+            <li>средний цикл сделки в&nbsp;стройке&nbsp;— 7—21&nbsp;день</li>
+            <li>без касания клиент остывает за&nbsp;3—5&nbsp;дней</li>
+            <li>«я&nbsp;потом сам напишу»&nbsp;— почти всегда означает «нет»</li>
+          </ul>
+        </div>
+        <div class="stack__visual">
+          <div class="stack__stats">
+            <div class="stack__stat">
+              <div class="stack__stat-label">день&nbsp;1 · смета отправлена</div>
+              <div class="stack__stat-bar"><i style="--w:92%;--c:#6ade8e"></i></div>
+              <div class="stack__stat-meta">клиент <b>«горячий»</b> · готов решить</div>
+            </div>
+            <div class="stack__stat">
+              <div class="stack__stat-label">день&nbsp;3 · никто не&nbsp;написал</div>
+              <div class="stack__stat-bar"><i style="--w:60%;--c:#ffa940"></i></div>
+              <div class="stack__stat-meta">внимание <b>остывает</b> · смотрит других</div>
+            </div>
+            <div class="stack__stat">
+              <div class="stack__stat-label">день&nbsp;7 · вспомнили</div>
+              <div class="stack__stat-bar"><i style="--w:18%;--c:#ff8074"></i></div>
+              <div class="stack__stat-meta">клиент <b>уже договорился</b> с&nbsp;другими</div>
+            </div>
+            <div class="stack__verdict">Mentra сама пишет в&nbsp;нужный день&nbsp;— без&nbsp;участия менеджера.</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 04 — рук-ль ищет цифры -->
+      <article class="stack__card" data-stack-card>
+        <div class="stack__num">04</div>
+        <div class="stack__body">
+          <h3 class="stack__title">Руководитель хочет<br/>понять прибыль</h3>
+          <p class="stack__text">Открывает Excel, CRM, почту и&nbsp;чат с&nbsp;бухгалтером. Через&nbsp;час всё ещё нет ответа. К&nbsp;вечеру&nbsp;— ответ есть, но&nbsp;цифры в&nbsp;трёх местах не&nbsp;бьются.</p>
+          <ul class="stack__bullets stack__bullets--row">
+            <li>Excel</li>
+            <li>AmoCRM</li>
+            <li>1С</li>
+            <li>WhatsApp</li>
+            <li>почта</li>
+            <li>чат с&nbsp;бухгалтером</li>
+            <li>звонок прорабу</li>
+          </ul>
+        </div>
+        <div class="stack__visual">
+          <div class="stack__diagram">
+            <div class="stack__node stack__node--main">?&nbsp;прибыль</div>
+            <div class="stack__node stack__node--src" style="--x:-150px;--y:-95px">Excel</div>
+            <div class="stack__node stack__node--src" style="--x:150px;--y:-95px">AmoCRM</div>
+            <div class="stack__node stack__node--src" style="--x:-170px;--y:35px">1С</div>
+            <div class="stack__node stack__node--src" style="--x:170px;--y:35px">WhatsApp</div>
+            <div class="stack__node stack__node--dst" style="--x:-90px;--y:130px;background:rgba(255,128,116,.14);border-color:rgba(255,128,116,.35);color:#ffb8b1">час&nbsp;прошёл</div>
+            <div class="stack__node stack__node--dst" style="--x:90px;--y:130px;background:rgba(255,128,116,.14);border-color:rgba(255,128,116,.35);color:#ffb8b1">ответа&nbsp;нет</div>
+            <svg class="stack__diagram-lines" viewBox="-200 -150 400 320">
+              <g stroke="rgba(255,255,255,0.12)" stroke-width="1" fill="none">
+                <path d="M-150,-95 Q-75,-45 0,0"/>
+                <path d="M150,-95 Q75,-45 0,0"/>
+                <path d="M-170,35 Q-85,18 0,0"/>
+                <path d="M170,35 Q85,18 0,0"/>
+                <path d="M0,0 Q-45,65 -90,130" stroke="rgba(255,128,116,0.55)"/>
+                <path d="M0,0 Q45,65 90,130" stroke="rgba(255,128,116,0.55)"/>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="services-stack__bottom" data-reveal>
+      <div class="services-stack__verdict">
+        Mentra устраняет <em>каждую</em> из&nbsp;этих потерь.<br/>
+        Заявки, замеры, сметы и&nbsp;цифры&nbsp;— в&nbsp;одной системе, которая не&nbsp;забывает и&nbsp;не&nbsp;спит.
+      </div>
+      <a href="#cta-final" class="btn btn--primary" data-magnetic>
+        <span>Найти потери в&nbsp;моём бизнесе</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 12.5L12.5 3.5M12.5 3.5H5.5M12.5 3.5V10.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ───────────────── PRODUCTION (для производств) ───────────────── -->
+  <section class="prod" id="production">
+    <div class="prod__bg" aria-hidden="true">
+      <div class="prod__mesh"></div>
+    </div>
+    <div class="prod__inner">
+      <div class="prod__copy">
+        <div class="eyebrow" data-reveal>
+          <span class="eyebrow__pulse"></span>
+          <span>для&nbsp;производств</span>
+        </div>
+        <h2 class="prod__title" data-reveal>
+          Производство <em>растёт</em>&nbsp;—<br/>хаос растёт <em>быстрее</em>
+        </h2>
+        <p class="prod__lead" data-reveal>Цех загружен. Заказов больше, чем&nbsp;год назад. Но&nbsp;вместе с&nbsp;ростом приходят менеджеры, которые обещают то, чего нет на&nbsp;складе, остатки, которые считаются в&nbsp;Excel один раз в&nbsp;неделю, и&nbsp;руководитель, который узнаёт о&nbsp;проблеме последним.</p>
+
+        <ul class="prod__list" data-reveal>
+          <li>
+            <span class="prod__list-mark" aria-hidden="true">×</span>
+            Заказы ведутся в&nbsp;таблицах&nbsp;— у&nbsp;каждого менеджера своя
+          </li>
+          <li>
+            <span class="prod__list-mark" aria-hidden="true">×</span>
+            Остатки считаются вручную, расхождение со&nbsp;складом&nbsp;— норма
+          </li>
+          <li>
+            <span class="prod__list-mark" aria-hidden="true">×</span>
+            Менеджеры обещают клиенту то, чего&nbsp;нет в&nbsp;наличии
+          </li>
+          <li>
+            <span class="prod__list-mark" aria-hidden="true">×</span>
+            Руководитель узнаёт о&nbsp;срыве срока, когда клиент уже&nbsp;звонит
+          </li>
+        </ul>
+
+        <p class="prod__verdict" data-reveal>Mentra объединяет <b>продажи, производство и&nbsp;склад</b> в&nbsp;единую систему управления. Менеджер видит реальный остаток, руководитель&nbsp;— реальные сроки и&nbsp;прибыль по&nbsp;каждому заказу. В&nbsp;день, а&nbsp;не&nbsp;раз в&nbsp;неделю.</p>
+
+        <div class="prod__actions" data-reveal>
+          <a href="#cta-final" class="btn btn--primary" data-magnetic>
+            <span>Разобрать моё&nbsp;производство</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 12.5L12.5 3.5M12.5 3.5H5.5M12.5 3.5V10.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- визуал — flow «продажи → производство → склад» -->
+      <div class="prod__viz" data-tilt aria-hidden="true">
+        <div class="prod__board">
+          <div class="prod__board-row prod__board-row--head">
+            <span>заказ</span><span>склад</span><span>цех</span><span>сроки</span>
+          </div>
+          <div class="prod__board-row">
+            <span><b>#1284</b><i>фасады дуб</i></span>
+            <span class="prod__pill prod__pill--ok">в&nbsp;наличии</span>
+            <span class="prod__pill prod__pill--ok">в&nbsp;работе</span>
+            <span class="prod__pill prod__pill--ok">+0&nbsp;дн</span>
+          </div>
+          <div class="prod__board-row">
+            <span><b>#1283</b><i>МДФ кухня</i></span>
+            <span class="prod__pill prod__pill--warn">кромки нет</span>
+            <span class="prod__pill prod__pill--warn">ждёт</span>
+            <span class="prod__pill prod__pill--warn">+2&nbsp;дн</span>
+          </div>
+          <div class="prod__board-row">
+            <span><b>#1281</b><i>массив&nbsp;ясень</i></span>
+            <span class="prod__pill prod__pill--bad">нет</span>
+            <span class="prod__pill prod__pill--bad">стоит</span>
+            <span class="prod__pill prod__pill--bad">+6&nbsp;дн</span>
+          </div>
+          <div class="prod__board-row">
+            <span><b>#1278</b><i>шкаф белый</i></span>
+            <span class="prod__pill prod__pill--ok">в&nbsp;наличии</span>
+            <span class="prod__pill prod__pill--ok">готов</span>
+            <span class="prod__pill prod__pill--ok">−1&nbsp;дн</span>
+          </div>
+          <div class="prod__board-foot">
+            <span class="prod__board-foot-dot"></span>
+            <span>обновлено только&nbsp;что · 14:27</span>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -653,130 +725,155 @@
     </div>
   </section>
 
-
-  <!-- ───────────────── BLOG PREVIEW ───────────────── -->
-  <section class="blog-preview" id="blog">
-    <div class="section__head">
-      <h2 class="section__title" data-reveal>Разбираем то,<br/><em>о&nbsp;чём молчат</em></h2>
-      <p class="section__lead" data-reveal>Открываем кухню агентства&nbsp;— как&nbsp;реально работают AI&#8209;воронки, алгоритмы Profi и&nbsp;скорость обработки лидов. По&nbsp;цифрам, без&nbsp;воды.</p>
-    </div>
-
-    <div class="blog-preview__grid">
-      <a href="blog.html" class="blog-card blog-card--big" data-reveal>
-        <div class="blog-card__bg"><div class="blog-card__glow"></div></div>
-        <div class="blog-card__meta">
-          <span class="blog-card__tag">обработка лидов</span>
-          <span class="blog-card__date">скоро</span>
-        </div>
-        <h3 class="blog-card__title">Почему 60% заявок теряются в&nbsp;первые 5&nbsp;минут</h3>
-        <p class="blog-card__excerpt">Разница между ответом за&nbsp;30&nbsp;секунд и&nbsp;за&nbsp;час&nbsp;— это&nbsp;потеря половины конверсии. Разбираем&nbsp;на&nbsp;данных 14&nbsp;проектов.</p>
-        <div class="blog-card__time">8 мин чтения →</div>
-      </a>
-
-      <a href="blog.html" class="blog-card" data-reveal>
-        <div class="blog-card__meta">
-          <span class="blog-card__tag">profi.ru</span>
-        </div>
-        <h3 class="blog-card__title">Алгоритм Profi.ru изнутри</h3>
-        <p class="blog-card__excerpt">Как&nbsp;поднять эффективность отклика с&nbsp;1% до&nbsp;9%.</p>
-        <div class="blog-card__time">12 мин →</div>
-      </a>
-
-      <a href="blog.html" class="blog-card" data-reveal>
-        <div class="blog-card__meta">
-          <span class="blog-card__tag">ai-агенты</span>
-        </div>
-        <h3 class="blog-card__title">AI-агент, который не&nbsp;похож на&nbsp;чат-бота</h3>
-        <p class="blog-card__excerpt">Чем&nbsp;современные модели&nbsp;2026 отличаются от&nbsp;«сценариев на&nbsp;кнопках».</p>
-        <div class="blog-card__time">10 мин →</div>
-      </a>
-    </div>
-
-    <div class="blog-preview__bottom">
-      <a href="blog.html" class="btn btn--ghost" data-magnetic>
-        <span>Все материалы</span>
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
-    </div>
-  </section>
-
-  <!-- ───────────────── PRICING — STARTER / GROWTH / ENTERPRISE ───────────────── -->
+  <!-- ───────────────── PRICING — ОДИН МАРШРУТ ИЗ 3 ШАГОВ ───────────────── -->
   <section class="pkg" id="subscription">
     <div class="section__head">
-      <h2 class="section__title" data-reveal>Премиум&#8209;пакеты<br/><em>для&nbsp;вашего&nbsp;этапа</em></h2>
-      <p class="section__lead" data-reveal>От&nbsp;первого аудита до&nbsp;выделенной AI&#8209;команды на&nbsp;контракте. Любой&nbsp;пакет можно расширить, поменять или&nbsp;остановить&nbsp;— подписка помесячная, без&nbsp;штрафов.</p>
+      <h2 class="section__title" data-reveal>Три шага.<br/><em>Один маршрут.</em></h2>
+      <p class="section__lead" data-reveal>Это не&nbsp;три разных тарифа, а&nbsp;единый путь&nbsp;— от&nbsp;первого созвона, где находим, куда утекают деньги, до&nbsp;системы, которая работает у&nbsp;вас под&nbsp;капотом. Можно остановиться на&nbsp;любом шаге&nbsp;— но&nbsp;обычно клиенты идут до&nbsp;конца.</p>
     </div>
 
-    <div class="pkg__grid">
+    <div class="pkg__stage" data-pkg-stage>
 
-      <!-- ─── STARTER ─── -->
-      <article class="pkg__card" data-tilt data-reveal>
-        <div class="pkg__tag">starter</div>
-        <h3 class="pkg__name">Audit&nbsp;&amp;&nbsp;Roadmap</h3>
-        <p class="pkg__subtitle">для&nbsp;тех, кто&nbsp;хочет понять, что&nbsp;автоматизировать первым</p>
-        <div class="pkg__price">
-          <span class="pkg__price-num">7&nbsp;000</span>
-          <span class="pkg__price-cur">₽&nbsp;за&nbsp;аудит</span>
-        </div>
-        <ul class="pkg__list">
-          <li>Аудит всей воронки и&nbsp;CRM</li>
-          <li>Расчёт ROI по&nbsp;каждому направлению</li>
-          <li>Карта внедрений на&nbsp;6&nbsp;месяцев</li>
-          <li>Презентация плана команде</li>
-          <li>2 недели работы</li>
-        </ul>
-        <a href="contact.html" class="btn btn--ghost btn--block" data-magnetic>
-          <span>Заказать аудит</span>
-        </a>
-      </article>
+      <!-- степпер прогресса -->
+      <div class="pkg__progress" role="tablist" aria-label="Шаги маршрута">
+        <button class="pkg__dot is-active" data-pkg-go="0" type="button" role="tab" aria-selected="true">
+          <span class="pkg__dot-num">01</span>
+          <span class="pkg__dot-label">диагностика</span>
+        </button>
+        <div class="pkg__dot-line" aria-hidden="true"><i></i></div>
+        <button class="pkg__dot" data-pkg-go="1" type="button" role="tab" aria-selected="false">
+          <span class="pkg__dot-num">02</span>
+          <span class="pkg__dot-label">анализ</span>
+        </button>
+        <div class="pkg__dot-line" aria-hidden="true"><i></i></div>
+        <button class="pkg__dot" data-pkg-go="2" type="button" role="tab" aria-selected="false">
+          <span class="pkg__dot-num">03</span>
+          <span class="pkg__dot-label">внедрение</span>
+        </button>
+      </div>
 
-      <!-- ─── GROWTH (featured) ─── -->
-      <article class="pkg__card pkg__card--featured" data-tilt data-reveal>
-        <div class="pkg__glow"></div>
-        <div class="pkg__tag pkg__tag--pop">growth · самый&nbsp;популярный</div>
-        <h3 class="pkg__name">Continuous AI&nbsp;Ops</h3>
-        <p class="pkg__subtitle">полное сопровождение под&nbsp;ключ для&nbsp;растущего&nbsp;бизнеса</p>
-        <div class="pkg__price">
-          <span class="pkg__price-num">по&nbsp;запросу</span>
-          <span class="pkg__price-cur">индивидуально</span>
-        </div>
-        <ul class="pkg__list">
-          <li>Выделенная команда: AI&#8209;инженер&nbsp;+&nbsp;продуктовый</li>
-          <li>Проактивный апгрейд моделей и&nbsp;промптов</li>
-          <li>Еженедельные ритуалы по&nbsp;метрикам</li>
-          <li>SLA 4&nbsp;часа на&nbsp;инциденты</li>
-          <li>Roadmap новых сценариев и&nbsp;каналов</li>
-          <li>Доступ к&nbsp;Mentra&nbsp;CRM</li>
-        </ul>
-        <a href="contact.html" class="btn btn--primary btn--block" data-magnetic>
-          <span>Забронировать слот</span>
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 12.5L12.5 3.5M12.5 3.5H5.5M12.5 3.5V10.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-      </article>
+      <!-- колода: prev — deck — next -->
+      <div class="pkg__deck">
+        <button class="pkg__nav pkg__nav--prev" data-pkg-prev type="button" aria-label="Предыдущий шаг" disabled>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M15 6L9 12L15 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
 
-      <!-- ─── ENTERPRISE ─── -->
-      <article class="pkg__card" data-tilt data-reveal>
-        <div class="pkg__tag pkg__tag--ent">enterprise</div>
-        <h3 class="pkg__name">Custom AI&nbsp;Systems</h3>
-        <p class="pkg__subtitle">для&nbsp;компаний с&nbsp;нестандартной воронкой и&nbsp;большим&nbsp;объёмом</p>
-        <div class="pkg__price">
-          <span class="pkg__price-num">по&nbsp;запросу</span>
-          <span class="pkg__price-cur">индивидуально</span>
+        <div class="pkg__deck-inner">
+
+          <!-- ───── 01 · Первичная диагностика ───── -->
+          <article class="pkg__card pkg__step is-active" data-pkg-step="0">
+            <div class="pkg__step-num" aria-hidden="true">01</div>
+            <div class="pkg__tag">бесплатно · 1 созвон</div>
+            <div class="pkg__lock-hint" aria-hidden="true">
+              <svg class="pkg__lock-ico" viewBox="0 0 64 72" fill="none" aria-hidden="true">
+                <rect class="pkg__lock-body" x="6" y="30" width="52" height="38" rx="6" stroke="currentColor" stroke-width="2.4"/>
+                <path class="pkg__lock-shackle" d="M16 30V18a16 16 0 0 1 32 0v12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+                <circle class="pkg__lock-keyhole" cx="32" cy="48" r="3.2" fill="currentColor"/>
+                <path class="pkg__lock-keystem" d="M32 51v6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+              </svg>
+              <span class="pkg__lock-label">нажмите, чтобы&nbsp;открыть</span>
+            </div>
+            <div class="pkg__step-body">
+              <h3 class="pkg__name">Первичная<br/>диагностика</h3>
+              <p class="pkg__subtitle">Созвон, на&nbsp;котором находим узкие места в&nbsp;вашей воронке. Без&nbsp;презентаций и&nbsp;продаж&nbsp;— смотрим, где именно утекают клиенты и&nbsp;деньги.</p>
+
+              <div class="pkg__features-h">что вы&nbsp;получите</div>
+              <ul class="pkg__list">
+                <li>Понимание узких мест в&nbsp;текущих процессах продаж</li>
+                <li>Направление работы по&nbsp;улучшению</li>
+                <li>Понимание потенциальных точек роста</li>
+              </ul>
+
+              <div class="pkg__price">
+                <span class="pkg__price-num">0&nbsp;₽</span>
+                <span class="pkg__price-cur">первый созвон</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- ───── 02 · Глубокий анализ + вход в систему ───── -->
+          <article class="pkg__card pkg__step" data-pkg-step="1">
+            <div class="pkg__step-num" aria-hidden="true">02</div>
+            <div class="pkg__tag">1 месяц · вход в&nbsp;систему</div>
+            <div class="pkg__lock-hint" aria-hidden="true">
+              <svg class="pkg__lock-ico" viewBox="0 0 64 72" fill="none" aria-hidden="true">
+                <rect class="pkg__lock-body" x="6" y="30" width="52" height="38" rx="6" stroke="currentColor" stroke-width="2.4"/>
+                <path class="pkg__lock-shackle" d="M16 30V18a16 16 0 0 1 32 0v12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+                <circle class="pkg__lock-keyhole" cx="32" cy="48" r="3.2" fill="currentColor"/>
+                <path class="pkg__lock-keystem" d="M32 51v6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+              </svg>
+              <span class="pkg__lock-label">нажмите, чтобы&nbsp;открыть</span>
+            </div>
+            <div class="pkg__step-body">
+              <h3 class="pkg__name">Глубокий&nbsp;анализ<br/>и&nbsp;вход в&nbsp;Mentra</h3>
+              <p class="pkg__subtitle">Подключаемся к&nbsp;вашей CRM, разбираем диалоги, считаем конверсии на&nbsp;каждом этапе воронки. По&nbsp;итогам вы&nbsp;получаете доступ в&nbsp;систему Mentra и&nbsp;набор инструментов для&nbsp;принятия решений.</p>
+
+              <div class="pkg__features-h">что вы&nbsp;получаете</div>
+              <ul class="pkg__list">
+                <li>Анализ ключевых метрик бизнеса</li>
+                <li>Доступ в&nbsp;личный кабинет и&nbsp;систему Mentra на&nbsp;месяц</li>
+                <li>Финансового консультанта на&nbsp;этапе анализа</li>
+              </ul>
+
+              <div class="pkg__price">
+                <span class="pkg__price-num">7&nbsp;000&nbsp;₽</span>
+                <span class="pkg__price-cur">за&nbsp;месяц работы</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- ───── 03 · Индивидуальная настройка и внедрение ───── -->
+          <article class="pkg__card pkg__step pkg__step--final" data-pkg-step="2">
+            <div class="pkg__glow"></div>
+            <div class="pkg__step-num pkg__step-num--accent" aria-hidden="true">03</div>
+            <div class="pkg__tag pkg__tag--pop">собирается под&nbsp;ваш бизнес</div>
+            <div class="pkg__lock-hint" aria-hidden="true">
+              <svg class="pkg__lock-ico" viewBox="0 0 64 72" fill="none" aria-hidden="true">
+                <rect class="pkg__lock-body" x="6" y="30" width="52" height="38" rx="6" stroke="currentColor" stroke-width="2.4"/>
+                <path class="pkg__lock-shackle" d="M16 30V18a16 16 0 0 1 32 0v12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+                <circle class="pkg__lock-keyhole" cx="32" cy="48" r="3.2" fill="currentColor"/>
+                <path class="pkg__lock-keystem" d="M32 51v6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+              </svg>
+              <span class="pkg__lock-label">нажмите, чтобы&nbsp;открыть</span>
+            </div>
+            <div class="pkg__step-body">
+              <h3 class="pkg__name">Индивидуальная настройка<br/>и&nbsp;внедрение</h3>
+              <p class="pkg__subtitle">Подбираем и&nbsp;внедряем только те&nbsp;инструменты, которые действительно нужны бизнесу&nbsp;— на&nbsp;основе анализа из&nbsp;шага&nbsp;02. Никаких универсальных шаблонов: система собирается под&nbsp;вашу воронку, склад и&nbsp;команду.</p>
+
+              <div class="pkg__features-h">принципы внедрения</div>
+              <ul class="pkg__list">
+                <li>Только инструменты с&nbsp;понятным эффектом на&nbsp;метрики</li>
+                <li>Архитектура под&nbsp;вашу воронку, а&nbsp;не&nbsp;шаблон</li>
+                <li>Сопровождение и&nbsp;развитие системы дальше</li>
+              </ul>
+
+              <div class="pkg__price">
+                <span class="pkg__price-num">по&nbsp;запросу</span>
+                <span class="pkg__price-cur">индивидуально</span>
+              </div>
+            </div>
+          </article>
+
         </div>
-        <ul class="pkg__list">
-          <li>Своя архитектура под&nbsp;ваш&nbsp;бизнес-процесс</li>
-          <li>Несколько AI&#8209;агентов в&nbsp;связке</li>
-          <li>Кастомные интеграции (1С, ERP, BI)</li>
-          <li>On&#8209;premise или&nbsp;закрытый контур, если&nbsp;нужно</li>
-          <li>Юр.&nbsp;ответственность, SLA по&nbsp;контракту</li>
-          <li>Поддержка 24/7</li>
-        </ul>
-        <a href="contact.html" class="btn btn--ghost btn--block" data-magnetic>
-          <span>Обсудить enterprise</span>
+
+        <button class="pkg__nav pkg__nav--next" data-pkg-next type="button" aria-label="Следующий шаг">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+      <div class="pkg__cta" data-reveal>
+        <a href="#cta-final" class="btn btn--primary btn--xl" data-magnetic>
+          <span>Получить разбор</span>
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 14L14 4M14 4H6.5M14 4V11.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
-      </article>
+        <p class="pkg__cta-note">Любой этап начинается с&nbsp;разбора. Без&nbsp;него нет смысла говорить о&nbsp;тарифах.</p>
+      </div>
 
     </div>
+
+    <p class="pkg__rail-note" data-reveal>
+      Шаги&nbsp;01 и&nbsp;02&nbsp;— это уже само по&nbsp;себе ценность: даже если&nbsp;вы остановитесь после второго этапа, у&nbsp;вас на&nbsp;руках будут карта потерь, метрики воронки и&nbsp;доступ к&nbsp;Mentra на&nbsp;месяц.
+    </p>
 
   </section>
 
@@ -792,16 +889,16 @@
         <span>берём 3 проекта в&nbsp;месяц</span>
       </div>
       <h2 class="cta__title" data-reveal>
-        Покажем, где&nbsp;вы<br/>
-        теряете клиентов&nbsp;—<br/>
-        <em>и&nbsp;как это&nbsp;закрыть</em>
+        Сколько денег<br/>
+        ваш бизнес <em>теряет</em><br/>
+        каждый&nbsp;месяц?
       </h2>
       <p class="cta__lead" data-reveal>
-        45&nbsp;минут разговора. Без&nbsp;презентаций и&nbsp;«у&nbsp;вас&nbsp;всё&nbsp;плохо». Смотрим вашу воронку, считаем, сколько&nbsp;денег&nbsp;уходит&nbsp;мимо. На&nbsp;выходе&nbsp;— план первых&nbsp;30&nbsp;дней.
+        45&nbsp;минут разговора. Без&nbsp;презентаций и&nbsp;«у&nbsp;вас&nbsp;всё&nbsp;плохо». Смотрим вашу воронку, работу менеджеров, склад и&nbsp;обработку клиентов&nbsp;— и&nbsp;показываем, где&nbsp;именно утекают деньги. Обычно находим потери, которые стоят бизнесу <b>сотни тысяч&nbsp;рублей в&nbsp;месяц</b>. На&nbsp;выходе&nbsp;— карта потерь и&nbsp;план первых&nbsp;30&nbsp;дней.
       </p>
       <div class="cta__actions" data-reveal>
         <a href="mailto:hello@mentra.tech" class="btn btn--primary btn--xl" data-magnetic>
-          <span>Получить разбор</span>
+          <span>Посчитать потери бизнеса</span>
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 14L14 4M14 4H6.5M14 4V11.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
         <a href="https://t.me/Mento_ri" class="btn btn--ghost btn--xl" data-magnetic>
@@ -817,7 +914,7 @@
       <div class="foot__brand">
         <div>
           <div class="foot__name">Mentra</div>
-          <div class="foot__tag">агентство автоматизации продаж · с&nbsp;2023</div>
+          <div class="foot__tag">операционная система бизнеса · с&nbsp;2023</div>
         </div>
       </div>
       <div class="foot__cols">
@@ -853,6 +950,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/tengbao/vanta/dist/vanta.net.min.js"></script>
-  <script src="main.js" defer></script>
+  <script src="main.js?v=28" defer></script>
 </body>
 </html>
