@@ -153,6 +153,7 @@ body:hover .cursor-glow { opacity: 1; }
   align-items: center;
   justify-content: space-between;
   gap: 32px;
+  position: relative;
 }
 .nav__brand {
   display: inline-flex;
@@ -176,6 +177,9 @@ body:hover .cursor-glow { opacity: 1; }
   gap: 26px;
   font-size: 13.5px;
   color: var(--text-secondary);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 @media (max-width: 1200px) {
   .nav__links { gap: 18px; font-size: 13px; }
@@ -3734,6 +3738,17 @@ body.menu-open { overflow: hidden; }
 .pkg__step > * {
   position: relative;
   z-index: 1;
+}
+.pkg__step > .pkg__step-num {
+  position: absolute;
+  top: 14px;
+  right: 20px;
+  left: auto;
+  font-size: clamp(72px, 7vw, 108px);
+  line-height: 0.8;
+  text-align: right;
+  opacity: 0.9;
+  z-index: 0;
 }
 
 /* финальный шаг — оранжевая подсветка */
@@ -7588,6 +7603,7 @@ body.menu-open { overflow: hidden; }
    THEME TOGGLE — ручной переключатель темы в шапке
    ═══════════════════════════════════════════════════════════════ */
 .theme-toggle {
+  margin-left: auto;
   display: inline-flex;
   align-items: center;
   justify-content: center;
