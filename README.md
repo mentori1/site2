@@ -4,7 +4,7 @@
 Чистый стек без сборки: **HTML + CSS + ванильный JS**, плюс GSAP/Lenis/Vanta с CDN.
 Эстетика: warm black (`#0a0a0a`) + оранжевый (`#ff5e1a` / `#ffa940`), шрифты Fraunces + Geist + Geist Mono.
 
-> Дата основания бренда: **10 декабря 2023**. Основатель — Данила Родионов, со-основатель — Теплицкий Матвей.
+> Дата основания бренда: **10 декабря 2023**. Основатель — Данила Родионов.
 > Контакты: Telegram **@Mento_ri**, почта **hello@mentra.tech**.
 
 ---
@@ -31,12 +31,11 @@ python3 -m http.server 4321
 | `services.html` | Что делаем |
 | `process.html` | Как работаем |
 | `about.html` | О компании / основатель |
-| `blog.html` | Блог |
 | `contact.html` | Контакты |
 | `cases.html` | Кейсы — **скрыт из навигации** (заготовка под отдельный лендинг) |
 | `profi.html` | Profi.ru — **скрыт из навигации** (заготовка под отдельный лендинг) |
 
-Общие ресурсы: `styles.css` (один файл на все страницы), `main.js` (вся логика), `assets/` (фото: founder.jpg, matvey.jpg, profi_screen.jpg, case-*.jpg).
+Общие ресурсы: `styles.css` (один файл на все страницы), `main.js` (вся логика), `assets/` (фото: founder.jpg, profi_screen.jpg, case-*.jpg).
 
 ---
 
