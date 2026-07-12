@@ -6339,10 +6339,16 @@ body.menu-open { overflow: hidden; }
 @media (max-width: 900px) {
   .hero__webgl,
   .hero__mesh { display: none !important; }
+  .hero__bg {
+    background:
+      radial-gradient(circle at 16% 18%, rgba(255, 94, 26, 0.16), transparent 34%),
+      radial-gradient(circle at 88% 72%, rgba(255, 169, 64, 0.08), transparent 30%);
+  }
   .hero__bg-fade {
     background: linear-gradient(180deg, transparent 50%, var(--bg-base) 100%);
   }
   .hero {
+    min-height: auto;
     padding: 120px 20px 60px;
   }
   .hero__inner {
@@ -6402,10 +6408,16 @@ body.menu-open { overflow: hidden; }
     padding: 0 20px;
   }
   .stack__card {
+    position: relative;
+    top: 0 !important;
     padding: 28px 24px;
     margin-bottom: 16px;
     border-radius: 24px;
     min-height: auto;
+    transform: none !important;
+    will-change: auto;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
   }
   .stack__title {
     font-size: clamp(28px, 8vw, 40px);
