@@ -663,7 +663,7 @@ body.menu-open { overflow: hidden; }
   margin-top: -48px;
   width: 92%;
   max-width: 610px;
-  justify-self: end;
+  justify-self: center;
 }
 @media (max-width: 1080px) {
   .hero__dashboard { width: 100%; max-width: 720px; justify-self: center; }
@@ -3496,6 +3496,7 @@ body.menu-open { overflow: hidden; }
 .pkg__lock-ico {
   width: clamp(64px, 22%, 96px);
   height: auto;
+  overflow: visible;
   color: rgba(255, 169, 64, 0.78);
   filter: drop-shadow(0 8px 24px rgba(255, 94, 26, 0.28));
   transition:
@@ -7118,6 +7119,7 @@ body.menu-open { overflow: hidden; }
 .prod__actions {
   margin-top: 28px;
   display: flex;
+  justify-content: flex-end;
   gap: 14px;
   flex-wrap: wrap;
 }
@@ -7681,8 +7683,29 @@ body.menu-open { overflow: hidden; }
 [data-theme="dark"] .theme-toggle__sun { display: block; }
 [data-theme="light"] .theme-toggle__moon { display: block; }
 
+/* Внутренние страницы: без фоновой квадратной сетки. */
+.page-hero .hero__grid { display: none; }
+
+/* Цитата на фотографии меняет контраст вместе с темой. */
+[data-theme="dark"] .about__photo-quote {
+  background: rgba(12, 10, 9, 0.82);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+[data-theme="dark"] .about__photo-quote p { color: #fff; }
+
+/* Текстовые юридические страницы. */
+.legal-page { padding: 150px var(--gutter) 96px; }
+.legal-page__inner { max-width: 860px; margin: 0 auto; }
+.legal-page h1 { font-family: var(--font-display); font-size: clamp(42px, 6vw, 76px); line-height: 1; margin-bottom: 48px; }
+.legal-page h2 { font-family: var(--font-display); font-size: 26px; font-weight: 400; margin: 38px 0 12px; }
+.legal-page p, .legal-page li { color: var(--text-secondary); line-height: 1.65; font-size: 15px; }
+.legal-page ul { padding-left: 20px; margin: 12px 0; }
+.legal-page a { color: var(--accent-amber); }
+
 @media (max-width: 900px) {
   /* прижимаем тумблер к правой группе (рядом с бургером), а не по центру */
   .theme-toggle { width: 36px; height: 36px; margin-left: auto; margin-right: 6px; }
   .theme-toggle svg { width: 18px; height: 18px; }
+  .prod__actions { justify-content: flex-start; }
+  .legal-page { padding: 110px 20px 64px; }
 }
