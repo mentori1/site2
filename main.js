@@ -96,27 +96,34 @@
     ? "[data-reveal], .timeline, .case, .cinema__scene"
     : "[data-reveal], .timeline, .case";
   const revealEls = document.querySelectorAll(revealSelector);
-  const io = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const el = entry.target;
-          // лёгкий stagger для соседей в общем родителе
-          if (el.parentElement) {
-            const siblings = el.parentElement.querySelectorAll(":scope > [data-reveal]");
-            if (siblings.length > 1) {
-              const idx = Array.from(siblings).indexOf(el);
-              if (idx > -1) el.style.transitionDelay = `${idx * 70}ms`;
+  let io = null;
+  if ("IntersectionObserver" in window) {
+    io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const el = entry.target;
+            // лёгкий stagger для соседей в общем родителе
+            if (el.parentElement) {
+              const siblings = Array.from(el.parentElement.children).filter((child) =>
+                child.hasAttribute("data-reveal")
+              );
+              if (siblings.length > 1) {
+                const idx = Array.from(siblings).indexOf(el);
+                if (idx > -1) el.style.transitionDelay = `${idx * 70}ms`;
+              }
             }
+            el.classList.add("is-in");
+            io.unobserve(el);
           }
-          el.classList.add("is-in");
-          io.unobserve(el);
-        }
-      });
-    },
-    { threshold: 0.08, rootMargin: "0px 0px -40px 0px" }
-  );
-  revealEls.forEach((el) => io.observe(el));
+        });
+      },
+      { threshold: 0.08, rootMargin: "0px 0px -40px 0px" }
+    );
+    revealEls.forEach((el) => io.observe(el));
+  } else {
+    revealEls.forEach((el) => el.classList.add("is-in"));
+  }
 
   // safety net: если по любой причине IO не сработал за 2 секунды —
   // принудительно показываем все элементы
@@ -145,18 +152,22 @@
     };
     requestAnimationFrame(tick);
   };
-  const counterIO = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          animateCounter(entry.target);
-          counterIO.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.4 }
-  );
-  counters.forEach((c) => counterIO.observe(c));
+  if ("IntersectionObserver" in window) {
+    const counterIO = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            animateCounter(entry.target);
+            counterIO.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+    counters.forEach((c) => counterIO.observe(c));
+  } else {
+    counters.forEach(animateCounter);
+  }
 
   /* ─── 6. MAGNETIC BUTTONS ────────────────────────────── */
   if (!prefersReducedMotion) {
@@ -210,16 +221,20 @@
       );
       // Отслеживаем, какие элементы реально в viewport, чтобы не крутить rAF впустую
       const visibleSet = new Set();
-      const visIO = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((e) => {
-            if (e.isIntersecting) visibleSet.add(e.target);
-            else visibleSet.delete(e.target);
-          });
-        },
-        { threshold: 0.2 }
-      );
-      floatTargets.forEach((el) => visIO.observe(el));
+      if ("IntersectionObserver" in window) {
+        const visIO = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) visibleSet.add(e.target);
+              else visibleSet.delete(e.target);
+            });
+          },
+          { threshold: 0.2 }
+        );
+        floatTargets.forEach((el) => visIO.observe(el));
+      } else {
+        floatTargets.forEach((el) => visibleSet.add(el));
+      }
 
       const startedAt = performance.now();
       const tick = (t) => {
@@ -573,7 +588,11 @@
   if (form) {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
-      const data = Object.fromEntries(new FormData(form).entries());
+      const data = {};
+      const formData = new FormData(form);
+      formData.forEach((value, key) => {
+        data[key] = value;
+      });
       // в продакшене сюда подставить fetch на ваш бэкенд / webhook
       console.log("[Mentra form submit]", data);
       form.style.transition = "opacity 0.5s var(--ease-expo)";

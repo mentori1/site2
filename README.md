@@ -31,9 +31,8 @@ python3 -m http.server 4321
 | `services.html` | Что делаем |
 | `about.html` | О компании / основатель |
 | `contact.html` | Контакты |
-| `profi.html` | Profi.ru — **скрыт из навигации** (заготовка под отдельный лендинг) |
 
-Общие ресурсы: `styles.css` (один файл на все страницы), `main.js` (вся логика), `assets/` (фото: founder.jpg, profi_screen.jpg, case-*.jpg).
+Общие ресурсы: `styles.css` (один файл на все страницы), `main.js` (вся логика), `assets/` (фото и графика сайта).
 
 ---
 
