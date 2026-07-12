@@ -7122,6 +7122,8 @@ body.menu-open { overflow: hidden; }
 .prod__inner {
   max-width: var(--container);
   margin: 0 auto;
+  position: relative;
+  padding-bottom: 78px;
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
   gap: clamp(40px, 6vw, 88px);
@@ -7201,7 +7203,10 @@ body.menu-open { overflow: hidden; }
   color: var(--accent-amber);
 }
 .prod__actions {
-  margin-top: 28px;
+  position: absolute;
+  right: clamp(48px, 10vw, 150px);
+  bottom: 0;
+  margin-top: 0;
   display: flex;
   justify-content: flex-end;
   gap: 14px;
@@ -7790,6 +7795,11 @@ body.menu-open { overflow: hidden; }
   /* прижимаем тумблер к правой группе (рядом с бургером), а не по центру */
   .theme-toggle { width: 36px; height: 36px; margin-left: auto; margin-right: 6px; }
   .theme-toggle svg { width: 18px; height: 18px; }
-  .prod__actions { justify-content: flex-start; }
+  .prod__inner { padding-bottom: 0; }
+  .prod__actions {
+    position: static;
+    margin-top: 28px;
+    justify-content: flex-start;
+  }
   .legal-page { padding: 110px 20px 64px; }
 }
