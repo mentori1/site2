@@ -6345,6 +6345,18 @@ body.menu-open { overflow: hidden; }
 
 /* ─── HERO mobile ─────────────────────────────────────── */
 @media (max-width: 900px) {
+  html {
+    height: 100%;
+    overflow: hidden;
+  }
+  body {
+    height: 100%;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: none;
+  }
   .hero__webgl,
   .hero__mesh { display: none !important; }
   .hero__bg {
