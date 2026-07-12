@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════
-   MENTRA · AI MARKETING AGENCY
+   MENTRA · AUTOMATION AGENCY
    Design system: OLED Hero + Glass Cards · warm black · orange accent
    ═══════════════════════════════════════════════════════════════ */
 
@@ -822,7 +822,7 @@ body.menu-open { overflow: hidden; }
   to { transform: scaleY(1); opacity: 1; }
 }
 
-/* AI process */
+/* Processing workflow */
 .dash__scan-dot {
   width: 6px; height: 6px;
   border-radius: 50%;
@@ -2187,12 +2187,12 @@ body.menu-open { overflow: hidden; }
   box-shadow: 0 0 10px rgba(106, 222, 142, 0.6);
   animation: pulse-soft 1.6s var(--ease-expo-io) infinite;
 }
-.own-tech__badge--ai {
+.own-tech__badge--accent {
   background: rgba(255, 94, 26, 0.08);
   border-color: rgba(255, 94, 26, 0.28);
   color: var(--accent-amber);
 }
-.own-tech__badge--ai span:first-child {
+.own-tech__badge--accent span:first-child {
   background: var(--accent);
   box-shadow: 0 0 10px var(--accent-glow);
   animation: pulse-soft 1.6s var(--ease-expo-io) infinite;
@@ -3749,6 +3749,11 @@ body.menu-open { overflow: hidden; }
   text-align: right;
   opacity: 0.9;
   z-index: 0;
+}
+.pkg__step--final .pkg__tag {
+  max-width: calc(100% - 170px);
+  white-space: normal;
+  line-height: 1.25;
 }
 
 /* финальный шаг — оранжевая подсветка */
