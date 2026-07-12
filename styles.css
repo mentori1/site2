@@ -6268,6 +6268,93 @@ body.menu-open { overflow: hidden; }
    MOBILE FIXES
    ═══════════════════════════════════════════════════════════════ */
 
+/* Телефонный запуск Mentra CRM. На десктопе заставка не существует. */
+.mobile-boot { display: none; }
+
+@media (max-width: 600px) {
+  .mobile-boot {
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 28px;
+    background: var(--bg-base);
+    color: var(--text-primary);
+    transition: opacity 700ms var(--ease-expo), visibility 700ms var(--ease-expo);
+  }
+  .mobile-boot__brand {
+    font-family: var(--font-display);
+    font-size: clamp(42px, 14vw, 62px);
+    line-height: 1;
+    letter-spacing: -0.045em;
+  }
+  .mobile-boot__brand span { color: var(--accent); font-style: italic; font-weight: 300; }
+  .mobile-boot__status {
+    margin-top: 22px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+  }
+  .mobile-boot__status i {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 14px var(--accent);
+    animation: pulse-soft 900ms ease-in-out infinite;
+  }
+  .mobile-boot__bar {
+    width: min(220px, 62vw);
+    height: 2px;
+    margin-top: 18px;
+    overflow: hidden;
+    border-radius: 4px;
+    background: var(--border-base);
+  }
+  .mobile-boot__bar i {
+    display: block; width: 100%; height: 100%;
+    background: linear-gradient(90deg, var(--accent-deep), var(--accent-amber));
+    transform: scaleX(0);
+    transform-origin: left;
+    animation: mobileBootLoad 1450ms var(--ease-expo) forwards;
+  }
+  @keyframes mobileBootLoad { to { transform: scaleX(1); } }
+  body.mobile-booting { overflow: hidden; }
+  .mobile-boot.is-panel { opacity: 0; visibility: hidden; }
+  .mobile-boot.is-done { opacity: 0; visibility: hidden; }
+
+  /* После заставки панель исчезает с самой главной страницы. */
+  .hero__dashboard { display: none; }
+  body.mobile-boot-panel .hero__dashboard {
+    position: fixed;
+    z-index: 9999;
+    display: block;
+    width: calc(100vw - 24px);
+    max-width: 430px;
+    left: 50%;
+    top: 50%;
+    margin: 0;
+    transform: translate(-50%, -50%) !important;
+    opacity: 0;
+    animation: mobilePanelIn 650ms var(--ease-expo) 80ms forwards;
+  }
+  body.mobile-boot-exit .hero__dashboard {
+    opacity: 0;
+    transition: opacity 600ms var(--ease-expo), transform 600ms var(--ease-expo);
+    transform: translate(-50%, -47%) scale(.97) !important;
+  }
+  @keyframes mobilePanelIn {
+    from { opacity: 0; transform: translate(-50%, -47%) scale(.96); }
+    to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  }
+}
+
 /* ─── HERO mobile ─────────────────────────────────────── */
 @media (max-width: 900px) {
   .hero {
@@ -6278,8 +6365,8 @@ body.menu-open { overflow: hidden; }
   }
   .hero__title { font-size: clamp(36px, 10.5vw, 64px); word-break: keep-all; overflow-wrap: break-word; hyphens: manual; }
   .hero__lead { font-size: 15.5px; }
-  .hero__actions { flex-direction: column; align-items: flex-start; gap: 10px; }
-  .hero__actions .btn { width: auto; padding: 12px 18px; font-size: 14px; }
+  .hero__actions { flex-direction: row; align-items: stretch; gap: 8px; width: 100%; }
+  .hero__actions .btn { flex: 1 1 0; width: auto; padding: 12px 10px; font-size: 12.5px; justify-content: center; text-align: center; }
   .hero__copy > .eyebrow { padding: 5px 10px 5px 9px; font-size: 10px; }
   .hero__trust { margin-top: 32px; padding-top: 24px; }
   .hero__trust-num { font-size: 44px; }

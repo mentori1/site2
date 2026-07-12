@@ -10,6 +10,27 @@
   // Это гарантирует, что текст ВИДЕН даже если что-то упадёт в скриптах.
   document.body.classList.add("js-ready");
 
+  /* ─── MOBILE CRM BOOT INTRO ─────────────────────────────── */
+  const mobileBoot = document.getElementById("mobileBoot");
+  const isPhoneBoot = mobileBoot && window.matchMedia("(max-width: 600px)").matches;
+  if (isPhoneBoot && !prefersReducedMotion) {
+    document.body.classList.add("mobile-booting");
+    setTimeout(() => {
+      document.body.classList.add("mobile-boot-panel");
+      mobileBoot.classList.add("is-panel");
+    }, 1500);
+    setTimeout(() => {
+      document.body.classList.add("mobile-boot-exit");
+      mobileBoot.classList.add("is-done");
+    }, 4700);
+    setTimeout(() => {
+      document.body.classList.remove("mobile-booting", "mobile-boot-panel", "mobile-boot-exit");
+      mobileBoot.remove();
+    }, 5400);
+  } else if (mobileBoot) {
+    mobileBoot.remove();
+  }
+
   /* ─── 1. LENIS SMOOTH SCROLL ─────────────────────────────── */
   let lenis;
   if (!prefersReducedMotion && window.Lenis) {
