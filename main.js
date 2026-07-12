@@ -12,8 +12,7 @@
 
   /* ─── DESKTOP CRM BOOT INTRO ────────────────────────────── */
   const mobileBoot = document.getElementById("mobileBoot");
-  const isDesktopBoot = mobileBoot && window.matchMedia("(min-width: 601px)").matches;
-  if (isDesktopBoot && !prefersReducedMotion) {
+  if (mobileBoot && !prefersReducedMotion) {
     document.body.classList.add("mobile-booting");
     setTimeout(() => {
       mobileBoot.classList.add("is-done");

@@ -6268,10 +6268,10 @@ body.menu-open { overflow: hidden; }
    MOBILE FIXES
    ═══════════════════════════════════════════════════════════════ */
 
-/* Короткий запуск Mentra CRM на компьютерах. */
+/* Короткий запуск Mentra CRM на всех устройствах. */
 .mobile-boot { display: none; }
 
-@media (min-width: 601px) {
+@media (min-width: 0px) {
   .mobile-boot {
     position: fixed;
     inset: 0;
@@ -6329,9 +6329,8 @@ body.menu-open { overflow: hidden; }
   .mobile-boot.is-done { opacity: 0; visibility: hidden; }
 }
 
-/* На телефонах панель клиента и загрузочная заставка полностью скрыты. */
+/* На телефонах скрыта только панель клиента; заставка остаётся. */
 @media (max-width: 600px) {
-  .mobile-boot,
   .hero__dashboard { display: none !important; }
 }
 
