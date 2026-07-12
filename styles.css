@@ -6332,10 +6332,16 @@ body.menu-open { overflow: hidden; }
 /* На телефонах скрыта только панель клиента; заставка остаётся. */
 @media (max-width: 600px) {
   .hero__dashboard { display: none !important; }
+  body.mobile-booting { overflow: auto; }
 }
 
 /* ─── HERO mobile ─────────────────────────────────────── */
 @media (max-width: 900px) {
+  .hero__webgl,
+  .hero__mesh { display: none !important; }
+  .hero__bg-fade {
+    background: linear-gradient(180deg, transparent 50%, var(--bg-base) 100%);
+  }
   .hero {
     padding: 120px 20px 60px;
   }

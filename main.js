@@ -5,6 +5,7 @@
 
 (() => {
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const isTouchMobile = window.matchMedia("(max-width: 900px)").matches;
 
   // helper: разрешаем reveal-стили только когда JS работает.
   // Это гарантирует, что текст ВИДЕН даже если что-то упадёт в скриптах.
@@ -27,7 +28,7 @@
 
   /* ─── 1. LENIS SMOOTH SCROLL ─────────────────────────────── */
   let lenis;
-  if (!prefersReducedMotion && window.Lenis) {
+  if (!prefersReducedMotion && !isTouchMobile && window.Lenis) {
     lenis = new Lenis({
       duration: 1.15,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -185,7 +186,7 @@
   }
 
   /* ─── 6. MAGNETIC BUTTONS ────────────────────────────── */
-  if (!prefersReducedMotion) {
+  if (!prefersReducedMotion && !isTouchMobile) {
     const magnets = document.querySelectorAll("[data-magnetic]");
     magnets.forEach((m) => {
       const strength = 0.32;
@@ -517,7 +518,7 @@
   window.__skinVanta = skinVanta;
 
   /* ─── 12. VANTA.NET WebGL HERO BACKGROUND ─────────────── */
-  if (!prefersReducedMotion && window.VANTA && window.VANTA.NET) {
+  if (!prefersReducedMotion && !isTouchMobile && window.VANTA && window.VANTA.NET) {
     const webglEl = document.getElementById("heroWebgl");
     if (webglEl) {
       const isMobile = window.matchMedia("(max-width: 900px)").matches;
