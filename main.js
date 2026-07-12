@@ -586,15 +586,25 @@
   /* ─── 14. CONTACT FORM ─────────────────────────────────── */
   const form = document.getElementById("contactForm");
   if (form) {
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const data = {};
       const formData = new FormData(form);
-      formData.forEach((value, key) => {
-        data[key] = value;
-      });
-      // в продакшене сюда подставить fetch на ваш бэкенд / webhook
-      console.log("[Mentra form submit]", data);
+      const submitButton = form.querySelector('button[type="submit"]');
+      if (submitButton) submitButton.disabled = true;
+
+      try {
+        const response = await fetch(form.action, {
+          method: "POST",
+          body: formData,
+          headers: { Accept: "application/json" },
+        });
+        if (!response.ok) throw new Error("Form submission failed");
+      } catch (error) {
+        if (submitButton) submitButton.disabled = false;
+        alert("Не удалось отправить заявку. Напишите нам на mentraos@mail.ru или позвоните по номеру +7 911 437-85-85.");
+        return;
+      }
+
       form.style.transition = "opacity 0.5s var(--ease-expo)";
       form.style.opacity = "0";
       setTimeout(() => {
