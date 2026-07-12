@@ -661,6 +661,12 @@ body.menu-open { overflow: hidden; }
   perspective: 2400px;
   will-change: transform;
   margin-top: -48px;
+  width: 92%;
+  max-width: 610px;
+  justify-self: end;
+}
+@media (max-width: 1080px) {
+  .hero__dashboard { width: 100%; max-width: 720px; justify-self: center; }
 }
 @media (min-width: 1081px) and (max-height: 850px) {
   .hero { padding-top: 108px; }
@@ -2987,7 +2993,7 @@ body.menu-open { overflow: hidden; }
    HISTORY TIMELINE (about page)
    ═══════════════════════════════════════════════════════════════ */
 .history {
-  padding: clamp(80px, 12vw, 140px) 0;
+  padding: clamp(64px, 7vw, 96px) 0;
 }
 .history__timeline {
   position: relative;
@@ -3038,9 +3044,18 @@ body.menu-open { overflow: hidden; }
    ═══════════════════════════════════════════════════════════════ */
 .values {
   position: relative;
-  padding: clamp(80px, 12vw, 140px) 0;
+  padding: clamp(64px, 7vw, 96px) 0;
   isolation: isolate;
 }
+
+/* Страница «О нас»: компактные переходы между соседними секциями. */
+.page-hero + .about {
+  padding-top: clamp(72px, 7vw, 96px);
+  padding-bottom: clamp(64px, 6vw, 88px);
+}
+.about + .history { padding-top: clamp(48px, 5vw, 72px); }
+.history + .values { padding-top: clamp(48px, 5vw, 72px); }
+.values + .cta { padding: clamp(88px, 10vw, 128px) var(--gutter); }
 .values__bg {
   position: absolute;
   inset: 0;
