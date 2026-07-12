@@ -57,7 +57,11 @@
 
 /* ─── Reset ─────────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { -webkit-text-size-adjust: 100%; }
+html {
+  -webkit-text-size-adjust: 100%;
+  overscroll-behavior-y: none;
+  background: var(--bg-base);
+}
 body {
   font-family: var(--font-sans);
   background: var(--bg-base);
@@ -68,6 +72,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  overscroll-behavior-y: none;
   min-height: 100vh;
   min-height: 100dvh;
 }
@@ -424,6 +429,9 @@ body.menu-open { overflow: hidden; }
   mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black 30%, transparent 80%);
   -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black 30%, transparent 80%);
 }
+
+/* Декоративная клетка отключена на всём сайте. */
+.hero__grid { display: none !important; }
 
 .hero__inner {
   max-width: var(--container);
