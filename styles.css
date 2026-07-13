@@ -7212,7 +7212,7 @@ body.menu-open { overflow: hidden; }
   line-height: 1;
 }
 .prod__verdict {
-  margin-top: 32px;
+  margin-top: 28px;
   font-size: 16.5px;
   line-height: 1.55;
   color: var(--text-primary);
@@ -7222,17 +7222,6 @@ body.menu-open { overflow: hidden; }
   font-weight: 500;
   color: var(--accent-amber);
 }
-.prod__actions {
-  position: absolute;
-  right: clamp(48px, 10vw, 150px);
-  bottom: 130px;
-  margin-top: 0;
-  display: flex;
-  justify-content: flex-end;
-  gap: 14px;
-  flex-wrap: wrap;
-}
-
 /* prod viz — табло заказов */
 .prod__viz {
   position: relative;
@@ -7816,10 +7805,5 @@ body.menu-open { overflow: hidden; }
   .theme-toggle { width: 36px; height: 36px; margin-left: auto; margin-right: 6px; }
   .theme-toggle svg { width: 18px; height: 18px; }
   .prod__inner { padding-bottom: 0; }
-  .prod__actions {
-    position: static;
-    margin-top: 28px;
-    justify-content: flex-start;
-  }
   .legal-page { padding: 110px 20px 64px; }
 }
