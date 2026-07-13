@@ -3064,6 +3064,7 @@ body.menu-open { overflow: hidden; }
 .about + .history { padding-top: clamp(48px, 5vw, 72px); }
 .history + .values { padding-top: clamp(48px, 5vw, 72px); }
 .values + .cta { padding: clamp(88px, 10vw, 128px) var(--gutter); }
+.history + .cta { padding: clamp(88px, 10vw, 128px) var(--gutter); }
 .values__bg {
   position: absolute;
   inset: 0;
