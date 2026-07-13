@@ -7121,7 +7121,7 @@ body.menu-open { overflow: hidden; }
    ═══════════════════════════════════════════════════════════════ */
 .prod {
   position: relative;
-  padding: clamp(80px, 12vw, 160px) var(--gutter);
+  padding: clamp(80px, 12vw, 160px) var(--gutter) clamp(56px, 6vw, 84px);
   overflow: hidden;
   isolation: isolate;
 }
@@ -7143,7 +7143,7 @@ body.menu-open { overflow: hidden; }
   max-width: var(--container);
   margin: 0 auto;
   position: relative;
-  padding-bottom: 78px;
+  padding-bottom: 0;
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
   gap: clamp(40px, 6vw, 88px);
@@ -7225,7 +7225,7 @@ body.menu-open { overflow: hidden; }
 .prod__actions {
   position: absolute;
   right: clamp(48px, 10vw, 150px);
-  bottom: 0;
+  bottom: 130px;
   margin-top: 0;
   display: flex;
   justify-content: flex-end;
