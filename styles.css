@@ -1300,13 +1300,25 @@ body.menu-open { overflow: hidden; }
 
 .stack__num {
   position: absolute;
-  top: 28px;
-  right: 36px;
-  font-family: var(--font-mono);
-  font-size: 12px;
-  color: var(--accent);
-  letter-spacing: 0.1em;
+  top: 20px;
+  right: 26px;
+  z-index: 0;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(72px, 7vw, 108px);
+  line-height: .8;
+  letter-spacing: -0.05em;
+  color: transparent;
+  background: linear-gradient(180deg, rgba(255, 169, 64, .82), rgba(255, 94, 26, .38));
+  -webkit-background-clip: text;
+  background-clip: text;
+  opacity: .72;
+  font-feature-settings: "tnum";
+  user-select: none;
+  pointer-events: none;
 }
+.stack__body,
+.stack__visual { position: relative; z-index: 1; }
 .stack__title {
   font-family: var(--font-display);
   font-weight: 400;
@@ -6474,7 +6486,7 @@ body.menu-open { overflow: hidden; }
   .stack.is-carousel {
     width: 100%;
     max-width: none;
-    height: calc(var(--stack-carousel-card-height, 680px) + 78px);
+    height: calc(var(--stack-carousel-card-height, 610px) + 66px);
     padding: 0;
     overflow: hidden;
     perspective: 1200px;
@@ -6493,7 +6505,7 @@ body.menu-open { overflow: hidden; }
     z-index: 0;
     width: min(calc(100% - 52px), 430px);
     height: var(--stack-carousel-card-height, auto);
-    padding: 28px 24px;
+    padding: 22px 20px;
     margin: 0;
     border-radius: 24px;
     min-height: auto;
@@ -6551,43 +6563,66 @@ body.menu-open { overflow: hidden; }
   .stack.is-carousel .stack__card.is-active .stack__visual {
     animation: stack-carousel-float 4.8s ease-in-out infinite;
   }
+  .stack__body { padding-top: 24px; }
   .stack__title {
-    font-size: clamp(28px, 8vw, 40px);
-    margin-bottom: 16px;
+    max-width: calc(100% - 36px);
+    font-size: clamp(27px, 7.4vw, 34px);
+    margin-bottom: 12px;
   }
-  .stack__text { font-size: 15px; }
-  .stack__num { top: 18px; right: 24px; font-size: 11px; }
-  .stack__visual { min-height: 260px; padding-top: 12px; }
+  .stack__text { font-size: 14px; line-height: 1.45; }
+  .stack__bullets {
+    margin-top: 16px;
+    padding-top: 14px;
+    gap: 7px;
+  }
+  .stack__bullets li { font-size: 11.5px; line-height: 1.38; }
+  .stack__bullets--row { gap: 6px; }
+  .stack__bullets--row li { padding: 5px 9px 5px 21px; }
+  .stack__bullets--row li::before { left: 9px; }
+  .stack__num {
+    top: 14px;
+    right: 20px;
+    font-size: clamp(62px, 18vw, 74px);
+    opacity: .8;
+  }
+  .stack__visual { min-height: 190px; padding-top: 4px; }
   .stack__chat,
   .stack__pipe,
   .stack__stats { max-width: 100%; }
-  .stack__chat { padding: 16px; }
-  .stack__chat-msg { font-size: 12.5px; padding: 8px 12px; }
+  .stack__chat { gap: 5px; padding: 12px; }
+  .stack__chat-msg { font-size: 11.5px; padding: 7px 9px; }
+  .stack__chat-time { margin-top: 4px; font-size: 9.5px; }
+  .stack__pipe-row { font-size: 11px; }
+  .stack__pipe-bar { margin-bottom: 4px; }
+  .stack__stats { gap: 11px; }
+  .stack__stat-label,
+  .stack__stat-meta { font-size: 10.5px; }
+  .stack__verdict { margin-top: 4px; padding: 9px 11px; font-size: 11.5px; }
   .stack__diagram {
     width: 100%;
-    height: 280px;
-    transform: scale(0.78);
+    height: 210px;
+    transform: scale(0.64);
     transform-origin: center;
   }
   .stack-carousel__controls {
     position: absolute;
     right: 20px;
-    bottom: 4px;
+    bottom: 2px;
     left: 20px;
     z-index: 8;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 20px;
-    height: 58px;
+    height: 52px;
   }
   .stack-carousel__arrow {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 48px;
-    height: 48px;
-    flex: 0 0 48px;
+    width: 44px;
+    height: 44px;
+    flex: 0 0 44px;
     border: 1px solid var(--border-strong);
     border-radius: 50%;
     background: var(--bg-elevated);
@@ -6636,17 +6671,17 @@ body.menu-open { overflow: hidden; }
 
 @keyframes stack-carousel-float {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
+  50% { transform: translateY(-3px); }
 }
 
 @media (max-width: 360px) {
   .stack.is-carousel .stack__card {
     width: calc(100% - 42px);
-    padding: 26px 20px;
+    padding: 20px 18px;
   }
   .stack.is-carousel .stack__card.is-prev { --stack-x: -86%; }
   .stack.is-carousel .stack__card.is-next { --stack-x: 86%; }
-  .stack__visual { min-height: 240px; }
+  .stack__visual { min-height: 180px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

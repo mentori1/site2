@@ -65,12 +65,12 @@ python3 -m http.server 4321
 
 Подключения в HTML версионированы: `styles.css?v=N` и `main.js?v=N`.
 **При каждом изменении `styles.css` или `main.js` поднимай номер версии во всех HTML** —
-тогда браузеры подтянут свежие файлы без жёсткой перезагрузки (Cmd+Shift+R). Текущие версии: стили **v=47**, скрипт **v=36**.
+тогда браузеры подтянут свежие файлы без жёсткой перезагрузки (Cmd+Shift+R). Текущие версии: стили **v=48**, скрипт **v=36**.
 
 Быстрый бамп по всем страницам:
 ```bash
 cd /Users/mentori/mentra-site
-OLD=47; NEW=48
+OLD=48; NEW=49
 sed -i '' "s/styles.css?v=$OLD/styles.css?v=$NEW/; s/main.js?v=$OLD/main.js?v=$NEW/" *.html
 ```
 
