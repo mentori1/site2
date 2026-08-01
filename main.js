@@ -755,6 +755,97 @@
     if (document.fonts?.ready) document.fonts.ready.then(measureCards);
   }
 
+  /* ─── 13c. MOBILE SERVICES CAROUSEL ───────────────────── */
+  const servicesCarousel = document.querySelector("[data-services-carousel]");
+  const servicesTrack = servicesCarousel?.querySelector("[data-services-track]");
+  const serviceCards = servicesTrack
+    ? Array.from(servicesTrack.querySelectorAll(".srv"))
+    : [];
+
+  if (servicesCarousel && servicesTrack && serviceCards.length > 1 && isTouchMobile) {
+    const prevService = servicesCarousel.querySelector("[data-services-prev]");
+    const nextService = servicesCarousel.querySelector("[data-services-next]");
+    const serviceCounter = servicesCarousel.querySelector("[data-services-counter]");
+    const serviceDotsRoot = servicesCarousel.querySelector("[data-services-dots]");
+    const totalServices = serviceCards.length;
+    let activeService = 0;
+    let serviceScrollRaf = 0;
+
+    servicesCarousel.setAttribute("role", "region");
+    servicesCarousel.setAttribute("aria-roledescription", "карусель");
+    servicesTrack.setAttribute("tabindex", "0");
+
+    const serviceDots = serviceCards.map((card, index) => {
+      card.setAttribute("role", "group");
+      card.setAttribute("aria-roledescription", "слайд");
+      card.setAttribute("aria-label", `${index + 1} из ${totalServices}`);
+
+      const dot = document.createElement("button");
+      dot.type = "button";
+      dot.className = "srv-carousel__dot";
+      dot.setAttribute("aria-label", `Открыть карточку ${index + 1}`);
+      dot.addEventListener("click", () => goToService(index));
+      serviceDotsRoot?.appendChild(dot);
+      return dot;
+    });
+
+    const renderServiceProgress = (index) => {
+      activeService = index;
+      serviceDots.forEach((dot, dotIndex) => {
+        const isActive = dotIndex === activeService;
+        dot.classList.toggle("is-active", isActive);
+        dot.setAttribute("aria-current", isActive ? "true" : "false");
+      });
+      if (serviceCounter) {
+        serviceCounter.textContent = `${String(activeService + 1).padStart(2, "0")} / ${String(totalServices).padStart(2, "0")}`;
+      }
+    };
+
+    const goToService = (index) => {
+      const nextIndex = (index + totalServices) % totalServices;
+      const card = serviceCards[nextIndex];
+      const left = card.offsetLeft - (servicesTrack.clientWidth - card.clientWidth) / 2;
+      servicesTrack.scrollTo({ left, behavior: prefersReducedMotion ? "auto" : "smooth" });
+      renderServiceProgress(nextIndex);
+    };
+
+    const updateServiceFromScroll = () => {
+      window.cancelAnimationFrame(serviceScrollRaf);
+      serviceScrollRaf = window.requestAnimationFrame(() => {
+        const trackCenter = servicesTrack.scrollLeft + servicesTrack.clientWidth / 2;
+        let nearestIndex = 0;
+        let nearestDistance = Infinity;
+
+        serviceCards.forEach((card, index) => {
+          const cardCenter = card.offsetLeft + card.clientWidth / 2;
+          const distance = Math.abs(trackCenter - cardCenter);
+          if (distance < nearestDistance) {
+            nearestDistance = distance;
+            nearestIndex = index;
+          }
+        });
+
+        if (nearestIndex !== activeService) renderServiceProgress(nearestIndex);
+      });
+    };
+
+    prevService?.addEventListener("click", () => goToService(activeService - 1));
+    nextService?.addEventListener("click", () => goToService(activeService + 1));
+    servicesTrack.addEventListener("scroll", updateServiceFromScroll, { passive: true });
+    servicesTrack.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        goToService(activeService - 1);
+      }
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        goToService(activeService + 1);
+      }
+    });
+
+    renderServiceProgress(0);
+  }
+
   /* ─── 14. CONTACT FORM ─────────────────────────────────── */
   const form = document.getElementById("contactForm");
   if (form) {

@@ -4770,6 +4770,8 @@ body.menu-open { overflow: hidden; }
   letter-spacing: -0.01em;
 }
 
+.srv-carousel__controls { display: none; }
+
 /* ─── CASE BIG · развёрнутый кейс ──────────────────────────── */
 .cases-list {
   padding: 80px var(--gutter);
@@ -6793,14 +6795,166 @@ body.menu-open { overflow: hidden; }
 
 /* ─── SRV (детальные услуги) mobile ───────────────────── */
 @media (max-width: 900px) {
-  .srv { padding: 60px 20px; }
-  .srv__inner { gap: 32px; }
-  .srv__title { font-size: clamp(28px, 8vw, 40px); }
-  .srv__lead { font-size: 15px; }
-  .srv__list { gap: 14px; }
-  .srv__list li { font-size: 13.5px; }
-  .srv__visual { min-height: 260px; }
-  .srv__device { max-width: 100%; padding: 16px; }
+  .srv-carousel {
+    padding: 54px 0 72px;
+    overflow: hidden;
+  }
+  .srv-carousel__track {
+    display: flex;
+    align-items: stretch;
+    gap: 14px;
+    width: 100%;
+    padding: 0 20px 18px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 20px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .srv-carousel__track::-webkit-scrollbar { display: none; }
+  .srv-carousel .srv {
+    flex: 0 0 calc(100vw - 40px);
+    display: flex;
+    max-width: 430px;
+    padding: 0;
+    overflow: hidden;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    border: 1px solid var(--border-base);
+    border-radius: 24px;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.014)),
+      var(--bg-elevated);
+    box-shadow:
+      inset 0 1px 0 var(--border-glass-inner),
+      0 28px 56px -34px rgba(0,0,0,.72);
+  }
+  .srv-carousel .srv--alt {
+    border-color: var(--border-base);
+    background:
+      linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.014)),
+      var(--bg-elevated);
+  }
+  .srv-carousel .srv__inner {
+    display: block;
+    width: 100%;
+    padding: 26px 22px 28px;
+  }
+  .srv-carousel .srv__copy { position: relative; }
+  .srv-carousel .srv__num {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 0;
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 68px;
+    font-weight: 300;
+    line-height: .8;
+    letter-spacing: -.05em;
+    color: transparent;
+    background: linear-gradient(180deg, rgba(255,169,64,.82), rgba(255,94,26,.34));
+    -webkit-background-clip: text;
+    background-clip: text;
+    opacity: .76;
+    pointer-events: none;
+  }
+  .srv-carousel .srv__title {
+    position: relative;
+    z-index: 1;
+    max-width: calc(100% - 34px);
+    padding-top: 42px;
+    font-size: clamp(29px, 8vw, 36px);
+    line-height: 1;
+  }
+  .srv-carousel .srv__lead {
+    margin-top: 16px;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .srv-carousel .srv__list {
+    margin-top: 22px;
+    padding-top: 18px;
+    gap: 14px;
+  }
+  .srv-carousel .srv__list li {
+    grid-template-columns: 1fr;
+    gap: 5px;
+    font-size: 13px;
+    line-height: 1.42;
+  }
+  .srv-carousel .srv__list-h { font-size: 11px; }
+  .srv-carousel .srv__visual { display: none; }
+  .srv-carousel__controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 8px;
+    padding: 0 20px;
+  }
+  .srv-carousel__arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    flex: 0 0 46px;
+    border: 1px solid var(--border-strong);
+    border-radius: 50%;
+    background: var(--bg-elevated);
+    color: var(--text-primary);
+    box-shadow: inset 0 1px 0 var(--border-glass-inner);
+    transition: transform .3s var(--ease-back), border-color .3s ease, color .3s ease;
+  }
+  .srv-carousel__arrow:active {
+    transform: scale(.9);
+    border-color: var(--accent);
+    color: var(--accent-amber);
+  }
+  .srv-carousel__progress {
+    min-width: 126px;
+    text-align: center;
+  }
+  .srv-carousel__counter {
+    display: block;
+    margin-bottom: 8px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: .12em;
+    color: var(--text-tertiary);
+  }
+  .srv-carousel__dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+  }
+  .srv-carousel__dot {
+    width: 7px;
+    height: 7px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: var(--text-quaternary);
+    transition: width .4s var(--ease-expo), background .3s ease, box-shadow .3s ease;
+  }
+  .srv-carousel__dot.is-active {
+    width: 22px;
+    border-radius: 8px;
+    background: var(--accent);
+    box-shadow: 0 0 12px var(--accent-glow);
+  }
+}
+
+@media (max-width: 360px) {
+  .srv-carousel__track { padding-inline: 16px; scroll-padding-inline: 16px; }
+  .srv-carousel .srv { flex-basis: calc(100vw - 32px); }
+  .srv-carousel .srv__inner { padding: 24px 18px 26px; }
+  .srv-carousel .srv__title { font-size: 28px; }
+  .srv-carousel .srv__lead { font-size: 13.5px; }
+  .srv-carousel .srv__list li { font-size: 12.5px; }
 }
 
 /* ─── CASE CARD + MODAL mobile ────────────────────────── */
