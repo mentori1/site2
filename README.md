@@ -33,7 +33,7 @@ python3 -m http.server 4321
 | `contact.html` | Контакты |
 
 Общие ресурсы: `styles.css` (один файл на все страницы), `main.js` (вся логика), `assets/` (фото и графика сайта).
-Фирменный знак в шапке, загрузочном экране и подвале: прозрачные версии `assets/mentori-technologies-wordmark-transparent.png` и `assets/mentori-technologies-wordmark-transparent-light.png`. Исходник с чёрным фоном сохранён как `assets/mentori-technologies-wordmark.png`.
+Фирменный знак в шапке, загрузочном экране и подвале: прозрачные версии `assets/mentori-technologies-wordmark-transparent.png` и `assets/mentori-technologies-wordmark-transparent-light.png`. Вариант с чёрным прямоугольным фоном на сайте не используется и в актуальных ассетах не хранится.
 
 ---
 
