@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════
-   MENTRA · main.js
+   MENTORI TECHNOLOGIES · main.js
    Lenis smooth scroll + GSAP ScrollTrigger + magnetic + tilt + counters
    ═══════════════════════════════════════════════════════════════ */
 
