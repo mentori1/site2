@@ -171,7 +171,6 @@ body:hover .cursor-glow { opacity: 1; }
   flex-shrink: 0;
   border-radius: 2px;
   overflow: hidden;
-  background: #050607;
 }
 .nav__logo {
   display: inline-flex;
@@ -179,7 +178,6 @@ body:hover .cursor-glow { opacity: 1; }
   flex-shrink: 0;
   border-radius: 2px;
   overflow: hidden;
-  background: #050607;
 }
 .nav__wordmark,
 .foot__wordmark,
@@ -4524,8 +4522,6 @@ body.menu-open { overflow: hidden; }
 }
 .foot__wordmark {
   width: min(196px, 58vw);
-  border-radius: 3px;
-  background: #050607;
 }
 .foot__tag {
   margin-top: 10px;
@@ -6352,9 +6348,6 @@ body.menu-open { overflow: hidden; }
   }
   .mobile-boot__wordmark {
     width: min(330px, 78vw);
-    border-radius: 4px;
-    background: #050607;
-    box-shadow: 0 24px 80px rgba(0, 0, 0, .16);
   }
   .mobile-boot__status {
     margin-top: 22px;
@@ -8170,6 +8163,12 @@ body.menu-open { overflow: hidden; }
     background: linear-gradient(180deg, transparent, rgba(20, 18, 14, 0.04));
     border-top: 1px solid rgba(20, 18, 14, 0.08);
   }
+
+[data-theme="light"] .nav__wordmark,
+[data-theme="light"] .foot__wordmark,
+[data-theme="light"] .mobile-boot__wordmark {
+  content: url("assets/mentori-technologies-wordmark-transparent-light.png");
+}
 
 [data-theme="light"] .foot__tag,
   [data-theme="light"] .foot__col-h,

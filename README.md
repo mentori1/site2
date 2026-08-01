@@ -33,7 +33,7 @@ python3 -m http.server 4321
 | `contact.html` | Контакты |
 
 Общие ресурсы: `styles.css` (один файл на все страницы), `main.js` (вся логика), `assets/` (фото и графика сайта).
-Фирменный знак в шапке, загрузочном экране и подвале: `assets/mentori-technologies-wordmark.png`.
+Фирменный знак в шапке, загрузочном экране и подвале: прозрачные версии `assets/mentori-technologies-wordmark-transparent.png` и `assets/mentori-technologies-wordmark-transparent-light.png`. Исходник с чёрным фоном сохранён как `assets/mentori-technologies-wordmark.png`.
 
 ---
 
@@ -67,12 +67,12 @@ python3 -m http.server 4321
 
 Подключения в HTML версионированы: `styles.css?v=N` и `main.js?v=N`.
 **При каждом изменении `styles.css` или `main.js` поднимай номер версии во всех HTML** —
-тогда браузеры подтянут свежие файлы без жёсткой перезагрузки (Cmd+Shift+R). Текущие версии: стили **v=50**, скрипт **v=37**.
+тогда браузеры подтянут свежие файлы без жёсткой перезагрузки (Cmd+Shift+R). Текущие версии: стили **v=51**, скрипт **v=37**.
 
 Быстрый бамп по всем страницам:
 ```bash
 cd /Users/mentori/mentra-site
-OLD=50; NEW=51
+OLD=51; NEW=52
 sed -i '' "s/styles.css?v=$OLD/styles.css?v=$NEW/; s/main.js?v=$OLD/main.js?v=$NEW/" *.html
 ```
 
