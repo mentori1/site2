@@ -599,6 +599,162 @@
     }
   }
 
+  /* ─── 13b. MOBILE 3D CAROUSEL ─────────────────────────── */
+  const mobileStack = document.querySelector("[data-stack]");
+  const mobileStackCards = mobileStack
+    ? Array.from(mobileStack.querySelectorAll("[data-stack-card]"))
+    : [];
+
+  if (mobileStack && mobileStackCards.length > 1 && isTouchMobile) {
+    const controls = mobileStack.querySelector("[data-stack-controls]");
+    const prevButton = mobileStack.querySelector("[data-stack-prev]");
+    const nextButton = mobileStack.querySelector("[data-stack-next]");
+    const counter = mobileStack.querySelector("[data-stack-counter]");
+    const dotsRoot = mobileStack.querySelector("[data-stack-dots]");
+    const cardCount = mobileStackCards.length;
+    let activeCard = 0;
+    let autoTimer = 0;
+    let carouselVisible = false;
+    let pointerStartX = 0;
+    let pointerStartY = 0;
+    let resizeTimer = 0;
+
+    mobileStack.classList.add("is-carousel");
+    mobileStack.setAttribute("role", "region");
+    mobileStack.setAttribute("aria-roledescription", "карусель");
+    mobileStack.setAttribute("tabindex", "0");
+
+    const dots = mobileStackCards.map((card, index) => {
+      card.setAttribute("role", "group");
+      card.setAttribute("aria-roledescription", "слайд");
+      card.setAttribute("aria-label", `${index + 1} из ${cardCount}`);
+
+      const dot = document.createElement("button");
+      dot.type = "button";
+      dot.className = "stack-carousel__dot";
+      dot.setAttribute("aria-label", `Открыть карточку ${index + 1}`);
+      dot.addEventListener("click", () => setActiveCard(index, true));
+      dotsRoot?.appendChild(dot);
+      return dot;
+    });
+
+    const measureCards = () => {
+      mobileStack.style.removeProperty("--stack-carousel-card-height");
+      requestAnimationFrame(() => {
+        const tallestCard = Math.max(...mobileStackCards.map((card) => card.scrollHeight));
+        mobileStack.style.setProperty("--stack-carousel-card-height", `${tallestCard}px`);
+      });
+    };
+
+    const stopAutoplay = () => {
+      window.clearTimeout(autoTimer);
+      autoTimer = 0;
+    };
+
+    const scheduleAutoplay = () => {
+      stopAutoplay();
+      if (prefersReducedMotion || !carouselVisible || document.hidden) return;
+      autoTimer = window.setTimeout(() => {
+        setActiveCard(activeCard + 1, false);
+      }, 4800);
+    };
+
+    const renderCards = () => {
+      mobileStackCards.forEach((card, index) => {
+        const relativeIndex = (index - activeCard + cardCount) % cardCount;
+        const isActive = relativeIndex === 0;
+        const isNext = relativeIndex === 1;
+        const isPrev = relativeIndex === cardCount - 1;
+
+        card.classList.toggle("is-active", isActive);
+        card.classList.toggle("is-next", isNext);
+        card.classList.toggle("is-prev", isPrev);
+        card.classList.toggle("is-far", !isActive && !isNext && !isPrev);
+        card.setAttribute("aria-hidden", isActive ? "false" : "true");
+      });
+
+      dots.forEach((dot, index) => {
+        const isActive = index === activeCard;
+        dot.classList.toggle("is-active", isActive);
+        dot.setAttribute("aria-current", isActive ? "true" : "false");
+      });
+
+      if (counter) {
+        counter.textContent = `${String(activeCard + 1).padStart(2, "0")} / ${String(cardCount).padStart(2, "0")}`;
+      }
+    };
+
+    function setActiveCard(nextIndex, userInitiated = false) {
+      activeCard = (nextIndex + cardCount) % cardCount;
+      renderCards();
+      if (userInitiated) stopAutoplay();
+      scheduleAutoplay();
+    }
+
+    prevButton?.addEventListener("click", () => setActiveCard(activeCard - 1, true));
+    nextButton?.addEventListener("click", () => setActiveCard(activeCard + 1, true));
+
+    mobileStack.addEventListener("pointerdown", (event) => {
+      if (event.target.closest("button")) return;
+      pointerStartX = event.clientX;
+      pointerStartY = event.clientY;
+      stopAutoplay();
+    });
+
+    mobileStack.addEventListener("pointerup", (event) => {
+      if (!pointerStartX && !pointerStartY) return;
+      const deltaX = event.clientX - pointerStartX;
+      const deltaY = event.clientY - pointerStartY;
+      pointerStartX = 0;
+      pointerStartY = 0;
+
+      if (Math.abs(deltaX) > 42 && Math.abs(deltaX) > Math.abs(deltaY)) {
+        setActiveCard(activeCard + (deltaX < 0 ? 1 : -1), true);
+      } else {
+        scheduleAutoplay();
+      }
+    });
+
+    mobileStack.addEventListener("pointercancel", () => {
+      pointerStartX = 0;
+      pointerStartY = 0;
+      scheduleAutoplay();
+    });
+
+    mobileStack.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        setActiveCard(activeCard - 1, true);
+      }
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        setActiveCard(activeCard + 1, true);
+      }
+    });
+
+    controls?.addEventListener("focusin", stopAutoplay);
+    controls?.addEventListener("focusout", scheduleAutoplay);
+
+    const carouselObserver = new IntersectionObserver(
+      ([entry]) => {
+        carouselVisible = entry.isIntersecting && entry.intersectionRatio > 0.25;
+        scheduleAutoplay();
+      },
+      { threshold: [0, 0.25, 0.6] }
+    );
+    carouselObserver.observe(mobileStack);
+
+    document.addEventListener("visibilitychange", scheduleAutoplay);
+    window.addEventListener("resize", () => {
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(measureCards, 180);
+    });
+
+    renderCards();
+    measureCards();
+    if (document.fonts?.ready) document.fonts.ready.then(measureCards);
+  }
+
   /* ─── 14. CONTACT FORM ─────────────────────────────────── */
   const form = document.getElementById("contactForm");
   if (form) {

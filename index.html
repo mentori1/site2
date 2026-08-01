@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="styles.css?v=46" />
+  <link rel="stylesheet" href="styles.css?v=47" />
 </head>
 <body>
   <div class="grain" aria-hidden="true"></div>
@@ -295,7 +295,7 @@
       <p class="section__lead" data-reveal>Мы&nbsp;не&nbsp;подгоняем бизнес под&nbsp;готовый шаблон. Собираем систему вокруг ваших процессов: от&nbsp;первой заявки до&nbsp;оплаты, производства и&nbsp;повторной продажи.</p>
     </div>
 
-    <div class="stack" data-stack>
+    <div class="stack" data-stack aria-label="Четыре задачи, которые закрывает система">
       <!-- 01 — заявка остыла -->
       <article class="stack__card" data-stack-card>
         <div class="stack__num">01</div>
@@ -416,6 +416,19 @@
           </div>
         </div>
       </article>
+
+      <div class="stack-carousel__controls" data-stack-controls aria-label="Управление каруселью">
+        <button class="stack-carousel__arrow" type="button" data-stack-prev aria-label="Предыдущая карточка">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 6L9 12L15 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="stack-carousel__progress">
+          <span class="stack-carousel__counter" data-stack-counter aria-live="polite">01 / 04</span>
+          <div class="stack-carousel__dots" data-stack-dots aria-label="Выбор карточки"></div>
+        </div>
+        <button class="stack-carousel__arrow" type="button" data-stack-next aria-label="Следующая карточка">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
     </div>
 
     <div class="services-stack__bottom" data-reveal>
@@ -727,6 +740,6 @@
       document.write('<script src="https://cdn.jsdelivr.net/gh/tengbao/vanta/dist/vanta.net.min.js"><\/script>');
     }
   </script>
-  <script src="main.js?v=35" defer></script>
+  <script src="main.js?v=36" defer></script>
 </body>
 </html>
