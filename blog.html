@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="color-scheme" content="dark light" />
+  <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#fafaf7" media="(prefers-color-scheme: light)" />
+  <title>Блог о системах и автоматизации бизнеса — MENTORI TECHNOLOGIES</title>
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('mentra-theme');
+        var sys = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', saved || sys);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
+  <meta name="description" content="Практические статьи MENTORI TECHNOLOGIES о порядке в данных, процессах, CRM, личных кабинетах и автоматизации бизнеса." />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <link rel="canonical" href="https://mentorios.tech/blog.html" />
+  <link rel="alternate" hreflang="ru" href="https://mentorios.tech/blog.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="ru_RU" />
+  <meta property="og:site_name" content="MENTORI TECHNOLOGIES" />
+  <meta property="og:title" content="Блог о системах и автоматизации бизнеса" />
+  <meta property="og:description" content="Разбираем, как убрать хаос из заявок, заказов, оплат, документов и ежедневной работы команды." />
+  <meta property="og:url" content="https://mentorios.tech/blog.html" />
+  <meta property="og:image" content="https://mentorios.tech/assets/social-preview.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Блог MENTORI TECHNOLOGIES" />
+  <meta name="twitter:description" content="Практические материалы о системах и автоматизации бизнеса." />
+  <meta name="twitter:image" content="https://mentorios.tech/assets/social-preview.png" />
+  <link rel="icon" href="/favicon.ico" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/assets/favicon-48.png" sizes="48x48" />
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" sizes="180x180" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": "https://mentorios.tech/blog.html#webpage",
+    "url": "https://mentorios.tech/blog.html",
+    "name": "Блог MENTORI TECHNOLOGIES",
+    "description": "Практические статьи о системах и автоматизации бизнеса.",
+    "isPartOf": { "@id": "https://mentorios.tech/#website" },
+    "about": { "@id": "https://mentorios.tech/#organization" },
+    "inLanguage": "ru-RU",
+    "mainEntity": {
+      "@type": "ItemList",
+      "numberOfItems": 2,
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "url": "https://mentorios.tech/blog-crm-dlya-stroitelstva.html" },
+        { "@type": "ListItem", "position": 2, "url": "https://mentorios.tech/blog-crm-dlya-repetitora.html" }
+      ]
+    }
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=54" />
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+      m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+      m[i].l=1*new Date();
+      for (var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+      k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window,document,"script","https://mc.yandex.ru/metrika/tag.js?id=111247225","ym");
+    ym(111247225,"init",{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",referrer:document.referrer,url:location.href,accurateTrackBounce:true,trackLinks:true});
+  </script>
+</head>
+<body>
+  <noscript><div><img src="https://mc.yandex.ru/watch/111247225" style="position:absolute;left:-9999px" alt="" /></div></noscript>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor-glow" aria-hidden="true"></div>
+
+  <header class="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__brand" aria-label="MENTORI TECHNOLOGIES">
+        <img class="nav__wordmark" src="assets/mentori-technologies-wordmark-transparent.png" alt="" width="1120" height="500" />
+      </a>
+      <nav class="nav__links" aria-label="Главная навигация">
+        <a href="services.html">Что делаем</a>
+        <a href="about.html">О нас</a>
+        <a href="blog.html" class="is-active">Блог</a>
+        <a href="contact.html">Контакты</a>
+      </nav>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Переключить тему" title="Светлая / тёмная тема">
+        <svg class="theme-toggle__sun" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.7"/><path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M5 5l1.7 1.7M17.3 17.3 19 19M19 5l-1.7 1.7M6.7 17.3 5 19" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+        <svg class="theme-toggle__moon" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.3 6.3 0 0 0 10.5 10.5z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+      </button>
+      <a href="contact.html" class="nav__cta" data-magnetic><span>Получить разбор</span><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <button class="nav__burger" id="navBurger" aria-label="Меню" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <nav class="mobile-menu__nav">
+      <a href="services.html">Что делаем</a>
+      <a href="about.html">О нас</a>
+      <a href="blog.html" class="is-active">Блог</a>
+      <a href="contact.html">Контакты</a>
+    </nav>
+    <div class="mobile-menu__cta">
+      <a href="contact.html" class="btn btn--primary btn--block"><span>Получить разбор</span></a>
+      <div class="mobile-menu__contact"><a href="https://t.me/Mento_ri">@Mento_ri</a><a href="mailto:mentraos@mail.ru">mentraos@mail.ru</a></div>
+    </div>
+  </div>
+
+  <main>
+    <section class="blog-hub__hero">
+      <div class="blog-hub__glow" aria-hidden="true"></div>
+      <div class="blog-hub__hero-inner">
+        <div class="eyebrow" data-reveal><span class="eyebrow__pulse"></span><span>практика без лишних терминов</span></div>
+        <h1 class="blog-hub__title" data-reveal>Как навести порядок<br/>в&nbsp;<em>реальной работе бизнеса</em></h1>
+        <p class="blog-hub__lead" data-reveal>Разбираем знакомые ситуации: заявки в&nbsp;чатах, оплаты в&nbsp;таблицах, непонятные статусы заказов и&nbsp;ручные отчёты. Показываем, как собрать это в&nbsp;понятную систему.</p>
+      </div>
+    </section>
+
+    <section class="blog-index" aria-label="Статьи">
+      <div class="blog-index__grid">
+        <a class="blog-feature blog-feature--construction" href="blog-crm-dlya-stroitelstva.html" data-reveal>
+          <div class="blog-feature__visual" aria-hidden="true">
+            <div class="mini-project">
+              <div class="mini-project__top"><span>объект · квартира 78</span><i>в работе</i></div>
+              <div class="mini-project__line"><b style="--progress:68%"></b></div>
+              <div class="mini-project__stats"><span><small>этап</small>Чистовая отделка</span><span><small>следующий платёж</small>18 августа</span></div>
+            </div>
+          </div>
+          <div class="blog-feature__body">
+            <div class="blog-feature__meta"><span>строительство</span><time datetime="2026-08-08">8 августа 2026</time></div>
+            <h2>CRM для строительной компании: этапы ремонта, документы и&nbsp;оплаты в&nbsp;личном кабинете</h2>
+            <p>Как перестать собирать состояние объекта по&nbsp;звонкам и&nbsp;показать клиенту весь процесс в&nbsp;одном месте.</p>
+            <span class="blog-feature__read">9 минут чтения <i>↗</i></span>
+          </div>
+        </a>
+
+        <a class="blog-feature blog-feature--tutor" href="blog-crm-dlya-repetitora.html" data-reveal>
+          <div class="blog-feature__visual" aria-hidden="true">
+            <div class="mini-student">
+              <div class="mini-student__avatar">АК</div>
+              <div><strong>Анна К.</strong><small>математика · 9 класс</small></div>
+              <span>6 из 8</span>
+            </div>
+            <div class="mini-week"><i>пн</i><i class="is-active">вт</i><i>ср</i><i class="is-active">чт</i><i>пт</i></div>
+          </div>
+          <div class="blog-feature__body">
+            <div class="blog-feature__meta"><span>частная практика</span><time datetime="2026-08-08">8 августа 2026</time></div>
+            <h2>CRM вместо Excel для репетитора: ученики, расписание, абонементы и&nbsp;оплаты</h2>
+            <p>Что автоматизировать перед учебным сезоном, чтобы меньше времени уходило на&nbsp;переносы, напоминания и&nbsp;подсчёты.</p>
+            <span class="blog-feature__read">8 минут чтения <i>↗</i></span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section class="blog-hub__cta">
+      <p>Узнали в&nbsp;статьях свою ситуацию?</p>
+      <h2>Покажем, какую часть процесса стоит привести в&nbsp;порядок первой.</h2>
+      <a href="contact.html" class="btn btn--primary btn--xl" data-magnetic><span>Получить разбор</span></a>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="foot__inner">
+      <div class="foot__brand"><div><img class="foot__wordmark" src="assets/mentori-technologies-wordmark-transparent.png" alt="MENTORI TECHNOLOGIES" width="1120" height="500" loading="lazy" /><div class="foot__tag">системы и&nbsp;автоматизация для&nbsp;бизнеса</div></div></div>
+      <div class="foot__cols">
+        <div><div class="foot__h">Контакт</div><a href="mailto:mentraos@mail.ru">mentraos@mail.ru</a><a href="tel:+79114378585">+7 911 437-85-85</a><a href="https://t.me/Mento_ri">@Mento_ri</a></div>
+        <div><div class="foot__h">Разделы</div><a href="services.html">Что делаем</a><a href="about.html">О нас</a><a href="blog.html">Блог</a><a href="contact.html">Контакты</a></div>
+        <div><div class="foot__h">Юридическое</div><a href="privacy.html">Политика конфиденциальности</a><a href="offer.html">Договор оферты</a></div>
+      </div>
+    </div>
+    <div class="foot__bottom"><span>© MENTORI TECHNOLOGIES, 2026</span><span>работаем по&nbsp;всей России и&nbsp;СНГ</span></div>
+  </footer>
+
+  <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="main.js?v=38" defer></script>
+</body>
+</html>

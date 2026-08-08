@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="color-scheme" content="dark light" />
+  <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#fafaf7" media="(prefers-color-scheme: light)" />
+  <title>CRM для репетитора: ученики, расписание, оплаты и абонементы</title>
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('mentra-theme');
+        var sys = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', saved || sys);
+      } catch (e) { document.documentElement.setAttribute('data-theme', 'dark'); }
+    })();
+  </script>
+  <meta name="description" content="Как CRM помогает репетитору вести учеников, расписание, оплаты, абонементы, пропуски и напоминания без хаоса в Excel и чатах." />
+  <meta name="keywords" content="CRM для репетитора, учет учеников репетитора, расписание занятий, учет оплат учеников, CRM вместо Excel, программа для репетитора, личный кабинет ученика" />
+  <meta name="author" content="MENTORI TECHNOLOGIES" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <link rel="canonical" href="https://mentorios.tech/blog-crm-dlya-repetitora.html" />
+  <link rel="alternate" hreflang="ru" href="https://mentorios.tech/blog-crm-dlya-repetitora.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="ru_RU" />
+  <meta property="og:site_name" content="MENTORI TECHNOLOGIES" />
+  <meta property="og:title" content="CRM для репетитора: ученики, расписание, оплаты и абонементы" />
+  <meta property="og:description" content="Как уйти от Excel и чатов к понятному учёту учеников, уроков, абонементов и оплат." />
+  <meta property="og:url" content="https://mentorios.tech/blog-crm-dlya-repetitora.html" />
+  <meta property="og:image" content="https://mentorios.tech/assets/social-preview.png" />
+  <meta property="article:published_time" content="2026-08-08" />
+  <meta property="article:author" content="MENTORI TECHNOLOGIES" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="CRM для репетитора" />
+  <meta name="twitter:description" content="Ученики, расписание, оплаты и абонементы без хаоса в Excel." />
+  <meta name="twitter:image" content="https://mentorios.tech/assets/social-preview.png" />
+  <link rel="icon" href="/favicon.ico" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/assets/favicon-48.png" sizes="48x48" />
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" sizes="180x180" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "@id": "https://mentorios.tech/blog-crm-dlya-repetitora.html#article",
+        "headline": "CRM для репетитора: как вести учеников, расписание, оплаты и абонементы без Excel",
+        "description": "Как CRM помогает репетитору вести учеников, расписание, оплаты, абонементы, пропуски и напоминания.",
+        "datePublished": "2026-08-08",
+        "dateModified": "2026-08-08",
+        "author": { "@id": "https://mentorios.tech/#organization" },
+        "publisher": { "@id": "https://mentorios.tech/#organization" },
+        "mainEntityOfPage": "https://mentorios.tech/blog-crm-dlya-repetitora.html",
+        "image": "https://mentorios.tech/assets/social-preview.png",
+        "inLanguage": "ru-RU",
+        "keywords": "CRM для репетитора, учет учеников, расписание занятий, учет оплат, CRM вместо Excel"
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Когда репетитору нужна CRM?", "acceptedAnswer": { "@type": "Answer", "text": "Когда расписание, оплаты, переносы и остатки занятий уже приходится сверять между таблицей, календарем и переписками, CRM помогает собрать учет в одном месте." } },
+          { "@type": "Question", "name": "Можно ли учитывать абонементы и пропуски?", "acceptedAnswer": { "@type": "Answer", "text": "Да. Система может автоматически списывать проведенные занятия, сохранять причины переносов и показывать остаток по каждому абонементу." } },
+          { "@type": "Question", "name": "Подойдет ли система небольшой студии?", "acceptedAnswer": { "@type": "Answer", "text": "Да. В одной системе можно вести учеников, группы, преподавателей, кабинеты, расписание, оплаты и уведомления." } }
+        ]
+      }
+    ]
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=54" />
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,"script","https://mc.yandex.ru/metrika/tag.js?id=111247225","ym");
+    ym(111247225,"init",{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",referrer:document.referrer,url:location.href,accurateTrackBounce:true,trackLinks:true});
+  </script>
+</head>
+<body>
+  <noscript><div><img src="https://mc.yandex.ru/watch/111247225" style="position:absolute;left:-9999px" alt="" /></div></noscript>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor-glow" aria-hidden="true"></div>
+
+  <header class="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__brand" aria-label="MENTORI TECHNOLOGIES"><img class="nav__wordmark" src="assets/mentori-technologies-wordmark-transparent.png" alt="" width="1120" height="500" /></a>
+      <nav class="nav__links" aria-label="Главная навигация"><a href="services.html">Что делаем</a><a href="about.html">О нас</a><a href="blog.html" class="is-active">Блог</a><a href="contact.html">Контакты</a></nav>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Переключить тему" title="Светлая / тёмная тема"><svg class="theme-toggle__sun" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.7"/><path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M5 5l1.7 1.7M17.3 17.3 19 19M19 5l-1.7 1.7M6.7 17.3 5 19" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><svg class="theme-toggle__moon" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.3 6.3 0 0 0 10.5 10.5z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></button>
+      <a href="contact.html" class="nav__cta" data-magnetic><span>Получить разбор</span><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <button class="nav__burger" id="navBurger" aria-label="Меню" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true"><nav class="mobile-menu__nav"><a href="services.html">Что делаем</a><a href="about.html">О нас</a><a href="blog.html" class="is-active">Блог</a><a href="contact.html">Контакты</a></nav><div class="mobile-menu__cta"><a href="contact.html" class="btn btn--primary btn--block"><span>Получить разбор</span></a><div class="mobile-menu__contact"><a href="https://t.me/Mento_ri">@Mento_ri</a><a href="mailto:mentraos@mail.ru">mentraos@mail.ru</a></div></div></div>
+
+  <main>
+    <article>
+      <header class="article-hero article-hero--tutor">
+        <div class="article-hero__inner">
+          <div class="article-breadcrumb"><a href="blog.html">Блог</a><span>/</span><span>Частная практика</span></div>
+          <div class="article-hero__layout">
+            <div class="article-hero__copy">
+              <div class="article-meta"><span>репетиторы</span><time datetime="2026-08-08">8 августа 2026</time><span>8 минут</span></div>
+              <h1>CRM для репетитора: как вести учеников, расписание и&nbsp;оплаты без хаоса в&nbsp;Excel</h1>
+              <p>Ученики, переносы, абонементы и&nbsp;платежи в&nbsp;одном рабочем пространстве, чтобы меньше времени уходило на&nbsp;ручное администрирование.</p>
+            </div>
+
+            <div class="product-preview product-preview--tutor" aria-label="Пример кабинета репетитора">
+              <div class="product-preview__bar"><span><i></i><i></i><i></i></span><b>кабинет преподавателя · август</b><em>online</em></div>
+              <div class="tutor-ui">
+                <div class="tutor-ui__top"><div class="tutor-ui__avatar">АК</div><div><small>Ученик</small><strong>Алина Котова</strong><span>Английский · B1</span></div><b>6 / 8</b></div>
+                <div class="tutor-ui__progress"><i></i></div>
+                <div class="tutor-ui__week">
+                  <div><span>пн</span><b>10</b></div><div><span>вт</span><b>11</b></div><div class="is-active"><span>ср</span><b>12</b></div><div><span>чт</span><b>13</b></div><div><span>пт</span><b>14</b></div>
+                </div>
+                <div class="tutor-ui__bottom"><div><small>Следующий урок</small><b>Сегодня, 18:30</b></div><div><small>Абонемент</small><b>2 занятия</b></div><div><small>Оплата</small><b class="is-ok">получена</b></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class="article-layout">
+        <aside class="article-toc" aria-label="Содержание статьи">
+          <span>Содержание</span>
+          <a href="#season">Почему сезон создаёт хаос</a>
+          <a href="#excel">Где мешает Excel</a>
+          <a href="#student">Карточка ученика</a>
+          <a href="#payments">Абонементы и оплаты</a>
+          <a href="#requests">Новые заявки</a>
+          <a href="#portal">Кабинет ученика</a>
+          <a href="#fit">Кому подходит</a>
+          <a href="#faq">Частые вопросы</a>
+        </aside>
+
+        <div class="article-prose">
+          <p class="article-lede">Перед учебным сезоном у репетитора резко растёт нагрузка: новые ученики пишут в разных мессенджерах, родители уточняют расписание, кто-то переносит урок, а кому-то пора напомнить об оплате. Когда информация разбросана, преподаватель начинает тратить вечер не на подготовку к занятиям, а на сверку чатов и таблиц.</p>
+
+          <section id="season">
+            <h2>Почему перед сезоном ручной учёт начинает мешать</h2>
+            <p>При небольшом количестве учеников расписание можно помнить, а оплаты отмечать в заметках. Но учебный процесс постоянно меняется: появляются переносы, пропуски, пробные занятия, новые абонементы и разные условия оплаты.</p>
+            <p>В этот момент возникают типовые проблемы:</p>
+            <ul class="article-list">
+              <li>новая заявка осталась в переписке без ответа;</li>
+              <li>два ученика случайно записаны на одно время;</li>
+              <li>занятие провели, но не списали из абонемента;</li>
+              <li>родителю поздно напомнили об оплате;</li>
+              <li>доход за месяц приходится считать вручную.</li>
+            </ul>
+            <div class="article-callout"><span>Суть проблемы</span><p>Каждая запись по отдельности кажется мелочью. Но вместе они забирают часы работы и делают доход менее предсказуемым.</p></div>
+          </section>
+
+          <section id="excel">
+            <h2>Почему Excel и чаты не дают полной картины</h2>
+            <p>Excel умеет хранить список учеников и суммы. Он не связывает автоматически урок, остаток абонемента, перенос, оплату и напоминание. Поэтому актуальное состояние ученика всё равно приходится восстанавливать по нескольким источникам.</p>
+            <div class="article-compare">
+              <div><span>Ручной учёт</span><b>Чаты + календарь + Excel</b><p>Расписание, договорённости и деньги живут отдельно.</p></div>
+              <i>→</i>
+              <div class="is-accent"><span>Рабочая система</span><b>Один ученик · одна история</b><p>Уроки, переносы, остаток и оплаты связаны между собой.</p></div>
+            </div>
+            <p>CRM в таком решении нужна не ради сложного отдела продаж. Это один из инструментов учёта: она помогает сохранить путь от первой заявки до регулярных занятий и понятной оплаты.</p>
+          </section>
+
+          <section id="student">
+            <h2>Карточка ученика и расписание без ручной сверки</h2>
+            <p>В карточке ученика можно хранить контакты, предмет, цель обучения, текущий уровень, заметки по прогрессу, историю занятий, договорённости с родителем и финансовую информацию.</p>
+            <div class="article-feature-grid">
+              <div><span>01</span><b>Расписание</b><p>Все индивидуальные и групповые уроки в одном календаре.</p></div>
+              <div><span>02</span><b>История</b><p>Проведённые, отменённые и перенесённые занятия.</p></div>
+              <div><span>03</span><b>Прогресс</b><p>Цели, заметки преподавателя и материалы к урокам.</p></div>
+              <div><span>04</span><b>Связь</b><p>Контакты ученика или родителя и история договорённостей.</p></div>
+            </div>
+            <p>После проведения урока система может отметить занятие, списать его из абонемента и обновить остаток. Преподавателю не нужно дублировать одно действие в нескольких таблицах.</p>
+          </section>
+
+          <section id="payments">
+            <h2>Абонементы, пропуски и оплаты</h2>
+            <p>Условия у учеников могут различаться: разовая оплата, пакет из восьми занятий, месячный абонемент или обучение в группе. Система учитывает эти правила отдельно и показывает, что происходит по каждому ученику.</p>
+            <ul class="article-checks">
+              <li><b>Остаток занятий.</b> Видно, сколько уроков уже проведено и сколько осталось.</li>
+              <li><b>Переносы и отмены.</b> Причина и результат сохраняются в истории.</li>
+              <li><b>Срок оплаты.</b> Напоминание появляется до того, как абонемент закончится.</li>
+              <li><b>Финансовая сводка.</b> Поступления, задолженность и план на месяц считаются из фактических занятий.</li>
+            </ul>
+            <p>Автоматическое напоминание не заменяет личное общение. Оно помогает преподавателю не держать все даты в голове и не замечать долг только спустя несколько недель.</p>
+          </section>
+
+          <section id="requests">
+            <h2>Новые заявки не теряются в сезон</h2>
+            <p>В августе и сентябре обращения часто приходят одновременно из сайта, Telegram, рекомендаций и площадок. Если отвечать по мере свободного времени, часть людей успеет договориться с другим преподавателем.</p>
+            <ol class="article-route">
+              <li><span>01</span><div><b>Новое обращение</b><p>Контакт автоматически попадает в общий список с источником и временем заявки.</p></div></li>
+              <li><span>02</span><div><b>Уточнение задачи</b><p>Предмет, уровень, цель, удобное время и формат сохраняются в карточке.</p></div></li>
+              <li><span>03</span><div><b>Пробное занятие</b><p>Система ставит урок в расписание и напоминает обеим сторонам.</p></div></li>
+              <li><span>04</span><div><b>Регулярное обучение</b><p>После решения ученику назначаются график, условия оплаты и абонемент.</p></div></li>
+            </ol>
+          </section>
+
+          <section id="portal">
+            <h2>Личный кабинет ученика или родителя</h2>
+            <p>Отдельный кабинет полезен, когда нужно дать второй стороне прозрачный доступ без внутренних заметок преподавателя. В нём можно показывать ближайшие уроки, остаток занятий, материалы, домашние задания, оплаты и уведомления.</p>
+            <p>Родителю не нужно каждый раз спрашивать, сколько занятий осталось. Ученик быстро находит материалы. Преподаватель реже отвечает на одинаковые организационные вопросы.</p>
+          </section>
+
+          <section id="fit">
+            <h2>Кому подходит такой подход</h2>
+            <p>Система нужна не каждому начинающему преподавателю. Она становится полезной, когда ручное администрирование уже отнимает заметное время или в работе участвуют несколько преподавателей.</p>
+            <div class="article-tags"><span>частные репетиторы</span><span>языковые преподаватели</span><span>онлайн-школы</span><span>школы танцев</span><span>тренеры</span><span>небольшие студии</span><span>коучи и консультанты</span></div>
+            <h2>Как работает MENTORI TECHNOLOGIES</h2>
+            <p>Сначала мы разбираем текущую работу: откуда приходят ученики, как устроено расписание, какие есть правила переносов и оплат, кому нужны уведомления и какие цифры важно видеть владельцу.</p>
+            <p>После этого проектируем только необходимые разделы и автоматизацию. Одному преподавателю достаточно учеников, календаря и оплат. Студии могут потребоваться группы, преподаватели, кабинеты, зарплаты и отчёты. Система подстраивается под реальный процесс, а не наоборот.</p>
+          </section>
+
+          <section id="faq" class="article-faq">
+            <h2>Частые вопросы</h2>
+            <details><summary>Когда репетитору стоит уйти из Excel?</summary><p>Когда расписание, оплаты, переносы и остатки занятий уже приходится сверять между таблицей, календарём и переписками. Важно не число учеников само по себе, а время, которое забирает ручной контроль.</p></details>
+            <details><summary>Можно ли учитывать абонементы и пропуски?</summary><p>Да. Система может автоматически списывать проведённые занятия, сохранять причины переносов и показывать остаток по каждому абонементу.</p></details>
+            <details><summary>Можно ли отправлять напоминания ученикам?</summary><p>Да. Уведомления о занятии или оплате можно отправлять через Telegram, электронную почту или другой согласованный канал.</p></details>
+            <details><summary>Подойдёт ли система небольшой студии?</summary><p>Да. В одной системе можно вести учеников, группы, преподавателей, кабинеты, расписание, оплаты и финансовые отчёты.</p></details>
+          </section>
+
+          <section class="article-cta">
+            <span>первичная диагностика</span>
+            <h2>Покажем, что уже можно перестать вести вручную</h2>
+            <p>Разберём путь ученика, расписание и оплаты, а затем определим, какие инструменты действительно нужны.</p>
+            <a href="contact.html" class="btn btn--primary btn--xl" data-magnetic><span>Получить разбор</span></a>
+          </section>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer class="foot">
+    <div class="foot__inner"><div class="foot__brand"><div><img class="foot__wordmark" src="assets/mentori-technologies-wordmark-transparent.png" alt="MENTORI TECHNOLOGIES" width="1120" height="500" loading="lazy" /><div class="foot__tag">системы и&nbsp;автоматизация для&nbsp;бизнеса</div></div></div><div class="foot__cols"><div><div class="foot__h">Контакт</div><a href="mailto:mentraos@mail.ru">mentraos@mail.ru</a><a href="tel:+79114378585">+7 911 437-85-85</a><a href="https://t.me/Mento_ri">@Mento_ri</a></div><div><div class="foot__h">Разделы</div><a href="services.html">Что делаем</a><a href="about.html">О нас</a><a href="blog.html">Блог</a><a href="contact.html">Контакты</a></div><div><div class="foot__h">Юридическое</div><a href="privacy.html">Политика конфиденциальности</a><a href="offer.html">Договор оферты</a></div></div></div>
+    <div class="foot__bottom"><span>© MENTORI TECHNOLOGIES, 2026</span><span>работаем по&nbsp;всей России и&nbsp;СНГ</span></div>
+  </footer>
+  <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="main.js?v=38" defer></script>
+</body>
+</html>
