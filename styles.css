@@ -8976,8 +8976,142 @@ body.menu-open { overflow: hidden; }
   .direct-ui__sources { grid-template-columns: 1fr; }
 }
 
+/* Cookie consent and form consent */
+.cookie-banner {
+  position: fixed;
+  right: max(18px, env(safe-area-inset-right));
+  bottom: max(18px, env(safe-area-inset-bottom));
+  z-index: 10000;
+  display: grid;
+  width: min(420px, calc(100vw - 36px));
+  gap: 20px;
+  padding: 22px;
+  border: 1px solid rgba(255, 255, 255, .13);
+  border-radius: 8px;
+  background: rgba(17, 17, 16, .94);
+  box-shadow: 0 28px 80px rgba(0, 0, 0, .42), inset 0 1px 0 rgba(255, 255, 255, .07);
+  opacity: 0;
+  transform: translateY(18px);
+  backdrop-filter: blur(22px) saturate(130%);
+  -webkit-backdrop-filter: blur(22px) saturate(130%);
+  transition: opacity .4s var(--ease-expo), transform .4s var(--ease-expo);
+}
+.cookie-banner.is-visible { opacity: 1; transform: translateY(0); }
+.cookie-banner__body { display: grid; gap: 8px; }
+.cookie-banner__body strong {
+  color: var(--text-primary);
+  font-size: 15px;
+  font-weight: 500;
+}
+.cookie-banner__body p {
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.55;
+}
+.cookie-banner__actions { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+.cookie-banner__actions a {
+  color: var(--text-tertiary);
+  font-size: 12px;
+  text-decoration: underline;
+  text-decoration-color: var(--border-bright);
+  text-underline-offset: 4px;
+}
+.cookie-banner__actions a:hover { color: var(--text-primary); }
+.cookie-banner__actions button {
+  min-width: 126px;
+  min-height: 46px;
+  padding: 0 24px;
+  border: 0;
+  border-radius: 6px;
+  background: var(--accent);
+  color: #fff;
+  font: 600 13px/1 var(--font-sans);
+  cursor: pointer;
+  box-shadow: 0 12px 28px rgba(255, 94, 26, .24);
+  transition: background .25s var(--ease-expo), transform .25s var(--ease-expo);
+}
+.cookie-banner__actions button:hover { background: var(--accent-bright); transform: translateY(-1px); }
+
+.contact-form__consent {
+  position: relative;
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr);
+  align-items: start;
+  gap: 12px;
+  cursor: pointer;
+}
+.contact-form__consent input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+.contact-form__consent > span {
+  position: relative;
+  width: 22px;
+  height: 22px;
+  border: 1px solid var(--border-bright);
+  border-radius: 5px;
+  background: var(--bg-glass);
+  transition: border-color .25s var(--ease-expo), background .25s var(--ease-expo), box-shadow .25s var(--ease-expo);
+}
+.contact-form__consent > span::after {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: 3px;
+  width: 6px;
+  height: 11px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  opacity: 0;
+  transform: rotate(45deg) scale(.6);
+  transition: opacity .2s var(--ease-expo), transform .2s var(--ease-expo);
+}
+.contact-form__consent input:checked + span {
+  border-color: var(--accent);
+  background: var(--accent);
+  box-shadow: 0 0 20px rgba(255, 94, 26, .2);
+}
+.contact-form__consent input:checked + span::after { opacity: 1; transform: rotate(45deg) scale(1); }
+.contact-form__consent input:focus-visible + span { outline: 2px solid var(--accent-bright); outline-offset: 3px; }
+.contact-form__consent small {
+  color: var(--text-tertiary);
+  font-size: 11px;
+  line-height: 1.55;
+}
+.contact-form__consent a {
+  color: var(--text-secondary);
+  text-decoration: underline;
+  text-decoration-color: var(--border-bright);
+  text-underline-offset: 3px;
+}
+.contact-form__consent a:hover { color: var(--accent-bright); }
+
+[data-theme="light"] .cookie-banner {
+  border-color: rgba(20, 18, 14, .12);
+  background: rgba(255, 255, 252, .95);
+  box-shadow: 0 28px 70px rgba(32, 26, 20, .17), inset 0 1px 0 rgba(255, 255, 255, .9);
+}
+
+@media (max-width: 600px) {
+  .cookie-banner {
+    right: max(12px, env(safe-area-inset-right));
+    bottom: max(12px, env(safe-area-inset-bottom));
+    width: calc(100vw - 24px);
+    gap: 16px;
+    padding: 18px;
+  }
+  .cookie-banner__actions button { min-width: 118px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .blog-feature,
   .blog-feature__read i,
-  .article-faq summary::after { transition: none; }
+  .article-faq summary::after,
+  .cookie-banner,
+  .cookie-banner__actions button,
+  .contact-form__consent > span,
+  .contact-form__consent > span::after { transition: none; }
 }

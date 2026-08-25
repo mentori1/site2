@@ -11,6 +11,228 @@
   // Это гарантирует, что текст ВИДЕН даже если что-то упадёт в скриптах.
   document.body.classList.add("js-ready");
 
+  /* ─── 0. COOKIE CONSENT + VISIT ATTRIBUTION ───────────── */
+  const METRIKA_COUNTER_ID = 111247225;
+  const COOKIE_CONSENT_KEY = "mentori_cookie_consent_v1";
+  const VISIT_ATTRIBUTION_KEY = "mentori_visit_attribution_v1";
+  const ATTRIBUTION_KEYS = [
+    "utm_source",
+    "utm_medium",
+    "utm_campaign",
+    "utm_term",
+    "utm_content",
+    "yclid",
+  ];
+
+  const createConsentId = () => {
+    if (window.crypto?.randomUUID) return window.crypto.randomUUID();
+    return `consent-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+  };
+
+  const readStorageJson = (storage, key) => {
+    try {
+      const value = storage.getItem(key);
+      return value ? JSON.parse(value) : null;
+    } catch (error) {
+      return null;
+    }
+  };
+
+  const captureVisitAttribution = () => {
+    const stored = readStorageJson(window.sessionStorage, VISIT_ATTRIBUTION_KEY) || {};
+    const params = new URLSearchParams(window.location.search);
+
+    ATTRIBUTION_KEYS.forEach((key) => {
+      const value = params.get(key);
+      if (value) stored[key] = value.slice(0, 500);
+    });
+
+    if (!stored.landing_page) stored.landing_page = window.location.href.slice(0, 1000);
+    if (!stored.referrer && document.referrer) stored.referrer = document.referrer.slice(0, 1000);
+
+    try {
+      window.sessionStorage.setItem(VISIT_ATTRIBUTION_KEY, JSON.stringify(stored));
+    } catch (error) {}
+
+    window.__mentoriVisitAttribution = stored;
+  };
+
+  const loadMetrika = () => {
+    if (window.__mentoriMetrikaLoaded) return;
+    window.__mentoriMetrikaLoaded = true;
+    window.ym = window.ym || function () {
+      (window.ym.a = window.ym.a || []).push(arguments);
+    };
+    window.ym.l = Date.now();
+
+    const script = document.createElement("script");
+    script.async = true;
+    script.src = `https://mc.yandex.ru/metrika/tag.js?id=${METRIKA_COUNTER_ID}`;
+    document.head.appendChild(script);
+
+    window.ym(METRIKA_COUNTER_ID, "init", {
+      ssr: true,
+      webvisor: true,
+      clickmap: true,
+      ecommerce: "dataLayer",
+      referrer: document.referrer,
+      url: window.location.href,
+      accurateTrackBounce: true,
+      trackLinks: true,
+    });
+  };
+
+  const setupCookieConsent = () => {
+    const stored = readStorageJson(window.localStorage, COOKIE_CONSENT_KEY);
+    if (stored?.accepted && stored.id && stored.acceptedAt) {
+      window.__mentoriCookieConsent = stored;
+      loadMetrika();
+      return;
+    }
+
+    const banner = document.createElement("aside");
+    banner.className = "cookie-banner";
+    banner.setAttribute("role", "dialog");
+    banner.setAttribute("aria-label", "Использование cookie");
+    banner.innerHTML = `
+      <div class="cookie-banner__body">
+        <strong>Cookie и аналитика</strong>
+        <p>Мы используем cookie и Яндекс.Метрику, чтобы понимать, как работает сайт, и улучшать его.</p>
+      </div>
+      <div class="cookie-banner__actions">
+        <a href="privacy.html" data-cookie-policy-link>Политика</a>
+        <button type="button" data-cookie-accept>Хорошо</button>
+      </div>
+    `;
+    document.body.appendChild(banner);
+
+    requestAnimationFrame(() => banner.classList.add("is-visible"));
+    const shownAt = Date.now();
+    let accepted = false;
+
+    const cleanup = () => {
+      document.removeEventListener("pointerdown", onInteraction, true);
+      document.removeEventListener("keydown", onKeyInteraction, true);
+      window.removeEventListener("scroll", onScroll);
+    };
+
+    const accept = (method) => {
+      if (accepted) return;
+      accepted = true;
+      const consent = {
+        accepted: true,
+        id: createConsentId(),
+        acceptedAt: new Date().toISOString(),
+        method,
+      };
+
+      try {
+        window.localStorage.setItem(COOKIE_CONSENT_KEY, JSON.stringify(consent));
+      } catch (error) {}
+
+      window.__mentoriCookieConsent = consent;
+      cleanup();
+      loadMetrika();
+      banner.classList.remove("is-visible");
+      window.setTimeout(() => banner.remove(), 420);
+    };
+
+    const isPolicyLink = (target) => target.closest?.("[data-cookie-policy-link]");
+    function onInteraction(event) {
+      if (isPolicyLink(event.target)) return;
+      accept(event.target.closest?.("[data-cookie-accept]") ? "button" : "interaction");
+    }
+    function onKeyInteraction(event) {
+      if (!['Enter', ' '].includes(event.key) || isPolicyLink(event.target)) return;
+      accept(event.target.closest?.("[data-cookie-accept]") ? "button" : "interaction");
+    }
+    function onScroll() {
+      if (Date.now() - shownAt >= 5000) accept("scroll_after_5s");
+    }
+
+    document.addEventListener("pointerdown", onInteraction, true);
+    document.addEventListener("keydown", onKeyInteraction, true);
+    window.addEventListener("scroll", onScroll, { passive: true });
+  };
+
+  captureVisitAttribution();
+  setupCookieConsent();
+
+  /* ─── 0.5. YANDEX METRIKA GOALS ───────────────────────── */
+  const articlePathPattern = /\/blog-[^/]+\.html$/;
+  const currentPath = window.location.pathname;
+  const cleanText = (value) => (value || "").replace(/\s+/g, " ").trim().slice(0, 120);
+  const reachGoal = (goal, params = {}) => {
+    if (typeof window.ym !== "function") return;
+    window.ym(METRIKA_COUNTER_ID, "reachGoal", goal, {
+      page: currentPath || "/",
+      ...params,
+    });
+  };
+
+  document.addEventListener("click", (event) => {
+    const link = event.target.closest("a[href]");
+    if (!link) return;
+
+    const href = link.getAttribute("href") || "";
+    const linkText = cleanText(link.textContent || link.getAttribute("aria-label"));
+    const commonParams = { link_text: linkText, target: href.slice(0, 240) };
+
+    if (/^https?:\/\/t\.me\//i.test(href)) {
+      reachGoal("click_telegram", commonParams);
+    } else if (/^tel:/i.test(href)) {
+      reachGoal("click_phone", commonParams);
+    } else if (/^mailto:/i.test(href)) {
+      reachGoal("click_email", commonParams);
+    }
+
+    if (/^blog-[^?#]+\.html(?:[?#].*)?$/i.test(href)) {
+      reachGoal("blog_article_open", {
+        ...commonParams,
+        article: href.split(/[?#]/)[0],
+      });
+    }
+
+    if (link.matches(".connected-service")) {
+      reachGoal("service_click", {
+        ...commonParams,
+        service: cleanText(link.querySelector("h3, h2")?.textContent || linkText),
+      });
+    }
+
+    if (/^contact\.html(?:[?#].*)?$/i.test(href) && link.matches(".btn, .nav__cta, .connected-service")) {
+      reachGoal("cta_contact", commonParams);
+    }
+
+    if (articlePathPattern.test(currentPath) && link.closest(".article-cta")) {
+      reachGoal("article_cta", {
+        ...commonParams,
+        article: currentPath.split("/").pop() || currentPath,
+      });
+    }
+  });
+
+  if (articlePathPattern.test(currentPath)) {
+    const reachedDepth = new Set();
+    const trackArticleDepth = () => {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      if (scrollable <= 0) return;
+      const depth = Math.min(100, Math.round((window.scrollY / scrollable) * 100));
+
+      [50, 90].forEach((threshold) => {
+        if (depth < threshold || reachedDepth.has(threshold)) return;
+        reachedDepth.add(threshold);
+        reachGoal(`article_read_${threshold}`, {
+          article: currentPath.split("/").pop() || currentPath,
+          depth: threshold,
+        });
+      });
+    };
+
+    window.addEventListener("scroll", trackArticleDepth, { passive: true });
+    trackArticleDepth();
+  }
+
   /* ─── DESKTOP CRM BOOT INTRO ────────────────────────────── */
   const mobileBoot = document.getElementById("mobileBoot");
   if (mobileBoot && !prefersReducedMotion) {
@@ -851,7 +1073,29 @@
   if (form) {
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
+      const personalConsent = form.querySelector("#personalDataConsent");
+      if (!personalConsent?.checked) {
+        personalConsent?.reportValidity();
+        return;
+      }
+
       const formData = new FormData(form);
+      const cookieConsent = window.__mentoriCookieConsent || {};
+      const attribution = window.__mentoriVisitAttribution || {};
+      const personalConsentAt = new Date().toISOString();
+
+      formData.set("personal_data_consent", "yes");
+      formData.set("personal_data_consent_at", personalConsentAt);
+      formData.set("cookie_consent_id", cookieConsent.id || "not_recorded");
+      formData.set("cookie_consent_at", cookieConsent.acceptedAt || "not_recorded");
+      formData.set("cookie_consent_method", cookieConsent.method || "not_recorded");
+      formData.set("form_page", window.location.href);
+      ATTRIBUTION_KEYS.forEach((key) => {
+        if (attribution[key]) formData.set(key, attribution[key]);
+      });
+      if (attribution.landing_page) formData.set("landing_page", attribution.landing_page);
+      if (attribution.referrer) formData.set("referrer", attribution.referrer);
+
       const submitButton = form.querySelector('button[type="submit"]');
       if (submitButton) submitButton.disabled = true;
 
@@ -868,11 +1112,15 @@
         return;
       }
 
+      reachGoal("form_submit_success", {
+        form: form.id || "contactForm",
+      });
+
       form.style.transition = "opacity 0.5s var(--ease-expo)";
       form.style.opacity = "0";
       setTimeout(() => {
         const fields = form.querySelectorAll(
-          ".contact-form__head, .contact-form__field, .contact-form__row, .contact-form__note, button"
+          ".contact-form__head, .contact-form__field, .contact-form__row, .contact-form__note, .contact-form__consent, button"
         );
         fields.forEach((f) => (f.hidden = true));
         const success = document.getElementById("formSuccess");
