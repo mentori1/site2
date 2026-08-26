@@ -231,19 +231,45 @@
     trackArticleDepth();
   }
 
-  /* ─── DESKTOP CRM BOOT INTRO ────────────────────────────── */
-  const mobileBoot = document.getElementById("mobileBoot");
-  if (mobileBoot && !prefersReducedMotion) {
-    document.body.classList.add("mobile-booting");
-    setTimeout(() => {
-      mobileBoot.classList.add("is-done");
-    }, 1700);
-    setTimeout(() => {
-      document.body.classList.remove("mobile-booting");
-      mobileBoot.remove();
-    }, 2400);
-  } else if (mobileBoot) {
-    mobileBoot.remove();
+  /* ─── MENTORY LOGO REVEAL ───────────────────────────────── */
+  const brandIntro = document.getElementById("brandIntro");
+  const brandIntroVideo = document.getElementById("brandIntroVideo");
+  const brandIntroSkip = document.getElementById("brandIntroSkip");
+
+  if (brandIntro && brandIntroVideo && !prefersReducedMotion) {
+    document.body.classList.add("brand-intro-active");
+    let introFinished = false;
+    let introSafetyTimer;
+
+    const handleIntroKeydown = (event) => {
+      if (event.key === "Escape") finishBrandIntro();
+    };
+
+    const finishBrandIntro = () => {
+      if (introFinished) return;
+      introFinished = true;
+      clearTimeout(introSafetyTimer);
+      window.removeEventListener("keydown", handleIntroKeydown);
+      brandIntroVideo.pause();
+      brandIntro.classList.add("is-done");
+      document.body.classList.remove("brand-intro-active");
+      setTimeout(() => brandIntro.remove(), 720);
+    };
+
+    brandIntroVideo.addEventListener("ended", finishBrandIntro, { once: true });
+    brandIntroVideo.addEventListener("error", () => {
+      setTimeout(finishBrandIntro, 1400);
+    }, { once: true });
+    brandIntroSkip?.addEventListener("click", finishBrandIntro);
+    window.addEventListener("keydown", handleIntroKeydown);
+
+    const playback = brandIntroVideo.play();
+    if (playback?.catch) {
+      playback.catch(() => setTimeout(finishBrandIntro, 1400));
+    }
+    introSafetyTimer = setTimeout(finishBrandIntro, 12000);
+  } else if (brandIntro) {
+    brandIntro.remove();
   }
 
   /* ─── 1. LENIS SMOOTH SCROLL ─────────────────────────────── */
