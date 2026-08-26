@@ -96,11 +96,9 @@
     banner.setAttribute("aria-label", "Использование cookie");
     banner.innerHTML = `
       <div class="cookie-banner__body">
-        <strong>Cookie и аналитика</strong>
-        <p>Мы используем cookie и Яндекс.Метрику, чтобы понимать, как работает сайт, и улучшать его.</p>
+        <p>Используем cookie и Яндекс.Метрику, чтобы улучшать сайт. <a href="privacy.html" data-cookie-policy-link>Политика</a></p>
       </div>
       <div class="cookie-banner__actions">
-        <a href="privacy.html" data-cookie-policy-link>Политика</a>
         <button type="button" data-cookie-accept>Хорошо</button>
       </div>
     `;
@@ -258,16 +256,16 @@
       smoothTouch: false,
     });
 
-    const raf = (time) => {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    };
-    requestAnimationFrame(raf);
-
     if (window.gsap && window.ScrollTrigger) {
       lenis.on("scroll", ScrollTrigger.update);
       gsap.ticker.add((time) => lenis.raf(time * 1000));
       gsap.ticker.lagSmoothing(0);
+    } else {
+      const raf = (time) => {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      };
+      requestAnimationFrame(raf);
     }
 
     // anchor links
@@ -435,6 +433,8 @@
       tiltEls.forEach((el) => {
         const max = el.classList.contains("hero__dashboard") ? 6 : 5;
         const child = el.firstElementChild || el;
+        const baseX = Number.parseFloat(el.dataset.tiltBaseX || "0") || 0;
+        const baseY = Number.parseFloat(el.dataset.tiltBaseY || "0") || 0;
         let raf = null;
         const update = (e) => {
           const r = el.getBoundingClientRect();
@@ -442,12 +442,12 @@
           const y = (e.clientY - r.top) / r.height - 0.5;
           if (raf) cancelAnimationFrame(raf);
           raf = requestAnimationFrame(() => {
-            child.style.transform = `perspective(2400px) rotateX(${-y * max}deg) rotateY(${x * max}deg) translateZ(0)`;
+            child.style.transform = `perspective(2400px) rotateX(${baseX - y * max}deg) rotateY(${baseY + x * max}deg) translateZ(0)`;
           });
         };
         const reset = () => {
           if (raf) cancelAnimationFrame(raf);
-          child.style.transform = "perspective(2400px) rotateX(0) rotateY(0)";
+          child.style.transform = `perspective(2400px) rotateX(${baseX}deg) rotateY(${baseY}deg) translateZ(0)`;
         };
         el.addEventListener("mousemove", update);
         el.addEventListener("mouseleave", reset);
@@ -480,10 +480,12 @@
         floatTargets.forEach((el, i) => {
           if (!visibleSet.has(el)) return;
           const child = el.firstElementChild || el;
+          const baseX = Number.parseFloat(el.dataset.tiltBaseX || "0") || 0;
+          const baseY = Number.parseFloat(el.dataset.tiltBaseY || "0") || 0;
           const phase = ((elapsed + i * 600) % 7000) / 7000;
           const rx = Math.sin(phase * Math.PI * 2) * 1.4;
           const ry = Math.cos(phase * Math.PI * 2) * 1.8;
-          child.style.transform = `perspective(2400px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+          child.style.transform = `perspective(2400px) rotateX(${baseX + rx}deg) rotateY(${baseY + ry}deg)`;
         });
         requestAnimationFrame(tick);
       };
@@ -496,7 +498,9 @@
         const y = Math.max(-15, Math.min(15, e.beta - 45)) / 5;
         tiltEls.forEach((el) => {
           const child = el.firstElementChild || el;
-          child.style.transform = `perspective(2400px) rotateX(${-y}deg) rotateY(${x}deg)`;
+          const baseX = Number.parseFloat(el.dataset.tiltBaseX || "0") || 0;
+          const baseY = Number.parseFloat(el.dataset.tiltBaseY || "0") || 0;
+          child.style.transform = `perspective(2400px) rotateX(${baseX - y}deg) rotateY(${baseY + x}deg)`;
         });
       };
       if (window.DeviceOrientationEvent) {
