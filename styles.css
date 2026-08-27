@@ -6483,7 +6483,7 @@ body.menu-open { overflow: hidden; }
 .js-ready .brand-intro {
   position: fixed;
   inset: 0;
-  z-index: 9998;
+  z-index: 10020;
   display: grid;
   place-items: center;
   padding: 24px;
