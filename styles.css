@@ -168,9 +168,9 @@ body:hover .cursor-glow { opacity: 1; }
 .nav__brand {
   display: inline-flex;
   align-items: center;
+  gap: 8px;
   flex-shrink: 0;
   border-radius: 2px;
-  overflow: hidden;
 }
 .nav__logo {
   display: inline-flex;
@@ -185,18 +185,22 @@ body:hover .cursor-glow { opacity: 1; }
   height: auto;
 }
 .nav__wordmark {
-  width: 140px;
-  height: 56px;
+  width: 106px;
+  height: 36px;
   object-fit: contain;
   object-position: center;
-  filter: brightness(1.28) saturate(1.12);
+  filter: brightness(1.1) saturate(1.08);
 }
-.nav__brand-suffix {
+.nav__tech {
   font-family: var(--font-mono);
-  font-size: 12px;
-  color: var(--text-tertiary);
-  letter-spacing: 0;
-  font-weight: 400;
+  font-size: 9px;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.78);
+  letter-spacing: 0.16em;
+  font-weight: 500;
+}
+[data-theme="light"] .nav__tech {
+  color: rgba(20, 18, 14, 0.7);
 }
 .nav__links {
   display: flex;
@@ -6474,7 +6478,7 @@ body.menu-open { overflow: hidden; }
    MOBILE FIXES
    ═══════════════════════════════════════════════════════════════ */
 
-/* Полноэкранная заставка видна только при работающем JavaScript. */
+/* Компактная фирменная загрузка видна только при работающем JavaScript. */
 .brand-intro { display: none; }
 .js-ready .brand-intro {
   position: fixed;
@@ -6482,44 +6486,72 @@ body.menu-open { overflow: hidden; }
   z-index: 9998;
   display: grid;
   place-items: center;
-  overflow: hidden;
-  background: #050505;
+  padding: 24px;
+  background: var(--bg-base);
   opacity: 1;
   visibility: visible;
-  transition: opacity 680ms var(--ease-expo), visibility 680ms var(--ease-expo);
+  transition: opacity 620ms var(--ease-expo), visibility 620ms var(--ease-expo);
 }
-.brand-intro__video {
-  width: 100%;
-  height: clamp(300px, 52vh, 520px);
-  object-fit: cover;
-  object-position: center;
-  background: #050505;
-  border-top: 1px solid rgba(255, 94, 26, 0.12);
-  border-bottom: 1px solid rgba(255, 94, 26, 0.12);
-  box-shadow: 0 0 80px rgba(255, 94, 26, 0.08);
+.brand-intro__panel {
+  width: min(300px, 78vw);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: brandIntroEnter 520ms var(--ease-expo) both;
 }
-.brand-intro__skip {
-  position: absolute;
-  top: max(18px, env(safe-area-inset-top));
-  right: max(18px, env(safe-area-inset-right));
-  width: 42px;
-  height: 42px;
-  display: grid;
-  place-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+.brand-intro__wordmark {
+  display: block;
+  width: min(272px, 72vw);
+  height: auto;
+  clip-path: inset(0 100% 0 0);
+  filter: saturate(1.05) brightness(1.05);
+  animation: brandWordmarkReveal 680ms var(--ease-expo) 40ms forwards;
+}
+[data-theme="light"] .brand-intro__wordmark {
+  content: url("assets/mentori-technologies-wordmark-transparent-light.png");
+}
+.brand-intro__status {
+  margin-top: 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.48);
+  opacity: 0;
+  animation: brandStatusIn 300ms ease 320ms forwards;
+}
+[data-theme="light"] .brand-intro__status {
+  color: rgba(20, 18, 14, 0.46);
+}
+.brand-intro__status i {
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
-  color: rgba(255, 255, 255, 0.72);
-  background: rgba(8, 8, 8, 0.46);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  cursor: pointer;
-  transition: color 220ms ease, border-color 220ms ease, background 220ms ease;
+  background: var(--accent);
+  box-shadow: 0 0 12px var(--accent);
+  animation: pulse-soft 900ms ease-in-out infinite;
 }
-.brand-intro__skip:hover,
-.brand-intro__skip:focus-visible {
-  color: #fff;
-  border-color: rgba(255, 94, 26, 0.72);
-  background: rgba(255, 94, 26, 0.15);
+.brand-intro__bar {
+  width: min(188px, 54vw);
+  height: 2px;
+  margin-top: 14px;
+  overflow: hidden;
+  border-radius: 4px;
+  background: var(--border-base);
+  opacity: 0;
+  animation: brandStatusIn 220ms ease 380ms forwards;
+}
+.brand-intro__bar i {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-deep), var(--accent), var(--accent-amber));
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: brandBootLoad 1080ms var(--ease-expo) 390ms forwards;
 }
 .brand-intro.is-done {
   opacity: 0;
@@ -6528,13 +6560,24 @@ body.menu-open { overflow: hidden; }
 }
 body.brand-intro-active { overflow: hidden !important; }
 
+@keyframes brandIntroEnter {
+  from { opacity: 0; transform: translateY(8px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes brandWordmarkReveal {
+  to { clip-path: inset(0 0 0 0); }
+}
+@keyframes brandStatusIn {
+  to { opacity: 1; }
+}
+@keyframes brandBootLoad {
+  to { transform: scaleX(1); }
+}
+
 @media (max-width: 600px) {
   .hero__dashboard { display: none !important; }
-  .brand-intro__video {
-    height: clamp(180px, 56.25vw, 240px);
-    object-fit: contain;
-  }
-  .brand-intro__skip { width: 38px; height: 38px; }
+  .brand-intro__panel { width: min(248px, 72vw); }
+  .brand-intro__wordmark { width: min(226px, 66vw); }
 }
 
 /* ─── HERO mobile ─────────────────────────────────────── */
@@ -6606,8 +6649,9 @@ body.brand-intro-active { overflow: hidden !important; }
     padding: max(8px, env(safe-area-inset-top)) 16px 8px;
   }
   .nav__inner { gap: 10px; }
-  .nav__wordmark { width: 112px; height: 46px; }
-  .nav__brand-suffix { font-size: 11px; }
+  .nav__brand { gap: 6px; }
+  .nav__wordmark { width: 88px; height: 30px; }
+  .nav__tech { font-size: 7.5px; letter-spacing: 0.13em; }
   .nav__burger { width: 40px; height: 40px; }
   .mobile-menu { padding-top: calc(72px + env(safe-area-inset-top)); }
 }
@@ -7787,7 +7831,8 @@ body.brand-intro-active { overflow: hidden !important; }
 }
 
 @media (max-width: 380px) {
-  .nav__wordmark { width: 104px; height: 42px; }
+  .nav__wordmark { width: 82px; height: 28px; }
+  .nav__tech { font-size: 7px; }
 }
 
 /* ═══════════════════════════════════════════════════════════════

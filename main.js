@@ -231,15 +231,13 @@
     trackArticleDepth();
   }
 
-  /* ─── MENTORY LOGO REVEAL ───────────────────────────────── */
+  /* ─── COMPACT MENTORY BOOT INTRO ─────────────────────────── */
   const brandIntro = document.getElementById("brandIntro");
-  const brandIntroVideo = document.getElementById("brandIntroVideo");
-  const brandIntroSkip = document.getElementById("brandIntroSkip");
 
-  if (brandIntro && brandIntroVideo && !prefersReducedMotion) {
+  if (brandIntro && !prefersReducedMotion) {
     document.body.classList.add("brand-intro-active");
     let introFinished = false;
-    let introSafetyTimer;
+    let introTimer;
 
     const handleIntroKeydown = (event) => {
       if (event.key === "Escape") finishBrandIntro();
@@ -248,26 +246,15 @@
     const finishBrandIntro = () => {
       if (introFinished) return;
       introFinished = true;
-      clearTimeout(introSafetyTimer);
+      clearTimeout(introTimer);
       window.removeEventListener("keydown", handleIntroKeydown);
-      brandIntroVideo.pause();
       brandIntro.classList.add("is-done");
       document.body.classList.remove("brand-intro-active");
       setTimeout(() => brandIntro.remove(), 720);
     };
 
-    brandIntroVideo.addEventListener("ended", finishBrandIntro, { once: true });
-    brandIntroVideo.addEventListener("error", () => {
-      setTimeout(finishBrandIntro, 1400);
-    }, { once: true });
-    brandIntroSkip?.addEventListener("click", finishBrandIntro);
     window.addEventListener("keydown", handleIntroKeydown);
-
-    const playback = brandIntroVideo.play();
-    if (playback?.catch) {
-      playback.catch(() => setTimeout(finishBrandIntro, 1400));
-    }
-    introSafetyTimer = setTimeout(finishBrandIntro, 12000);
+    introTimer = setTimeout(finishBrandIntro, 1850);
   } else if (brandIntro) {
     brandIntro.remove();
   }
