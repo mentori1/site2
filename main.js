@@ -231,7 +231,7 @@
     trackArticleDepth();
   }
 
-  /* ─── COMPACT MENTORY BOOT INTRO ─────────────────────────── */
+  /* ─── COMPACT MENTORI BOOT INTRO ─────────────────────────── */
   const brandIntro = document.getElementById("brandIntro");
 
   if (brandIntro && !prefersReducedMotion) {

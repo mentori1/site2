@@ -179,27 +179,24 @@ body:hover .cursor-glow { opacity: 1; }
   border-radius: 2px;
   overflow: hidden;
 }
-.nav__wordmark,
-.foot__wordmark {
-  display: block;
-  height: auto;
-}
 .nav__wordmark {
-  width: 106px;
-  height: 36px;
-  object-fit: contain;
-  object-position: center;
-  filter: brightness(1.1) saturate(1.08);
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 21px;
+  line-height: 0.86;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 0.02em;
 }
 .nav__tech {
   font-family: var(--font-mono);
-  margin-left: -5px;
-  font-size: 8px;
+  margin-left: 2px;
+  font-size: 7.5px;
   line-height: 1;
   color: rgba(255, 255, 255, 0.78);
   letter-spacing: 0.12em;
   font-weight: 500;
-  transform: translateY(4px);
+  transform: translateY(3px);
 }
 [data-theme="light"] .nav__tech {
   color: rgba(20, 18, 14, 0.7);
@@ -4627,7 +4624,27 @@ body.menu-open { overflow: hidden; }
   align-items: flex-start;
 }
 .foot__wordmark {
-  width: min(196px, 58vw);
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: auto;
+  color: var(--accent);
+}
+.foot__wordmark span {
+  font-family: var(--font-display);
+  font-size: 38px;
+  line-height: 0.9;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+.foot__wordmark small {
+  margin-top: 7px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  line-height: 1;
+  font-weight: 500;
+  color: var(--text-secondary);
+  letter-spacing: 0.17em;
 }
 .foot__tag {
   margin-top: 10px;
@@ -6651,8 +6668,8 @@ body.brand-intro-active { overflow: hidden !important; }
     padding: max(8px, env(safe-area-inset-top)) 16px 8px;
   }
   .nav__inner { gap: 10px; }
-  .nav__wordmark { width: 88px; height: 30px; }
-  .nav__tech { margin-left: -4px; font-size: 7px; letter-spacing: 0.1em; transform: translateY(3px); }
+  .nav__wordmark { font-size: 19px; }
+  .nav__tech { margin-left: 2px; font-size: 6.5px; letter-spacing: 0.1em; transform: translateY(2.5px); }
   .nav__burger { width: 40px; height: 40px; }
   .mobile-menu { padding-top: calc(72px + env(safe-area-inset-top)); }
 }
@@ -7832,8 +7849,8 @@ body.brand-intro-active { overflow: hidden !important; }
 }
 
 @media (max-width: 380px) {
-  .nav__wordmark { width: 82px; height: 28px; }
-  .nav__tech { font-size: 6.5px; }
+  .nav__wordmark { font-size: 18px; }
+  .nav__tech { font-size: 6px; }
 }
 
 /* ═══════════════════════════════════════════════════════════════
