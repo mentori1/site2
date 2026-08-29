@@ -380,6 +380,38 @@
     revealEls.forEach((el) => el.classList.add("is-in"));
   }, 2000);
 
+  /* ─── 4. ABOUT HISTORY · SCROLL PROGRESS ─────────────── */
+  const historyTimeline = document.querySelector("[data-history-timeline]");
+  if (historyTimeline) {
+    const historyDots = Array.from(historyTimeline.querySelectorAll(".timeline__dot"));
+    let historyFrame = 0;
+
+    const updateHistoryProgress = () => {
+      historyFrame = 0;
+      const rect = historyTimeline.getBoundingClientRect();
+      const lineTop = rect.top + 12;
+      const lineBottom = rect.bottom - 12;
+      const viewportMarker = window.innerHeight * 0.58;
+      const progress = Math.max(0, Math.min(1, (viewportMarker - lineTop) / Math.max(1, lineBottom - lineTop)));
+
+      historyTimeline.style.setProperty("--history-progress", progress.toFixed(4));
+      historyDots.forEach((dot) => {
+        const dotRect = dot.getBoundingClientRect();
+        dot.classList.toggle("is-reached", dotRect.top + dotRect.height / 2 <= viewportMarker);
+      });
+    };
+
+    const requestHistoryUpdate = () => {
+      if (historyFrame) return;
+      historyFrame = requestAnimationFrame(updateHistoryProgress);
+    };
+
+    updateHistoryProgress();
+    window.addEventListener("scroll", requestHistoryUpdate, { passive: true });
+    document.body.addEventListener("scroll", requestHistoryUpdate, { passive: true });
+    window.addEventListener("resize", requestHistoryUpdate);
+  }
+
   /* ─── 5. NUMBER COUNTERS ─────────────────────────────── */
   const counters = document.querySelectorAll("[data-counter]");
   const formatNumber = (n, isDecimal) => {
@@ -743,48 +775,6 @@
   const isLightTheme = () =>
     document.documentElement.getAttribute("data-theme") === "light";
 
-  // перекраска Vanta-фона под тему (вызывается при инициализации и при toggle)
-  const skinVanta = () => {
-    if (!window.__vantaNet) return;
-    const light = isLightTheme();
-    try {
-      window.__vantaNet.setOptions({
-        color: light ? 0xea4f10 : 0xff5e1a,
-        backgroundColor: light ? 0xfafaf7 : 0x0a0a0a,
-      });
-    } catch (e) {}
-  };
-  window.__skinVanta = skinVanta;
-
-  /* ─── 12. VANTA.NET WebGL HERO BACKGROUND ─────────────── */
-  if (!prefersReducedMotion && !isTouchMobile && window.VANTA && window.VANTA.NET) {
-    const webglEl = document.getElementById("heroWebgl");
-    if (webglEl) {
-      const isMobile = window.matchMedia("(max-width: 900px)").matches;
-      const light = isLightTheme();
-      try {
-        window.__vantaNet = VANTA.NET({
-          el: webglEl,
-          mouseControls: !isMobile,
-          touchControls: true,
-          gyroControls: isMobile, // на мобиле — реагируем на наклон устройства
-          minHeight: 200.0,
-          minWidth: 200.0,
-          scale: 1.0,
-          scaleMobile: 0.7, // на мобиле — пореже сетка, чтобы не тормозить
-          color: light ? 0xea4f10 : 0xff5e1a,
-          backgroundColor: light ? 0xfafaf7 : 0x0a0a0a,
-          points: isMobile ? 7.0 : 11.0,
-          maxDistance: isMobile ? 18.0 : 22.0,
-          spacing: isMobile ? 20.0 : 17.0,
-          showDots: false,
-        });
-      } catch (e) {
-        console.warn("Vanta.NET init failed:", e);
-      }
-    }
-  }
-
   /* ─── 12.5. THEME TOGGLE — ручной переключатель + системная тема ── */
   (function () {
     const root = document.documentElement;
@@ -796,7 +786,6 @@
       if (persist) {
         try { localStorage.setItem("mentra-theme", theme); } catch (e) {}
       }
-      skinVanta();
     };
 
     if (toggle) {
