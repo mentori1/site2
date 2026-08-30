@@ -178,6 +178,8 @@
 
     if (/^https?:\/\/t\.me\//i.test(href)) {
       reachGoal("click_telegram", commonParams);
+    } else if (/^https?:\/\/max\.ru\//i.test(href)) {
+      reachGoal("cta_contact", { ...commonParams, channel: "max" });
     } else if (/^tel:/i.test(href)) {
       reachGoal("click_phone", commonParams);
     } else if (/^mailto:/i.test(href)) {
@@ -198,7 +200,7 @@
       });
     }
 
-    if (/^contact\.html(?:[?#].*)?$/i.test(href) && link.matches(".btn, .nav__cta, .connected-service")) {
+    if (/^contact\.html(?:[?#].*)?$/i.test(href) && link.matches(".btn, .connected-service")) {
       reachGoal("cta_contact", commonParams);
     }
 
@@ -1074,69 +1076,7 @@
     renderServiceProgress(0);
   }
 
-  /* ─── 14. CONTACT FORM ─────────────────────────────────── */
-  const form = document.getElementById("contactForm");
-  if (form) {
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const personalConsent = form.querySelector("#personalDataConsent");
-      if (!personalConsent?.checked) {
-        personalConsent?.reportValidity();
-        return;
-      }
-
-      const formData = new FormData(form);
-      const cookieConsent = window.__mentoriCookieConsent || {};
-      const attribution = window.__mentoriVisitAttribution || {};
-      const personalConsentAt = new Date().toISOString();
-
-      formData.set("personal_data_consent", "yes");
-      formData.set("personal_data_consent_at", personalConsentAt);
-      formData.set("cookie_consent_id", cookieConsent.id || "not_recorded");
-      formData.set("cookie_consent_at", cookieConsent.acceptedAt || "not_recorded");
-      formData.set("cookie_consent_method", cookieConsent.method || "not_recorded");
-      formData.set("form_page", window.location.href);
-      ATTRIBUTION_KEYS.forEach((key) => {
-        if (attribution[key]) formData.set(key, attribution[key]);
-      });
-      if (attribution.landing_page) formData.set("landing_page", attribution.landing_page);
-      if (attribution.referrer) formData.set("referrer", attribution.referrer);
-
-      const submitButton = form.querySelector('button[type="submit"]');
-      if (submitButton) submitButton.disabled = true;
-
-      try {
-        const response = await fetch(form.action, {
-          method: "POST",
-          body: formData,
-          headers: { Accept: "application/json" },
-        });
-        if (!response.ok) throw new Error("Form submission failed");
-      } catch (error) {
-        if (submitButton) submitButton.disabled = false;
-        alert("Не удалось отправить заявку. Напишите нам на mentraos@mail.ru или позвоните по номеру +7 911 437-85-85.");
-        return;
-      }
-
-      reachGoal("form_submit_success", {
-        form: form.id || "contactForm",
-      });
-
-      form.style.transition = "opacity 0.5s var(--ease-expo)";
-      form.style.opacity = "0";
-      setTimeout(() => {
-        const fields = form.querySelectorAll(
-          ".contact-form__head, .contact-form__field, .contact-form__row, .contact-form__note, .contact-form__consent, button"
-        );
-        fields.forEach((f) => (f.hidden = true));
-        const success = document.getElementById("formSuccess");
-        if (success) success.hidden = false;
-        form.style.opacity = "1";
-      }, 400);
-    });
-  }
-
-  /* ─── 15. CINEMA · pinned scenes ────────────────────── */
+  /* ─── 14. CINEMA · pinned scenes ────────────────────── */
   const cinema = document.querySelector(".cinema");
   // На мобиле (≤960px) cinema показывается как обычный stack — pin-эффект не нужен,
   // scroll-handler тоже отключаем, чтобы не было лишней работы.
@@ -1174,7 +1114,7 @@
     window.addEventListener("scroll", onCinemaScroll, { passive: true });
   }
 
-  /* ─── 16. CASE MODAL ───────────────────────────────────── */
+  /* ─── 15. CASE MODAL ───────────────────────────────────── */
   const openCaseModal = (trigger) => {
     const id = "case-" + trigger.dataset.caseTrigger;
     const modal = document.getElementById(id);
@@ -1228,7 +1168,7 @@
     });
   });
 
-  /* ─── 17. ACCESSIBILITY: focus management ─────────────── */
+  /* ─── 16. ACCESSIBILITY: focus management ─────────────── */
   document.addEventListener("keydown", (e) => {
     if (e.key === "Tab") document.body.classList.add("is-tabbing");
   });
