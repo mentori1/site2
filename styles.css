@@ -215,8 +215,8 @@ body:hover .cursor-glow { opacity: 1; }
 }
 @media (max-width: 1080px) {
   .nav__links { gap: 14px; font-size: 12.5px; }
-  .nav__cta { padding: 9px 14px; font-size: 12.5px; }
-  .nav__cta svg { width: 12px; height: 12px; }
+  .nav__contacts { gap: 6px; }
+  .nav__contact { width: 38px; height: 38px; }
 }
 .nav__links a {
   position: relative;
@@ -235,28 +235,40 @@ body:hover .cursor-glow { opacity: 1; }
 }
 .nav__links a:hover { color: var(--text-primary); }
 .nav__links a:hover::after { transform: scaleX(1); }
-.nav__cta {
-  display: inline-flex;
+.nav__contacts {
+  display: flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 18px;
+  flex-shrink: 0;
+}
+.nav__contact {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
   background: var(--bg-glass);
   border: 1px solid var(--border-base);
-  border-radius: 100px;
-  font-size: 13.5px;
-  font-weight: 500;
-  letter-spacing: -0.005em;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  transition: background 0.4s var(--ease-expo), border-color 0.4s var(--ease-expo);
-  will-change: transform;
+  border-radius: 50%;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: transform 0.4s var(--ease-expo), background 0.4s var(--ease-expo), border-color 0.4s var(--ease-expo);
 }
-.nav__cta:hover {
+.nav__contact:hover {
+  transform: translateY(-2px);
   background: var(--bg-glass-strong);
-  border-color: var(--border-strong);
+  border-color: var(--accent);
 }
-.nav__cta svg { transition: transform 0.5s var(--ease-expo); }
-.nav__cta:hover svg { transform: translate(2px, -2px); }
+.nav__contact img {
+  display: block;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+.nav__contact--phone img {
+  width: 17px;
+  height: 17px;
+}
 
 /* ─── NAV BURGER + MOBILE MENU ───────────────────────────── */
 .nav__burger {
@@ -379,7 +391,7 @@ body.menu-open { overflow: hidden; }
 
 @media (max-width: 900px) {
   .nav__links { display: none; }
-  .nav__cta { display: none; }
+  .nav__contacts { display: none; }
   .nav__burger { display: flex; }
 }
 
@@ -686,6 +698,22 @@ body.menu-open { overflow: hidden; }
   gap: 14px;
   flex-wrap: wrap;
 }
+.hero__phone {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-top: 18px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--text-primary);
+  transition: color 0.35s var(--ease-expo);
+}
+.hero__phone small {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+.hero__phone:hover { color: var(--accent); }
 
 /* buttons */
 .btn {
@@ -6663,6 +6691,8 @@ body.brand-intro-active { overflow: hidden !important; }
   .hero__lead { font-size: 15.5px; }
   .hero__actions { flex-direction: row; align-items: stretch; gap: 8px; width: 100%; }
   .hero__actions .btn { flex: 1 1 0; width: auto; padding: 12px 10px; font-size: 12.5px; justify-content: center; text-align: center; }
+  .hero__phone { width: 100%; justify-content: center; margin-top: 16px; font-size: 13px; }
+  .hero__phone small { font-size: 11px; }
   .hero__trust { margin-top: 32px; padding-top: 24px; }
   .hero__trust-num { font-size: 44px; }
   .hero__trust-text { font-size: 13px; }

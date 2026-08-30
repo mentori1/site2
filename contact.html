@@ -61,7 +61,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="styles.css?v=71" />
+  <link rel="stylesheet" href="styles.css?v=72" />
 </head>
 <body>
   <div class="grain" aria-hidden="true"></div>
@@ -82,10 +82,11 @@
         <svg class="theme-toggle__sun" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.7"/><path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M5 5l1.7 1.7M17.3 17.3 19 19M19 5l-1.7 1.7M6.7 17.3 5 19" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
         <svg class="theme-toggle__moon" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.3 6.3 0 0 0 10.5 10.5z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
       </button>
-      <a href="contact.html" class="nav__cta" data-magnetic>
-        <span>Получить разбор</span>
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
+      <div class="nav__contacts" aria-label="Быстрая связь">
+        <a class="nav__contact" href="https://t.me/Mentori_Re" aria-label="Написать в Telegram" title="Telegram" target="_blank" rel="noopener"><img src="assets/icons/telegram.svg" alt="" width="18" height="18" /></a>
+        <a class="nav__contact" href="https://max.ru/u/f9LHodD0cOKBPM0dbjrb5ezQXBmCYH_aXZDfeNXg5-SMxcV_laJVpwlyBO0" aria-label="Написать в MAX" title="MAX" target="_blank" rel="noopener"><img src="assets/icons/max.svg" alt="" width="18" height="18" /></a>
+        <a class="nav__contact nav__contact--phone" href="tel:+79114378585" aria-label="Позвонить: +7 911 437-85-85" title="+7 911 437-85-85"><img src="assets/icons/phone.svg" alt="" width="18" height="18" /></a>
+      </div>
       <button class="nav__burger" id="navBurger" aria-label="Меню" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -101,7 +102,7 @@
     </nav>
     <div class="mobile-menu__cta">
       <a href="contact.html" class="btn btn--primary btn--block">
-        <span>Получить разбор</span>
+        <span>Связаться</span>
       </a>
       <div class="mobile-menu__contact">
         <a href="https://t.me/Mentori_Re" aria-label="Открыть Telegram" title="Telegram">@Mentori_Re</a>
