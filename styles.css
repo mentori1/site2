@@ -4709,6 +4709,7 @@ body.menu-open { overflow: hidden; }
 .foot__cols > div:first-child > a {
   display: inline-grid;
   place-items: center;
+  position: relative;
   width: 42px;
   height: 42px;
   margin: 0 8px 8px 0;
@@ -4723,12 +4724,15 @@ body.menu-open { overflow: hidden; }
 }
 .foot__cols > div:first-child > a::before {
   content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
   width: 20px;
   height: 20px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
-  transform: translateY(1px);
+  transform: translate(-50%, -50%);
 }
 .foot__cols > div:first-child > a[href^="mailto:"]::before {
   background-image: url("assets/icons/mail.svg");

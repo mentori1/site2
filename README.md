@@ -72,7 +72,7 @@ python3 -m http.server 4321
 
 ## Версии ресурсов
 
-JavaScript подключён как `main.js?v=45`, CSS как `styles.css?v=69`.
+JavaScript подключён как `main.js?v=45`, CSS как `styles.css?v=70`.
 
 После любого изменения `main.js` поднять его номер во всех HTML-файлах. После изменения `styles.css` поднять версию CSS на всех страницах, где требуется обновление кэша.
 
