@@ -90,9 +90,9 @@
       return;
     }
 
-    const banner = document.createElement("aside");
+    const banner = document.createElement("section");
     banner.className = "cookie-banner";
-    banner.setAttribute("role", "dialog");
+    banner.setAttribute("role", "region");
     banner.setAttribute("aria-label", "Использование cookie");
     banner.innerHTML = `
       <div class="cookie-banner__body">
@@ -263,7 +263,8 @@
 
   /* ─── 1. LENIS SMOOTH SCROLL ─────────────────────────────── */
   let lenis;
-  if (!prefersReducedMotion && !isTouchMobile && window.Lenis) {
+  const initLenis = () => {
+    if (prefersReducedMotion || isTouchMobile || !window.Lenis || lenis) return;
     lenis = new Lenis({
       duration: 1.15,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -296,7 +297,7 @@
         }
       });
     });
-  }
+  };
 
   /* ─── 2a. MOBILE MENU ───────────────────────────────── */
   const burger = document.getElementById("navBurger");
@@ -306,6 +307,7 @@
       burger.classList.remove("is-open");
       mobileMenu.classList.remove("is-open");
       mobileMenu.setAttribute("aria-hidden", "true");
+      mobileMenu.inert = true;
       burger.setAttribute("aria-expanded", "false");
       document.body.classList.remove("menu-open");
       if (lenis) lenis.start();
@@ -314,6 +316,7 @@
       const isOpen = mobileMenu.classList.toggle("is-open");
       burger.classList.toggle("is-open", isOpen);
       mobileMenu.setAttribute("aria-hidden", String(!isOpen));
+      mobileMenu.inert = !isOpen;
       burger.setAttribute("aria-expanded", String(isOpen));
       document.body.classList.toggle("menu-open", isOpen);
       if (lenis) (isOpen ? lenis.stop() : lenis.start());
@@ -333,9 +336,12 @@
 
   /* ─── 2. NAV SCROLL STATE ─────────────────────────────── */
   const nav = document.querySelector(".nav");
+  let navScrolled = null;
   const onScroll = () => {
-    if (window.scrollY > 24) nav.classList.add("is-scrolled");
-    else nav.classList.remove("is-scrolled");
+    const next = window.scrollY > 24;
+    if (next === navScrolled) return;
+    navScrolled = next;
+    nav.classList.toggle("is-scrolled", next);
   };
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
@@ -808,7 +814,8 @@
   })();
 
   /* ─── 13. STICKY SCROLL-STACK ─────────────────────────── */
-  if (!prefersReducedMotion && window.gsap && window.ScrollTrigger) {
+  const initScrollStack = () => {
+    if (prefersReducedMotion || !window.gsap || !window.ScrollTrigger) return;
     gsap.registerPlugin(ScrollTrigger);
     const cards = document.querySelectorAll("[data-stack-card]");
     if (cards.length > 1 && window.matchMedia("(min-width: 901px)").matches) {
@@ -827,7 +834,33 @@
         });
       });
     }
-  }
+  };
+
+  const loadMotionScript = (src) => new Promise((resolve, reject) => {
+    const script = document.createElement("script");
+    script.src = src;
+    script.async = true;
+    script.onload = resolve;
+    script.onerror = reject;
+    document.head.appendChild(script);
+  });
+
+  const loadDesktopMotion = async () => {
+    if (prefersReducedMotion || isTouchMobile) return;
+    try {
+      await Promise.all([
+        loadMotionScript("https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"),
+        loadMotionScript("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"),
+      ]);
+      await loadMotionScript("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js");
+      initLenis();
+      initScrollStack();
+    } catch (error) {
+      // Native scrolling and the rest of the interface remain fully usable.
+    }
+  };
+
+  window.setTimeout(loadDesktopMotion, 2200);
 
   /* ─── 13b. MOBILE 3D CAROUSEL ─────────────────────────── */
   const mobileStack = document.querySelector("[data-stack]");

@@ -111,11 +111,8 @@
   }
   </script>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
-
-  <link rel="stylesheet" href="styles.css?v=73" />
+  <link rel="preload" href="assets/fonts/geist-cyrillic.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="home.min.css?v=74" />
 </head>
 <body>
   <div class="grain" aria-hidden="true"></div>
@@ -123,7 +120,7 @@
 
   <div class="brand-intro" id="brandIntro" aria-label="Загрузка MENTORI TECHNOLOGIES" aria-live="polite">
     <div class="brand-intro__panel">
-      <img class="brand-intro__wordmark" src="assets/mentori-technologies-wordmark-transparent.png" alt="MENTORI TECHNOLOGIES" width="1120" height="500" />
+      <div class="brand-intro__wordmark" role="img" aria-label="MENTORI TECHNOLOGIES"></div>
       <div class="brand-intro__status"><i aria-hidden="true"></i><span>запускаем систему</span></div>
       <div class="brand-intro__bar" aria-hidden="true"><i></i></div>
     </div>
@@ -132,7 +129,7 @@
   <!-- ───────────────── NAV ───────────────── -->
   <header class="nav">
     <div class="nav__inner">
-      <a href="index.html" class="nav__brand" aria-label="MENTORI TECHNOLOGIES">
+      <a href="index.html" class="nav__brand" aria-label="MENTORI TECH">
         <span class="nav__wordmark" aria-hidden="true">MENTORI</span><span class="nav__tech" aria-hidden="true">TECH</span>
       </a>
       <nav class="nav__links" aria-label="Главная навигация">
@@ -156,7 +153,7 @@
     </div>
   </header>
 
-  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true" inert>
     <nav class="mobile-menu__nav">
       <a href="services.html">Что делаем</a>
       <a href="about.html">О нас</a>
@@ -174,6 +171,7 @@
     </div>
   </div>
 
+  <main>
   <!-- ───────────────── HERO ───────────────── -->
   <section class="hero" id="hero">
     <div class="hero__bg">
@@ -184,7 +182,7 @@
 
     <div class="hero__inner">
       <div class="hero__copy">
-        <h1 class="hero__title hero__title--excel" data-reveal>
+        <h1 class="hero__title hero__title--excel">
           Excel угробит<br/><em class="hero__title-em">развитие вашего бизнеса</em>.
         </h1>
 
@@ -319,7 +317,7 @@
 
     <div class="stack" data-stack aria-label="Что перестанет теряться после внедрения">
       <!-- 01 — заявка остыла -->
-      <article class="stack__card" data-stack-card>
+      <div class="stack__card" data-stack-card>
         <div class="stack__num">01</div>
         <div class="stack__body">
           <h3 class="stack__title">Все обращения<br/>в&nbsp;одном окне</h3>
@@ -338,10 +336,10 @@
             <div class="stack__chat-time" style="color:#6ade8e">14:02 · создана сделка · менеджер назначен</div>
           </div>
         </div>
-      </article>
+      </div>
 
       <!-- 02 — забыли напомнить про замер -->
-      <article class="stack__card" data-stack-card>
+      <div class="stack__card" data-stack-card>
         <div class="stack__num">02</div>
         <div class="stack__body">
           <h3 class="stack__title">Каждая сделка<br/>под&nbsp;контролем</h3>
@@ -364,10 +362,10 @@
             <div class="stack__pipe-bar"><i style="--w:100%;background:#6ade8e"></i></div>
           </div>
         </div>
-      </article>
+      </div>
 
       <!-- 03 — смета ушла думать -->
-      <article class="stack__card" data-stack-card>
+      <div class="stack__card" data-stack-card>
         <div class="stack__num">03</div>
         <div class="stack__body">
           <h3 class="stack__title">Система сама ставит<br/>следующий шаг</h3>
@@ -398,10 +396,10 @@
             <div class="stack__verdict">Система напоминает и&nbsp;запускает следующий шаг точно в&nbsp;нужный день.</div>
           </div>
         </div>
-      </article>
+      </div>
 
       <!-- 04 — рук-ль ищет цифры -->
-      <article class="stack__card" data-stack-card>
+      <div class="stack__card" data-stack-card>
         <div class="stack__num">04</div>
         <div class="stack__body">
           <h3 class="stack__title">Цифры бизнеса<br/>перед глазами</h3>
@@ -437,7 +435,7 @@
             </svg>
           </div>
         </div>
-      </article>
+      </div>
 
       <div class="stack-carousel__controls" data-stack-controls aria-label="Управление каруселью">
         <button class="stack-carousel__arrow" type="button" data-stack-prev aria-label="Предыдущая карточка">
@@ -716,6 +714,8 @@
 
   </section>
 
+  </main>
+
   <!-- ───────────────── FOOTER ───────────────── -->
   <footer class="foot">
     <div class="foot__inner">
@@ -754,9 +754,6 @@
   </footer>
 
   <!-- ───────────────── SCRIPTS ───────────────── -->
-  <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="main.js?v=46" defer></script>
+  <script src="main.min.js?v=47" defer></script>
 </body>
 </html>
