@@ -849,10 +849,10 @@
     if (prefersReducedMotion || isTouchMobile) return;
     try {
       await Promise.all([
-        loadMotionScript("https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"),
-        loadMotionScript("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"),
+        loadMotionScript("https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"),
+        loadMotionScript("https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"),
       ]);
-      await loadMotionScript("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js");
+      await loadMotionScript("https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js");
       initLenis();
       initScrollStack();
     } catch (error) {
