@@ -6,6 +6,12 @@
 (() => {
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const isTouchMobile = window.matchMedia("(max-width: 900px)").matches;
+  const userAgent = navigator.userAgent;
+  const isSafari =
+    /Safari/i.test(userAgent) &&
+    !/Chrome|CriOS|Chromium|Edg|OPR|Android/i.test(userAgent);
+
+  if (isSafari) document.documentElement.classList.add("is-safari");
 
   // helper: разрешаем reveal-стили только когда JS работает.
   // Это гарантирует, что текст ВИДЕН даже если что-то упадёт в скриптах.
@@ -419,7 +425,7 @@
   }
 
   /* ─── 6. MAGNETIC BUTTONS ────────────────────────────── */
-  if (!prefersReducedMotion && !isTouchMobile) {
+  if (!prefersReducedMotion && !isTouchMobile && !isSafari) {
     const magnets = document.querySelectorAll("[data-magnetic]");
     magnets.forEach((m) => {
       const strength = 0.32;
@@ -437,7 +443,7 @@
   }
 
   /* ─── 7. 3D TILT (cards + dashboard) ─────────────────── */
-  if (!prefersReducedMotion) {
+  if (!prefersReducedMotion && !isSafari) {
     const tiltEls = document.querySelectorAll("[data-tilt]");
     const isFinePointer = window.matchMedia("(pointer: fine)").matches;
 
@@ -470,7 +476,7 @@
 
   /* ─── 8. HERO DASHBOARD INITIAL TILT ──────────────────── */
   const dashWrap = document.querySelector(".hero__dashboard");
-  if (dashWrap && !prefersReducedMotion) {
+  if (dashWrap && !prefersReducedMotion && !isSafari) {
     const dash = dashWrap.querySelector(".dash");
     // приветственный наклон
     dash.style.transform = "perspective(2400px) rotateX(8deg) rotateY(-14deg)";
@@ -630,7 +636,7 @@
   }
 
   /* ─── 11. PARALLAX HERO BG ────────────────────────────── */
-  if (!prefersReducedMotion) {
+  if (!prefersReducedMotion && !isSafari) {
     const heroMeshes = document.querySelectorAll(".hero__mesh");
     const heroDash = document.querySelector(".hero__dashboard");
     let heroParallaxFrame = 0;
@@ -720,7 +726,12 @@
   });
 
   const loadDesktopMotion = async () => {
-    if (prefersReducedMotion || isTouchMobile) return;
+    if (
+      prefersReducedMotion ||
+      isTouchMobile ||
+      isSafari ||
+      !document.querySelector("[data-stack-card]")
+    ) return;
     try {
       await loadMotionScript("https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js");
       await loadMotionScript("https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js");

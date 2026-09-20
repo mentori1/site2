@@ -148,6 +148,18 @@ em { font-style: normal; }
   background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/></svg>");
 }
 
+/* Safari noticeably repaints full-page blur and SVG noise while scrolling. */
+html.is-safari .grain { display: none; }
+html.is-safari * {
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+html.is-safari .hero__mesh {
+  animation: none !important;
+  filter: blur(72px);
+  will-change: auto;
+}
+
 /* ─── Reveal animation base ─────────────────────────────────── */
 /* ВАЖНО: скрываем элементы ТОЛЬКО когда JS подтвердил готовность.
    Без js-ready весь текст виден — никаких "пропадающих" заголовков. */
@@ -4758,29 +4770,12 @@ body.menu-open { overflow: hidden; }
   vertical-align: top;
   transition: color 240ms var(--ease-expo), border-color 240ms var(--ease-expo), background 240ms var(--ease-expo), transform 240ms var(--ease-expo);
 }
-.foot__cols > div:first-child > a::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
+.foot__contact-icon {
+  display: block;
   width: 20px;
   height: 20px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
-  transform: translate(-50%, -50%);
-}
-.foot__cols > div:first-child > a[href^="mailto:"]::before {
-  background-image: url("assets/icons/mail.svg");
-}
-.foot__cols > div:first-child > a[href^="tel:"]::before {
-  background-image: url("assets/icons/phone.svg");
-}
-.foot__cols > div:first-child > a[href*="t.me"]::before {
-  background-image: url("assets/icons/telegram.svg");
-}
-.foot__cols > div:first-child > a[href*="max.ru"]::before {
-  background-image: url("assets/icons/max.svg");
+  object-fit: contain;
+  pointer-events: none;
 }
 .foot__cols > div:first-child > a:hover {
   color: var(--accent);
