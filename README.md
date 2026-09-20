@@ -186,8 +186,9 @@ GitHub `main` является источником истины. Рабочий
 
 ```bash
 ssh new-server 'tar -czf /root/backups/mentorios-site-before-YYYYMMDD-HHMMSS.tar.gz -C /var/www mentorios-site'
-rsync -az --exclude .git/ --exclude .DS_Store ./ new-server:/var/www/mentorios-site/
-ssh new-server 'sudo cp /var/www/mentorios-site/nginx/mentorios-site2.conf /etc/nginx/sites-available/mentorios-site2 && sudo nginx -t && sudo systemctl reload nginx'
+rsync -az --exclude .git/ --exclude .DS_Store --exclude nginx/ ./ new-server:/var/www/mentorios-site/
+rsync -az nginx/mentorios-site2.conf new-server:/tmp/mentorios-site2.conf
+ssh new-server 'sudo cp /tmp/mentorios-site2.conf /etc/nginx/sites-available/mentorios-site2 && sudo nginx -t && sudo systemctl reload nginx'
 git add -A
 git commit -m "Describe the site update"
 git push origin HEAD:main
