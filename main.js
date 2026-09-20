@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════════════════════════════
    MENTORI TECHNOLOGIES · main.js
-   Lenis smooth scroll + GSAP ScrollTrigger + magnetic + tilt + counters
+   Native scroll + GSAP ScrollTrigger + magnetic + tilt + counters
    ═══════════════════════════════════════════════════════════════ */
 
 (() => {
@@ -96,7 +96,7 @@
     banner.setAttribute("aria-label", "Использование cookie");
     banner.innerHTML = `
       <div class="cookie-banner__body">
-        <p>Используем cookie и Яндекс.Метрику, чтобы улучшать сайт. <a href="privacy.html" data-cookie-policy-link>Политика</a></p>
+        <p>Используем cookie и Яндекс.Метрику, чтобы улучшать сайт. <a href="/privacy" data-cookie-policy-link>Политика</a></p>
       </div>
       <div class="cookie-banner__actions">
         <button type="button" data-cookie-accept>Хорошо</button>
@@ -157,7 +157,7 @@
   setupCookieConsent();
 
   /* ─── 0.5. YANDEX METRIKA GOALS ───────────────────────── */
-  const articlePathPattern = /\/blog-[^/]+\.html$/;
+  const articlePathPattern = /\/blog-[^/]+(?:\.html)?\/?$/;
   const currentPath = window.location.pathname;
   const cleanText = (value) => (value || "").replace(/\s+/g, " ").trim().slice(0, 120);
   const reachGoal = (goal, params = {}) => {
@@ -186,7 +186,7 @@
       reachGoal("click_email", commonParams);
     }
 
-    if (/^blog-[^?#]+\.html(?:[?#].*)?$/i.test(href)) {
+    if (/^\/?blog-[^?#]+(?:\.html)?(?:[?#].*)?$/i.test(href)) {
       reachGoal("blog_article_open", {
         ...commonParams,
         article: href.split(/[?#]/)[0],
@@ -200,7 +200,7 @@
       });
     }
 
-    if (/^contact\.html(?:[?#].*)?$/i.test(href) && link.matches(".btn, .connected-service")) {
+    if (/^\/?contact(?:\.html)?(?:[?#].*)?$/i.test(href) && link.matches(".btn, .connected-service")) {
       reachGoal("cta_contact", commonParams);
     }
 
@@ -261,44 +261,6 @@
     brandIntro.remove();
   }
 
-  /* ─── 1. LENIS SMOOTH SCROLL ─────────────────────────────── */
-  let lenis;
-  const initLenis = () => {
-    if (prefersReducedMotion || isTouchMobile || !window.Lenis || lenis) return;
-    lenis = new Lenis({
-      duration: 1.15,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-      smoothTouch: false,
-    });
-
-    if (window.gsap && window.ScrollTrigger) {
-      lenis.on("scroll", ScrollTrigger.update);
-      gsap.ticker.add((time) => lenis.raf(time * 1000));
-      gsap.ticker.lagSmoothing(0);
-    } else {
-      const raf = (time) => {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-      };
-      requestAnimationFrame(raf);
-    }
-
-    // anchor links
-    document.querySelectorAll('a[href^="#"]').forEach((a) => {
-      a.addEventListener("click", (e) => {
-        const id = a.getAttribute("href");
-        if (id.length > 1) {
-          const target = document.querySelector(id);
-          if (target) {
-            e.preventDefault();
-            lenis.scrollTo(target, { offset: -60, duration: 1.6 });
-          }
-        }
-      });
-    });
-  };
-
   /* ─── 2a. MOBILE MENU ───────────────────────────────── */
   const burger = document.getElementById("navBurger");
   const mobileMenu = document.getElementById("mobileMenu");
@@ -310,7 +272,6 @@
       mobileMenu.inert = true;
       burger.setAttribute("aria-expanded", "false");
       document.body.classList.remove("menu-open");
-      if (lenis) lenis.start();
     };
     const toggleMenu = () => {
       const isOpen = mobileMenu.classList.toggle("is-open");
@@ -319,7 +280,6 @@
       mobileMenu.inert = !isOpen;
       burger.setAttribute("aria-expanded", String(isOpen));
       document.body.classList.toggle("menu-open", isOpen);
-      if (lenis) (isOpen ? lenis.stop() : lenis.start());
     };
     burger.addEventListener("click", toggleMenu);
     // закрытие при клике по любой ссылке
@@ -505,73 +465,6 @@
         el.addEventListener("mousemove", update);
         el.addEventListener("mouseleave", reset);
       });
-    } else if (tiltEls.length) {
-      // МОБАЙЛ: лёгкий 3D tilt по гироскопу + auto-float только для видимых карточек
-      const floatTargets = Array.from(tiltEls).filter(
-        (el) => !el.classList.contains("hero__dashboard")
-      );
-      // Отслеживаем, какие элементы реально в viewport, чтобы не крутить rAF впустую
-      const visibleSet = new Set();
-      if ("IntersectionObserver" in window) {
-        const visIO = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((e) => {
-              if (e.isIntersecting) visibleSet.add(e.target);
-              else visibleSet.delete(e.target);
-            });
-          },
-          { threshold: 0.2 }
-        );
-        floatTargets.forEach((el) => visIO.observe(el));
-      } else {
-        floatTargets.forEach((el) => visibleSet.add(el));
-      }
-
-      const startedAt = performance.now();
-      const tick = (t) => {
-        const elapsed = t - startedAt;
-        floatTargets.forEach((el, i) => {
-          if (!visibleSet.has(el)) return;
-          const child = el.firstElementChild || el;
-          const baseX = Number.parseFloat(el.dataset.tiltBaseX || "0") || 0;
-          const baseY = Number.parseFloat(el.dataset.tiltBaseY || "0") || 0;
-          const phase = ((elapsed + i * 600) % 7000) / 7000;
-          const rx = Math.sin(phase * Math.PI * 2) * 1.4;
-          const ry = Math.cos(phase * Math.PI * 2) * 1.8;
-          child.style.transform = `perspective(2400px) rotateX(${baseX + rx}deg) rotateY(${baseY + ry}deg)`;
-        });
-        requestAnimationFrame(tick);
-      };
-      requestAnimationFrame(tick);
-
-      // гироскоп (если разрешён)
-      const handleOrient = (e) => {
-        if (e.beta == null || e.gamma == null) return;
-        const x = Math.max(-15, Math.min(15, e.gamma)) / 5;
-        const y = Math.max(-15, Math.min(15, e.beta - 45)) / 5;
-        tiltEls.forEach((el) => {
-          const child = el.firstElementChild || el;
-          const baseX = Number.parseFloat(el.dataset.tiltBaseX || "0") || 0;
-          const baseY = Number.parseFloat(el.dataset.tiltBaseY || "0") || 0;
-          child.style.transform = `perspective(2400px) rotateX(${baseX - y}deg) rotateY(${baseY + x}deg)`;
-        });
-      };
-      if (window.DeviceOrientationEvent) {
-        if (typeof DeviceOrientationEvent.requestPermission === "function") {
-          // iOS 13+ требует user-gesture для разрешения
-          document.addEventListener("touchend", function once() {
-            DeviceOrientationEvent.requestPermission()
-              .then((p) => {
-                if (p === "granted")
-                  window.addEventListener("deviceorientation", handleOrient);
-              })
-              .catch(() => {});
-            document.removeEventListener("touchend", once);
-          }, { once: true });
-        } else {
-          window.addEventListener("deviceorientation", handleOrient);
-        }
-      }
     }
   }
 
@@ -736,44 +629,25 @@
     setTimeout(tick, 1200);
   }
 
-  /* ─── 10. CURSOR GLOW ─────────────────────────────────── */
-  const glow = document.querySelector(".cursor-glow");
-  if (glow && !prefersReducedMotion && window.matchMedia("(pointer: fine)").matches) {
-    let targetX = window.innerWidth / 2;
-    let targetY = window.innerHeight / 2;
-    let curX = targetX;
-    let curY = targetY;
-
-    document.addEventListener("mousemove", (e) => {
-      targetX = e.clientX;
-      targetY = e.clientY;
-    });
-
-    const animate = () => {
-      curX += (targetX - curX) * 0.08;
-      curY += (targetY - curY) * 0.08;
-      glow.style.transform = `translate(${curX}px, ${curY}px) translate(-50%, -50%)`;
-      requestAnimationFrame(animate);
-    };
-    animate();
-  }
-
   /* ─── 11. PARALLAX HERO BG ────────────────────────────── */
   if (!prefersReducedMotion) {
     const heroMeshes = document.querySelectorAll(".hero__mesh");
     const heroDash = document.querySelector(".hero__dashboard");
+    let heroParallaxFrame = 0;
+    const updateHeroParallax = () => {
+      heroParallaxFrame = 0;
+      const y = window.scrollY;
+      if (y > window.innerHeight) return;
+      heroMeshes.forEach((m, i) => {
+        const speed = i === 0 ? 0.25 : 0.4;
+        m.style.transform = `translate3d(0, ${y * speed}px, 0)`;
+      });
+      if (heroDash) heroDash.style.transform = `translate3d(0, ${y * 0.15}px, 0)`;
+    };
     window.addEventListener(
       "scroll",
       () => {
-        const y = window.scrollY;
-        if (y > window.innerHeight) return;
-        heroMeshes.forEach((m, i) => {
-          const speed = i === 0 ? 0.25 : 0.4;
-          m.style.transform = `translateY(${y * speed}px)`;
-        });
-        if (heroDash) {
-          heroDash.style.transform = `translateY(${y * 0.15}px)`;
-        }
+        if (!heroParallaxFrame) heroParallaxFrame = requestAnimationFrame(updateHeroParallax);
       },
       { passive: true }
     );
@@ -848,12 +722,8 @@
   const loadDesktopMotion = async () => {
     if (prefersReducedMotion || isTouchMobile) return;
     try {
-      await Promise.all([
-        loadMotionScript("https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"),
-        loadMotionScript("https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"),
-      ]);
+      await loadMotionScript("https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js");
       await loadMotionScript("https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js");
-      initLenis();
       initScrollStack();
     } catch (error) {
       // Native scrolling and the rest of the interface remain fully usable.
@@ -1120,9 +990,11 @@
     const currentLabel = document.getElementById("cinemaCurrent");
     const marks = cinema.querySelectorAll(".cinema__rail-marks span");
     let activeIdx = 0;
+    let cinemaFrame = 0;
 
     const clamp01 = (n) => Math.min(1, Math.max(0, n));
     const onCinemaScroll = () => {
+      cinemaFrame = 0;
       const rect = cinema.getBoundingClientRect();
       const total_scroll = cinema.offsetHeight - window.innerHeight;
       if (total_scroll <= 0) return;
@@ -1143,8 +1015,12 @@
       }
     };
 
+    const requestCinemaUpdate = () => {
+      if (!cinemaFrame) cinemaFrame = requestAnimationFrame(onCinemaScroll);
+    };
+
     onCinemaScroll();
-    window.addEventListener("scroll", onCinemaScroll, { passive: true });
+    window.addEventListener("scroll", requestCinemaUpdate, { passive: true });
   }
 
   /* ─── 15. CASE MODAL ───────────────────────────────────── */
@@ -1154,7 +1030,6 @@
     if (modal && typeof modal.showModal === "function") {
       modal.showModal();
       document.body.style.overflow = "hidden";
-      // НЕ останавливаем Lenis — он сам игнорирует элементы с data-lenis-prevent.
       // Внутренний scroll модалки работает через нативный браузерный wheel.
       requestAnimationFrame(() => {
         const closeBtn = modal.querySelector("[data-modal-close]");

@@ -103,6 +103,7 @@ html {
   -webkit-text-size-adjust: 100%;
   overscroll-behavior-y: none;
   background: var(--bg-base);
+  scroll-behavior: smooth;
 }
 body {
   font-family: var(--font-sans);
@@ -146,24 +147,6 @@ em { font-style: normal; }
   mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/></svg>");
 }
-
-.cursor-glow {
-  position: fixed;
-  top: 0; left: 0;
-  width: 540px;
-  height: 540px;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 1;
-  background: radial-gradient(circle, var(--accent-glow-soft) 0%, transparent 65%);
-  transform: translate(-50%, -50%);
-  transition: opacity 0.6s var(--ease-expo);
-  opacity: 0;
-  will-change: transform, opacity;
-  mix-blend-mode: screen;
-}
-body:hover .cursor-glow { opacity: 1; }
-@media (max-width: 900px) { .cursor-glow { display: none; } }
 
 /* ─── Reveal animation base ─────────────────────────────────── */
 /* ВАЖНО: скрываем элементы ТОЛЬКО когда JS подтвердил готовность.
@@ -6601,17 +6584,18 @@ body.brand-intro-active { overflow: hidden !important; }
 /* ─── HERO mobile ─────────────────────────────────────── */
 @media (max-width: 900px) {
   html {
-    height: 100%;
-    overflow: hidden;
-  }
-  body {
-    height: 100%;
-    min-height: 0;
+    min-height: 100%;
     overflow-x: hidden;
     overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    overscroll-behavior-y: none;
   }
+  body {
+    height: auto;
+    min-height: 100%;
+    overflow-x: hidden;
+    overflow-y: visible;
+    overscroll-behavior-y: auto;
+  }
+  .grain { display: none; }
   .hero__mesh { display: none !important; }
   .hero__bg {
     background:
