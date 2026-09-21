@@ -4770,12 +4770,39 @@ body.menu-open { overflow: hidden; }
   vertical-align: top;
   transition: color 240ms var(--ease-expo), border-color 240ms var(--ease-expo), background 240ms var(--ease-expo), transform 240ms var(--ease-expo);
 }
+.foot__cols > div:first-child > a::before {
+  content: "";
+  position: absolute;
+  inset: 50% auto auto 50%;
+  width: 20px;
+  height: 20px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  transform: translate(-50%, -50%);
+}
+.foot__cols > div:first-child > a[href^="mailto:"]::before {
+  background-image: url("/assets/icons/mail.svg");
+}
+.foot__cols > div:first-child > a[href^="tel:"]::before {
+  background-image: url("/assets/icons/phone.svg");
+}
+.foot__cols > div:first-child > a[href*="t.me"]::before {
+  background-image: url("/assets/icons/telegram.svg");
+}
+.foot__cols > div:first-child > a[href*="max.ru"]::before {
+  background-image: url("/assets/icons/max.svg");
+}
 .foot__contact-icon {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  z-index: 1;
   display: block;
   width: 20px;
   height: 20px;
   object-fit: contain;
   pointer-events: none;
+  transform: translate(-50%, -50%);
 }
 .foot__cols > div:first-child > a:hover {
   color: var(--accent);
