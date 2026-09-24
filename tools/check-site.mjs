@@ -7,8 +7,11 @@ let checked=0;
 for(const page of pages){
   const $=load(await fs.readFile(page,'utf8'));
   assert.equal($('h1').length,1,`${page}: one H1`);
-  assert.equal($('.nav__links [href="/portfolio"]').length,1,`${page}: portfolio nav`);
-  assert.equal($('.nav__contacts [href="tel:+79114378585"]').length,1,`${page}: call link`);
+  assert.equal($('.nav .nav__links,.nav .nav__contacts').length,0,`${page}: no duplicate header actions`);
+  assert.equal($('.nav__brand').length,1,`${page}: brand retained`);
+  assert.equal($('.nav button').length,1,`${page}: menu is the only header button`);
+  assert.equal($('.mobile-menu__nav [href="/portfolio"]').length,1,`${page}: portfolio in menu`);
+  assert.equal($('.mobile-menu__socials [href="tel:+79114378585"]').length,1,`${page}: call link in menu`);
   const scriptVersion=page==='index.html'?'57':'56';
   assert($(`script[src="main.min.js?v=${scriptVersion}"]`).length,`${page}: consent/analytics retained`);
   assert($('meta[name="robots"]').attr('content')?.includes('index'),`${page}: indexing`);
@@ -23,17 +26,20 @@ for(const page of pages){
   }
 }
 const home=load(await fs.readFile('index.html','utf8'));
-assert.equal(home('.air-hero').length,1);
-assert(home('h1').text().includes('Порядок вместо'));
+assert.equal(home('.hero').length,1);
+const headline=home('h1').clone();
+headline.find('br').replaceWith(' ');
+assert.equal(headline.text().replace(/\s+/g,' ').trim(),'Excel угробит развитие вашего бизнеса.');
+assert.equal(home('.hero__dashboard .dash').length,1,'Original illustrated dashboard restored');
 assert.equal(home('#services').length,1,'Original homepage sections retained');
 assert.equal(home('.project-teaser,.project-preview').length,0,'Projects live only in portfolio');
 assert.equal(home('.founder-hero__image').length,0,'Rejected homepage portrait removed');
 assert.equal(home('#brandIntro').length,1,'Previous compact loader restored');
-assert.equal(home('.air-stage canvas').length,1,'Previous MacBook hero restored');
+assert.equal(home('.air-hero,.air-stage,canvas').length,0,'No MacBook scene');
 assert.equal(home('[data-stack]').length,1,'Previous scroll-stack restored');
 assert.equal(home('[data-stack-card]').length,4,'Four original stacked cards');
 assert.equal(home('[data-stack-controls]').length,1,'Previous mobile carousel controls restored');
-assert.equal(home('script[src*="hero/bundle"]').length,1,'Restored hero bundle connected');
+assert.equal(home('script[src*="hero/bundle"]').length,0,'No laptop bundle download');
 assert.equal(home('.pkg__lock-ico').length,3,'Three stage locks');
 home('.pkg__lock-ico').each((_,el)=>assert.equal(home(el).attr('viewBox'),'-12 -24 88 100','Open lock has drawing space'));
 assert.equal(home('.mobile-menu__socials').length,1,'Compact glass menu has contact icons');

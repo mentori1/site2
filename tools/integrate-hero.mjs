@@ -11,7 +11,7 @@ for(const name of pages){
   const edits=[];
   const replace=(node,text)=>{const l=node.sourceCodeLocation;edits.push({start:l.startOffset,end:l.endOffset,text});};
   const append=(node,text)=>{const l=node.sourceCodeLocation;edits.push({start:l.endTag.startOffset,end:l.endTag.startOffset,text});};
-  if(!$('.nav__links').length){
+  if(!$('.nav__brand').length){
     replace($('.nav')[0],shared('.nav').toString()+shared('#mobileMenu').toString());
     if(!$('.foot').length)append($('body')[0],shared('.foot').toString());
     append($('head')[0],'<script>document.documentElement.dataset.theme="dark";document.documentElement.dataset.themeLock="dark";</script>');
@@ -22,14 +22,15 @@ for(const name of pages){
   $('meta[name="color-scheme"]').each((_,node)=>replace(node,'<meta name="color-scheme" content="dark">'));
   $('meta[name="theme-color"]').each((i,node)=>replace(node,i===0?'<meta name="theme-color" content="#0b0b0a">':''));
   $('#themeToggle').each((_,node)=>replace(node,''));
-  $('.nav__links,.mobile-menu__nav').each((_,node)=>{
+  $('.mobile-menu__nav').each((_,node)=>{
     if(!$(node).find('[href="/portfolio"]').length)append(node,'<a href="/portfolio">Портфолио</a>');
   });
-  $('.mobile-menu__cta').each((_,node)=>replace(node,`<div class="mobile-menu__socials" aria-label="Связаться с MENTORI">${shared('.nav__contacts').html()}</div>`));
+  $('.mobile-menu__cta').each((_,node)=>replace(node,`<div class="mobile-menu__socials" aria-label="Связаться с MENTORI">${shared('.mobile-menu__socials').html()}</div>`));
+  $('.nav .nav__links,.nav .nav__contacts').each((_,node)=>replace(node,''));
   $('.foot__h').each((_,node)=>{
     if($(node).text()==='Разделы'&&!$(node).parent().find('[href="/portfolio"]').length)append(node.parent,'<a href="/portfolio">Портфолио</a>');
   });
-  const refreshVersion=name==='index.html'?'20260925-rollback1':'20260925-4';
+  const refreshVersion='20260925-excel';
   const refreshStyle=`<link rel="stylesheet" href="/site-refresh.css?v=${refreshVersion}">`;
   if(!$('link[href^="/site-refresh.css"]').length)append($('head')[0],`\n${refreshStyle}\n`);
   else $('link[href^="/site-refresh.css"]').each((_,node)=>replace(node,refreshStyle));
@@ -38,21 +39,19 @@ for(const name of pages){
   if(name==='index.html'){
     if($('#hero').length)replace($('#hero')[0],hero);
     $('.project-preview').each((_,node)=>replace(node,''));
-    const heroScript='<script type="module" src="/assets/hero/bundle/air.js?v=20260925-rollback1"></script>';
-    if(!$('script[src^="/assets/hero/bundle/"]').length)append($('body')[0],`\n${heroScript}\n`);
-    else $('script[src^="/assets/hero/bundle/"]').each((_,node)=>replace(node,heroScript));
+    $('script[src^="/assets/hero/bundle/"]').each((_,node)=>replace(node,''));
     $('link[rel="preload"][href="/assets/hero/graphite-studio.jpg"]').each((_,node)=>replace(node,''));
   }
   let updated=html;
   for(const edit of edits.sort((a,b)=>b.start-a.start))updated=updated.slice(0,edit.start)+edit.text+updated.slice(edit.end);
-  await fs.writeFile(name,updated);
+  await fs.writeFile(name,updated.replace(/^[\t ]+$/gm,''));
 }
 
 const index=load(await fs.readFile('index.html','utf8'));
 const title='Портфолио: системы и сайты для бизнеса | MENTORI TECHNOLOGIES';
 const description='Наши проекты: система Mentori, CRM и Telegram Mini App для танцевальной студии, сайт производственной компании Спектр Металла.';
 const head=index('head').clone();
-head.find('link[href^="/site-refresh.css"]').attr('href','/site-refresh.css?v=20260925-4');
+head.find('link[href^="/site-refresh.css"]').attr('href','/site-refresh.css?v=20260925-excel');
 head.find('link[rel="preload"][as="image"],script[type="application/ld+json"]').remove();
 head.find('title').text(title);
 head.find('[name="description"],[property="og:description"],[name="twitter:description"]').attr('content',description);
@@ -62,7 +61,7 @@ head.find('[property="og:url"]').attr('content','https://mentorios.tech/portfoli
 head.find('link[href*="home.min.css"]').attr('href','https://cdn.jsdelivr.net/gh/mentori1/site2@16abbcb/styles.min.css?v=79');
 const schema={'@context':'https://schema.org','@type':'CollectionPage',name:title,description,url:'https://mentorios.tech/portfolio',inLanguage:'ru-RU'};
 head.append(`<script type="application/ld+json">${JSON.stringify(schema)}</script>`);
-const nav=index('.nav').clone();nav.find('[href="/portfolio"]').addClass('is-active').attr('aria-current','page');
+const nav=index('.nav').clone();
 const portfolio=`<!doctype html>\n<html lang="ru">${head.toString()}<body>${nav.toString()}${index('#mobileMenu').toString()}${await fs.readFile('src/portfolio-main.html','utf8')}${index('.foot').toString()}<script src="main.min.js?v=56" defer></script></body></html>\n`;
 await fs.writeFile('portfolio.html',portfolio.replace(/[\t ]+$/gm,''));
 const xml=load(await fs.readFile('sitemap.xml','utf8'),{xmlMode:true});

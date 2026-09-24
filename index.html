@@ -105,7 +105,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mentori1/site2@16abbcb/home.min.css?v=78" />
 
 
-<link rel="stylesheet" href="/site-refresh.css?v=20260925-rollback1">
+<link rel="stylesheet" href="/site-refresh.css?v=20260925-excel">
 </head>
 <body>
   <div class="grain" aria-hidden="true"></div>
@@ -124,18 +124,9 @@
       <a href="/" class="nav__brand" aria-label="MENTORI TECH">
         <span class="nav__wordmark" aria-hidden="true">MENTORI</span><span class="nav__tech" aria-hidden="true">TECH</span>
       </a>
-      <nav class="nav__links" aria-label="Главная навигация">
-        <a href="/services">Что делаем</a>
-        <a href="/about">О нас</a>
-        <a href="/blog">Блог</a>
-        <a href="/contact">Контакты</a>
-      <a href="/portfolio">Портфолио</a></nav>
 
-      <div class="nav__contacts" aria-label="Быстрая связь">
-        <a class="nav__contact" href="https://t.me/Mentori_Re" aria-label="Написать в Telegram" title="Telegram" target="_blank" rel="noopener"><img src="assets/icons/telegram.svg" alt="" width="18" height="18" /></a>
-        <a class="nav__contact" href="https://max.ru/u/f9LHodD0cOKBPM0dbjrb5ezQXBmCYH_aXZDfeNXg5-SMxcV_laJVpwlyBO0" aria-label="Написать в MAX" title="MAX" target="_blank" rel="noopener"><img src="assets/icons/max.svg" alt="" width="18" height="18" /></a>
-        <a class="nav__contact nav__contact--phone" href="tel:+79114378585" aria-label="Позвонить: +7 911 437-85-85" title="+7 911 437-85-85"><img src="assets/icons/phone.svg" alt="" width="18" height="18" /></a>
-      </div>
+
+
       <button class="nav__burger" id="navBurger" aria-label="Меню" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -158,23 +149,142 @@
 
   <main>
   <!-- ───────────────── HERO ───────────────── -->
-  <section class="air-hero" id="hero" aria-label="Система для работы вашей компании">
-  <div class="air-sticky">
-    <div class="air-copy">
-      <p class="air-eyebrow">Разработка систем для бизнеса</p>
-      <h1>Порядок вместо<br><em>хаоса в Excel.</em></h1>
-      <p class="air-intro">Заказы в Excel, договорённости в переписках, задачи в заметках телефона?</p>
-      <p class="air-offer">Создадим одну рабочую систему для вас и команды. Перенесём клиентов, заказы, оплаты и задачи из разрозненных записей в одно место.</p>
-      <div class="air-actions"><a class="air-primary" href="/contact">Навести порядок</a><a class="air-secondary" href="/services">Что вы получите</a></div>
+  <section class="hero" id="hero">
+    <div class="hero__bg">
+      <div class="hero__mesh hero__mesh--orange"></div>
+      <div class="hero__mesh hero__mesh--amber"></div>
+      <div class="hero__bg-fade"></div>
     </div>
-    <div class="air-stage" aria-label="MacBook Air 13 дюймов с интерфейсом Mentori">
-      <img class="air-fallback" src="/assets/hero/mentori-crm-contrast.jpg" width="2160" height="1350" alt="Клиенты, задачи и финансы в системе Mentori. Демонстрационные данные." fetchpriority="high">
-      <canvas aria-hidden="true"></canvas>
+
+    <div class="hero__inner">
+      <div class="hero__copy">
+        <h1 class="hero__title hero__title--excel">
+          Excel угробит<br/><em class="hero__title-em">развитие вашего бизнеса</em>.
+        </h1>
+
+        <p class="hero__lead" data-reveal>
+          Переносим заявки, клиентов, заказы, финансы и&nbsp;работу команды из&nbsp;таблиц и&nbsp;чатов в&nbsp;одну систему, созданную под&nbsp;процессы вашей компании.
+        </p>
+
+        <div class="hero__actions" data-reveal>
+          <a href="/contact" class="btn btn--primary" data-magnetic>
+            <span>Консультация</span>
+          </a>
+          <a href="/services" class="btn btn--ghost" data-magnetic>
+            <span>Что войдёт в&nbsp;систему</span>
+          </a>
+        </div>
+
+      </div>
+
+      <!-- ─── DASHBOARD MOCK ─── -->
+      <div class="hero__dashboard" data-tilt>
+        <div class="dash">
+          <div class="dash__topbar">
+            <div class="dash__dots"><i></i><i></i><i></i></div>
+            <div class="dash__title">панель клиента&nbsp;·&nbsp;live</div>
+            <div class="dash__status">
+              <span class="dash__status-dot"></span>
+              <span>в&nbsp;работе</span>
+            </div>
+          </div>
+
+          <div class="dash__grid">
+            <!-- Метрика 1 -->
+            <div class="dash__card dash__card--metric">
+              <div class="dash__label">выручка за&nbsp;месяц</div>
+              <div class="dash__value"><span data-counter="2847290">0</span><i>₽</i></div>
+              <div class="dash__delta dash__delta--up">+47% к&nbsp;прошлому месяцу</div>
+              <svg class="dash__spark" viewBox="0 0 120 36" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="sparkGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#ff5e1a" stop-opacity="0.5"/>
+                    <stop offset="100%" stop-color="#ff5e1a" stop-opacity="0"/>
+                  </linearGradient>
+                </defs>
+                <path class="dash__spark-fill" d="M0,28 L12,24 L24,26 L36,18 L48,20 L60,12 L72,14 L84,8 L96,10 L108,4 L120,2 L120,36 L0,36 Z" fill="url(#sparkGrad)"/>
+                <path class="dash__spark-line" d="M0,28 L12,24 L24,26 L36,18 L48,20 L60,12 L72,14 L84,8 L96,10 L108,4 L120,2" stroke="#ff5e1a" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" pathLength="100"/>
+              </svg>
+            </div>
+
+            <!-- Метрика 2 -->
+            <div class="dash__card dash__card--metric">
+              <div class="dash__label">из&nbsp;заявок в&nbsp;заказ</div>
+              <div class="dash__value"><span data-counter="23.4">0</span><i>%</i></div>
+              <div class="dash__delta dash__delta--up">было&nbsp;15.3%</div>
+              <div class="dash__bars">
+                <i style="--h:30%"></i><i style="--h:45%"></i><i style="--h:38%"></i><i style="--h:62%"></i><i style="--h:55%"></i><i style="--h:78%"></i><i style="--h:92%"></i>
+              </div>
+            </div>
+
+            <!-- Обработка обращений -->
+            <div class="dash__card dash__card--process">
+              <div class="dash__label">
+                <span class="dash__scan-dot"></span>
+                сейчас ведём диалоги
+              </div>
+              <ul class="dash__queue">
+                <li>
+                  <span class="dash__avatar" style="--c1:#ff8a3d;--c2:#d94a1c">АК</span>
+                  <span class="dash__queue-name">Артём&nbsp;Кравцов</span>
+                  <span class="dash__queue-tag dash__queue-tag--hot">готов купить</span>
+                </li>
+                <li>
+                  <span class="dash__avatar" style="--c1:#f4b860;--c2:#a8650d">ИМ</span>
+                  <span class="dash__queue-name">Ирина&nbsp;Мещерякова</span>
+                  <span class="dash__queue-tag dash__queue-tag--warm">думает</span>
+                </li>
+                <li>
+                  <span class="dash__avatar" style="--c1:#d97757;--c2:#7a3318">ДГ</span>
+                  <span class="dash__queue-name">Денис&nbsp;Горшенин</span>
+                  <span class="dash__queue-tag">уточняем</span>
+                </li>
+              </ul>
+              <div class="dash__typing">
+                <span class="dash__typing-label">отвечаем</span>
+                <span class="dash__typing-text" data-typewriter></span>
+              </div>
+            </div>
+
+            <!-- Pipeline -->
+            <div class="dash__card dash__card--pipeline">
+              <div class="dash__label">путь клиента сегодня</div>
+              <div class="dash__pipeline">
+                <div class="dash__stage">
+                  <div class="dash__stage-name">заявка</div>
+                  <div class="dash__stage-bar"><i style="--w:92%"></i></div>
+                  <div class="dash__stage-n"><span data-counter="184">0</span></div>
+                </div>
+                <div class="dash__stage">
+                  <div class="dash__stage-name">диалог</div>
+                  <div class="dash__stage-bar"><i style="--w:68%"></i></div>
+                  <div class="dash__stage-n"><span data-counter="127">0</span></div>
+                </div>
+                <div class="dash__stage">
+                  <div class="dash__stage-name">встреча</div>
+                  <div class="dash__stage-bar"><i style="--w:42%"></i></div>
+                  <div class="dash__stage-n"><span data-counter="61">0</span></div>
+                </div>
+                <div class="dash__stage">
+                  <div class="dash__stage-name">заказ</div>
+                  <div class="dash__stage-bar dash__stage-bar--accent"><i style="--w:28%"></i></div>
+                  <div class="dash__stage-n"><span data-counter="34">0</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="dash__footer">
+            <span class="dash__foot-dot"></span>
+            <span>обновлено только что · 14:27</span>
+          </div>
+        </div>
+      </div>
     </div>
-    <button class="air-skip" type="button" hidden>Пропустить</button>
-    <div class="air-bottom"><ol class="air-delivery"><li><span>01</span>Разберёмся в вашей работе</li><li><span>02</span>Перенесём данные</li><li><span>03</span>Соберём всё в одном месте</li></ol><span class="air-scroll" aria-hidden="true">↓</span></div>
-  </div>
-</section>
+
+  </section>
+
+
 
 
 
@@ -631,6 +741,6 @@
   <!-- ───────────────── SCRIPTS ───────────────── -->
   <script src="main.min.js?v=57" defer></script>
 
-<script type="module" src="/assets/hero/bundle/air.js?v=20260925-rollback1"></script>
+
 </body>
 </html>
