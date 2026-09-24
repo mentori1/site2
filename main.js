@@ -241,30 +241,48 @@
 
   /* ─── COMPACT MENTORI BOOT INTRO ─────────────────────────── */
   const brandIntro = document.getElementById("brandIntro");
+  const airHero = document.querySelector('.air-hero');
+  let introSeen = false;
+  try { introSeen = sessionStorage.getItem('mentori_air_intro_v3') === 'done'; } catch {}
+  const notifyBoot = (skip) => {
+    if (airHero) airHero.dataset.bootFinished = skip ? 'skip' : 'play';
+    window.dispatchEvent(new Event('mentori:boot-finished'));
+  };
 
-  if (brandIntro && !prefersReducedMotion) {
+  if (brandIntro && !prefersReducedMotion && !introSeen && !location.hash) {
     document.body.classList.add("brand-intro-active");
     let introFinished = false;
     let introTimer;
+    let maxTimer;
+    let minElapsed = false;
 
     const handleIntroKeydown = (event) => {
-      if (event.key === "Escape") finishBrandIntro();
+      if (event.key === "Escape") finishBrandIntro(true);
     };
 
-    const finishBrandIntro = () => {
+    const finishBrandIntro = (skip = false) => {
       if (introFinished) return;
       introFinished = true;
       clearTimeout(introTimer);
+      clearTimeout(maxTimer);
+      window.removeEventListener('mentori:scene-ready', tryFinish);
       window.removeEventListener("keydown", handleIntroKeydown);
       brandIntro.classList.add("is-done");
       document.body.classList.remove("brand-intro-active");
+      notifyBoot(skip);
       setTimeout(() => brandIntro.remove(), 720);
     };
 
+    const tryFinish = () => {
+      if (minElapsed && (!airHero || airHero.dataset.sceneReady)) finishBrandIntro();
+    };
     window.addEventListener("keydown", handleIntroKeydown);
-    introTimer = setTimeout(finishBrandIntro, 1850);
+    window.addEventListener('mentori:scene-ready', tryFinish);
+    introTimer = setTimeout(() => { minElapsed = true; tryFinish(); }, 1850);
+    maxTimer = setTimeout(() => finishBrandIntro(true), 4500);
   } else if (brandIntro) {
     brandIntro.remove();
+    notifyBoot(true);
   }
 
   /* ─── 2a. MOBILE MENU ───────────────────────────────── */
@@ -288,6 +306,9 @@
       document.body.classList.toggle("menu-open", isOpen);
     };
     burger.addEventListener("click", toggleMenu);
+    document.addEventListener('click', (event) => {
+      if (!mobileMenu.contains(event.target) && !burger.contains(event.target)) closeMenu();
+    });
     // закрытие при клике по любой ссылке
     mobileMenu.querySelectorAll("a").forEach((a) => {
       a.addEventListener("click", closeMenu);
@@ -296,6 +317,7 @@
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape" && mobileMenu.classList.contains("is-open")) {
         closeMenu();
+        burger.focus();
       }
     });
   }

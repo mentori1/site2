@@ -25,16 +25,20 @@ for(const name of pages){
   $('.nav__links,.mobile-menu__nav').each((_,node)=>{
     if(!$(node).find('[href="/portfolio"]').length)append(node,'<a href="/portfolio">Портфолио</a>');
   });
+  $('.mobile-menu__cta').each((_,node)=>replace(node,`<div class="mobile-menu__socials" aria-label="Связаться с MENTORI">${shared('.nav__contacts').html()}</div>`));
   $('.foot__h').each((_,node)=>{
     if($(node).text()==='Разделы'&&!$(node).parent().find('[href="/portfolio"]').length)append(node.parent,'<a href="/portfolio">Портфолио</a>');
   });
-  if(!$('link[href^="/site-refresh.css"]').length)append($('head')[0],'\n<link rel="stylesheet" href="/site-refresh.css?v=20260924-3">\n');
-  $('script[src^="main.min.js"]').each((_,node)=>replace(node,'<script src="main.min.js?v=52" defer></script>'));
+  const refreshStyle='<link rel="stylesheet" href="/site-refresh.css?v=20260924-7">';
+  if(!$('link[href^="/site-refresh.css"]').length)append($('head')[0],`\n${refreshStyle}\n`);
+  else $('link[href^="/site-refresh.css"]').each((_,node)=>replace(node,refreshStyle));
+  $('script[src^="main.min.js"]').each((_,node)=>replace(node,'<script src="main.min.js?v=54" defer></script>'));
   if(name==='index.html'){
     if($('#hero').length)replace($('#hero')[0],hero);
     $('.project-preview').each((_,node)=>replace(node,''));
-    if(!$('script[src^="/assets/hero/bundle/"]').length)append($('body')[0],'\n<script type="module" src="/assets/hero/bundle/air.js?v=20260924-3"></script>\n');
-    if(!$('link[rel="preload"][href="/assets/hero/graphite-studio.jpg"]').length)append($('head')[0],'<link rel="preload" href="/assets/hero/graphite-studio.jpg" as="image">\n');
+    if(!$('script[src^="/assets/hero/bundle/"]').length)append($('body')[0],'\n<script type="module" src="/assets/hero/bundle/air.js?v=20260924-7"></script>\n');
+    else $('script[src^="/assets/hero/bundle/"]').each((_,node)=>replace(node,'<script type="module" src="/assets/hero/bundle/air.js?v=20260924-7"></script>'));
+    $('link[rel="preload"][href="/assets/hero/graphite-studio.jpg"]').each((_,node)=>replace(node,''));
   }
   let updated=html;
   for(const edit of edits.sort((a,b)=>b.start-a.start))updated=updated.slice(0,edit.start)+edit.text+updated.slice(edit.end);
@@ -55,7 +59,7 @@ head.find('link[href*="home.min.css"]').attr('href','https://cdn.jsdelivr.net/gh
 const schema={'@context':'https://schema.org','@type':'CollectionPage',name:title,description,url:'https://mentorios.tech/portfolio',inLanguage:'ru-RU'};
 head.append(`<script type="application/ld+json">${JSON.stringify(schema)}</script>`);
 const nav=index('.nav').clone();nav.find('[href="/portfolio"]').addClass('is-active').attr('aria-current','page');
-const portfolio=`<!doctype html>\n<html lang="ru">${head.toString()}<body>${nav.toString()}${index('#mobileMenu').toString()}${await fs.readFile('src/portfolio-main.html','utf8')}${index('.foot').toString()}<script src="main.min.js?v=52" defer></script></body></html>\n`;
+const portfolio=`<!doctype html>\n<html lang="ru">${head.toString()}<body>${nav.toString()}${index('#mobileMenu').toString()}${await fs.readFile('src/portfolio-main.html','utf8')}${index('.foot').toString()}<script src="main.min.js?v=54" defer></script></body></html>\n`;
 await fs.writeFile('portfolio.html',portfolio);
 const xml=load(await fs.readFile('sitemap.xml','utf8'),{xmlMode:true});
 xml('url').each((_,node)=>xml(node).find('lastmod').text('2026-09-24'));

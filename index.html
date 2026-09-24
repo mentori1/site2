@@ -103,9 +103,9 @@
 
   <link rel="preload" href="https://cdn.jsdelivr.net/gh/mentori1/site2@main/assets/fonts/geist-cyrillic.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mentori1/site2@16abbcb/home.min.css?v=78" />
-<link rel="preload" href="/assets/hero/graphite-studio.jpg" as="image">
 
-<link rel="stylesheet" href="/site-refresh.css?v=20260924-3">
+
+<link rel="stylesheet" href="/site-refresh.css?v=20260924-7">
 </head>
 <body>
   <div class="grain" aria-hidden="true"></div>
@@ -149,15 +149,11 @@
       <a href="/blog">Блог</a>
         <a href="/contact">Контакты</a>
     <a href="/portfolio">Портфолио</a></nav>
-    <div class="mobile-menu__cta">
-      <a href="/contact" class="btn btn--primary btn--block">
-        <span>Связаться</span>
-      </a>
-      <div class="mobile-menu__contact">
-        <a href="https://t.me/Mentori_Re" aria-label="Открыть Telegram" title="Telegram">@Mentori_Re</a>
-        <a href="mailto:mentraos@mail.ru" aria-label="Написать на почту" title="Написать на почту">mentraos@mail.ru</a>
+    <div class="mobile-menu__socials" aria-label="Связаться с MENTORI">
+        <a class="nav__contact" href="https://t.me/Mentori_Re" aria-label="Написать в Telegram" title="Telegram" target="_blank" rel="noopener"><img src="assets/icons/telegram.svg" alt="" width="18" height="18"></a>
+        <a class="nav__contact" href="https://max.ru/u/f9LHodD0cOKBPM0dbjrb5ezQXBmCYH_aXZDfeNXg5-SMxcV_laJVpwlyBO0" aria-label="Написать в MAX" title="MAX" target="_blank" rel="noopener"><img src="assets/icons/max.svg" alt="" width="18" height="18"></a>
+        <a class="nav__contact nav__contact--phone" href="tel:+79114378585" aria-label="Позвонить: +7 911 437-85-85" title="+7 911 437-85-85"><img src="assets/icons/phone.svg" alt="" width="18" height="18"></a>
       </div>
-    </div>
   </div>
 
   <main>
@@ -175,12 +171,13 @@
       <img class="air-fallback" src="/assets/hero/mentori-crm-contrast.jpg" width="2160" height="1350" alt="Клиенты, задачи и финансы в системе Mentori. Демонстрационные данные." fetchpriority="high">
       <canvas aria-hidden="true"></canvas>
     </div>
-    <div class="air-portal" aria-hidden="true">
-      <picture><source media="(max-width:700px)" srcset="/assets/hero/mentori-crm-mobile.jpg"><img src="/assets/hero/mentori-crm-contrast.jpg" width="2160" height="1350" alt=""></picture>
-    </div>
+    <button class="air-skip" type="button" hidden>Пропустить</button>
     <div class="air-bottom"><ol class="air-delivery"><li><span>01</span>Разберёмся в вашей работе</li><li><span>02</span>Перенесём данные</li><li><span>03</span>Соберём всё в одном месте</li></ol><span class="air-scroll" aria-hidden="true">↓</span></div>
   </div>
 </section>
+
+
+
 
 
 
@@ -492,7 +489,7 @@
             <div class="pkg__step-num" aria-hidden="true">01</div>
             <div class="pkg__tag">1 созвон</div>
             <div class="pkg__lock-hint" aria-hidden="true">
-              <svg class="pkg__lock-ico" viewBox="0 0 64 72" fill="none" aria-hidden="true">
+              <svg class="pkg__lock-ico" viewBox="-12 -24 88 100" fill="none" aria-hidden="true">
                 <rect class="pkg__lock-body" x="6" y="30" width="52" height="38" rx="6" stroke="currentColor" stroke-width="2.4"/>
                 <path class="pkg__lock-shackle" d="M16 30V18a16 16 0 0 1 32 0v12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
                 <circle class="pkg__lock-keyhole" cx="32" cy="48" r="3.2" fill="currentColor"/>
@@ -519,7 +516,7 @@
             <div class="pkg__step-num" aria-hidden="true">02</div>
             <div class="pkg__tag">концепция · прототип</div>
             <div class="pkg__lock-hint" aria-hidden="true">
-              <svg class="pkg__lock-ico" viewBox="0 0 64 72" fill="none" aria-hidden="true">
+              <svg class="pkg__lock-ico" viewBox="-12 -24 88 100" fill="none" aria-hidden="true">
                 <rect class="pkg__lock-body" x="6" y="30" width="52" height="38" rx="6" stroke="currentColor" stroke-width="2.4"/>
                 <path class="pkg__lock-shackle" d="M16 30V18a16 16 0 0 1 32 0v12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
                 <circle class="pkg__lock-keyhole" cx="32" cy="48" r="3.2" fill="currentColor"/>
@@ -547,7 +544,7 @@
             <div class="pkg__step-num pkg__step-num--accent" aria-hidden="true">03</div>
             <div class="pkg__tag pkg__tag--pop">по&nbsp;вашему&nbsp;ТЗ</div>
             <div class="pkg__lock-hint" aria-hidden="true">
-              <svg class="pkg__lock-ico" viewBox="0 0 64 72" fill="none" aria-hidden="true">
+              <svg class="pkg__lock-ico" viewBox="-12 -24 88 100" fill="none" aria-hidden="true">
                 <rect class="pkg__lock-body" x="6" y="30" width="52" height="38" rx="6" stroke="currentColor" stroke-width="2.4"/>
                 <path class="pkg__lock-shackle" d="M16 30V18a16 16 0 0 1 32 0v12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
                 <circle class="pkg__lock-keyhole" cx="32" cy="48" r="3.2" fill="currentColor"/>
@@ -632,8 +629,8 @@
   </footer>
 
   <!-- ───────────────── SCRIPTS ───────────────── -->
-  <script src="main.min.js?v=52" defer></script>
+  <script src="main.min.js?v=54" defer></script>
 
-<script type="module" src="/assets/hero/bundle/air.js?v=20260924-3"></script>
+<script type="module" src="/assets/hero/bundle/air.js?v=20260924-7"></script>
 </body>
 </html>
