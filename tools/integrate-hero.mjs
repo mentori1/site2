@@ -29,18 +29,18 @@ for(const name of pages){
   $('.foot__h').each((_,node)=>{
     if($(node).text()==='Разделы'&&!$(node).parent().find('[href="/portfolio"]').length)append(node.parent,'<a href="/portfolio">Портфолио</a>');
   });
-  const refreshStyle='<link rel="stylesheet" href="/site-refresh.css?v=20260925-4">';
+  const refreshVersion=name==='index.html'?'20260925-rollback1':'20260925-4';
+  const refreshStyle=`<link rel="stylesheet" href="/site-refresh.css?v=${refreshVersion}">`;
   if(!$('link[href^="/site-refresh.css"]').length)append($('head')[0],`\n${refreshStyle}\n`);
   else $('link[href^="/site-refresh.css"]').each((_,node)=>replace(node,refreshStyle));
-  $('script[src^="main.min.js"]').each((_,node)=>replace(node,'<script src="main.min.js?v=56" defer></script>'));
+  const scriptVersion=name==='index.html'?'57':'56';
+  $('script[src^="main.min.js"]').each((_,node)=>replace(node,`<script src="main.min.js?v=${scriptVersion}" defer></script>`));
   if(name==='index.html'){
     if($('#hero').length)replace($('#hero')[0],hero);
     $('.project-preview').each((_,node)=>replace(node,''));
-    $('script[src^="/assets/hero/bundle/"],#brandIntro,[data-stack-controls]').each((_,node)=>replace(node,''));
-    $('[data-stack],[data-stack-card]').each((_,node)=>{
-      const l=node.sourceCodeLocation.startTag;
-      edits.push({start:l.startOffset,end:l.endOffset,text:html.slice(l.startOffset,l.endOffset).replace(/ data-stack(?:-card)?(?=[\s>])/g,'')});
-    });
+    const heroScript='<script type="module" src="/assets/hero/bundle/air.js?v=20260925-rollback1"></script>';
+    if(!$('script[src^="/assets/hero/bundle/"]').length)append($('body')[0],`\n${heroScript}\n`);
+    else $('script[src^="/assets/hero/bundle/"]').each((_,node)=>replace(node,heroScript));
     $('link[rel="preload"][href="/assets/hero/graphite-studio.jpg"]').each((_,node)=>replace(node,''));
   }
   let updated=html;
@@ -52,6 +52,7 @@ const index=load(await fs.readFile('index.html','utf8'));
 const title='Портфолио: системы и сайты для бизнеса | MENTORI TECHNOLOGIES';
 const description='Наши проекты: система Mentori, CRM и Telegram Mini App для танцевальной студии, сайт производственной компании Спектр Металла.';
 const head=index('head').clone();
+head.find('link[href^="/site-refresh.css"]').attr('href','/site-refresh.css?v=20260925-4');
 head.find('link[rel="preload"][as="image"],script[type="application/ld+json"]').remove();
 head.find('title').text(title);
 head.find('[name="description"],[property="og:description"],[name="twitter:description"]').attr('content',description);
