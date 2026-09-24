@@ -105,18 +105,12 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mentori1/site2@16abbcb/home.min.css?v=78" />
 
 
-<link rel="stylesheet" href="/site-refresh.css?v=20260924-7">
+<link rel="stylesheet" href="/site-refresh.css?v=20260925-4">
 </head>
 <body>
   <div class="grain" aria-hidden="true"></div>
 
-  <div class="brand-intro" id="brandIntro" aria-label="Загрузка MENTORI TECHNOLOGIES" aria-live="polite">
-    <div class="brand-intro__panel">
-      <div class="brand-intro__wordmark" role="img" aria-label="MENTORI TECHNOLOGIES"></div>
-      <div class="brand-intro__status"><i aria-hidden="true"></i><span>запускаем систему</span></div>
-      <div class="brand-intro__bar" aria-hidden="true"><i></i></div>
-    </div>
-  </div>
+
 
   <!-- ───────────────── NAV ───────────────── -->
   <header class="nav">
@@ -159,6 +153,7 @@
   <main>
   <!-- ───────────────── HERO ───────────────── -->
   <section class="air-hero" id="hero" aria-label="Система для работы вашей компании">
+  <img class="founder-hero__image" src="/assets/hero/founder-macbook-20260925.jpg" width="1672" height="941" alt="Данила Родионов за работой с MacBook" fetchpriority="high">
   <div class="air-sticky">
     <div class="air-copy">
       <p class="air-eyebrow">Разработка систем для бизнеса</p>
@@ -167,14 +162,15 @@
       <p class="air-offer">Создадим одну рабочую систему для вас и команды. Перенесём клиентов, заказы, оплаты и задачи из разрозненных записей в одно место.</p>
       <div class="air-actions"><a class="air-primary" href="/contact">Навести порядок</a><a class="air-secondary" href="/services">Что вы получите</a></div>
     </div>
-    <div class="air-stage" aria-label="MacBook Air 13 дюймов с интерфейсом Mentori">
-      <img class="air-fallback" src="/assets/hero/mentori-crm-contrast.jpg" width="2160" height="1350" alt="Клиенты, задачи и финансы в системе Mentori. Демонстрационные данные." fetchpriority="high">
-      <canvas aria-hidden="true"></canvas>
-    </div>
-    <button class="air-skip" type="button" hidden>Пропустить</button>
-    <div class="air-bottom"><ol class="air-delivery"><li><span>01</span>Разберёмся в вашей работе</li><li><span>02</span>Перенесём данные</li><li><span>03</span>Соберём всё в одном месте</li></ol><span class="air-scroll" aria-hidden="true">↓</span></div>
   </div>
+  <div class="air-bottom"><ol class="air-delivery"><li><span>01</span>Разберёмся в вашей работе</li><li><span>02</span>Перенесём данные</li><li><span>03</span>Соберём всё в одном месте</li></ol></div>
 </section>
+
+
+
+
+
+
 
 
 
@@ -190,9 +186,9 @@
       <p class="section__lead" data-reveal>Мы&nbsp;собираем обращения, сделки, задачи и&nbsp;внутреннюю работу в&nbsp;одну систему вокруг ваших процессов: от&nbsp;первой заявки до&nbsp;оплаты, производства и&nbsp;повторного обращения.</p>
     </div>
 
-    <div class="stack" data-stack aria-label="Что перестанет теряться после внедрения">
+    <div class="stack" aria-label="Что перестанет теряться после внедрения">
       <!-- 01 — заявка остыла -->
-      <div class="stack__card" data-stack-card>
+      <div class="stack__card">
         <div class="stack__num">01</div>
         <div class="stack__body">
           <h3 class="stack__title">Все обращения<br/>в&nbsp;одном окне</h3>
@@ -214,7 +210,7 @@
       </div>
 
       <!-- 02 — забыли напомнить про замер -->
-      <div class="stack__card" data-stack-card>
+      <div class="stack__card">
         <div class="stack__num">02</div>
         <div class="stack__body">
           <h3 class="stack__title">Каждая сделка<br/>под&nbsp;контролем</h3>
@@ -240,7 +236,7 @@
       </div>
 
       <!-- 03 — смета ушла думать -->
-      <div class="stack__card" data-stack-card>
+      <div class="stack__card">
         <div class="stack__num">03</div>
         <div class="stack__body">
           <h3 class="stack__title">Система сама ставит<br/>следующий шаг</h3>
@@ -274,7 +270,7 @@
       </div>
 
       <!-- 04 — рук-ль ищет цифры -->
-      <div class="stack__card" data-stack-card>
+      <div class="stack__card">
         <div class="stack__num">04</div>
         <div class="stack__body">
           <h3 class="stack__title">Цифры бизнеса<br/>перед глазами</h3>
@@ -312,18 +308,7 @@
         </div>
       </div>
 
-      <div class="stack-carousel__controls" data-stack-controls aria-label="Управление каруселью">
-        <button class="stack-carousel__arrow" type="button" data-stack-prev aria-label="Предыдущая карточка">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 6L9 12L15 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <div class="stack-carousel__progress">
-          <span class="stack-carousel__counter" data-stack-counter aria-live="polite">01 / 04</span>
-          <div class="stack-carousel__dots" data-stack-dots aria-label="Выбор карточки"></div>
-        </div>
-        <button class="stack-carousel__arrow" type="button" data-stack-next aria-label="Следующая карточка">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-      </div>
+
     </div>
 
     <div class="services-stack__bottom" data-reveal>
@@ -629,8 +614,8 @@
   </footer>
 
   <!-- ───────────────── SCRIPTS ───────────────── -->
-  <script src="main.min.js?v=54" defer></script>
+  <script src="main.min.js?v=56" defer></script>
 
-<script type="module" src="/assets/hero/bundle/air.js?v=20260924-7"></script>
+
 </body>
 </html>

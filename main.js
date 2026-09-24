@@ -239,51 +239,6 @@
     trackArticleDepth();
   }
 
-  /* ─── COMPACT MENTORI BOOT INTRO ─────────────────────────── */
-  const brandIntro = document.getElementById("brandIntro");
-  const airHero = document.querySelector('.air-hero');
-  let introSeen = false;
-  try { introSeen = sessionStorage.getItem('mentori_air_intro_v3') === 'done'; } catch {}
-  const notifyBoot = (skip) => {
-    if (airHero) airHero.dataset.bootFinished = skip ? 'skip' : 'play';
-    window.dispatchEvent(new Event('mentori:boot-finished'));
-  };
-
-  if (brandIntro && !prefersReducedMotion && !introSeen && !location.hash) {
-    document.body.classList.add("brand-intro-active");
-    let introFinished = false;
-    let introTimer;
-    let maxTimer;
-    let minElapsed = false;
-
-    const handleIntroKeydown = (event) => {
-      if (event.key === "Escape") finishBrandIntro(true);
-    };
-
-    const finishBrandIntro = (skip = false) => {
-      if (introFinished) return;
-      introFinished = true;
-      clearTimeout(introTimer);
-      clearTimeout(maxTimer);
-      window.removeEventListener('mentori:scene-ready', tryFinish);
-      window.removeEventListener("keydown", handleIntroKeydown);
-      brandIntro.classList.add("is-done");
-      document.body.classList.remove("brand-intro-active");
-      notifyBoot(skip);
-      setTimeout(() => brandIntro.remove(), 720);
-    };
-
-    const tryFinish = () => {
-      if (minElapsed && (!airHero || airHero.dataset.sceneReady)) finishBrandIntro();
-    };
-    window.addEventListener("keydown", handleIntroKeydown);
-    window.addEventListener('mentori:scene-ready', tryFinish);
-    introTimer = setTimeout(() => { minElapsed = true; tryFinish(); }, 1850);
-    maxTimer = setTimeout(() => finishBrandIntro(true), 4500);
-  } else if (brandIntro) {
-    brandIntro.remove();
-    notifyBoot(true);
-  }
 
   /* ─── 2a. MOBILE MENU ───────────────────────────────── */
   const burger = document.getElementById("navBurger");
@@ -716,211 +671,6 @@
     else if (sysMQ.addListener) sysMQ.addListener(onSysChange);
   })();
 
-  /* ─── 13. STICKY SCROLL-STACK ─────────────────────────── */
-  const initScrollStack = () => {
-    if (prefersReducedMotion || !window.gsap || !window.ScrollTrigger) return;
-    gsap.registerPlugin(ScrollTrigger);
-    const cards = document.querySelectorAll("[data-stack-card]");
-    if (cards.length > 1 && window.matchMedia("(min-width: 901px)").matches) {
-      cards.forEach((card, i) => {
-        if (i === cards.length - 1) return;
-        gsap.to(card, {
-          scale: 0.94,
-          opacity: 0.5,
-          ease: "none",
-          scrollTrigger: {
-            trigger: cards[i + 1],
-            start: "top 80%",
-            end: "top 20%",
-            scrub: 0.5,
-          },
-        });
-      });
-    }
-  };
-
-  const loadMotionScript = (src) => new Promise((resolve, reject) => {
-    const script = document.createElement("script");
-    script.src = src;
-    script.async = true;
-    script.onload = resolve;
-    script.onerror = reject;
-    document.head.appendChild(script);
-  });
-
-  const loadDesktopMotion = async () => {
-    if (
-      prefersReducedMotion ||
-      isTouchMobile ||
-      isSafari ||
-      !document.querySelector("[data-stack-card]")
-    ) return;
-    try {
-      await loadMotionScript("https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js");
-      await loadMotionScript("https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js");
-      initScrollStack();
-    } catch (error) {
-      // Native scrolling and the rest of the interface remain fully usable.
-    }
-  };
-
-  window.setTimeout(loadDesktopMotion, 2200);
-
-  /* ─── 13b. MOBILE 3D CAROUSEL ─────────────────────────── */
-  const mobileStack = document.querySelector("[data-stack]");
-  const mobileStackCards = mobileStack
-    ? Array.from(mobileStack.querySelectorAll("[data-stack-card]"))
-    : [];
-
-  if (mobileStack && mobileStackCards.length > 1 && isTouchMobile) {
-    const controls = mobileStack.querySelector("[data-stack-controls]");
-    const prevButton = mobileStack.querySelector("[data-stack-prev]");
-    const nextButton = mobileStack.querySelector("[data-stack-next]");
-    const counter = mobileStack.querySelector("[data-stack-counter]");
-    const dotsRoot = mobileStack.querySelector("[data-stack-dots]");
-    const cardCount = mobileStackCards.length;
-    let activeCard = 0;
-    let autoTimer = 0;
-    let carouselVisible = false;
-    let pointerStartX = 0;
-    let pointerStartY = 0;
-    let resizeTimer = 0;
-
-    mobileStack.classList.add("is-carousel");
-    mobileStack.setAttribute("role", "region");
-    mobileStack.setAttribute("aria-roledescription", "карусель");
-    mobileStack.setAttribute("tabindex", "0");
-
-    const dots = mobileStackCards.map((card, index) => {
-      card.setAttribute("role", "group");
-      card.setAttribute("aria-roledescription", "слайд");
-      card.setAttribute("aria-label", `${index + 1} из ${cardCount}`);
-
-      const dot = document.createElement("button");
-      dot.type = "button";
-      dot.className = "stack-carousel__dot";
-      dot.setAttribute("aria-label", `Открыть карточку ${index + 1}`);
-      dot.addEventListener("click", () => setActiveCard(index, true));
-      dotsRoot?.appendChild(dot);
-      return dot;
-    });
-
-    const measureCards = () => {
-      mobileStack.style.removeProperty("--stack-carousel-card-height");
-      requestAnimationFrame(() => {
-        const tallestCard = Math.max(...mobileStackCards.map((card) => card.scrollHeight));
-        mobileStack.style.setProperty("--stack-carousel-card-height", `${tallestCard}px`);
-      });
-    };
-
-    const stopAutoplay = () => {
-      window.clearTimeout(autoTimer);
-      autoTimer = 0;
-    };
-
-    const scheduleAutoplay = () => {
-      stopAutoplay();
-      if (prefersReducedMotion || !carouselVisible || document.hidden) return;
-      autoTimer = window.setTimeout(() => {
-        setActiveCard(activeCard + 1, false);
-      }, 4800);
-    };
-
-    const renderCards = () => {
-      mobileStackCards.forEach((card, index) => {
-        const relativeIndex = (index - activeCard + cardCount) % cardCount;
-        const isActive = relativeIndex === 0;
-        const isNext = relativeIndex === 1;
-        const isPrev = relativeIndex === cardCount - 1;
-
-        card.classList.toggle("is-active", isActive);
-        card.classList.toggle("is-next", isNext);
-        card.classList.toggle("is-prev", isPrev);
-        card.classList.toggle("is-far", !isActive && !isNext && !isPrev);
-        card.setAttribute("aria-hidden", isActive ? "false" : "true");
-      });
-
-      dots.forEach((dot, index) => {
-        const isActive = index === activeCard;
-        dot.classList.toggle("is-active", isActive);
-        dot.setAttribute("aria-current", isActive ? "true" : "false");
-      });
-
-      if (counter) {
-        counter.textContent = `${String(activeCard + 1).padStart(2, "0")} / ${String(cardCount).padStart(2, "0")}`;
-      }
-    };
-
-    function setActiveCard(nextIndex, userInitiated = false) {
-      activeCard = (nextIndex + cardCount) % cardCount;
-      renderCards();
-      if (userInitiated) stopAutoplay();
-      scheduleAutoplay();
-    }
-
-    prevButton?.addEventListener("click", () => setActiveCard(activeCard - 1, true));
-    nextButton?.addEventListener("click", () => setActiveCard(activeCard + 1, true));
-
-    mobileStack.addEventListener("pointerdown", (event) => {
-      if (event.target.closest("button")) return;
-      pointerStartX = event.clientX;
-      pointerStartY = event.clientY;
-      stopAutoplay();
-    });
-
-    mobileStack.addEventListener("pointerup", (event) => {
-      if (!pointerStartX && !pointerStartY) return;
-      const deltaX = event.clientX - pointerStartX;
-      const deltaY = event.clientY - pointerStartY;
-      pointerStartX = 0;
-      pointerStartY = 0;
-
-      if (Math.abs(deltaX) > 42 && Math.abs(deltaX) > Math.abs(deltaY)) {
-        setActiveCard(activeCard + (deltaX < 0 ? 1 : -1), true);
-      } else {
-        scheduleAutoplay();
-      }
-    });
-
-    mobileStack.addEventListener("pointercancel", () => {
-      pointerStartX = 0;
-      pointerStartY = 0;
-      scheduleAutoplay();
-    });
-
-    mobileStack.addEventListener("keydown", (event) => {
-      if (event.key === "ArrowLeft") {
-        event.preventDefault();
-        setActiveCard(activeCard - 1, true);
-      }
-      if (event.key === "ArrowRight") {
-        event.preventDefault();
-        setActiveCard(activeCard + 1, true);
-      }
-    });
-
-    controls?.addEventListener("focusin", stopAutoplay);
-    controls?.addEventListener("focusout", scheduleAutoplay);
-
-    const carouselObserver = new IntersectionObserver(
-      ([entry]) => {
-        carouselVisible = entry.isIntersecting && entry.intersectionRatio > 0.25;
-        scheduleAutoplay();
-      },
-      { threshold: [0, 0.25, 0.6] }
-    );
-    carouselObserver.observe(mobileStack);
-
-    document.addEventListener("visibilitychange", scheduleAutoplay);
-    window.addEventListener("resize", () => {
-      window.clearTimeout(resizeTimer);
-      resizeTimer = window.setTimeout(measureCards, 180);
-    });
-
-    renderCards();
-    measureCards();
-    if (document.fonts?.ready) document.fonts.ready.then(measureCards);
-  }
 
   /* ─── 14. CINEMA · pinned scenes ────────────────────── */
   const cinema = document.querySelector(".cinema");
@@ -1017,6 +767,26 @@
       e.preventDefault();
       close();
     });
+  });
+
+  // Portfolio galleries work as native horizontal strips without JavaScript.
+  document.querySelectorAll('[data-case-gallery]').forEach((gallery) => {
+    const track = gallery.querySelector('.case-gallery__track');
+    const slides = Array.from(track.children);
+    const tabs = Array.from(gallery.querySelectorAll('[data-case-slide]'));
+    const select = (index) => {
+      const slide = slides[index];
+      track.scrollTo({left:slide.offsetLeft-track.offsetLeft,behavior:'instant'});
+    };
+    tabs.forEach((tab,index)=>tab.addEventListener('click',()=>select(index)));
+    const update = () => {
+      const center = track.getBoundingClientRect().left + track.clientWidth / 2;
+      let nearest = 0, distance = Infinity;
+      slides.forEach((slide,index)=>{const rect=slide.getBoundingClientRect();const d=Math.abs(rect.left+rect.width/2-center);if(d<distance){distance=d;nearest=index;}});
+      tabs.forEach((tab,index)=>tab.setAttribute('aria-pressed',String(index===nearest)));
+    };
+    track.addEventListener('scroll',update,{passive:true});
+    update();
   });
 
   /* ─── 16. ACCESSIBILITY: focus management ─────────────── */

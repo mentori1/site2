@@ -29,15 +29,18 @@ for(const name of pages){
   $('.foot__h').each((_,node)=>{
     if($(node).text()==='Разделы'&&!$(node).parent().find('[href="/portfolio"]').length)append(node.parent,'<a href="/portfolio">Портфолио</a>');
   });
-  const refreshStyle='<link rel="stylesheet" href="/site-refresh.css?v=20260924-7">';
+  const refreshStyle='<link rel="stylesheet" href="/site-refresh.css?v=20260925-4">';
   if(!$('link[href^="/site-refresh.css"]').length)append($('head')[0],`\n${refreshStyle}\n`);
   else $('link[href^="/site-refresh.css"]').each((_,node)=>replace(node,refreshStyle));
-  $('script[src^="main.min.js"]').each((_,node)=>replace(node,'<script src="main.min.js?v=54" defer></script>'));
+  $('script[src^="main.min.js"]').each((_,node)=>replace(node,'<script src="main.min.js?v=56" defer></script>'));
   if(name==='index.html'){
     if($('#hero').length)replace($('#hero')[0],hero);
     $('.project-preview').each((_,node)=>replace(node,''));
-    if(!$('script[src^="/assets/hero/bundle/"]').length)append($('body')[0],'\n<script type="module" src="/assets/hero/bundle/air.js?v=20260924-7"></script>\n');
-    else $('script[src^="/assets/hero/bundle/"]').each((_,node)=>replace(node,'<script type="module" src="/assets/hero/bundle/air.js?v=20260924-7"></script>'));
+    $('script[src^="/assets/hero/bundle/"],#brandIntro,[data-stack-controls]').each((_,node)=>replace(node,''));
+    $('[data-stack],[data-stack-card]').each((_,node)=>{
+      const l=node.sourceCodeLocation.startTag;
+      edits.push({start:l.startOffset,end:l.endOffset,text:html.slice(l.startOffset,l.endOffset).replace(/ data-stack(?:-card)?(?=[\s>])/g,'')});
+    });
     $('link[rel="preload"][href="/assets/hero/graphite-studio.jpg"]').each((_,node)=>replace(node,''));
   }
   let updated=html;
@@ -59,10 +62,10 @@ head.find('link[href*="home.min.css"]').attr('href','https://cdn.jsdelivr.net/gh
 const schema={'@context':'https://schema.org','@type':'CollectionPage',name:title,description,url:'https://mentorios.tech/portfolio',inLanguage:'ru-RU'};
 head.append(`<script type="application/ld+json">${JSON.stringify(schema)}</script>`);
 const nav=index('.nav').clone();nav.find('[href="/portfolio"]').addClass('is-active').attr('aria-current','page');
-const portfolio=`<!doctype html>\n<html lang="ru">${head.toString()}<body>${nav.toString()}${index('#mobileMenu').toString()}${await fs.readFile('src/portfolio-main.html','utf8')}${index('.foot').toString()}<script src="main.min.js?v=54" defer></script></body></html>\n`;
-await fs.writeFile('portfolio.html',portfolio);
+const portfolio=`<!doctype html>\n<html lang="ru">${head.toString()}<body>${nav.toString()}${index('#mobileMenu').toString()}${await fs.readFile('src/portfolio-main.html','utf8')}${index('.foot').toString()}<script src="main.min.js?v=56" defer></script></body></html>\n`;
+await fs.writeFile('portfolio.html',portfolio.replace(/[\t ]+$/gm,''));
 const xml=load(await fs.readFile('sitemap.xml','utf8'),{xmlMode:true});
-xml('url').each((_,node)=>xml(node).find('lastmod').text('2026-09-24'));
-if(!xml('loc').toArray().some(node=>xml(node).text()==='https://mentorios.tech/portfolio'))xml('urlset').append('<url><loc>https://mentorios.tech/portfolio</loc><lastmod>2026-09-24</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>');
+xml('url').each((_,node)=>xml(node).find('lastmod').text('2026-09-25'));
+if(!xml('loc').toArray().some(node=>xml(node).text()==='https://mentorios.tech/portfolio'))xml('urlset').append('<url><loc>https://mentorios.tech/portfolio</loc><lastmod>2026-09-25</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>');
 await fs.writeFile('sitemap.xml',xml.xml());
 console.log('Integrated hero, portfolio, sticky contact navigation and shared styling.');
