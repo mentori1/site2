@@ -12,7 +12,7 @@ for(const page of pages){
   assert.equal($('.nav button').length,1,`${page}: menu is the only header button`);
   assert.equal($('.mobile-menu__nav [href="/portfolio"]').length,1,`${page}: portfolio in menu`);
   assert.equal($('.mobile-menu__socials [href="tel:+79114378585"]').length,1,`${page}: call link in menu`);
-  const scriptVersion=page==='index.html'?'57':'56';
+  const scriptVersion=page==='index.html'?'58':'56';
   assert($(`script[src="main.min.js?v=${scriptVersion}"]`).length,`${page}: consent/analytics retained`);
   assert($('meta[name="robots"]').attr('content')?.includes('index'),`${page}: indexing`);
   $('script[type="application/ld+json"]').each((_,el)=>JSON.parse($(el).text()));

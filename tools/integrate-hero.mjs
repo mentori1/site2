@@ -3,7 +3,7 @@ import { load } from 'cheerio';
 
 // Source offsets preserve all unrelated HTML and metadata verbatim.
 const pages=(await fs.readdir('.')).filter(name=>name.endsWith('.html')&&!name.startsWith('yandex_')&&name!=='portfolio.html');
-const hero=await fs.readFile('src/hero.html','utf8');
+const hero=(await fs.readFile('src/hero.html','utf8')).trimEnd();
 const shared=load(await fs.readFile('index.html','utf8'));
 for(const name of pages){
   const html=await fs.readFile(name,'utf8');
@@ -30,11 +30,11 @@ for(const name of pages){
   $('.foot__h').each((_,node)=>{
     if($(node).text()==='Разделы'&&!$(node).parent().find('[href="/portfolio"]').length)append(node.parent,'<a href="/portfolio">Портфолио</a>');
   });
-  const refreshVersion='20260925-excel';
+  const refreshVersion='20260925-stack';
   const refreshStyle=`<link rel="stylesheet" href="/site-refresh.css?v=${refreshVersion}">`;
   if(!$('link[href^="/site-refresh.css"]').length)append($('head')[0],`\n${refreshStyle}\n`);
   else $('link[href^="/site-refresh.css"]').each((_,node)=>replace(node,refreshStyle));
-  const scriptVersion=name==='index.html'?'57':'56';
+  const scriptVersion=name==='index.html'?'58':'56';
   $('script[src^="main.min.js"]').each((_,node)=>replace(node,`<script src="main.min.js?v=${scriptVersion}" defer></script>`));
   if(name==='index.html'){
     if($('#hero').length)replace($('#hero')[0],hero);
@@ -51,7 +51,7 @@ const index=load(await fs.readFile('index.html','utf8'));
 const title='Портфолио: системы и сайты для бизнеса | MENTORI TECHNOLOGIES';
 const description='Наши проекты: система Mentori, CRM и Telegram Mini App для танцевальной студии, сайт производственной компании Спектр Металла.';
 const head=index('head').clone();
-head.find('link[href^="/site-refresh.css"]').attr('href','/site-refresh.css?v=20260925-excel');
+head.find('link[href^="/site-refresh.css"]').attr('href','/site-refresh.css?v=20260925-stack');
 head.find('link[rel="preload"][as="image"],script[type="application/ld+json"]').remove();
 head.find('title').text(title);
 head.find('[name="description"],[property="og:description"],[name="twitter:description"]').attr('content',description);

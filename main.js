@@ -728,7 +728,6 @@
         if (i === cards.length - 1) return;
         gsap.to(card, {
           scale: 0.94,
-          opacity: 0.5,
           ease: "none",
           scrollTrigger: {
             trigger: cards[i + 1],

@@ -126,6 +126,9 @@ body.air-intro-playing { overflow: hidden; }
 .contact-hero__ways a:focus-visible { outline: none; }
 .contact-hero__ways li:has(a:focus-visible) { outline: 2px solid #ff783f; outline-offset: 5px; }
 .pkg__card,.stack__card,.blog-feature,.cost-factor,.internal-ops__item { border-radius: 26px; border-color: rgba(255,255,255,.17); background-color: rgba(255,255,255,.045); box-shadow: inset 0 1px 0 rgba(255,255,255,.1),0 16px 48px -40px #000; }
+/* Stacked cards must cover the text on the cards beneath them. */
+.services-stack .stack__card { background-color: var(--bg-elevated, #111110); backdrop-filter: none; -webkit-backdrop-filter: none; }
+@media(min-width:901px){ .services-stack .stack__card { opacity: 1; will-change: transform; } }
 .pkg__card { background: linear-gradient(125deg,rgba(255,255,255,.085),rgba(255,255,255,.025)); }
 .srv__device,.connected-service { border-radius: 26px; border-color: rgba(255,255,255,.2); background: linear-gradient(125deg,rgba(255,255,255,.085),rgba(255,255,255,.025)); box-shadow: inset 0 1px 0 rgba(255,255,255,.12),0 18px 45px -35px #000; }
 .pkg__lock-ico { width: 88px; height: 100px; max-width: none; overflow: visible; flex: none; filter: none; }
