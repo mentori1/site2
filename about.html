@@ -3,22 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="color-scheme" content="dark light" />
-  <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
-  <meta name="theme-color" content="#fafaf7" media="(prefers-color-scheme: light)" />
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#0b0b0a">
+
   <title>О компании — MENTORI TECHNOLOGIES</title>
   <!-- Тема: ставим до отрисовки (выбор пользователя > системная тема) — без мигания -->
-  <script>
-    (function () {
-      try {
-        var saved = localStorage.getItem('mentra-theme');
-        var sys = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-        document.documentElement.setAttribute('data-theme', saved || sys);
-      } catch (e) {
-        document.documentElement.setAttribute('data-theme', 'dark');
-      }
-    })();
-  </script>
+  <script>document.documentElement.dataset.theme="dark";document.documentElement.dataset.themeLock="dark";</script>
   <meta name="description" content="MENTORI TECHNOLOGIES проектирует системы и автоматизацию для бизнеса, наводит порядок в данных и процессах компании." />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <link rel="canonical" href="https://mentorios.tech/about" />
@@ -58,6 +48,8 @@
   </script>
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mentori1/site2@16abbcb/styles.min.css?v=79" />
+
+<link rel="stylesheet" href="/site-refresh.css?v=20260924-3">
 </head>
 <body>
   <div class="grain" aria-hidden="true"></div>
@@ -72,11 +64,8 @@
         <a href="/about" class="is-active">О нас</a>
         <a href="/blog">Блог</a>
         <a href="/contact">Контакты</a>
-      </nav>
-      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Переключить тему" title="Светлая / тёмная тема">
-        <svg class="theme-toggle__sun" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.7"/><path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M5 5l1.7 1.7M17.3 17.3 19 19M19 5l-1.7 1.7M6.7 17.3 5 19" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
-        <svg class="theme-toggle__moon" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.3 6.3 0 0 0 10.5 10.5z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
-      </button>
+      <a href="/portfolio">Портфолио</a></nav>
+
       <div class="nav__contacts" aria-label="Быстрая связь">
         <a class="nav__contact" href="https://t.me/Mentori_Re" aria-label="Написать в Telegram" title="Telegram" target="_blank" rel="noopener"><img src="assets/icons/telegram.svg" alt="" width="18" height="18" /></a>
         <a class="nav__contact" href="https://max.ru/u/f9LHodD0cOKBPM0dbjrb5ezQXBmCYH_aXZDfeNXg5-SMxcV_laJVpwlyBO0" aria-label="Написать в MAX" title="MAX" target="_blank" rel="noopener"><img src="assets/icons/max.svg" alt="" width="18" height="18" /></a>
@@ -94,7 +83,7 @@
       <a href="/about" class="is-active">О нас</a>
       <a href="/blog">Блог</a>
         <a href="/contact">Контакты</a>
-    </nav>
+    <a href="/portfolio">Портфолио</a></nav>
     <div class="mobile-menu__cta">
       <a href="/contact" class="btn btn--primary btn--block">
         <span>Связаться</span>
@@ -240,7 +229,7 @@
           <a href="/about">О нас</a>
           <a href="/blog">Блог</a>
         <a href="/contact">Контакты</a>
-        </div>
+        <a href="/portfolio">Портфолио</a></div>
         <div>
           <div class="foot__h">Юридическое</div>
           <a href="/privacy">Политика конфиденциальности</a>
@@ -257,6 +246,6 @@
 
 
 
-  <script src="main.min.js?v=51" defer></script>
+  <script src="main.min.js?v=52" defer></script>
 </body>
 </html>

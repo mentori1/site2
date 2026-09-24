@@ -1,0 +1,12 @@
+{
+  "name": "mentori-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 4322 --strictPort",
+    "build": "node tools/build.mjs",
+    "check": "node tools/check-site.mjs"
+  },
+  "dependencies": { "three": "0.180.0" },
+  "devDependencies": { "vite": "7.3.6", "cheerio": "1.2.0", "terser": "5.44.0" }
+}

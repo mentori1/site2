@@ -666,6 +666,7 @@
   /* ─── 12.5. THEME TOGGLE — ручной переключатель + системная тема ── */
   (function () {
     const root = document.documentElement;
+    if (root.dataset.themeLock === "dark") return;
     const toggle = document.getElementById("themeToggle");
     const metaDark = document.querySelector('meta[name="theme-color"][media*="dark"]');
 
