@@ -29,10 +29,18 @@ assert.equal(page('.offer-art--generated').length,4);
 assert.equal(page('.offer-art__brand').length,2);
 assert.equal(page('.offer-poster').length,6);
 assert.equal(page('.offer-card__decision').length,6);
-for(const s of services) assert.equal(page('#'+s.id+' .offer-poster__price strong').text(),s.price,'Poster price follows service data');
+for(const s of services) {
+  const poster=page('#'+s.id+' .offer-poster');
+  assert(!poster.text().includes('₽'),'Price is not repeated on the poster');
+  const teaser=home('a[href="/services#'+s.id+'"]');
+  assert.equal(teaser.find('.offer-poster').length,1,'Homepage reuses the complete service cover');
+  assert.equal(teaser.find('.home-offer__price').text(),s.price);
+  assert(!teaser.find('.offer-poster').text().includes('₽'));
+}
 const catalogCss=await fs.readFile('service-catalog.css','utf8');
 assert.match(catalogCss,/\.offer-grid\s*\{[^}]*align-items:stretch/,'Cards share the row height');
 assert.match(catalogCss,/\.offer-card__decision\s*\{[^}]*margin-top:auto/,'Decision rows align at the bottom');
+assert.match(catalogCss,/\.offer-price strong\s*\{[^}]*color:#ff641d/,'Single price uses the brand orange');
 const article=load(await fs.readFile('blog-yandex-direct-dlya-biznesa.html','utf8'));
 assert(!article('body').text().includes('20 000'),'Old fee removed');
 assert(article('#price').text().includes('7 500'));
@@ -45,6 +53,7 @@ assert(js.includes('".connected-service, [data-service]"'));
 for(const file of ['index.html','services.html']) {
   const $=load(await fs.readFile(file,'utf8'));
   assert.equal($('link[href^="/service-catalog.css"]').length,1);
+  assert.equal($('link[href^="/service-posters.css"]').length,1);
   assert.equal($('form').length,0,'Contact-only flow retained');
   const ids=$('[id]').toArray().map(el=>$(el).attr('id'));
   assert.equal(new Set(ids).size,ids.length,'Unique anchor IDs');

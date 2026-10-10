@@ -12,7 +12,7 @@ for (const file of ['services.html','index.html']) {
     const loc=node.sourceCodeLocation;
     edits.push({start:loc.startOffset,end:loc.endOffset,text});
   };
-  const css='<link rel="stylesheet" href="/service-catalog.css?v=20261010-4">';
+  const css='<link rel="stylesheet" href="/service-catalog.css?v=20261010-5">';
   if ($('link[href^="/service-catalog.css"]').length) replace($('link[href^="/service-catalog.css"]')[0],css);
   else {
     const offset=$('head')[0].sourceCodeLocation.endTag.startOffset;
@@ -20,10 +20,10 @@ for (const file of ['services.html','index.html']) {
   }
   const version=file==='index.html'?'59':'57';
   $('script[src^="main.min.js"]').each((_,node)=>replace(node,'<script src="main.min.js?v='+version+'" defer></script>'));
+  const posters='<link rel="stylesheet" href="/service-posters.css?v=20261010-4">';
+  if($('link[href^="/service-posters.css"]').length) replace($('link[href^="/service-posters.css"]')[0],posters);
+  else edits.push({start:$('head')[0].sourceCodeLocation.endTag.startOffset,end:$('head')[0].sourceCodeLocation.endTag.startOffset,text:posters+'\n'});
   if(file==='services.html') {
-    const posters='<link rel="stylesheet" href="/service-posters.css?v=20261010-3">';
-    if($('link[href^="/service-posters.css"]').length) replace($('link[href^="/service-posters.css"]')[0],posters);
-    else edits.push({start:$('head')[0].sourceCodeLocation.endTag.startOffset,end:$('head')[0].sourceCodeLocation.endTag.startOffset,text:posters+'\n'});
     if($('.offer-page').length) replace($('.offer-page')[0],renderServicePage());
     else {
       const start=$('.page-hero')[0].sourceCodeLocation.startOffset;
@@ -59,14 +59,35 @@ for (const file of ['services.html','index.html']) {
     };
     replace($('script[type="application/ld+json"]')[0],'<script type="application/ld+json">'+JSON.stringify(schema,null,2)+'</script>');
   } else {
+    const title='MENTORI TECHNOLOGIES — системы, сайты и продвижение бизнеса';
+    const description='Сначала наводим порядок в клиентах, заказах и оплатах. Затем подключаем сайты, Telegram-ботов, Яндекс Директ, Авито и SEO. Одна команда для системы и продвижения.';
+    replace($('title')[0],'<title>'+title+'</title>');
+    for (const selector of ['meta[name="description"]','meta[property="og:description"]','meta[name="twitter:description"]','meta[property="og:title"]','meta[name="twitter:title"]']) {
+      const node=$(selector)[0];
+      const key=$(node).attr('property')?'property':'name';
+      replace(node,'<meta '+key+'="'+$(node).attr(key)+'" content="'+(selector.includes(':title')?title:description)+'">');
+    }
+    const schema=JSON.parse($('script[type="application/ld+json"]').first().text());
+    for (const entity of schema['@graph']) {
+      if (entity['@type']==='WebPage') Object.assign(entity,{name:title,description});
+      if (entity['@type']==='Organization') {
+        entity.description=description;
+        entity.knowsAbout=[...new Set([...entity.knowsAbout,'Разработка сайтов','Яндекс Директ','Продвижение на Авито','SEO-продвижение'])];
+      }
+    }
+    replace($('script[type="application/ld+json"]')[0],'<script type="application/ld+json">'+JSON.stringify(schema,null,2)+'</script>');
     replace($('.home-offers,#internal-ops')[0],renderHomeServices());
     replace($('#hero')[0],(await fs.readFile('src/hero.html','utf8')).trim());
+    if ($('#brandIntro').length) replace($('#brandIntro')[0],'');
     if ($('#production').length) replace($('#production')[0],'');
     $('[data-stack-card] .stack__visual').each((i,node)=>replace(node,'<div class="stack__visual">'+homeScenes[i]+'</div>'));
-    const sceneCss='<link rel="stylesheet" href="/home-scenes.css?v=20261010-3">';
+    const sceneCss='<link rel="stylesheet" href="/home-scenes.css?v=20261010-4">';
     if ($('link[href^="/home-scenes.css"]').length) replace($('link[href^="/home-scenes.css"]')[0],sceneCss);
     else edits.push({start:$('head')[0].sourceCodeLocation.endTag.startOffset,end:$('head')[0].sourceCodeLocation.endTag.startOffset,text:sceneCss+'\n'});
-    const sceneJs='<script src="/home-scenes.js?v=20261010-1" defer></script>';
+    const heroCss='<link rel="stylesheet" href="/hero-focus.css?v=20261010-3">';
+    if ($('link[href^="/hero-focus.css"]').length) replace($('link[href^="/hero-focus.css"]')[0],heroCss);
+    else edits.push({start:$('head')[0].sourceCodeLocation.endTag.startOffset,end:$('head')[0].sourceCodeLocation.endTag.startOffset,text:heroCss+'\n'});
+    const sceneJs='<script src="/home-scenes.js?v=20261010-2" defer></script>';
     if ($('script[src^="/home-scenes.js"]').length) replace($('script[src^="/home-scenes.js"]')[0],sceneJs);
     else edits.push({start:$('body')[0].sourceCodeLocation.endTag.startOffset,end:$('body')[0].sourceCodeLocation.endTag.startOffset,text:sceneJs+'\n'});
   }

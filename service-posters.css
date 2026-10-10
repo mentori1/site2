@@ -1,5 +1,5 @@
 /* Editable poster typography over the existing device visuals. */
-.offer-poster { --poster-ink:#122234; --poster-accent:#176754; --poster-paper:#ecfff5; position:relative; flex:none; aspect-ratio:3/2; padding-bottom:28px; box-sizing:content-box; isolation:isolate; overflow:hidden; }
+.offer-poster { --poster-ink:#122234; --poster-accent:#176754; --poster-paper:#ecfff5; container:service-poster / inline-size; position:relative; flex:none; aspect-ratio:3/2; padding-bottom:28px; box-sizing:content-box; isolation:isolate; overflow:hidden; }
 .offer-poster>.offer-art { position:absolute; inset:0; width:100%; height:100%; aspect-ratio:auto; padding:0; }
 .offer-poster .offer-art__words,.offer-poster .offer-art__label { display:none; }
 .offer-poster .offer-art__image { height:calc(100% - 28px); width:100%; object-fit:cover; object-position:right center; }
@@ -7,13 +7,10 @@
 .offer-poster__paper { position:absolute; inset:0 48% 28px 0; background:var(--poster-paper); clip-path:polygon(0 0,100% 0,94% 100%,0 100%); z-index:0; }
 .offer-poster__brand { position:absolute; left:5%; top:5%; z-index:2; color:var(--poster-accent); font:700 18px/1 var(--font-sans,'Geist',sans-serif); }
 .offer-poster__brand small { font-size:8px; font-weight:600; }
-.offer-poster__copy { position:absolute; top:18%; left:5%; width:47%; z-index:2; color:var(--poster-ink); }
+.offer-poster__copy { position:absolute; top:25%; left:5%; width:47%; z-index:2; color:var(--poster-ink); }
 .offer-poster__headline { display:block; font:700 48px/.98 var(--font-sans,'Geist',sans-serif); text-transform:uppercase; }
 .offer-poster__accent { display:block; font:700 19px/1.2 var(--font-sans,'Geist',sans-serif); color:var(--poster-accent); margin-top:12px; }
-.offer-poster__copy p { margin:16px 0 0; font:500 14px/1.6 var(--font-sans,'Geist',sans-serif); }
-.offer-poster__price { position:absolute; left:5%; bottom:calc(28px + 6%); width:46%; min-height:70px; padding:12px 16px; border-radius:14px; background:var(--poster-accent); color:#fff; z-index:2; }
-.offer-poster__price strong { display:block; font:700 29px/1.2 var(--font-sans,'Geist',sans-serif); white-space:nowrap; }
-.offer-poster__price small { display:block; font:400 11px/1.4 var(--font-sans,'Geist',sans-serif); margin-top:4px; }
+.offer-poster__copy p { margin:24px 0 0; font:500 14px/1.6 var(--font-sans,'Geist',sans-serif); }
 .offer-poster .offer-art__brand { top:5%; left:auto; right:4%; width:44px; height:44px; z-index:3; }
 .offer-poster--studio { --poster-accent:#862d66; --poster-ink:#401832; --poster-paper:#fff1fc; }
 .offer-poster--websites { --poster-accent:#df382b; --poster-ink:#351512; --poster-paper:#fff5ef; }
@@ -24,7 +21,6 @@
 .offer-poster--websites .offer-poster__headline { font-size:41px; }
 .offer-poster--seo .offer-poster__headline { font-size:29px; line-height:1.2; }
 .offer-poster--seo .offer-poster__headline::first-line { font-size:68px; line-height:.95; }
-.offer-poster--direct .offer-poster__price strong { font-size:24px; }
 .offer-poster--websites .offer-art { background:#ee4f40; }
 .offer-poster__device { position:absolute; width:48%; height:calc(100% - 36px); object-fit:contain; right:0; top:4px; }
 .offer-poster--websites .offer-poster__copy { width:45%; }
@@ -45,32 +41,24 @@
 .offer-poster--avito .offer-poster__motif i:nth-child(2) { width:25%; height:25%; top:15%; left:40%; border-radius:50%; }
 .offer-poster--seo .offer-poster__motif i:first-child { width:75%; height:72%; border-radius:50%; }
 .offer-poster--seo .offer-poster__motif i:nth-child(2) { top:73%; left:68%; width:9%; height:40%; border:0; background:currentColor; transform:rotate(-35deg); border-radius:6px; }
-@media(max-width:1200px) and (min-width:1001px) {
+@container service-poster (max-width:540px) {
   .offer-poster__headline { font-size:36px; }
   .offer-poster--websites .offer-poster__headline { font-size:32px; }
   .offer-poster--seo .offer-poster__headline { font-size:23px; }
   .offer-poster--seo .offer-poster__headline::first-line { font-size:52px; }
   .offer-poster__accent { font-size:14px; margin-top:10px; }
   .offer-poster__copy p { font-size:12px; margin-top:10px; }
-  .offer-poster__price { padding:9px 12px; min-height:58px; }
-  .offer-poster__price strong { font-size:24px; }
-  .offer-poster--direct .offer-poster__price strong { font-size:18px; }
-  .offer-poster__price small { font-size:9px; }
 }
 @media(max-width:1000px) { .offer-grid { grid-template-columns:1fr; } }
-@media(max-width:600px) {
+@container service-poster (max-width:460px) {
   .offer-poster__headline { font-size:35px; }
   .offer-poster--websites .offer-poster__headline { font-size:30px; }
   .offer-poster--seo .offer-poster__headline { font-size:23px; }
   .offer-poster--seo .offer-poster__headline::first-line { font-size:52px; }
   .offer-poster__accent { font-size:14px; margin-top:8px; }
   .offer-poster__copy p { font-size:12px; margin-top:10px; }
-  .offer-poster__price { padding:9px 12px; min-height:54px; }
-  .offer-poster__price strong { font-size:24px; }
-  .offer-poster--direct .offer-poster__price strong { font-size:18px; }
-  .offer-poster__price small { font-size:9px; }
 }
-@media(max-width:480px) {
+@container service-poster (max-width:380px) {
   .offer-poster__brand { font-size:12px; }
   .offer-poster__brand small { font-size:6px; }
   .offer-poster__headline { font-size:27px; }
@@ -79,10 +67,6 @@
   .offer-poster--seo .offer-poster__headline::first-line { font-size:43px; }
   .offer-poster__accent { font-size:11px; margin-top:8px; }
   .offer-poster__copy p { font-size:10px; line-height:1.4; margin-top:10px; }
-  .offer-poster__price { bottom:calc(28px + 4%); min-height:44px; padding:7px 10px; border-radius:9px; }
-  .offer-poster__price strong { font-size:20px; }
-  .offer-poster--direct .offer-poster__price strong { font-size:15px; }
-  .offer-poster__price small { font-size:7px; margin-top:2px; }
   .offer-poster .offer-art__brand { width:28px; height:28px; }
   .offer-poster .offer-art__caption { font-size:7px; padding-inline:14px; }
   .offer-poster--seo .offer-phone { padding:5px; border-radius:25px; }
@@ -94,14 +78,11 @@
   .offer-poster--seo .phone-search>small,.offer-poster--seo .phone-search p { font-size:7px; }
   .offer-poster--seo .phone-search h4 { font-size:11px; }
 }
-@media(max-width:370px) {
-  .offer-poster { aspect-ratio:1.4; }
+@container service-poster (max-width:310px) {
   .offer-poster__headline { font-size:23px; }
   .offer-poster--websites .offer-poster__headline { font-size:20px; }
   .offer-poster--seo .offer-poster__headline { font-size:14px; }
   .offer-poster--seo .offer-poster__headline::first-line { font-size:35px; }
   .offer-poster__accent { font-size:9px; margin-top:6px; }
   .offer-poster__copy p { font-size:8px; margin-top:7px; }
-  .offer-poster__price strong { font-size:17px; }
-  .offer-poster--direct .offer-poster__price strong { font-size:12px; }
 }

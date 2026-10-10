@@ -102,7 +102,7 @@
 .offer-details>ul { padding-left:18px; }
 .offer-details li+li { margin-top:8px; }
 .offer-price { border-top:1px solid var(--offer-line); padding:21px 0 0; }
-.offer-price strong { font-size:25px; font-weight:500; }
+.offer-price strong { font-size:25px; font-weight:600; color:#ff641d; }
 .offer-price p { font-size:12px; line-height:1.65; color:#b7b7b2; margin:8px 0 0; min-height:40px; }
 .offer-actions { display:flex; flex-wrap:wrap; align-items:center; gap:18px 22px; margin-top:25px; }
 .offer-actions .btn { font-size:14px; padding:16px 24px; min-height:48px; }
@@ -116,16 +116,11 @@
 .offer-contact { text-align:center; padding:80px 0 100px; border-top:1px solid var(--offer-line); }
 .offer-contact p { color:var(--offer-muted); font-size:17px; line-height:1.6; margin-bottom:28px; }
 .home-offers { padding:75px 0; }
-.home-offers__grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; margin:36px 0 24px; }
-.home-offer { display:block; min-width:0; }
-.home-offer .offer-art { height:160px; border-radius:18px; pointer-events:none; }
-.home-offer .offer-art__label,.home-offer .offer-art__caption,.home-offer .offer-art__words { display:none; }
-.home-offer .offer-phone { transform:scale(.62) rotate(8deg); transform-origin:top center; top:20px; right:calc(50% - 105px); }
-.home-offer .offer-art__studio-phone { width:150px; top:12px; right:calc(50% - 75px); }
-.home-offer .offer-phone--website { right:6%; transform:scale(.65) rotate(8deg); }
-.home-offer .offer-browser { top:26px; }
-.home-offer__title { display:block; color:#f7f5ed; margin:16px 0 5px; font-size:18px; line-height:1.35; }
-.home-offer__price { font-size:13px; color:#babbb5; }
+.home-offers__grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); align-items:stretch; gap:28px 24px; margin:36px 0 24px; }
+.home-offer { display:flex; flex-direction:column; min-width:0; }
+.home-offer .offer-poster { border-radius:18px; pointer-events:none; }
+.home-offer__title { display:block; color:#f7f5ed; margin:16px 0 8px; min-height:2.7em; font-size:18px; line-height:1.35; }
+.home-offer__price { margin-top:auto; font-size:17px; line-height:1.4; font-weight:600; color:#ff641d; }
 .home-offer:hover .home-offer__title { color:#ff641d; }
 .offer-page a:focus-visible,.offer-page summary:focus-visible,.home-offers a:focus-visible { outline:2px solid #ff8b53; outline-offset:5px; }
 @media(max-width:1100px) {
@@ -167,11 +162,11 @@
   .offer-contact { padding:48px 0 64px; }
   .home-offers { padding:45px 0; }
   .home-offers__grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px 14px; }
-  .home-offer .offer-art { height:145px; }
-  .home-offer__title { font-size:16px; }
-  .home-offer .offer-phone { width:210px; height:405px; right:calc(50% - 105px); top:14px; }
-  .home-offer .offer-phone--website { width:152px; height:292px; right:0; top:25px; }
-  .home-offer .offer-art__studio-phone { width:145px; right:calc(50% - 72px); top:12px; }
+  .home-offer__title { font-size:17px; }
+}
+@media(max-width:600px) {
+  .home-offers__grid { grid-template-columns:1fr; gap:30px; }
+  .home-offer__title { min-height:0; }
 }
 @media(max-width:480px) {
   .offer-heading h1 { font-size:36px; }
@@ -195,11 +190,6 @@
   .offer-phone--system { border-radius:24px; padding:5px; }
   .offer-phone--system .offer-phone__screen { border-radius:17px; padding-top:23px; }
   .offer-phone--system .offer-phone__island { width:42px; height:10px; top:10px; }
-  .home-offer .offer-art { height:130px; }
-  .home-offer .offer-phone { transform:scale(.55) rotate(7deg); transform-origin:top center; right:calc(50% - 105px); top:14px; }
-  .home-offer .offer-phone--website { transform:scale(.55) rotate(7deg); right:-15px; top:22px; }
-  .home-offer__title { font-size:14px; }
-  .home-offer__price { font-size:12px; }
 }
 @media(max-width:380px) {
   .offer-art__words { font-size:22px; max-width:110px; top:80px; }
@@ -207,9 +197,6 @@
   .offer-art .offer-phone { width:182px; height:352px; right:3%; top:58px; transform:scale(.68) rotate(7deg); }
   .offer-art__studio-phone { width:128px; right:5%; top:58px; }
   .offer-art .offer-phone--website { width:152px; height:292px; top:80px; right:5%; }
-  .home-offer .offer-phone { width:210px; height:405px; right:calc(50% - 105px); top:14px; transform:scale(.55) rotate(7deg); }
-  .home-offer .offer-phone--website { width:152px; height:292px; right:-15px; top:22px; }
-  .home-offer .offer-art__studio-phone { width:145px; right:calc(50% - 72px); top:12px; }
 }
 @media(prefers-reduced-motion:reduce) { .offer-cta { transition:none; } }
 
@@ -222,8 +209,6 @@
 .offer-extra { padding:18px 0; margin:0 0 12px; border-top:1px solid var(--offer-line); }
 .offer-extra strong { color:#ff975e; font-size:14px; font-weight:500; line-height:1.5; }
 .offer-extra p { margin:8px 0 0; color:#bfc2c0; font-size:13px; line-height:1.65; }
-.home-offer .offer-art--generated { height:auto; aspect-ratio:3/2; padding:0; }
-.home-offer .offer-art__brand { width:28px; height:28px; }
 @media(max-width:1100px) { .offer-art--generated .offer-art__words { font-size:26px; } }
 @media(max-width:800px) {
   .offer-index { gap:9px; }

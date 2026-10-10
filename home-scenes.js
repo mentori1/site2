@@ -1,36 +1,4 @@
 (() => {
-  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  const demo = document.querySelector('[data-order-demo]');
-  if (demo) {
-    let timer;
-    let played = false;
-    const select = view => {
-      clearTimeout(timer);
-      demo.classList.remove('is-crossed');
-      demo.dataset.view = view;
-      demo.querySelectorAll('[data-order-view]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.orderView === view)));
-      demo.querySelectorAll('[data-order-panel]').forEach(panel => { panel.hidden = panel.dataset.orderPanel !== view; });
-    };
-    demo.querySelectorAll('[data-order-view]').forEach(button => button.addEventListener('click', () => {
-      played = true;
-      select(button.dataset.orderView);
-    }));
-    if ('IntersectionObserver' in window && !reduced.matches) {
-      const observer = new IntersectionObserver(entries => {
-        const visible = entries[0].isIntersecting;
-        clearTimeout(timer);
-        if (!visible) { demo.classList.remove('is-crossed'); return; }
-        if (played) return;
-        timer = setTimeout(() => {
-          demo.classList.add('is-crossed');
-          timer = setTimeout(() => { played = true; select('after'); }, 850);
-        }, 2300);
-      }, {threshold: .55});
-      observer.observe(demo);
-      document.addEventListener('visibilitychange', () => { if (document.hidden) { played = true; select('after'); } });
-      reduced.addEventListener('change', () => { if (reduced.matches) { played = true; select('after'); observer.disconnect(); } });
-    }
-  }
   // Each scene animates once; offscreen cards have no animation loop.
   const scenes = document.querySelectorAll('[data-flow-demo]');
   if ('IntersectionObserver' in window) {

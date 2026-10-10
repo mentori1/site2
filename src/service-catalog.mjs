@@ -70,17 +70,17 @@ export const systemVisual = '<figure class="system-preview"><img class="system-p
 
 const items = arr => arr.map(i=>'<li>'+i+'</li>').join('');
 const posterCopy = {
-  studio:{heading:'УЧЁТ<br>ЗАНЯТИЙ',accent:'БЕЗ ТАБЛИЦ',facts:'Запись · Абонементы<br>Оплаты · Расписание',priceNote:'готовое решение'},
-  websites:{heading:'САЙТЫ<br>ПОД КЛЮЧ',accent:'ВАС ВИДНО',facts:'Лендинг · Каталог<br>Удобно с телефона',priceNote:'разработка'},
-  bots:{heading:'TELEGRAM<br>БОТЫ',accent:'РУТИНУ БОТУ',facts:'Ответы · Запись<br>Заявки · Уведомления',priceNote:'под вашу задачу'},
-  direct:{heading:'ЯНДЕКС<br>ДИРЕКТ',accent:'ЗАПУСК И ВЕДЕНИЕ',facts:'Настройка · Тесты<br>Аналитика · Отчётность',priceNote:'ведение · бюджет отдельно'},
-  avito:{heading:'АВИТО<br>ПОД КЛЮЧ',accent:'ИЗ ПОИСКА В ДИАЛОГ',facts:'Упаковка · Ведение<br>Бот для ответов в бонус',priceNote:'оформление'},
-  seo:{heading:'SEO<br>ПРОДВИЖЕНИЕ',accent:'ВАС УЖЕ ИЩУТ',facts:'Аудит · Страницы<br>Контент · Индексация',priceNote:'объём после аудита'}
+  studio:{heading:'УЧЁТ<br>ЗАНЯТИЙ',accent:'БЕЗ ТАБЛИЦ',facts:'Запись · Абонементы<br>Оплаты · Расписание'},
+  websites:{heading:'САЙТЫ<br>ПОД КЛЮЧ',accent:'ВАС ВИДНО',facts:'Лендинг · Каталог<br>Удобно с телефона'},
+  bots:{heading:'TELEGRAM<br>БОТЫ',accent:'РУТИНУ БОТУ',facts:'Ответы · Запись<br>Заявки · Уведомления'},
+  direct:{heading:'ЯНДЕКС<br>ДИРЕКТ',accent:'ЗАПУСК И ВЕДЕНИЕ',facts:'Настройка · Тесты<br>Аналитика · Отчётность'},
+  avito:{heading:'АВИТО<br>ПОД КЛЮЧ',accent:'ИЗ ПОИСКА В ДИАЛОГ',facts:'Упаковка · Ведение<br>Бот для ответов в бонус'},
+  seo:{heading:'SEO<br>ПРОДВИЖЕНИЕ',accent:'ВАС УЖЕ ИЩУТ',facts:'Аудит · Страницы<br>Контент · Индексация'}
 };
 function renderPoster(s) {
   const p=posterCopy[s.id];
   const visual=s.id==='websites'?'<div class="offer-art offer-art--websites offer-art--generated"><img class="offer-poster__device" src="/assets/services/website-phone-v3.webp" width="733" height="1100" alt="iPhone с каталогом Спектра Металла" loading="lazy" decoding="async"><span class="offer-art__caption">Визуализация сайта «Спектр Металла»</span></div>':s.visual;
-  return '<div class="offer-poster offer-poster--'+s.id+'">'+visual+'<div class="offer-poster__paper" aria-hidden="true"></div><div class="offer-poster__motif" aria-hidden="true"><i></i><i></i><i></i></div><div class="offer-poster__brand" aria-hidden="true">MENTORI <small>TECH</small></div><div class="offer-poster__copy"><strong class="offer-poster__headline">'+p.heading+'</strong><b class="offer-poster__accent">'+p.accent+'</b><p>'+p.facts+'</p></div><div class="offer-poster__price"><strong>'+s.price+'</strong><small>'+p.priceNote+'</small></div></div>';
+  return '<div class="offer-poster offer-poster--'+s.id+'">'+visual+'<div class="offer-poster__paper" aria-hidden="true"></div><div class="offer-poster__motif" aria-hidden="true"><i></i><i></i><i></i></div><div class="offer-poster__brand" aria-hidden="true">MENTORI <small>TECH</small></div><div class="offer-poster__copy"><strong class="offer-poster__headline">'+p.heading+'</strong><b class="offer-poster__accent">'+p.accent+'</b><p>'+p.facts+'</p></div></div>';
 }
 function renderCard(s) {
   return '<article class="offer-card" id="'+s.id+'" aria-labelledby="'+s.id+'-title">'+renderPoster(s)+'<div class="offer-card__copy"><p class="offer-card__need">'+s.need+'</p><h3 id="'+s.id+'-title">'+s.title+'</h3><p class="offer-card__description">'+s.description+'</p><ul class="offer-scope">'+items(s.scope)+'</ul>'+(s.extraTitle?'<aside class="offer-extra"><strong>'+s.extraTitle+'</strong><p>'+s.extraText+'</p></aside>':'')+'<div class="offer-card__decision"><details class="offer-details"><summary>Что входит</summary><ul>'+items(s.details)+'</ul></details><div class="offer-price"><strong>'+s.price+'</strong><p>'+s.terms+'</p></div><div class="offer-actions"><a href="/contact" class="offer-cta" data-service="'+s.title+'">'+s.action+'</a>'+(s.caseHref?'<a class="offer-case" href="'+s.caseHref+'">'+s.caseLabel+'</a>':'')+'</div></div></div></article>';
@@ -98,7 +98,7 @@ export function renderServicePage() {
 export function renderHomeServices() {
   const links=services.map(s=>[
     '<a class="home-offer" href="/services#'+s.id+'" data-service="'+s.title+'" aria-label="'+s.short+', '+s.price+'">',
-    '<div aria-hidden="true">'+s.visual+'</div>',
+    '<div aria-hidden="true">'+renderPoster(s)+'</div>',
     '<span class="home-offer__title">'+s.short+'</span><span class="home-offer__price">'+s.price+'</span></a>'
   ].join('')).join('');
   return '<section class="home-offers" id="directions" aria-labelledby="home-offers-title"><div class="home-offers__heading"><h2 id="home-offers-title">Что ещё можем<br><em>сделать для вас</em></h2><p>От записи на занятия до сайта и рекламы.<br>Конкретная задача, отдельное решение.</p></div><div class="home-offers__grid">'+links+'</div><a class="offer-case" href="/services">Все услуги и что в них входит</a></section>';
