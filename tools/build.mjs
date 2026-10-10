@@ -1,5 +1,6 @@
 import fs from 'node:fs/promises';
 import { minify } from 'terser';
+import './build-services.mjs';
 
 const result=await minify(await fs.readFile('main.js','utf8'),{compress:true,mangle:true});
 await fs.writeFile('main.min.js',result.code);

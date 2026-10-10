@@ -34,7 +34,7 @@ for(const name of pages){
   const refreshStyle=`<link rel="stylesheet" href="/site-refresh.css?v=${refreshVersion}">`;
   if(!$('link[href^="/site-refresh.css"]').length)append($('head')[0],`\n${refreshStyle}\n`);
   else $('link[href^="/site-refresh.css"]').each((_,node)=>replace(node,refreshStyle));
-  const scriptVersion=name==='index.html'?'58':'56';
+  const scriptVersion=name==='index.html'?'59':name==='services.html'?'57':'56';
   $('script[src^="main.min.js"]').each((_,node)=>replace(node,`<script src="main.min.js?v=${scriptVersion}" defer></script>`));
   if(name==='index.html'){
     if($('#hero').length)replace($('#hero')[0],hero);

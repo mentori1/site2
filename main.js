@@ -199,14 +199,14 @@
       });
     }
 
-    if (link.matches(".connected-service")) {
+    if (link.matches(".connected-service, [data-service]")) {
       reachGoal("service_click", {
         ...commonParams,
-        service: cleanText(link.querySelector("h3, h2")?.textContent || linkText),
+        service: cleanText(link.dataset.service || link.querySelector("h3, h2")?.textContent || linkText),
       });
     }
 
-    if (/^\/?contact(?:\.html)?(?:[?#].*)?$/i.test(href) && link.matches(".btn, .connected-service")) {
+    if (/^\/?contact(?:\.html)?(?:[?#].*)?$/i.test(href) && link.matches(".btn, .connected-service, .offer-cta")) {
       reachGoal("cta_contact", commonParams);
     }
 
