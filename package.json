@@ -3,9 +3,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite --host 127.0.0.1 --port 4322 --strictPort",
+    "dev": "vite --host 127.0.0.1 --port 4323 --strictPort",
     "build": "node tools/build.mjs",
-    "check": "node tools/check-site.mjs && node tools/check-intro.mjs && node tools/check-stack.mjs && node tools/check-services.mjs"
+    "check": "node tools/check-site.mjs && node tools/check-intro.mjs && node tools/check-stack.mjs && node tools/check-services.mjs && node tools/check-home-scenes.mjs"
   },
   "dependencies": { "three": "0.180.0" },
   "devDependencies": { "vite": "7.3.6", "cheerio": "1.2.0", "terser": "5.44.0" }

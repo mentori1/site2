@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises';
 import { load } from 'cheerio';
 import { services, renderServicePage, renderHomeServices } from '../src/service-catalog.mjs';
+import { homeScenes } from '../src/home-scenes.mjs';
 
 // Source offsets keep the existing menu, footer and consent code untouched.
 for (const file of ['services.html','index.html']) {
@@ -11,7 +12,7 @@ for (const file of ['services.html','index.html']) {
     const loc=node.sourceCodeLocation;
     edits.push({start:loc.startOffset,end:loc.endOffset,text});
   };
-  const css='<link rel="stylesheet" href="/service-catalog.css?v=20261010-2">';
+  const css='<link rel="stylesheet" href="/service-catalog.css?v=20261010-4">';
   if ($('link[href^="/service-catalog.css"]').length) replace($('link[href^="/service-catalog.css"]')[0],css);
   else {
     const offset=$('head')[0].sourceCodeLocation.endTag.startOffset;
@@ -20,6 +21,9 @@ for (const file of ['services.html','index.html']) {
   const version=file==='index.html'?'59':'57';
   $('script[src^="main.min.js"]').each((_,node)=>replace(node,'<script src="main.min.js?v='+version+'" defer></script>'));
   if(file==='services.html') {
+    const posters='<link rel="stylesheet" href="/service-posters.css?v=20261010-3">';
+    if($('link[href^="/service-posters.css"]').length) replace($('link[href^="/service-posters.css"]')[0],posters);
+    else edits.push({start:$('head')[0].sourceCodeLocation.endTag.startOffset,end:$('head')[0].sourceCodeLocation.endTag.startOffset,text:posters+'\n'});
     if($('.offer-page').length) replace($('.offer-page')[0],renderServicePage());
     else {
       const start=$('.page-hero')[0].sourceCodeLocation.startOffset;
@@ -57,6 +61,14 @@ for (const file of ['services.html','index.html']) {
   } else {
     replace($('.home-offers,#internal-ops')[0],renderHomeServices());
     replace($('#hero')[0],(await fs.readFile('src/hero.html','utf8')).trim());
+    if ($('#production').length) replace($('#production')[0],'');
+    $('[data-stack-card] .stack__visual').each((i,node)=>replace(node,'<div class="stack__visual">'+homeScenes[i]+'</div>'));
+    const sceneCss='<link rel="stylesheet" href="/home-scenes.css?v=20261010-3">';
+    if ($('link[href^="/home-scenes.css"]').length) replace($('link[href^="/home-scenes.css"]')[0],sceneCss);
+    else edits.push({start:$('head')[0].sourceCodeLocation.endTag.startOffset,end:$('head')[0].sourceCodeLocation.endTag.startOffset,text:sceneCss+'\n'});
+    const sceneJs='<script src="/home-scenes.js?v=20261010-1" defer></script>';
+    if ($('script[src^="/home-scenes.js"]').length) replace($('script[src^="/home-scenes.js"]')[0],sceneJs);
+    else edits.push({start:$('body')[0].sourceCodeLocation.endTag.startOffset,end:$('body')[0].sourceCodeLocation.endTag.startOffset,text:sceneJs+'\n'});
   }
   let result=html;
   for(const edit of edits.sort((a,b)=>b.start-a.start)) result=result.slice(0,edit.start)+edit.text+result.slice(edit.end);
@@ -71,8 +83,13 @@ const replaceArticle=(node,text)=>{
   const loc=node.sourceCodeLocation;
   articleEdits.push({start:loc.startOffset,end:loc.endOffset,text});
 };
+const botStatus='Telegram-бот для Яндекс Директа находится в разработке. Планируем отчёты и просмотр статистики, изменение базовых настроек и бюджета, обновление изображений объявлений. Готовность и условия подключения сообщим отдельно.';
+replaceArticle(articleDom('#telegram')[0],'<section id="telegram"><h2>Telegram-бот для рекламы: в разработке</h2><p>'+botStatus+'</p><div class="article-feature-grid"><div><span>01</span><b>Отчёты в Telegram</b><p>Планируем автоматические сводки по рекламе и просмотр статистики без перехода в рекламный кабинет.</p></div><div><span>02</span><b>Бюджет и настройки</b><p>Работаем над изменением бюджета и базовых параметров кампаний через бота.</p></div><div><span>03</span><b>Изображения объявлений</b><p>Планируем обновление рекламных изображений прямо из Telegram.</p></div></div><div class="article-callout"><span>Это ещё не готовая услуга</span><p>Сейчас ведение рекламы и отчётность выполняет команда. Возможности бота показаны как планы разработки, а не как доступные функции тарифа.</p></div></section>');
+replaceArticle(articleDom('meta[name="description"]')[0],'<meta name="description" content="Что входит в ведение Яндекс Директа за 7 500 рублей в месяц: подготовка, аналитика и отчётность. Telegram-бот для управления рекламой в разработке.">');
+replaceArticle(articleDom('.article-cta > p')[0],'<p>Разберём предложение, сайт, аналитику и обработку заявок. Покажем, как устроены ведение рекламы и отчётность.</p>');
 replaceArticle(articleDom('#price > p').first()[0],'<p>Ведение Яндекс Директа в MENTORI TECHNOLOGIES стоит <strong>7 500 рублей в месяц</strong>. Стоимость первоначальной настройки согласуем после обсуждения задачи.</p>');
 articleDom('#faq details').each((_,node)=>{
+  if(articleDom(node).find('summary').text().includes('Telegram-бот')) replaceArticle(articleDom(node).find('p')[0],'<p>'+botStatus+'</p>');
   if(articleDom(node).find('summary').text()==='Сколько стоит ведение Яндекс Директ?') {
     replaceArticle(articleDom(node).find('p')[0],'<p>Ведение стоит 7 500 рублей в месяц. Рекламный бюджет оплачивается отдельно, стоимость первоначальной настройки согласуем.</p>');
   }
@@ -82,6 +99,8 @@ articleDom('script[type="application/ld+json"]').each((_,node)=>{
   const schema=JSON.parse(articleDom(node).text());
   const walk=value=>{
     if(!value||typeof value!=='object') return;
+    if(value['@type']==='BlogPosting') value.description='Ведение Яндекс Директа, аналитика и отчётность. Telegram-бот для управления рекламой находится в разработке.';
+    if(value['@type']==='Question'&&value.name?.includes('Telegram-бот')) value.acceptedAnswer.text=botStatus;
     if(value['@type']==='Question'&&value.name==='Сколько стоит ведение Яндекс Директ?')
       value.acceptedAnswer.text='В MENTORI TECHNOLOGIES ведение Яндекс Директа стоит 7 500 рублей в месяц. Рекламный бюджет отдельно, стоимость первоначальной настройки согласуем.';
     Object.values(value).forEach(walk);

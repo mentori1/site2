@@ -1,6 +1,6 @@
 // Shared content for the service page, homepage links and structured data.
 const phone = (content, theme = '') => '<div class="offer-phone '+theme+'"><div class="offer-phone__island"></div><div class="offer-phone__screen">'+content+'</div></div>';
-const telegramHeader = '<div class="phone-app-head"><img src="/assets/icons/telegram.svg" alt="" width="28" height="28"><span>Помощник<br><small>Telegram-бот</small></span></div>';
+const generatedArt = (id, alt, words, caption, logo = '') => '<div class="offer-art offer-art--'+id+' offer-art--generated"><img class="offer-art__image" src="/assets/services/'+({websites:'website',bots:'bot'}[id]||id)+'-device-v2.webp" width="1200" height="800" alt="'+alt+'" loading="lazy" decoding="async">'+(logo?'<img class="offer-art__brand" src="/assets/services/'+logo+'-official.webp" alt="'+(logo==='direct'?'Яндекс Директ':'Авито')+'" width="56" height="56">':'')+(words?'<div class="offer-art__words">'+words+'</div>':'')+'<span class="offer-art__caption">'+caption+'</span></div>';
 export const services = [
   {
     id:'studio', title:'Учёт занятий и абонементов', short:'Занятия и студии',
@@ -10,7 +10,7 @@ export const services = [
     price:'15 000 ₽', priceValue:'15000', terms:'Единоразово за готовое решение. Запуск за 10 дней после согласования вашего формата.',
     details:['Клиенты, расписание и история посещений.','Разовые занятия, группы, индивидуальные встречи и абонементы.','Кабинет ученика в Telegram и учёт оплат. Проверка чеков остаётся у преподавателя.'],
     action:'Обсудить студию', caseHref:'/portfolio#studio', caseLabel:'Пример студии',
-    visual:'<div class="offer-art offer-art--studio"><span class="offer-art__label">ЗАНЯТИЯ. БЕЗ ПЕРЕПИСОК.</span><div class="offer-art__words">Ваша студия.<br><em>Всё на месте.</em></div><img class="offer-art__studio-phone" src="/assets/services/studio.webp" width="540" height="1056" alt="Кабинет ученика на телефоне: абонементы и выбор даты занятия" loading="lazy" decoding="async"><span class="offer-art__caption">Реализованный проект · демоданные</span></div>'
+    visual:'<div class="offer-art offer-art--studio"><span class="offer-art__label">ЗАНЯТИЯ. БЕЗ ПЕРЕПИСОК.</span><div class="offer-art__words">Вы ведёте<br>занятия.<br><em>Не таблицы.</em></div><img class="offer-art__studio-phone" src="/assets/services/studio.webp" width="540" height="1056" alt="Кабинет ученика на телефоне: абонементы и выбор даты занятия" loading="lazy" decoding="async"><span class="offer-art__caption">Реализованный проект · демоданные</span></div>'
   },
   {
     id:'websites', title:'Сайты для бизнеса', short:'Разработка сайтов',
@@ -20,7 +20,7 @@ export const services = [
     price:'от 5 000 ₽', priceValue:'5000', terms:'Итоговая стоимость зависит от страниц и функций. Согласуем до начала работы.',
     details:['Структура, тексты, дизайн и разработка.','Мобильная версия, формы и способы связи.','Каталог, фильтры и калькулятор при необходимости. Состав согласуем отдельно.'],
     action:'Обсудить сайт', caseHref:'/portfolio#spektr', caseLabel:'Кейс «Спектр Металла»',
-    visual:'<div class="offer-art offer-art--websites"><span class="offer-art__label">УДОБНО ВЫБРАТЬ. ПРОСТО ЗАКАЗАТЬ.</span><div class="offer-browser"><div class="offer-browser__bar">metallomsk.ru</div><img src="/assets/services/catalog.webp" width="960" height="667" alt="Каталог Спектра Металла: товары, фильтры и цвета" loading="lazy" decoding="async"></div>'+phone('<img src="/assets/services/cart.webp" width="390" height="844" alt="Корзина заказа на телефоне" loading="lazy" decoding="async">','offer-phone--website')+'<span class="offer-art__caption">Реализованный проект · Спектр Металла</span></div>'
+    visual:generatedArt('websites','Каталог Спектра Металла на ноутбуке и iPhone с полноценной строкой состояния','','Визуализация сайта «Спектр Металла»')
   },
   {
     id:'bots', title:'Telegram-боты', short:'Telegram-боты',
@@ -30,7 +30,7 @@ export const services = [
     price:'от 3 000 ₽', priceValue:'3000', terms:'Стоимость зависит от сценария и подключений. Уточняем функции до разработки.',
     details:['Продумываем путь клиента, кнопки и ответы.','Разрабатываем бота, проверяем сценарии и запускаем.','Подключение к вашему учёту и отчёты обсуждаем под задачу.'],
     action:'Обсудить бота',
-    visual:'<div class="offer-art offer-art--bots"><span class="offer-art__label">ОТ ВОПРОСА ДО ЗАЯВКИ</span><div class="offer-art__words">Рутину<br><em>берёт бот.</em></div>'+phone(telegramHeader+'<div class="phone-chat"><p>Здравствуйте! Чем можем помочь?</p><span class="phone-chat__choice">Записаться на встречу</span><p>Выберите удобное время</p><div class="phone-times"><span>10:00</span><span>12:30</span><span>15:00</span></div><span class="phone-chat__choice">12:30</span><p class="phone-chat__success">Вы записаны.<br>Напомним перед встречей.</p></div>')+'<span class="offer-art__caption">Пример сценария бота</span></div>'
+    visual:generatedArt('bots','iPhone с примером записи через Telegram-бота','Клиент<br>записался.<br><em>Вы не<br>отвлекались.</em>','Демонстрационный сценарий записи')
   },
   {
     id:'direct', title:'Яндекс Директ', short:'Яндекс Директ',
@@ -38,19 +38,21 @@ export const services = [
     description:'Настраиваем рекламу, проверяем запросы и объявления. Вы получаете понятный отчёт: что сделали и что меняем дальше.',
     scope:['Запуск рекламы','Ведение','Отчётность'],
     price:'7 500 ₽ / месяц', priceValue:'7500', terms:'Ведение. Рекламный бюджет отдельно, стоимость первоначальной настройки согласуем.',
-    details:['Анализ ниши, запросы, минус-фразы и объявления.','Проверка статистики, тесты и корректировки кампаний.','PDF-отчёт каждые 10 дней. Дополнительно подключаем Telegram-бота со статистикой рекламы.'],
+    details:['Анализ ниши, запросы, минус-фразы и объявления.','Проверка статистики, тесты и корректировки кампаний.','PDF-отчёт каждые 10 дней. Telegram-бот для отчётности и управления рекламой сейчас в разработке.'],
+    extraTitle:'Telegram-бот для рекламы · в разработке', extraText:'Готовим бота, который будет присылать отчёты и показывать, что происходит с рекламой. Планируем базовые настройки, регулировку бюджета и обновление изображений объявлений прямо из Telegram. Подключение обсудим после готовности.',
     action:'Обсудить рекламу', caseHref:'/blog-yandex-direct-dlya-biznesa', caseLabel:'Как ведём рекламу',
-    visual:'<div class="offer-art offer-art--direct"><span class="offer-art__label">РЕКЛАМА С ПОНЯТНЫМ ОТЧЁТОМ</span><div class="offer-art__words">Не просто<br><em>клики.</em></div>'+phone(telegramHeader+'<div class="phone-report"><small>ОТЧЁТ ПО РЕКЛАМЕ</small><h4>Что происходит<br>с рекламой</h4><div class="phone-report__chart" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div><p><b>Что сделали</b>Проверили поисковые запросы</p><p><b>Что узнали</b>Сравнили варианты объявлений</p><p><b>Следующий шаг</b>Тестируем новые тексты</p></div>','offer-phone--light')+'<span class="offer-art__caption">Пример отчёта, не показатели клиента</span></div>'
+    visual:generatedArt('direct','Прототип Telegram-бота для управления рекламой','Куда уходит<br><em>рекламный<br>бюджет?</em>','Концепция бота · в разработке','direct')
   },
   {
     id:'avito', title:'Оформление и ведение Авито', short:'Услуги авитолога',
     need:'Когда объявление есть, а предложение не цепляет',
     description:'Упаковываем ваше предложение: заголовки, тексты и изображения. Публикуем объявления, тестируем подачу и следим за обращениями.',
-    scope:['Тексты и визуалы','Публикация','Ведение'],
+    scope:['Тексты и визуалы','Ведение','Бот для диалогов'],
     price:'5 800 ₽', priceValue:'5800', terms:'Оформление. Дальнейшее ведение за согласованный процент, расходы площадки отдельно.',
     details:['Изучаем нишу и предложения конкурентов.','Готовим оформление и размещаем согласованное количество объявлений.','Сравниваем заголовки и изображения, корректируем подачу по просмотрам и обращениям.'],
+    extraTitle:'Бонус при работе с нами: бот для диалогов', extraText:'Настраиваем бота на основе ваших диалогов с клиентами. Он знает ваши услуги, товары и расценки и отвечает по существу, а не одной заготовленной фразой. Перед запуском согласуем базу знаний и сценарии ответов.',
     action:'Обсудить Авито',
-    visual:'<div class="offer-art offer-art--avito"><span class="offer-art__label">ВАШЕ ПРЕДЛОЖЕНИЕ. НА ВИДУ.</span><div class="offer-art__words">Ваше дело.<br><em>На виду.</em></div>'+phone('<div class="phone-listing"><div class="phone-listing__head">Объявление</div><img src="/assets/services/catalog.webp" width="960" height="667" alt="Пример изображения сайта для объявления о разработке" loading="lazy" decoding="async"><h4>Сайт для вашего бизнеса</h4><strong>от 5 000 ₽</strong><p>Услуги, каталог и заявки.<br>Удобно с телефона.</p><span class="phone-listing__message">Написать</span><small>Пример оформления</small></div>','offer-phone--light')+'<span class="offer-art__caption">Демонстрационное объявление</span></div>'
+    visual:generatedArt('avito','Демонстрационное объявление Авито на iPhone','Объявление<br>заметили.<br><em>Бот ответил.</em>','Пример оформления объявления','avito')
   },
   {
     id:'seo', title:'SEO-продвижение', short:'SEO-продвижение',
@@ -64,11 +66,24 @@ export const services = [
   }
 ];
 
-export const systemVisual = '<figure class="system-preview"><div class="system-preview__screens"><div class="system-preview__desktop"><div class="offer-browser__bar">MENTORI · рабочее место команды</div><img src="/assets/services/projects.webp" alt="Mentori: проекты, этапы и следующий шаг по каждому заказу" width="1200" height="750" decoding="async" fetchpriority="high"></div>'+phone('<img src="/assets/services/projects-phone.webp" width="390" height="844" alt="Те же проекты на телефоне" decoding="async">','offer-phone--system')+'</div><figcaption>Настоящий интерфейс Mentori. На экранах вымышленные данные.</figcaption></figure>';
+export const systemVisual = '<figure class="system-preview"><img class="system-preview__generated" src="/assets/services/system-device-v2.webp" width="1200" height="800" alt="Система Mentori: проекты и оплаты на ноутбуке и iPhone" decoding="async" fetchpriority="high"><figcaption>Визуализация интерфейса Mentori. Данные демонстрационные.</figcaption></figure>';
 
 const items = arr => arr.map(i=>'<li>'+i+'</li>').join('');
+const posterCopy = {
+  studio:{heading:'УЧЁТ<br>ЗАНЯТИЙ',accent:'БЕЗ ТАБЛИЦ',facts:'Запись · Абонементы<br>Оплаты · Расписание',priceNote:'готовое решение'},
+  websites:{heading:'САЙТЫ<br>ПОД КЛЮЧ',accent:'ВАС ВИДНО',facts:'Лендинг · Каталог<br>Удобно с телефона',priceNote:'разработка'},
+  bots:{heading:'TELEGRAM<br>БОТЫ',accent:'РУТИНУ БОТУ',facts:'Ответы · Запись<br>Заявки · Уведомления',priceNote:'под вашу задачу'},
+  direct:{heading:'ЯНДЕКС<br>ДИРЕКТ',accent:'ЗАПУСК И ВЕДЕНИЕ',facts:'Настройка · Тесты<br>Аналитика · Отчётность',priceNote:'ведение · бюджет отдельно'},
+  avito:{heading:'АВИТО<br>ПОД КЛЮЧ',accent:'ИЗ ПОИСКА В ДИАЛОГ',facts:'Упаковка · Ведение<br>Бот для ответов в бонус',priceNote:'оформление'},
+  seo:{heading:'SEO<br>ПРОДВИЖЕНИЕ',accent:'ВАС УЖЕ ИЩУТ',facts:'Аудит · Страницы<br>Контент · Индексация',priceNote:'объём после аудита'}
+};
+function renderPoster(s) {
+  const p=posterCopy[s.id];
+  const visual=s.id==='websites'?'<div class="offer-art offer-art--websites offer-art--generated"><img class="offer-poster__device" src="/assets/services/website-phone-v3.webp" width="733" height="1100" alt="iPhone с каталогом Спектра Металла" loading="lazy" decoding="async"><span class="offer-art__caption">Визуализация сайта «Спектр Металла»</span></div>':s.visual;
+  return '<div class="offer-poster offer-poster--'+s.id+'">'+visual+'<div class="offer-poster__paper" aria-hidden="true"></div><div class="offer-poster__motif" aria-hidden="true"><i></i><i></i><i></i></div><div class="offer-poster__brand" aria-hidden="true">MENTORI <small>TECH</small></div><div class="offer-poster__copy"><strong class="offer-poster__headline">'+p.heading+'</strong><b class="offer-poster__accent">'+p.accent+'</b><p>'+p.facts+'</p></div><div class="offer-poster__price"><strong>'+s.price+'</strong><small>'+p.priceNote+'</small></div></div>';
+}
 function renderCard(s) {
-  return '<article class="offer-card" id="'+s.id+'" aria-labelledby="'+s.id+'-title">'+s.visual+'<div class="offer-card__copy"><p class="offer-card__need">'+s.need+'</p><h3 id="'+s.id+'-title">'+s.title+'</h3><p class="offer-card__description">'+s.description+'</p><ul class="offer-scope">'+items(s.scope)+'</ul><details class="offer-details"><summary>Что входит</summary><ul>'+items(s.details)+'</ul></details><div class="offer-price"><strong>'+s.price+'</strong><p>'+s.terms+'</p></div><div class="offer-actions"><a href="/contact" class="offer-cta" data-service="'+s.title+'">'+s.action+'</a>'+(s.caseHref?'<a class="offer-case" href="'+s.caseHref+'">'+s.caseLabel+'</a>':'')+'</div></div></article>';
+  return '<article class="offer-card" id="'+s.id+'" aria-labelledby="'+s.id+'-title">'+renderPoster(s)+'<div class="offer-card__copy"><p class="offer-card__need">'+s.need+'</p><h3 id="'+s.id+'-title">'+s.title+'</h3><p class="offer-card__description">'+s.description+'</p><ul class="offer-scope">'+items(s.scope)+'</ul>'+(s.extraTitle?'<aside class="offer-extra"><strong>'+s.extraTitle+'</strong><p>'+s.extraText+'</p></aside>':'')+'<div class="offer-card__decision"><details class="offer-details"><summary>Что входит</summary><ul>'+items(s.details)+'</ul></details><div class="offer-price"><strong>'+s.price+'</strong><p>'+s.terms+'</p></div><div class="offer-actions"><a href="/contact" class="offer-cta" data-service="'+s.title+'">'+s.action+'</a>'+(s.caseHref?'<a class="offer-case" href="'+s.caseHref+'">'+s.caseLabel+'</a>':'')+'</div></div></div></article>';
 }
 export function renderServicePage() {
   return [

@@ -1,134 +1,47 @@
-<section class="hero" id="hero">
-    <div class="hero__bg">
-      <div class="hero__mesh hero__mesh--orange"></div>
-      <div class="hero__mesh hero__mesh--amber"></div>
-      <div class="hero__bg-fade"></div>
-    </div>
-
-    <div class="hero__inner">
-      <div class="hero__copy">
-        <h1 class="hero__title hero__title--excel">
-          Excel угробит<br/><em class="hero__title-em">развитие вашего бизнеса</em>.
-        </h1>
-
-        <p class="hero__lead" data-reveal>
-          Клиенты в&nbsp;чатах, заказы в&nbsp;таблицах, оплаты в&nbsp;заметках? Соберём всё в&nbsp;одном месте, чтобы вы&nbsp;видели, что происходит, а&nbsp;команда знала, что делать.
-        </p>
-
-        <div class="hero__actions" data-reveal>
-          <a href="/contact" class="btn btn--primary" data-magnetic>
-            <span>Консультация</span>
-          </a>
-          <a href="/services" class="btn btn--ghost" data-magnetic>
-            <span>Услуги и&nbsp;примеры</span>
-          </a>
-        </div>
-
-      </div>
-
-      <!-- ─── DASHBOARD MOCK ─── -->
-      <div class="hero__dashboard" data-tilt>
-        <div class="dash">
-          <div class="dash__topbar">
-            <div class="dash__dots"><i></i><i></i><i></i></div>
-            <div class="dash__title">панель клиента&nbsp;·&nbsp;live</div>
-            <div class="dash__status">
-              <span class="dash__status-dot"></span>
-              <span>в&nbsp;работе</span>
-            </div>
-          </div>
-
-          <div class="dash__grid">
-            <!-- Метрика 1 -->
-            <div class="dash__card dash__card--metric">
-              <div class="dash__label">выручка за&nbsp;месяц</div>
-              <div class="dash__value"><span data-counter="2847290">0</span><i>₽</i></div>
-              <div class="dash__delta dash__delta--up">+47% к&nbsp;прошлому месяцу</div>
-              <svg class="dash__spark" viewBox="0 0 120 36" preserveAspectRatio="none">
-                <defs>
-                  <linearGradient id="sparkGrad" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#ff5e1a" stop-opacity="0.5"/>
-                    <stop offset="100%" stop-color="#ff5e1a" stop-opacity="0"/>
-                  </linearGradient>
-                </defs>
-                <path class="dash__spark-fill" d="M0,28 L12,24 L24,26 L36,18 L48,20 L60,12 L72,14 L84,8 L96,10 L108,4 L120,2 L120,36 L0,36 Z" fill="url(#sparkGrad)"/>
-                <path class="dash__spark-line" d="M0,28 L12,24 L24,26 L36,18 L48,20 L60,12 L72,14 L84,8 L96,10 L108,4 L120,2" stroke="#ff5e1a" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" pathLength="100"/>
-              </svg>
-            </div>
-
-            <!-- Метрика 2 -->
-            <div class="dash__card dash__card--metric">
-              <div class="dash__label">из&nbsp;заявок в&nbsp;заказ</div>
-              <div class="dash__value"><span data-counter="23.4">0</span><i>%</i></div>
-              <div class="dash__delta dash__delta--up">было&nbsp;15.3%</div>
-              <div class="dash__bars">
-                <i style="--h:30%"></i><i style="--h:45%"></i><i style="--h:38%"></i><i style="--h:62%"></i><i style="--h:55%"></i><i style="--h:78%"></i><i style="--h:92%"></i>
-              </div>
-            </div>
-
-            <!-- Обработка обращений -->
-            <div class="dash__card dash__card--process">
-              <div class="dash__label">
-                <span class="dash__scan-dot"></span>
-                сейчас ведём диалоги
-              </div>
-              <ul class="dash__queue">
-                <li>
-                  <span class="dash__avatar" style="--c1:#ff8a3d;--c2:#d94a1c">АК</span>
-                  <span class="dash__queue-name">Артём&nbsp;Кравцов</span>
-                  <span class="dash__queue-tag dash__queue-tag--hot">готов купить</span>
-                </li>
-                <li>
-                  <span class="dash__avatar" style="--c1:#f4b860;--c2:#a8650d">ИМ</span>
-                  <span class="dash__queue-name">Ирина&nbsp;Мещерякова</span>
-                  <span class="dash__queue-tag dash__queue-tag--warm">думает</span>
-                </li>
-                <li>
-                  <span class="dash__avatar" style="--c1:#d97757;--c2:#7a3318">ДГ</span>
-                  <span class="dash__queue-name">Денис&nbsp;Горшенин</span>
-                  <span class="dash__queue-tag">уточняем</span>
-                </li>
-              </ul>
-              <div class="dash__typing">
-                <span class="dash__typing-label">отвечаем</span>
-                <span class="dash__typing-text" data-typewriter></span>
-              </div>
-            </div>
-
-            <!-- Pipeline -->
-            <div class="dash__card dash__card--pipeline">
-              <div class="dash__label">путь клиента сегодня</div>
-              <div class="dash__pipeline">
-                <div class="dash__stage">
-                  <div class="dash__stage-name">заявка</div>
-                  <div class="dash__stage-bar"><i style="--w:92%"></i></div>
-                  <div class="dash__stage-n"><span data-counter="184">0</span></div>
-                </div>
-                <div class="dash__stage">
-                  <div class="dash__stage-name">диалог</div>
-                  <div class="dash__stage-bar"><i style="--w:68%"></i></div>
-                  <div class="dash__stage-n"><span data-counter="127">0</span></div>
-                </div>
-                <div class="dash__stage">
-                  <div class="dash__stage-name">встреча</div>
-                  <div class="dash__stage-bar"><i style="--w:42%"></i></div>
-                  <div class="dash__stage-n"><span data-counter="61">0</span></div>
-                </div>
-                <div class="dash__stage">
-                  <div class="dash__stage-name">заказ</div>
-                  <div class="dash__stage-bar dash__stage-bar--accent"><i style="--w:28%"></i></div>
-                  <div class="dash__stage-n"><span data-counter="34">0</span></div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="dash__footer">
-            <span class="dash__foot-dot"></span>
-            <span>обновлено только что · 14:27</span>
-          </div>
-        </div>
+<section class="hero hero--order" id="hero">
+  <div class="hero__inner">
+    <div class="hero__copy">
+      <h1 class="hero__title">Бизнес не должен <em class="hero__title-em">держаться у вас в голове.</em></h1>
+      <p class="hero__lead">Клиенты в чатах, заказы в Excel, оплаты в заметках? Соберём всё в одну систему: кто ждёт ответа, что нужно сделать и где ваши деньги.</p>
+      <div class="hero__actions">
+        <a href="/contact" class="btn btn--primary"><span>Обсудить мою задачу</span></a>
+        <a href="/services" class="btn btn--ghost"><span>Услуги и примеры</span></a>
       </div>
     </div>
-
-  </section>
+    <figure class="order-demo" data-order-demo>
+      <div class="order-demo__tabs" aria-label="Сравнить способы работы">
+        <button type="button" data-order-view="before" aria-pressed="true">Сейчас</button>
+        <button type="button" data-order-view="after" aria-pressed="false">С Mentori</button>
+      </div>
+      <div class="order-demo__stage">
+        <div class="order-demo__before" data-order-panel="before">
+          <div class="sheet-title">Заказы_финал_копия_2.xlsx</div>
+          <div class="sheet-toolbar">Файл &nbsp; Главная &nbsp; Вставка &nbsp; Данные</div>
+          <div class="sheet-formula"><b>C4</b><span>fx</span>кто обещал перезвонить?</div>
+          <table class="chaos-sheet" aria-label="Пример разрозненного учёта в таблице">
+            <thead><tr><th></th><th>A</th><th>B</th><th>C</th></tr></thead>
+            <tbody>
+              <tr><th>1</th><td>Клиент</td><td>Заказ</td><td>Что дальше?</td></tr>
+              <tr><th>2</th><td>Анна</td><td>Расчёт</td><td class="sheet-alert">забыли ответить</td></tr>
+              <tr><th>3</th><td>Михаил</td><td>Доставка</td><td>в другом чате</td></tr>
+              <tr><th>4</th><td>Ольга</td><td>Оплата</td><td class="sheet-selected">уточнить у Иры</td></tr>
+              <tr><th>5</th><td>Алексей</td><td>Срок?</td><td class="sheet-alert">???</td></tr>
+              <tr><th>6</th><td></td><td></td><td></td></tr>
+            </tbody>
+          </table>
+          <div class="sheet-sheets"><span>Клиенты</span><span>Заказы</span><span>Оплаты_старое</span></div>
+          <div class="sheet-cross" aria-hidden="true"></div>
+        </div>
+        <div class="order-demo__after" data-order-panel="after" hidden>
+          <div class="workspace-top"><strong>MENTORI</strong><span>Рабочий день</span></div>
+          <div class="workspace-summary"><span>Обращения<b>12</b></span><span>В работе<b>8</b></span><span>Ждём оплату<b>3</b></span></div>
+          <div class="workspace-row"><span class="workspace-avatar">А</span><div><b>Анна · расчёт заказа</b><small>Ответить сегодня, 14:00</small></div><span class="workspace-tag">Ирина</span></div>
+          <div class="workspace-row"><span class="workspace-avatar">М</span><div><b>Михаил · доставка</b><small>Согласовать время, 16:00</small></div><span class="workspace-tag">Олег</span></div>
+          <div class="workspace-row"><span class="workspace-avatar">О</span><div><b>Ольга · счёт оплачен</b><small>Передать заказ в работу</small></div><span class="workspace-tag workspace-tag--done">Оплачено</span></div>
+          <div class="workspace-bottom">У каждой задачи есть срок и ответственный.</div>
+        </div>
+      </div>
+      <figcaption>Один процесс: из разрозненных записей в понятный рабочий день. Демопример.</figcaption>
+    </figure>
+  </div>
+</section>
