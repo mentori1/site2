@@ -84,7 +84,7 @@ for (const file of ['services.html','index.html']) {
     const sceneCss='<link rel="stylesheet" href="/home-scenes.css?v=20261010-4">';
     if ($('link[href^="/home-scenes.css"]').length) replace($('link[href^="/home-scenes.css"]')[0],sceneCss);
     else edits.push({start:$('head')[0].sourceCodeLocation.endTag.startOffset,end:$('head')[0].sourceCodeLocation.endTag.startOffset,text:sceneCss+'\n'});
-    const heroCss='<link rel="stylesheet" href="/hero-focus.css?v=20261010-3">';
+    const heroCss='<link rel="stylesheet" href="/hero-focus.css?v=20261011-2">';
     if ($('link[href^="/hero-focus.css"]').length) replace($('link[href^="/hero-focus.css"]')[0],heroCss);
     else edits.push({start:$('head')[0].sourceCodeLocation.endTag.startOffset,end:$('head')[0].sourceCodeLocation.endTag.startOffset,text:heroCss+'\n'});
     const sceneJs='<script src="/home-scenes.js?v=20261010-2" defer></script>';
@@ -135,7 +135,7 @@ await fs.writeFile(articleFile,updatedArticle);
 const sitemap=load(await fs.readFile('sitemap.xml','utf8'),{xmlMode:true});
 sitemap('url').each((_,node)=>{
   if(['https://mentorios.tech/','https://mentorios.tech/services','https://mentorios.tech/blog-yandex-direct-dlya-biznesa'].includes(sitemap(node).find('loc').text()))
-    sitemap(node).find('lastmod').text('2026-10-10');
+    sitemap(node).find('lastmod').text('2026-10-11');
 });
 await fs.writeFile('sitemap.xml',sitemap.xml());
 console.log('Service catalog, homepage service links and current Direct fee generated.');

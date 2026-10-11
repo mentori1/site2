@@ -10,6 +10,7 @@ assert.equal(page('main').length,1);
 assert.equal(page('#system').length,1);
 assert.equal(home('#internal-ops').length,0,'Repeated operations explanation replaced');
 assert.equal(home('.home-offer').length,6);
+assert.equal(home('.home-offer .offer-art__caption').length,0,'No caption strips on homepage covers');
 assert.equal(home('[data-stack-card]').length,4,'Approved stack retained');
 for(const s of services) {
   assert.equal(page('#'+s.id+' .offer-price strong').text(),s.price);

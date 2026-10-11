@@ -1,0 +1,451 @@
+[
+  {
+    "height": 568,
+    "heroActions": 1,
+    "overflow": false,
+    "page": "/",
+    "phone": [
+      {
+        "fit": "contain",
+        "h": 160,
+        "w": 240
+      }
+    ],
+    "posterHeights": [
+      187,
+      187,
+      187,
+      187,
+      187,
+      187
+    ],
+    "width": 320
+  },
+  {
+    "height": 844,
+    "heroActions": 1,
+    "overflow": false,
+    "page": "/",
+    "phone": [
+      {
+        "fit": "contain",
+        "h": 197,
+        "w": 296
+      }
+    ],
+    "posterHeights": [
+      233,
+      233,
+      233,
+      233,
+      233,
+      233
+    ],
+    "width": 390
+  },
+  {
+    "height": 1024,
+    "heroActions": 1,
+    "overflow": false,
+    "page": "/",
+    "phone": [
+      {
+        "fit": "contain",
+        "h": 259,
+        "w": 388
+      }
+    ],
+    "posterHeights": [
+      238,
+      238,
+      238,
+      238,
+      238,
+      238
+    ],
+    "width": 768
+  },
+  {
+    "height": 768,
+    "heroActions": 1,
+    "overflow": false,
+    "page": "/",
+    "phone": [
+      {
+        "fit": "contain",
+        "h": 266,
+        "w": 398
+      }
+    ],
+    "posterHeights": [
+      199,
+      199,
+      199,
+      199,
+      199,
+      199
+    ],
+    "width": 1024
+  },
+  {
+    "height": 720,
+    "heroActions": 1,
+    "overflow": false,
+    "page": "/",
+    "phone": [
+      {
+        "fit": "contain",
+        "h": 332,
+        "w": 498
+      }
+    ],
+    "posterHeights": [
+      256,
+      256,
+      256,
+      256,
+      256,
+      256
+    ],
+    "width": 1280
+  },
+  {
+    "height": 900,
+    "heroActions": 1,
+    "overflow": false,
+    "page": "/",
+    "phone": [
+      {
+        "fit": "contain",
+        "h": 341,
+        "w": 511
+      }
+    ],
+    "posterHeights": [
+      274,
+      274,
+      274,
+      274,
+      274,
+      274
+    ],
+    "width": 1440
+  },
+  {
+    "height": 390,
+    "heroActions": 1,
+    "overflow": false,
+    "page": "/",
+    "phone": [
+      {
+        "fit": "contain",
+        "h": 259,
+        "w": 388
+      }
+    ],
+    "posterHeights": [
+      159,
+      159,
+      159,
+      159,
+      159,
+      159
+    ],
+    "width": 844
+  },
+  {
+    "cards": [
+      880,
+      811,
+      767,
+      1132,
+      1104,
+      831
+    ],
+    "height": 568,
+    "overflow": false,
+    "page": "/services",
+    "posters": [
+      213,
+      213,
+      213,
+      213,
+      213,
+      213
+    ],
+    "signature": 1,
+    "width": 320
+  },
+  {
+    "cards": [
+      800,
+      807,
+      769,
+      985,
+      1041,
+      776
+    ],
+    "height": 844,
+    "overflow": false,
+    "page": "/services",
+    "posters": [
+      260,
+      260,
+      260,
+      260,
+      260,
+      260
+    ],
+    "signature": 1,
+    "width": 390
+  },
+  {
+    "cards": [
+      990,
+      990,
+      990,
+      1135,
+      1135,
+      990
+    ],
+    "height": 1024,
+    "overflow": false,
+    "page": "/services",
+    "posters": [
+      512,
+      512,
+      512,
+      512,
+      512,
+      512
+    ],
+    "signature": 1,
+    "width": 768
+  },
+  {
+    "cards": [
+      839,
+      839,
+      1006,
+      1006,
+      1006,
+      1006
+    ],
+    "height": 768,
+    "overflow": false,
+    "page": "/services",
+    "posters": [
+      332,
+      332,
+      332,
+      332,
+      332,
+      332
+    ],
+    "signature": 1,
+    "width": 1024
+  },
+  {
+    "cards": [
+      959,
+      959,
+      1104,
+      1104,
+      1104,
+      1104
+    ],
+    "height": 900,
+    "overflow": false,
+    "page": "/services",
+    "posters": [
+      444,
+      444,
+      444,
+      444,
+      444,
+      444
+    ],
+    "signature": 1,
+    "width": 1440
+  },
+  {
+    "cards": [],
+    "height": 568,
+    "overflow": false,
+    "page": "/portfolio",
+    "posters": [],
+    "signature": 1,
+    "width": 320
+  },
+  {
+    "cards": [],
+    "height": 844,
+    "overflow": false,
+    "page": "/portfolio",
+    "posters": [],
+    "signature": 1,
+    "width": 390
+  },
+  {
+    "cards": [],
+    "height": 1024,
+    "overflow": false,
+    "page": "/portfolio",
+    "posters": [],
+    "signature": 1,
+    "width": 768
+  },
+  {
+    "cards": [],
+    "height": 768,
+    "overflow": false,
+    "page": "/portfolio",
+    "posters": [],
+    "signature": 1,
+    "width": 1024
+  },
+  {
+    "cards": [],
+    "height": 900,
+    "overflow": false,
+    "page": "/portfolio",
+    "posters": [],
+    "signature": 1,
+    "width": 1440
+  },
+  {
+    "cards": [],
+    "height": 568,
+    "overflow": false,
+    "page": "/about",
+    "posters": [],
+    "signature": 1,
+    "width": 320
+  },
+  {
+    "cards": [],
+    "height": 844,
+    "overflow": false,
+    "page": "/about",
+    "posters": [],
+    "signature": 1,
+    "width": 390
+  },
+  {
+    "cards": [],
+    "height": 1024,
+    "overflow": false,
+    "page": "/about",
+    "posters": [],
+    "signature": 1,
+    "width": 768
+  },
+  {
+    "cards": [],
+    "height": 768,
+    "overflow": false,
+    "page": "/about",
+    "posters": [],
+    "signature": 1,
+    "width": 1024
+  },
+  {
+    "cards": [],
+    "height": 900,
+    "overflow": false,
+    "page": "/about",
+    "posters": [],
+    "signature": 1,
+    "width": 1440
+  },
+  {
+    "cards": [],
+    "height": 568,
+    "overflow": false,
+    "page": "/contact",
+    "posters": [],
+    "signature": 1,
+    "width": 320
+  },
+  {
+    "cards": [],
+    "height": 844,
+    "overflow": false,
+    "page": "/contact",
+    "posters": [],
+    "signature": 1,
+    "width": 390
+  },
+  {
+    "cards": [],
+    "height": 1024,
+    "overflow": false,
+    "page": "/contact",
+    "posters": [],
+    "signature": 1,
+    "width": 768
+  },
+  {
+    "cards": [],
+    "height": 768,
+    "overflow": false,
+    "page": "/contact",
+    "posters": [],
+    "signature": 1,
+    "width": 1024
+  },
+  {
+    "cards": [],
+    "height": 900,
+    "overflow": false,
+    "page": "/contact",
+    "posters": [],
+    "signature": 1,
+    "width": 1440
+  },
+  {
+    "cards": [],
+    "height": 568,
+    "overflow": false,
+    "page": "/blog",
+    "posters": [],
+    "signature": 1,
+    "width": 320
+  },
+  {
+    "cards": [],
+    "height": 844,
+    "overflow": false,
+    "page": "/blog",
+    "posters": [],
+    "signature": 1,
+    "width": 390
+  },
+  {
+    "cards": [],
+    "height": 1024,
+    "overflow": false,
+    "page": "/blog",
+    "posters": [],
+    "signature": 1,
+    "width": 768
+  },
+  {
+    "cards": [],
+    "height": 768,
+    "overflow": false,
+    "page": "/blog",
+    "posters": [],
+    "signature": 1,
+    "width": 1024
+  },
+  {
+    "cards": [],
+    "height": 900,
+    "overflow": false,
+    "page": "/blog",
+    "posters": [],
+    "signature": 1,
+    "width": 1440
+  }
+]

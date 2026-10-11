@@ -1,4 +1,8 @@
 /* Editable poster typography over the existing device visuals. */
+.home-offers .offer-poster--clean { padding-bottom:0; }
+.home-offers .offer-poster--clean .offer-art__image { height:100%; }
+.home-offers .offer-poster--clean .offer-poster__paper { bottom:0; }
+.home-offers .offer-poster--clean .offer-poster__device { height:calc(100% - 8px); }
 .offer-poster { --poster-ink:#122234; --poster-accent:#176754; --poster-paper:#ecfff5; container:service-poster / inline-size; position:relative; flex:none; aspect-ratio:3/2; padding-bottom:28px; box-sizing:content-box; isolation:isolate; overflow:hidden; }
 .offer-poster>.offer-art { position:absolute; inset:0; width:100%; height:100%; aspect-ratio:auto; padding:0; }
 .offer-poster .offer-art__words,.offer-poster .offer-art__label { display:none; }

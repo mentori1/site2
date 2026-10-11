@@ -1,4 +1,5 @@
 // Shared content for the service page, homepage links and structured data.
+import { load } from 'cheerio';
 const phone = (content, theme = '') => '<div class="offer-phone '+theme+'"><div class="offer-phone__island"></div><div class="offer-phone__screen">'+content+'</div></div>';
 const generatedArt = (id, alt, words, caption, logo = '') => '<div class="offer-art offer-art--'+id+' offer-art--generated"><img class="offer-art__image" src="/assets/services/'+({websites:'website',bots:'bot'}[id]||id)+'-device-v2.webp" width="1200" height="800" alt="'+alt+'" loading="lazy" decoding="async">'+(logo?'<img class="offer-art__brand" src="/assets/services/'+logo+'-official.webp" alt="'+(logo==='direct'?'Яндекс Директ':'Авито')+'" width="56" height="56">':'')+(words?'<div class="offer-art__words">'+words+'</div>':'')+'<span class="offer-art__caption">'+caption+'</span></div>';
 export const services = [
@@ -96,9 +97,15 @@ export function renderServicePage() {
   ].join('\n');
 }
 export function renderHomeServices() {
+  const cleanPoster = s => {
+    const $ = load(renderPoster(s), null, false);
+    $('.offer-art__caption').remove();
+    $('.offer-poster').addClass('offer-poster--clean');
+    return $.html();
+  };
   const links=services.map(s=>[
     '<a class="home-offer" href="/services#'+s.id+'" data-service="'+s.title+'" aria-label="'+s.short+', '+s.price+'">',
-    '<div aria-hidden="true">'+renderPoster(s)+'</div>',
+    '<div aria-hidden="true">'+cleanPoster(s)+'</div>',
     '<span class="home-offer__title">'+s.short+'</span><span class="home-offer__price">'+s.price+'</span></a>'
   ].join('')).join('');
   return '<section class="home-offers" id="directions" aria-labelledby="home-offers-title"><div class="home-offers__heading"><h2 id="home-offers-title">Что ещё можем<br><em>сделать для вас</em></h2><p>От записи на занятия до сайта и рекламы.<br>Конкретная задача, отдельное решение.</p></div><div class="home-offers__grid">'+links+'</div><a class="offer-case" href="/services">Все услуги и что в них входит</a></section>';

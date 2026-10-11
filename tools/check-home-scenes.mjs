@@ -57,5 +57,7 @@ observer.callback([{ target: state.scenes[1], isIntersecting: true }]);
 assert(state.scenes[1].classes.has('is-visible'));
 assert(setup(false).scenes.every(scene => scene.classes.has('is-visible')), 'Fallback shows every scene without observers');
 const css = await fs.readFile('home-scenes.css', 'utf8');
+assert.match(css,/\.flow-demo__phone\s*\{[^}]*object-fit:contain/,'Phone is never cropped to fill a fixed rectangle');
+assert.match(css,/\.services-stack \.flow-demo--inbox\s*\{[^}]*height:auto;[^}]*aspect-ratio:3\/2/,'Inbox keeps the original image ratio at every breakpoint');
 assert(/prefers-reduced-motion:reduce/.test(css) && /animation:none!important/.test(css));
 console.log('Home scenes verified: no hero timers, one-time reveal, hidden-card guard, observer fallback and reduced-motion CSS.');
