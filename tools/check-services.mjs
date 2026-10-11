@@ -35,7 +35,8 @@ for(const s of services) {
   assert(!poster.text().includes('₽'),'Price is not repeated on the poster');
   const teaser=home('a[href="/services#'+s.id+'"]');
   assert.equal(teaser.find('.offer-poster').length,1,'Homepage reuses the complete service cover');
-  assert.equal(teaser.find('.home-offer__price').text(),s.price);
+  assert.equal(teaser.find('.home-offer__price').length,0,'Prices appear only on the services page');
+  assert(!teaser.attr('aria-label').includes('₽'),'Homepage accessible labels also omit prices');
   assert(!teaser.find('.offer-poster').text().includes('₽'));
 }
 const catalogCss=await fs.readFile('service-catalog.css','utf8');

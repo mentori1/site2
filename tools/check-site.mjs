@@ -10,7 +10,7 @@ for(const page of pages){
   assert.equal($('.nav .nav__links,.nav .nav__contacts').length,0,`${page}: no duplicate header actions`);
   assert.equal($('.nav__brand').length,1,`${page}: brand retained`);
   assert.equal($('[data-footer-reveal]').length,1,`${page}: one shared footer signature`);
-  assert.equal($('script[src^="/footer-reveal.js"]').length,1,`${page}: footer controller loaded once`);
+  assert.equal($('script[src="/footer-reveal.js?v=20261011-2"]').length,1,`${page}: one optimized footer controller`);
   assert.equal($('.nav button').length,1,`${page}: menu is the only header button`);
   assert.equal($('.mobile-menu__nav [href="/portfolio"]').length,1,`${page}: portfolio in menu`);
   assert.equal($('.mobile-menu__socials [href="tel:+79996693419"]').length,1,`${page}: call link in menu`);

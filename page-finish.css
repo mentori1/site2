@@ -1,17 +1,37 @@
-/* Photographic surface lighting, without cursor effects or fixed blur layers. */
-.hero.hero--devices {
-  background:linear-gradient(90deg,#0b0b0a88,#0b0b0a33),#151412 url('/assets/hero/graphite-studio.webp') center / cover no-repeat;
+/* One continuous surface: existing brand light, no photos or section seams. */
+body.surface-soft {
+  background-color:var(--bg-base,#0a0a0a);
+  background-image:
+    radial-gradient(ellipse 75% 820px at -8% 300px,rgba(255,94,26,.22),transparent 74%),
+    radial-gradient(ellipse 65% 900px at 108% 900px,rgba(255,169,64,.10),transparent 75%),
+    radial-gradient(ellipse 75% 1000px at -10% 52%,rgba(111,77,142,.09),transparent 76%),
+    radial-gradient(ellipse 75% 1000px at 110% 88%,rgba(255,94,26,.10),transparent 76%);
+  background-repeat:no-repeat;
 }
-.home-offers,.offer-heading,.portfolio-heading {
-  background-image:linear-gradient(180deg,#10101110,#0c0c0df2),url('/assets/hero/graphite-studio.webp');
-  background-size:cover;
-  background-position:center;
+.surface-soft .hero.hero--devices,
+.surface-soft .home-offers,
+.surface-soft .offer-page,
+.surface-soft .offer-heading,
+.surface-soft .portfolio-page,
+.surface-soft .portfolio-heading,
+.surface-soft .services-stack,
+.surface-soft .pkg,
+.surface-soft .foot {
+  background:transparent;
 }
-.offer-page,.portfolio-page {
-  background-color:#101012;
-  background-image:linear-gradient(115deg,#28223070,transparent 35%,transparent 65%,#35251e65);
+.surface-soft .home-offers,
+.surface-soft .offer-index,
+.surface-soft .offer-catalog,
+.surface-soft .offer-questions,
+.surface-soft .offer-contact,
+.surface-soft .portfolio-project,
+.surface-soft .portfolio-contact,
+.surface-soft .services-stack,
+.surface-soft .pkg,
+.surface-soft .foot {
+  border-top-color:transparent;
+  border-bottom-color:transparent;
 }
-.home-offers { border-block:1px solid #ffffff0c; }
 .foot { background:#141312; padding-bottom:0; }
 .foot__inner,.foot__bottom { position:relative; z-index:1; }
 .foot-signature {
@@ -19,11 +39,19 @@
   aspect-ratio:1170/500; contain:paint;
 }
 .foot-signature img { display:block; width:100%; height:100%; object-fit:contain; }
-.foot-signature.is-reveal-ready img { transform:translateY(var(--footer-offset,0%)); }
 @media(max-width:600px) {
   .foot-signature { margin-top:18px; }
   .foot { padding-bottom:env(safe-area-inset-bottom); }
 }
 @media(prefers-reduced-motion:reduce) {
-  .foot-signature.is-reveal-ready img { transform:none; }
+  .foot-signature img { transform:none!important; }
+}
+@media(max-width:600px) {
+  body.surface-soft {
+    background-image:
+      radial-gradient(ellipse 110% 620px at -25% 240px,rgba(255,94,26,.17),transparent 76%),
+      radial-gradient(ellipse 110% 900px at 125% 1100px,rgba(255,169,64,.08),transparent 76%),
+      radial-gradient(ellipse 110% 1000px at -25% 55%,rgba(111,77,142,.08),transparent 76%),
+      radial-gradient(ellipse 110% 900px at 125% 88%,rgba(255,94,26,.08),transparent 76%);
+  }
 }

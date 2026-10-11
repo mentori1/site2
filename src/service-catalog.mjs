@@ -104,9 +104,9 @@ export function renderHomeServices() {
     return $.html();
   };
   const links=services.map(s=>[
-    '<a class="home-offer" href="/services#'+s.id+'" data-service="'+s.title+'" aria-label="'+s.short+', '+s.price+'">',
+    '<a class="home-offer" href="/services#'+s.id+'" data-service="'+s.title+'" aria-label="'+s.short+'">',
     '<div aria-hidden="true">'+cleanPoster(s)+'</div>',
-    '<span class="home-offer__title">'+s.short+'</span><span class="home-offer__price">'+s.price+'</span></a>'
+    '<span class="home-offer__title">'+s.short+'</span></a>'
   ].join('')).join('');
   return '<section class="home-offers" id="directions" aria-labelledby="home-offers-title"><div class="home-offers__heading"><h2 id="home-offers-title">Что ещё можем<br><em>сделать для вас</em></h2><p>От записи на занятия до сайта и рекламы.<br>Конкретная задача, отдельное решение.</p></div><div class="home-offers__grid">'+links+'</div><a class="offer-case" href="/services">Все услуги и что в них входит</a></section>';
 }
