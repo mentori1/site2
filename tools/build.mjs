@@ -3,6 +3,7 @@ import { minify } from 'terser';
 import './build-services.mjs';
 await import('./build-seo-pages.mjs');
 await import('./build-finish.mjs');
+await import('./build-search.mjs');
 
 const result=await minify(await fs.readFile('main.js','utf8'),{compress:true,mangle:true});
 await fs.writeFile('main.min.js',result.code);

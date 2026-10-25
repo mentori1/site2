@@ -33,7 +33,10 @@ for (const file of (await fs.readdir('.')).filter(name => name.endsWith('.html')
     ['link[href^="/site-polish.css"]','<link rel="stylesheet" href="/site-polish.css?v=20261025-1">','head'],
     ['script[src^="/site-polish.js"]','<script src="/site-polish.js?v=20261025-1" defer></script>','body']
   ]) {
-    if ($(selector).length) replace($(selector)[0],markup);
+    if(selector==='link[href^="/site-polish.css"]'&&$(selector).length&&$('link[rel="stylesheet"]').last()[0]!==$(selector)[0]) {
+      replace($(selector)[0],'');insert($('head')[0],markup);
+    }
+    else if ($(selector).length) replace($(selector)[0],markup);
     else insert($(parent)[0],markup);
   }
   for (const name of ['home-scenes','hero-focus','service-posters']) {

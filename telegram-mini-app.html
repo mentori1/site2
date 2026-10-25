@@ -1,0 +1,235 @@
+<!DOCTYPE html><html lang="ru"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#0b0b0a">
+
+  <title>Разработка Telegram Mini App и личного кабинета | MENTORI TECHNOLOGIES</title>
+  <script>document.documentElement.dataset.theme="dark";document.documentElement.dataset.themeLock="dark";</script>
+  <meta name="description" content="Создаём мини-приложение внутри Telegram: кабинет клиента, расписание, запись и связанные рабочие данные. Реальный пример CRM и Mini App для танцевальной студии.">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <link rel="canonical" href="https://mentorios.tech/telegram-mini-app">
+  <link rel="alternate" hreflang="ru" href="https://mentorios.tech/telegram-mini-app">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:site_name" content="MENTORI TECHNOLOGIES">
+  <meta property="og:title" content="Разработка Telegram Mini App и личного кабинета | MENTORI TECHNOLOGIES">
+  <meta property="og:description" content="Создаём мини-приложение внутри Telegram: кабинет клиента, расписание, запись и связанные рабочие данные. Реальный пример CRM и Mini App для танцевальной студии.">
+  <meta property="og:url" content="https://mentorios.tech/telegram-mini-app">
+  <meta property="og:image" content="https://mentorios.tech/assets/mentori-technologies-preview-2026.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Разработка Telegram Mini App и личного кабинета | MENTORI TECHNOLOGIES">
+  <meta name="twitter:description" content="Создаём мини-приложение внутри Telegram: кабинет клиента, расписание, запись и связанные рабочие данные. Реальный пример CRM и Mini App для танцевальной студии.">
+  <meta name="twitter:image" content="https://mentorios.tech/assets/mentori-technologies-preview-2026.png">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any">
+  <link rel="icon" type="image/png" href="/assets/favicon-48.png" sizes="48x48">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" sizes="180x180">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mentori1/site2@16abbcb/styles.min.css?v=79">
+
+<link rel="stylesheet" href="/site-refresh.css?v=20260925-stack">
+<link rel="stylesheet" href="/page-finish.css?v=20261011-4"><meta name="twitter:image:alt" content="MENTORI TECHNOLOGIES"><meta property="og:image:alt" content="MENTORI TECHNOLOGIES"><meta property="og:image:type" content="image/png"><meta property="og:image:secure_url" content="https://mentorios.tech/assets/mentori-technologies-preview-2026.png"><link rel="stylesheet" href="/seo-pages.css?v=20261025-2"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://mentorios.tech/#organization",
+      "name": "MENTORI TECHNOLOGIES",
+      "url": "https://mentorios.tech/",
+      "telephone": "+79996693419",
+      "email": "mentraos@mail.ru",
+      "areaServed": {
+        "@type": "Country",
+        "name": "Россия"
+      },
+      "sameAs": [
+        "https://t.me/Mentori_Re",
+        "https://max.ru/u/f9LHodD0cOKBPM0dbjrb5ezQXBmCYH_aXZDfeNXg5-SMxcV_laJVpwlyBO0"
+      ],
+      "alternateName": [
+        "Mentori",
+        "Ментори",
+        "Mentory Technologies"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://mentorios.tech/assets/favicon-512.png",
+        "width": 512,
+        "height": 512,
+        "caption": "MENTORI TECHNOLOGIES"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://mentorios.tech/telegram-mini-app#webpage",
+      "url": "https://mentorios.tech/telegram-mini-app",
+      "name": "Разработка Telegram Mini App и личного кабинета | MENTORI TECHNOLOGIES",
+      "description": "Создаём мини-приложение внутри Telegram: кабинет клиента, расписание, запись и связанные рабочие данные. Реальный пример CRM и Mini App для танцевальной студии.",
+      "inLanguage": "ru-RU",
+      "isPartOf": {
+        "@id": "https://mentorios.tech/#website"
+      },
+      "about": {
+        "@id": "https://mentorios.tech/#organization"
+      },
+      "author": {
+        "@id": "https://mentorios.tech/#organization"
+      },
+      "dateModified": "2026-10-25",
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://mentorios.tech/assets/services/studio.webp",
+        "caption": "Пример Telegram Mini App студии: абонементы и запись на занятия"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Главная",
+          "item": "https://mentorios.tech/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Что делаем",
+          "item": "https://mentorios.tech/services"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Telegram-бот, который берёт на себя повторяющиеся действия",
+          "item": "https://mentorios.tech/telegram-boty"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Telegram Mini App: когда кнопок в переписке уже мало",
+          "item": "https://mentorios.tech/telegram-mini-app"
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://mentorios.tech/telegram-mini-app#service",
+      "name": "Telegram Mini App: когда кнопок в переписке уже мало",
+      "description": "Создаём мини-приложение внутри Telegram: кабинет клиента, расписание, запись и связанные рабочие данные. Реальный пример CRM и Mini App для танцевальной студии.",
+      "url": "https://mentorios.tech/telegram-mini-app",
+      "image": "https://mentorios.tech/assets/services/studio.webp",
+      "provider": {
+        "@id": "https://mentorios.tech/#organization"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "Россия"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://mentorios.tech/telegram-mini-app",
+        "description": "По функциям приложения. Проектируем клиентские экраны, серверную часть, доступы и связь с рабочей системой. Бюджет простого бота не равен стоимости Mini App."
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Mini App устанавливается из магазина приложений?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Нет, описываемый интерфейс открывается внутри Telegram. Особенности доступа и клиентский путь обсуждаем при проектировании."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Это входит в разработку бота от 3 000 ₽?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Нет. Мини-приложение с кабинетом и данными имеет отдельный объём интерфейса и серверной логики."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Можно использовать готовое решение студии?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Если ваши правила совместимы с ним. Готовое решение, его настройка и индивидуальная разработка являются разными вариантами работы."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://mentorios.tech/#website",
+      "url": "https://mentorios.tech/",
+      "name": "MENTORI TECHNOLOGIES",
+      "alternateName": [
+        "Mentori",
+        "Ментори",
+        "Mentory Technologies"
+      ],
+      "inLanguage": "ru-RU",
+      "publisher": {
+        "@id": "https://mentorios.tech/#organization"
+      }
+    }
+  ]
+}</script><link rel="stylesheet" href="/site-polish.css?v=20261025-1"></head>
+<body class="surface-soft seo-theme">
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <div class="nav__inner">
+      <a href="/" class="nav__brand" aria-label="MENTORI TECH">
+        <span class="nav__wordmark" aria-hidden="true">MENTORI</span><span class="nav__tech" aria-hidden="true">TECH</span>
+      </a>
+
+
+
+      <button class="nav__burger" id="navBurger" aria-label="Меню" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true" inert="">
+    <nav class="mobile-menu__nav">
+      <a href="/services" class="is-active">Что делаем</a>
+      <a href="/about">О нас</a>
+      <a href="/blog" class="">Блог</a>
+      <a href="/contact">Контакты</a>
+    <a href="/portfolio">Портфолио</a></nav>
+    <div class="mobile-menu__socials" aria-label="Связаться с MENTORI">
+        <a class="nav__contact" href="https://t.me/Mentori_Re" aria-label="Написать в Telegram" title="Telegram" target="_blank" rel="noopener"><img src="assets/icons/telegram.svg" alt="" width="18" height="18"></a>
+        <a class="nav__contact" href="https://max.ru/u/f9LHodD0cOKBPM0dbjrb5ezQXBmCYH_aXZDfeNXg5-SMxcV_laJVpwlyBO0" aria-label="Написать в MAX" title="MAX" target="_blank" rel="noopener"><img src="assets/icons/max.svg" alt="" width="18" height="18"></a>
+        <a class="nav__contact nav__contact--phone" href="tel:+79996693419" aria-label="Позвонить: +7 999 669-34-19" title="+7 999 669-34-19"><img src="assets/icons/phone.svg" alt="" width="18" height="18"></a>
+      </div>
+  </div>
+
+  <main class="seo-page seo-service"><nav class="seo-breadcrumb" aria-label="Хлебные крошки"><a href="/">Главная</a><span aria-hidden="true">/</span><a href="/services">Что делаем</a><span aria-hidden="true">/</span><a href="/telegram-boty">Telegram-боты</a><span aria-hidden="true">/</span><span aria-current="page">Telegram Mini App</span></nav><header class="seo-hero"><div><p class="seo-eyebrow">Услуга Mentori · Россия</p><h1>Telegram Mini App: когда кнопок в переписке уже мало</h1><p class="seo-lead">Личный кабинет открывается внутри Telegram. Клиенту удобнее видеть записи, доступные действия и свою информацию на одном экране.</p><a class="btn btn--primary" href="/contact" data-service="Telegram Mini App: когда кнопок в переписке уже мало">Обсудить задачу</a></div><figure class="seo-figure seo-figure--portrait"><img src="/assets/services/studio.webp" alt="Пример Telegram Mini App студии: абонементы и запись на занятия" width="540" height="1056" decoding="async" fetchpriority="high"></figure></header><section class="seo-outcomes" aria-label="Что вы получите"><div><span>01</span><p>У клиента есть понятный интерфейс внутри Telegram</p></div><div><span>02</span><p>Данные кабинета связаны с рабочим процессом компании</p></div><div><span>03</span><p>Доступы и изменения проверены на нужных ролях</p></div></section><div class="seo-reading"><div class="seo-prose"><section id="section-1"><h2>Что такое мини-приложение простыми словами</h2><p>Обычный бот ведёт диалог сообщениями и кнопками. Mini App открывает веб-интерфейс внутри Telegram: например, расписание, список записей или кабинет с абонементами. Это другой способ показать информацию, а не просто ещё одно меню в чате.</p><p>Выбирать формат стоит по задаче. Короткому сбору заявки может хватить бота. Для просмотра нескольких связанных разделов и регулярной работы клиента удобнее может быть кабинет.</p></section>
+<section id="section-2"><h2>Что проектируем кроме экранов</h2><p>Нельзя оценивать приложение только по числу макетов. Важны данные, правила их изменения и серверная логика. Платежи, кассу и сторонние сервисы подключаем только в согласованном объёме.</p><ul><li>Действия клиента и состав отображаемых сведений.</li><li>Связь с расписанием, заказами или другой рабочей системой.</li><li>Роли и правила доступа к личной информации.</li><li>Обработку изменений и нестандартных ситуаций.</li><li>Состояния загрузки, ошибок и отсутствующих данных.</li></ul></section>
+<section id="section-3"><h2>Пример: кабинет ученика танцевальной студии</h2><p>В реализованном проекте ученик через Telegram видит занятия и абонементы, выбирает запись и отправляет подтверждение оплаты. Преподаватель работает с расписанием и учётом в CRM. Проверка чека остаётся у преподавателя.</p><p>Индивидуальная разработка этого проекта заняла полтора месяца. Этот факт относится к конкретному кейсу и не является обещанием одинакового срока для любого мини-приложения. Скриншоты и описание доступны в портфолио.</p></section>
+<section id="section-4"><h2>Как согласуем и проверяем проект</h2><p>Начинаем с основного клиентского пути и прототипа экранов. После согласования разрабатываем интерфейс и логику, затем проверяем нужные действия с разными ролями, пустыми данными и ошибочными ситуациями.</p><p>Проверяем отображение внутри Telegram на согласованных устройствах и размеров экрана. Стоимость и сроки определяем по функциям и подключениям. Работаем удалённо по России, без обязательной очной встречи.</p></section></div><aside class="seo-terms"><span>Условия работы</span><strong>По функциям приложения</strong><p>Проектируем клиентские экраны, серверную часть, доступы и связь с рабочей системой. Бюджет простого бота не равен стоимости Mini App.</p><p>Дистанционно по всей России. Состав и сроки фиксируем до начала работы.</p><a href="/contact" data-service="Telegram Mini App: когда кнопок в переписке уже мало">Обсудить состав</a></aside></div><section class="seo-faq"><h2>Вопросы до начала работы</h2><details><summary>Mini App устанавливается из магазина приложений?</summary><p>Нет, описываемый интерфейс открывается внутри Telegram. Особенности доступа и клиентский путь обсуждаем при проектировании.</p></details><details><summary>Это входит в разработку бота от 3 000 ₽?</summary><p>Нет. Мини-приложение с кабинетом и данными имеет отдельный объём интерфейса и серверной логики.</p></details><details><summary>Можно использовать готовое решение студии?</summary><p>Если ваши правила совместимы с ним. Готовое решение, его настройка и индивидуальная разработка являются разными вариантами работы.</p></details></section><section class="seo-related seo-service-links"><h2>Другие задачи направления</h2><div><a href="/telegram-boty"><span>Все возможности направления</span><h3>Telegram-бот, который берёт на себя повторяющиеся действия</h3><p>Записать клиента, собрать заявку, показать информацию или напомнить о событии. Начинаем с конкретного сценария, а не со списка модных функций.</p><b>Состав и условия</b></a><a href="/bot-dlya-zapisi-klientov"><span>Отдельная услуга</span><h3>Бот для записи клиентов</h3><p>Клиент выбирает подходящий вариант в Telegram. Вы получаете оформленную запись, а не цепочку сообщений «а когда можно?».</p><b>Состав и условия</b></a><a href="/bot-dlya-priema-zayavok"><span>Отдельная услуга</span><h3>Бот для приёма заявок</h3><p>Вместо сообщения без деталей менеджер получает оформленное обращение: задача, важные параметры и согласованный способ связаться.</p><b>Состав и условия</b></a></div></section><section class="seo-related"><h2>Как это выглядит в работе</h2><div><a href="/case-crm-studii-tancev"><span>Реальный проект</span><h3>Запись на танцы без ручного согласования в чате</h3><p>Преподавателю требовалось собрать клиентов, занятия, абонементы и оплаты в одном месте. Создали кабинет студии и Mini App для ученика.</p><b>Посмотреть кейс</b></a></div></section><section class="seo-related"><h2>Полезно по теме</h2><div><a href="/blog-scenarii-telegram-bota"><span>Статья</span><h3>Как понять, какой Telegram-бот действительно нужен бизнесу</h3><p>Запись, заявки, частые вопросы и уведомления: выбираем первый сценарий Telegram-бота, определяем границы и проверяем результат до запуска.</p><b>Читать</b></a><a href="/blog-uchet-abonementov"><span>Статья</span><h3>Учёт абонементов начинается с правил, а не с таблицы</h3><p>Как организовать учёт занятий: срок абонемента, списания, переносы, отмены, проверка оплаты и остатки. Практический список правил для студии и преподавателя.</p><b>Читать</b></a></div></section><section class="seo-contact"><p>Работаем удалённо по всей России</p><h2>Обсудим вашу задачу?</h2><a class="btn btn--primary" href="/contact" data-service="Telegram Mini App: когда кнопок в переписке уже мало">Связаться</a></section><p class="seo-content-note">Информация об услуге: <a href="/about" rel="author">команда MENTORI TECHNOLOGIES</a>. Обновлено <time datetime="2026-10-25">25 октября 2026</time>.</p></main>
+
+  <footer class="foot">
+    <div class="foot__inner">
+      <div class="foot__cols">
+        <div><div class="foot__h">Контакт</div><a href="mailto:mentraos@mail.ru" aria-label="Написать на почту" title="Написать на почту"><img class="foot__contact-icon" src="/assets/icons/mail.svg" alt="" width="20" height="20"></a><a href="tel:+79996693419" aria-label="Позвонить" title="Позвонить"><img class="foot__contact-icon" src="/assets/icons/phone.svg" alt="" width="20" height="20"></a><a href="https://t.me/Mentori_Re" aria-label="Открыть Telegram" title="Telegram"><img class="foot__contact-icon" src="/assets/icons/telegram.svg" alt="" width="20" height="20"></a><a href="https://max.ru/u/f9LHodD0cOKBPM0dbjrb5ezQXBmCYH_aXZDfeNXg5-SMxcV_laJVpwlyBO0" aria-label="Открыть MAX" title="MAX"><img class="foot__contact-icon" src="/assets/icons/max.svg" alt="" width="20" height="20"></a></div>
+        <div><div class="foot__h">Разделы</div><a href="/services">Что делаем</a><a href="/about">О нас</a><a href="/blog">Блог</a><a href="/contact">Контакты</a><a href="/portfolio">Портфолио</a></div>
+        <div><div class="foot__h">Юридическое</div><a href="/privacy">Политика конфиденциальности</a><a href="/offer">Договор оферты</a></div>
+      </div>
+    </div>
+    <div class="foot__bottom"><span>© MENTORI TECHNOLOGIES, 2026</span><span>работаем по&nbsp;всей России</span></div>
+  <div class="foot-signature" data-footer-reveal><img src="/assets/mentori-technologies-wordmark-transparent.avif" width="1170" height="500" alt="MENTORI TECHNOLOGIES" loading="lazy" decoding="async"></div></footer>
+
+
+
+
+  <script src="main.min.js?v=56" defer=""></script>
+<script src="/footer-reveal.js?v=20261011-2" defer></script>
+
+<script src="/site-polish.js?v=20261025-1" defer></script></body></html>

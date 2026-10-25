@@ -76,6 +76,24 @@
 - Яндекс Директ с контролем заявок и расходов: https://mentorios.tech/yandex-direct
 - Услуги авитолога: от понятного объявления до диалога: https://mentorios.tech/uslugi-avitologa
 - SEO-продвижение начинается с полезных страниц: https://mentorios.tech/seo-prodvizhenie
+- CRM для строительства: каждый объект под контролем: https://mentorios.tech/crm-dlya-stroitelstva
+- CRM для производства: от запроса до готового заказа: https://mentorios.tech/crm-dlya-proizvodstva
+- Учёт клиентов и заказов в одном рабочем месте: https://mentorios.tech/uchet-klientov-i-zakazov
+- Автоматизация продаж, в которой заявки не остаются без следующего шага: https://mentorios.tech/avtomatizaciya-prodazh
+- Лендинг, на котором понятно, что вы предлагаете: https://mentorios.tech/razrabotka-lendinga
+- Корпоративный сайт, который объясняет компанию и её услуги: https://mentorios.tech/korporativnyj-sajt
+- Сайт-каталог, в котором удобно выбрать продукцию: https://mentorios.tech/sajt-katalog
+- Бот для записи клиентов без бесконечного согласования времени: https://mentorios.tech/bot-dlya-zapisi-klientov
+- Бот для заявок, после которого понятно, что нужно клиенту: https://mentorios.tech/bot-dlya-priema-zayavok
+- Telegram Mini App: когда кнопок в переписке уже мало: https://mentorios.tech/telegram-mini-app
+- Настройка Яндекс Директа начинается до первого платного клика: https://mentorios.tech/nastrojka-yandex-direct
+- Ведение Яндекс Директа: понятно, на что уходит бюджет: https://mentorios.tech/vedenie-yandex-direct
+- Аудит Яндекс Директа: почему расходы есть, а подходящих клиентов мало: https://mentorios.tech/audit-yandex-direct
+- Оформление Авито: чтобы по объявлению было понятно, почему выбрать вас: https://mentorios.tech/oformlenie-avito
+- Ведение Авито: от объявления до содержательного диалога: https://mentorios.tech/vedenie-avito
+- SEO-аудит: что мешает поиску понять ваш сайт: https://mentorios.tech/seo-audit
+- Техническая оптимизация: у каждой страницы один понятный адрес: https://mentorios.tech/tekhnicheskaya-optimizaciya-sajta
+- CRM для репетитора: меньше переписок между занятиями: https://mentorios.tech/crm-dlya-repetitora
 - Запись на танцы без ручного согласования в чате: https://mentorios.tech/case-crm-studii-tancev
 - Спектр Металла: от каталога до корзины заявки: https://mentorios.tech/case-spektr-metalla
 - Сначала собрали порядок в своей компании: https://mentorios.tech/case-mentori

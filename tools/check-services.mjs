@@ -21,7 +21,8 @@ for(const s of services) {
   assert.equal(home('.home-offer[href="/'+servicePages.find(p=>p.id===s.id).slug+'"]').length,1);
 }
 const schema=JSON.parse(page('script[type="application/ld+json"]').first().text());
-const offers=schema.hasOfferCatalog.itemListElement;
+const catalog=(schema['@graph']||[schema]).find(n=>n.hasOfferCatalog);
+const offers=catalog.hasOfferCatalog.itemListElement;
 for(const s of services) assert.equal(offers.find(o=>o.name===s.title).price,s.priceValue);
 assert(page('#direct .offer-price').text().includes('7 500 ₽ / месяц'));
 assert(page('#websites .offer-price').text().includes('от 5 000 ₽'));

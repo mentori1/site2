@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title>MENTORI TECHNOLOGIES</title>
+  <defs>
+    <linearGradient id="g" x1="10" y1="10" x2="54" y2="54" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ff7a3d"/>
+      <stop offset="1" stop-color="#ff4f0f"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="13" fill="#0a0a0a"/>
+  <path d="M12 48V16h10l10 20 10-20h10v32h-8V27L35 46h-6l-9-19v21z" fill="url(#g)"/>
+  <path d="M13 12h38" stroke="#ffa940" stroke-width="2" stroke-linecap="round" opacity=".72"/>
+</svg>

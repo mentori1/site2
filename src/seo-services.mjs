@@ -1,4 +1,6 @@
-export const servicePages = [
+import { specializations } from './seo-specializations.mjs';
+
+const primaryServices = [
   {
     id:'system', slug:'avtomatizaciya-biznesa', title:'Автоматизация бизнеса и система учёта под ваши процессы | Mentori',
     description:'Собираем клиентов, заказы, задачи и оплаты в систему под процессы вашей компании. Перенос данных из таблиц, роли сотрудников и понятные отчёты. Работаем по России.',
@@ -105,6 +107,12 @@ export const servicePages = [
     caseIds:[], articles:['blog-seo-posadochnye-stranicy','blog-seo-prodvizhenie-saita']
   }
 ];
+
+export const servicePages = [...primaryServices, ...specializations.map(page=>{
+  const parent=primaryServices.find(item=>item.id===page.parent);
+  if(!parent)throw Error('Unknown service parent: '+page.parent);
+  return {image:parent.image,alt:parent.alt,portrait:parent.portrait,...page};
+})];
 
 export const casePages = [
   {id:'studio',slug:'case-crm-studii-tancev',title:'Кейс: CRM и Telegram Mini App для студии танцев | Mentori',h1:'Запись на танцы без ручного согласования в чате',description:'Кейс Mentori: CRM, абонементы и самостоятельная запись учеников через Telegram. Разработка за полтора месяца. Оплаты проверяет преподаватель.',lead:'Преподавателю требовалось собрать клиентов, занятия, абонементы и оплаты в одном месте. Создали кабинет студии и Mini App для ученика.',services:['studio','bots'],articles:['blog-uchet-abonementov','blog-scenarii-telegram-bota'],image:'/assets/portfolio/studio-admin.jpg'},
