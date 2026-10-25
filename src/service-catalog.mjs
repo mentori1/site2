@@ -68,7 +68,7 @@ export const services = [
   }
 ];
 
-export const systemVisual = '<figure class="system-preview"><img class="system-preview__generated" src="/assets/services/system-device-v2.webp" width="1200" height="800" alt="Система Mentori: проекты и оплаты на ноутбуке и iPhone" decoding="async" fetchpriority="high"><figcaption>Визуализация интерфейса Mentori. Данные демонстрационные.</figcaption></figure>';
+export const systemVisual = '<figure class="system-preview"><img class="system-preview__generated" src="/assets/services/mentori-devices-cutout-v3.webp" width="1536" height="1024" alt="Система Mentori: проекты и оплаты на ноутбуке и iPhone" decoding="async" fetchpriority="high"><figcaption>Визуализация интерфейса Mentori. Данные демонстрационные.</figcaption></figure>';
 
 const items = arr => arr.map(i=>'<li>'+i+'</li>').join('');
 const posterCopy = {

@@ -1,0 +1,105 @@
+:root {
+  --glass-line:rgba(255,255,255,.17);
+  --glass-fill:linear-gradient(135deg,rgba(255,255,255,.085),rgba(255,255,255,.025));
+  --glass-edge:inset 0 1px 0 rgba(255,255,255,.11),0 16px 40px -32px rgba(0,0,0,.65);
+}
+.seo-related > div > a,.offer-card,.blog-feature,.pkg__card,.cost-factor,
+.article-callout,.article-feature-grid > div,.internal-ops__item {
+  border-radius:28px;
+  border-color:var(--glass-line);
+  background:var(--glass-fill);
+  box-shadow:var(--glass-edge);
+}
+.seo-related > div > a,.offer-card,.blog-feature,.home-offer .offer-poster {
+  transition:border-color .24s ease,box-shadow .24s ease;
+}
+.seo-outcomes > div {
+  padding:21px;
+  border:1px solid var(--glass-line);
+  border-radius:24px;
+  background:var(--glass-fill);
+  box-shadow:var(--glass-edge);
+}
+.seo-terms {
+  padding:24px;
+  border:1px solid var(--glass-line);
+  border-radius:26px;
+  background:linear-gradient(135deg,rgba(58,45,34,.65),rgba(29,28,27,.75));
+  box-shadow:var(--glass-edge);
+}
+.seo-toc {
+  padding:22px;
+  border:1px solid var(--glass-line);
+  border-radius:24px;
+  background:rgba(28,26,24,.75);
+  box-shadow:var(--glass-edge);
+}
+.seo-faq details,.article-faq details {
+  padding:0 22px;
+  margin:10px 0;
+  border:1px solid var(--glass-line);
+  border-radius:20px;
+  background:var(--glass-fill);
+}
+.seo-table { border:1px solid var(--glass-line); border-radius:20px; }
+.seo-blog-image { border-radius:27px 27px 0 0; }
+.seo-blog-image img,.seo-case-teaser__image img { border-radius:22px; }
+.portfolio-project__details > div {
+  padding:20px 22px;
+  border:1px solid var(--glass-line);
+  border-radius:24px;
+  background:var(--glass-fill);
+}
+.seo-figure img,.system-preview__generated,.hero-device__desktop img {
+  border:0;
+  border-radius:0;
+  background:transparent;
+  object-fit:contain;
+}
+.seo-figure img:not([src*="cutout"]),.seo-case-teaser__image img:not([src*="cutout"]) { border-radius:24px; }
+.seo-blog-image img[src*="cutout"],.seo-case-teaser__image img[src*="cutout"] { border-radius:0; background:none; border:0; }
+.seo-figure:has(img[src*="cutout"]),.system-preview:has(.system-preview__generated) { overflow:visible; }
+.system-preview__generated { width:100%; height:auto; }
+.seo-service-link { border-radius:20px; }
+.offer-extra { border-radius:20px; }
+/* These overlap; translucent fills would make their text bleed together. */
+.services-stack .stack__card {
+  border-radius:30px;
+  background-color:var(--bg-elevated,#111110);
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+}
+.polish-pending,.js-ready [data-reveal].polish-pending {
+  opacity:0;
+  transform:translateY(16px);
+}
+:root .polish-seen {
+  transition:opacity .5s ease,transform .55s cubic-bezier(.2,.65,.25,1),border-color .24s ease,box-shadow .24s ease;
+}
+@supports(backdrop-filter:blur(8px)) {
+  .seo-terms,.seo-toc { backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); }
+  html.is-safari .nav.is-scrolled,html.is-safari .mobile-menu {
+    backdrop-filter:blur(10px)!important;
+    -webkit-backdrop-filter:blur(10px)!important;
+  }
+}
+@media(hover:hover) and (pointer:fine) {
+  .seo-related > div > a:hover,.offer-card:hover,.blog-feature:hover {
+    border-color:rgba(255,161,103,.4);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 18px 42px -34px rgba(255,111,35,.3);
+  }
+}
+@media(max-width:760px) {
+  .seo-related > div > a,.offer-card,.blog-feature,.pkg__card { border-radius:24px; }
+  .seo-terms { padding:21px; border-radius:24px; }
+  .seo-toc { padding:18px 20px; }
+  .seo-outcomes > div { padding:18px; border-radius:22px; }
+  .seo-faq details,.article-faq details { padding:0 18px; }
+  .portfolio-project__details > div { padding:19px; border-radius:22px; }
+  .services-stack .stack__card { border-radius:24px; }
+  .seo-terms,.seo-toc { backdrop-filter:none; -webkit-backdrop-filter:none; }
+  .polish-pending { transform:translateY(11px); }
+}
+@media(prefers-reduced-motion:reduce) {
+  .polish-pending,.polish-seen { opacity:1!important; transform:none!important; transition:none!important; }
+}

@@ -29,7 +29,9 @@ for (const file of (await fs.readdir('.')).filter(name => name.endsWith('.html')
   else insert($('footer.foot')[0], signature);
   for (const [selector, markup, parent] of [
     ['link[href^="/page-finish.css"]','<link rel="stylesheet" href="/page-finish.css?v=20261011-4">','head'],
-    ['script[src^="/footer-reveal.js"]','<script src="/footer-reveal.js?v=20261011-2" defer></script>','body']
+    ['script[src^="/footer-reveal.js"]','<script src="/footer-reveal.js?v=20261011-2" defer></script>','body'],
+    ['link[href^="/site-polish.css"]','<link rel="stylesheet" href="/site-polish.css?v=20261025-1">','head'],
+    ['script[src^="/site-polish.js"]','<script src="/site-polish.js?v=20261025-1" defer></script>','body']
   ]) {
     if ($(selector).length) replace($(selector)[0],markup);
     else insert($(parent)[0],markup);
@@ -40,7 +42,7 @@ for (const file of (await fs.readdir('.')).filter(name => name.endsWith('.html')
   }
   let result=html;
   for (const e of edits.sort((a,b)=>b.start-a.start)) result=result.slice(0,e.start)+e.text+result.slice(e.end);
-  result=result.replace(/(<div class="foot__inner">\n)[\t ]+\n/g,'$1');
+  result=result.replace(/(<div class="foot__inner">\n)[\t ]+\n/g,'$1').replace(/[\t ]+$/gm,'');
   await fs.writeFile(file,result);
 }
 console.log('Shared footer and page finishes generated.');

@@ -38,7 +38,7 @@ assert.equal(home('[data-order-demo]').length,0,'No animated before/after panel 
 assert.equal(home('#hero a[href="/contact"]').text().trim(),'Консультация','Published desktop contact CTA');
 assert.equal(home('#hero a').length,1,'Hero has one clear contact action');
 assert.equal(home('#hero figcaption').length,0,'No caption under hero devices');
-assert.equal(home('#hero .hero-device__desktop img').attr('src'),'/assets/hero/mentori-devices-crm-v2.webp');
+assert.equal(home('#hero .hero-device__desktop img').attr('src'),'/assets/services/mentori-devices-cutout-v3.webp');
 assert.equal(home('#hero .hero-device__mobile img').length,1,'Published mobile fallback is retained in the source');
 assert.equal(home('link[href^="/hero-focus.css"]').length,0,'Draft hero CSS is not published');
 assert.equal(home('link[href^="/hero-published.css"]').length,1);

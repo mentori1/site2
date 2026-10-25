@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Mentori · Проверка мобильных экранов</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#e6e7e9;color:#222;font:14px/1.4 system-ui,sans-serif}header{display:flex;align-items:center;gap:20px;padding:18px 24px;background:#fff;border-bottom:1px solid #d5d5d5}h1{font-size:18px;margin:0}select{max-width:540px;padding:10px;border:1px solid #bbb;border-radius:10px;background:white;font:inherit}button{padding:10px 15px;border:1px solid #bbb;border-radius:10px;background:white;font:inherit;cursor:pointer}button:disabled{opacity:.5;cursor:default}.actions{display:flex;gap:8px;margin-left:auto}#progress{padding:12px 24px;min-height:44px;color:#555}.devices{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;padding:0 24px 22px;align-items:start}.device{min-width:0}.device h2{margin:0 0 10px;font-size:14px;font-weight:600;display:flex;justify-content:space-between}.size{font-weight:400;color:#777}.viewport{position:relative;margin:auto;border-radius:30px}.phone{position:absolute;left:0;top:0;background:#151515;border:3px solid #636363;border-radius:45px;padding:9px;box-shadow:0 12px 22px #0002;transform-origin:top left;overflow:hidden}.phone iframe{border:0;border-radius:33px;background:#0b0b0a;display:block}.result{font-size:12px;color:#555;margin:13px 0;min-height:40px}.error{color:#b72d19}.ok{color:#217446}@media(max-width:900px){header{flex-wrap:wrap;gap:12px}.actions{margin-left:0}.devices{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:520px){.devices{grid-template-columns:1fr}select{width:100%}}
+</style>
+</head>
+<body>
+<header><h1>MENTORI · Мобильные экраны</h1><select id="page" aria-label="Страница"></select><div class="actions"><button id="run">Проверить все</button><button id="stop" disabled>Стоп</button></div></header>
+<div id="progress" role="status">Подготовка</div>
+<main class="devices" id="devices"></main>
+<details style="margin:0 24px 24px"><summary>Протокол проверок</summary><pre id="report" style="white-space:pre-wrap;font-size:11px"></pre></details>
+<script type="module">
+const devices=[['iPhone SE',375,667],['iPhone 13 / 14',390,844],['iPhone 15 Pro',393,852],['iPhone Pro Max',430,932]];
+const sitemap=await fetch('/sitemap.xml').then(r=>r.text());
+const routes=[...new DOMParser().parseFromString(sitemap,'text/xml').querySelectorAll('urlset > url > loc')].map(n=>new URL(n.textContent).pathname);
+const select=document.querySelector('#page'),progress=document.querySelector('#progress');
+const run=document.querySelector('#run'),stop=document.querySelector('#stop');
+const results=[];let stopped=false,running=false;
+routes.forEach(route=>select.add(new Option(route,route)));
+const frames=devices.map(([name,width,height],index)=>{
+  const section=document.createElement('section');section.className='device';
+  section.innerHTML='<h2>'+name+'<span class="size">'+width+' × '+height+'</span></h2><div class="viewport"><div class="phone"><iframe title="'+name+'" width="'+width+'" height="'+height+'"></iframe></div></div><p class="result" role="status"></p>';
+  document.querySelector('#devices').append(section);
+  const phone=section.querySelector('.phone'),viewport=section.querySelector('.viewport');
+  function resize(){const scale=Math.min(1,section.clientWidth/(width+24));phone.style.width=(width+24)+'px';phone.style.transform='scale('+scale+')';viewport.style.width=((width+24)*scale)+'px';viewport.style.height=((height+24)*scale)+'px';}
+  new ResizeObserver(resize).observe(section);resize();
+  return {section,frame:section.querySelector('iframe'),width,height,name,index};
+});
+async function navigate(route){
+  select.value=route;
+  progress.textContent=route+' · '+(routes.indexOf(route)+1)+' / '+routes.length;
+  const checks=await Promise.all(frames.map(({frame,section,width,name})=>new Promise(resolve=>{
+    const started=performance.now();section.querySelector('.result').textContent='Загрузка';
+    frame.onload=()=>{
+      try{
+        const doc=frame.contentDocument;
+        const heading=doc.querySelectorAll('h1').length;
+        const overflow=doc.documentElement.scrollWidth>width+1;
+        const broken=[...doc.images].filter(i=>i.complete&&!i.naturalWidth).length;
+        const row={route,device:name,width,height:frame.height,h1:heading,overflow,broken,loadMs:Math.round(performance.now()-started),ok:heading===1&&!overflow&&!broken};
+        results.push(row);
+        const output=section.querySelector('.result');output.className='result '+(row.ok?'ok':'error');
+        output.textContent=(row.ok?'Без переполнения':'Нужна проверка')+' · '+row.loadMs+' мс · H1: '+heading+' · изображения: '+(broken?'ошибка':'OK');
+        resolve(row);
+      }catch(error){section.querySelector('.result').textContent=error.message;resolve({route,device:name,ok:false,error:error.message});}
+    };
+    frame.src=route;
+  })));
+  document.body.dataset.lastCheck=JSON.stringify(checks);
+  return checks;
+}
+select.addEventListener('change',()=>{stopped=true;navigate(select.value);});
+stop.addEventListener('click',()=>{stopped=true;});
+run.addEventListener('click',async()=>{
+  if(running)return;running=true;stopped=false;run.disabled=true;stop.disabled=false;
+  let completed=0,errors=0;
+  for(const route of routes){if(stopped)break;const checks=await navigate(route);completed++;errors+=checks.filter(r=>!r.ok).length;await new Promise(r=>setTimeout(r,750));}
+  progress.textContent=(stopped?'Остановлено':'Готово')+' · страниц '+completed+' · экранов '+completed*4+' · ошибок '+errors;
+  document.body.dataset.summary=JSON.stringify({completed,screens:completed*4,errors});
+  document.querySelector('#report').textContent=JSON.stringify(results,null,2);
+  running=false;run.disabled=false;stop.disabled=true;
+});
+await navigate('/avtomatizaciya-biznesa');
+</script>
+</body>
+</html>

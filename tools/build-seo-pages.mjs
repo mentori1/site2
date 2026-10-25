@@ -49,7 +49,7 @@ function renderPage(p,kind,main){
   $('meta[property="og:url"]').attr('content',origin+path(p));
   $('meta[property="og:type"]').attr('content',kind==='article'?'article':'website');
   $('link[rel="canonical"],link[rel="alternate"][hreflang="ru"]').attr('href',origin+path(p));
-  $('meta[name="keywords"],script[type="application/ld+json"],link[href^="/seo-pages.css"]').remove();
+  $('meta[name="keywords"],script[type="application/ld+json"],link[href^="/seo-pages.css"],link[href^="/site-polish.css"],script[src^="/site-polish.js"]').remove();
   $('head').append(css);
   const group=kind==='service'?'Что делаем':kind==='case'?'Портфолио':'Блог';
   const groupPath=kind==='service'?'/services':kind==='case'?'/portfolio':'/blog';
