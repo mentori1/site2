@@ -28,6 +28,7 @@ for(const [route,$] of pages){
   assert(title.includes('MENTORI TECHNOLOGIES'),route+': visible search brand');
   assert.equal($('h1').length,1);
   assert.equal($('form').length,0,'No lead forms or content gates');
+  if(route!=='/blog')assert.equal($('link[data-blog-covers]').length,0,route+': poster styles stay scoped to the blog index');
   assert(!$('body').text().includes('undefined'),route+': no missing content');
   const ids=$('[id]').toArray().map(n=>$(n).attr('id'));
   assert.equal(ids.length,new Set(ids).size,route+': unique IDs');
@@ -77,6 +78,17 @@ for(const p of newArticles){
   assert.equal($('article .seo-author').text(),'Материал команды MENTORI TECHNOLOGIES');
 }
 assert.equal(pages.get('/blog')('.seo-blog-card').length,11);
+const blog=pages.get('/blog'),catalog=pages.get('/services');
+assert.equal(blog('link[data-blog-covers]').length,2);
+assert.equal(blog('.seo-blog-card .offer-poster').length,9,'Use the complete approved service covers, not raw device images');
+for(const node of blog('.seo-blog-card .offer-poster').toArray()){
+  const cover=blog(node),kind=cover.attr('class').match(/offer-poster--(\w+)/)[1];
+  assert.equal(blog.html(node),catalog.html(catalog('#'+kind+' .offer-poster')[0]),kind+': blog cover must match the approved service poster');
+  assert.equal(cover.find('.offer-poster__headline').length,1);
+  assert.equal(cover.find('.offer-poster__brand').length,1);
+}
+assert.equal(blog('.seo-blog-image img').length,2);
+blog('.seo-blog-image img').each((_,n)=>assert.equal(blog(n).attr('src'),'/assets/services/mentori-devices-cutout-v3.webp'));
 assert(pages.get('/yandex-direct')('main').text().includes('7 500'));
 assert(pages.get('/yandex-direct')('main').text().includes('в разработке'));
 assert(pages.get('/razrabotka-sajtov')('main').text().includes('5 000'));

@@ -41,7 +41,10 @@ for (const file of (await fs.readdir('.')).filter(name => name.endsWith('.html')
   }
   for (const name of ['home-scenes','hero-focus','service-posters']) {
     const version=name==='hero-focus'?'20261011-8':'20261011-4';
-    $(`link[href^="/${name}.css"]`).each((_,node)=>replace(node,`<link rel="stylesheet" href="/${name}.css?v=${version}">`));
+    $(`link[href^="/${name}.css"]`).each((_,node)=>{
+      $(node).attr('href',`/${name}.css?v=${version}`);
+      replace(node,$.html(node));
+    });
   }
   let result=html;
   for (const e of edits.sort((a,b)=>b.start-a.start)) result=result.slice(0,e.start)+e.text+result.slice(e.end);

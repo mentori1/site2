@@ -79,8 +79,9 @@
 .seo-case-teaser h2 { margin:0 0 20px; font:400 38px/1.12 var(--font-display,serif); }
 .seo-case-teaser p:not(.seo-eyebrow) { color:#b6afa6; font-size:16px; line-height:1.8; }
 .seo-blog-card { display:flex; flex-direction:column; }
-.seo-blog-image { display:grid; place-items:center; height:300px; background:#ffffff03; padding:18px; }
-.seo-blog-image img { display:block; width:100%; height:100%; min-height:0; object-fit:contain; border-radius:8px; }
+.seo-blog-cover { width:100%; flex:none; overflow:hidden; border-radius:27px 27px 0 0; }
+.seo-blog-image { display:grid; place-items:center; aspect-ratio:3/2; background:none; padding:0; }
+.seo-blog-image img { display:block; width:100%; height:100%; min-height:0; object-fit:contain; border-radius:0; }
 .seo-blog-card .blog-feature__body { flex:1; display:flex; flex-direction:column; }
 .seo-blog-card .blog-feature__body h2 { font-size:29px; line-height:1.15; letter-spacing:0; }
 .seo-blog-card .blog-feature__read { margin-top:auto; padding-top:24px; }
@@ -145,7 +146,6 @@
   .seo-article-head { margin-bottom:30px; }
   .seo-case-teaser { grid-template-columns:minmax(0,1fr); gap:24px; }
   .seo-case-teaser h2 { font-size:31px; }
-  .seo-blog-image { height:230px; }
   .seo-blog-card .blog-feature__body h2 { font-size:27px; }
   .seo-geography { padding:35px 22px 45px; }
   .seo-geography h2 { font-size:30px; }

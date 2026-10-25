@@ -79,7 +79,7 @@ const posterCopy = {
   avito:{heading:'АВИТО<br>ПОД КЛЮЧ',accent:'ИЗ ПОИСКА В ДИАЛОГ',facts:'Упаковка · Ведение<br>Бот для ответов в бонус'},
   seo:{heading:'SEO<br>ПРОДВИЖЕНИЕ',accent:'ВАС УЖЕ ИЩУТ',facts:'Аудит · Страницы<br>Контент · Индексация'}
 };
-function renderPoster(s) {
+export function renderPoster(s) {
   const p=posterCopy[s.id];
   const visual=s.id==='websites'?'<div class="offer-art offer-art--websites offer-art--generated"><img class="offer-poster__device" src="/assets/services/website-phone-v3.webp" width="733" height="1100" alt="iPhone с каталогом Спектра Металла" loading="lazy" decoding="async"><span class="offer-art__caption">Визуализация сайта «Спектр Металла»</span></div>':s.visual;
   return '<div class="offer-poster offer-poster--'+s.id+'">'+visual+'<div class="offer-poster__paper" aria-hidden="true"></div><div class="offer-poster__motif" aria-hidden="true"><i></i><i></i><i></i></div><div class="offer-poster__brand" aria-hidden="true">MENTORI <small>TECH</small></div><div class="offer-poster__copy"><strong class="offer-poster__headline">'+p.heading+'</strong><b class="offer-poster__accent">'+p.accent+'</b><p>'+p.facts+'</p></div></div>';

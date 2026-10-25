@@ -1,12 +1,12 @@
 import fs from 'node:fs/promises';
 import { load } from 'cheerio';
-import { services } from '../src/service-catalog.mjs';
+import { services, renderPoster } from '../src/service-catalog.mjs';
 import { servicePages, casePages } from '../src/seo-services.mjs';
 import { newArticles } from '../src/seo-articles.mjs';
 import { homeFaq } from '../src/home-faq.mjs';
 
 const origin='https://mentorios.tech', date='2026-10-25';
-const css='<link rel="stylesheet" href="/seo-pages.css?v=20261025-2">';
+const css='<link rel="stylesheet" href="/seo-pages.css?v=20261025-3">';
 const esc=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const path=p=>'/'+p.slug;
 const service=id=>servicePages.find(p=>p.id===id);
@@ -65,7 +65,7 @@ function renderPage(p,kind,main){
   $('meta[property="og:url"]').attr('content',origin+path(p));
   $('meta[property="og:type"]').attr('content',kind==='article'?'article':'website');
   $('link[rel="canonical"],link[rel="alternate"][hreflang]').attr('href',origin+path(p));
-  $('meta[name="keywords"],script[type="application/ld+json"],link[href^="/seo-pages.css"],link[href^="/site-polish.css"],script[src^="/site-polish.js"]').remove();
+  $('meta[name="keywords"],script[type="application/ld+json"],link[href^="/seo-pages.css"],link[href^="/site-polish.css"],script[src^="/site-polish.js"],link[data-blog-covers],link[href^="/service-catalog.css"],link[href^="/service-posters.css"]').remove();
   $('head').append(css);
   const group=kind==='service'?'Что делаем':kind==='case'?'Портфолио':'Блог';
   const groupPath=kind==='service'?'/services':kind==='case'?'/portfolio':'/blog';
@@ -107,10 +107,21 @@ await patch('services.html',($,replace,append)=>{
   if($('#service-directions').length)replace($('#service-directions')[0],directory);else append($('main')[0],directory);
   addCss($,replace,append);
 });
-const blogCard=a=>'<a class="blog-feature seo-blog-card" href="'+path(a)+'"><div class="seo-blog-image"><img src="'+(a.image||service(a.service).image)+'" alt="" width="1200" height="800" loading="lazy" decoding="async"></div><div class="blog-feature__body"><div class="blog-feature__meta"><span>'+esc(a.category||service(a.service).h1)+'</span></div><h2>'+esc(a.h1)+'</h2><p>'+esc(a.description)+'</p><span class="blog-feature__read"><i>Читать</i></span></div></a>';
+function blogCover(a){
+  const offer=services.find(s=>s.id===a.service);
+  if(offer)return '<div class="seo-blog-cover" aria-hidden="true">'+renderPoster(offer)+'</div>';
+  return '<div class="seo-blog-image"><img src="'+service(a.service).image+'" alt="" width="1536" height="1024" loading="lazy" decoding="async"></div>';
+}
+const blogCard=a=>'<a class="blog-feature seo-blog-card" href="'+path(a)+'">'+blogCover(a)+'<div class="blog-feature__body"><div class="blog-feature__meta"><span>'+esc(a.category||service(a.service).h1)+'</span></div><h2>'+esc(a.h1)+'</h2><p>'+esc(a.description)+'</p><span class="blog-feature__read"><i>Читать</i></span></div></a>';
 await patch('blog.html',($,replace,append)=>{
   const ordered=[...newArticles.filter(a=>a.guide),...newArticles.filter(a=>!a.guide),...oldArticles];
   replace($('.blog-index__grid')[0],'<div class="blog-index__grid">'+ordered.map(blogCard).join('')+'</div>');addCss($,replace,append);
+  for(const [name,version] of [['service-catalog','20261010-5'],['service-posters','20261011-4']]){
+    const link='<link rel="stylesheet" href="/'+name+'.css?v='+version+'" data-blog-covers>';
+    const nodes=$('link[href^="/'+name+'.css"]').toArray();
+    if(nodes.length){replace(nodes[0],link);nodes.slice(1).forEach(n=>replace(n,''));}
+    else append($('head')[0],link);
+  }
   const schema=JSON.parse($('script[type="application/ld+json"]').first().text());
   const collection=(schema['@graph']||[schema]).find(n=>n['@type']==='CollectionPage');
   if(!collection)throw Error('Blog collection schema is missing');
