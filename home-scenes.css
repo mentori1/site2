@@ -97,6 +97,15 @@
 @media(max-width:800px) {
   .services-stack .stack__num { top:14px; right:20px; font-size:14px; }
 }
+@media(max-width:900px) {
+  .stack.is-carousel { transition:none; }
+  .stack.is-carousel .stack__card {
+    filter:none;
+    will-change:transform,opacity;
+    transition:transform .68s cubic-bezier(.4,0,.2,1),opacity .55s ease-in-out;
+  }
+  .stack.is-carousel .stack__card.is-active .stack__visual { animation:none; }
+}
 @media(prefers-reduced-motion:reduce) {
   .flow-demo * { animation:none!important; transition:none!important; }
 }

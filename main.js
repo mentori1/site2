@@ -786,6 +786,9 @@
     let pointerStartX = 0;
     let pointerStartY = 0;
     let resizeTimer = 0;
+    let measuredWidth = 0;
+    let measureFrame = 0;
+    let userControlled = false;
 
     mobileStack.classList.add("is-carousel");
     mobileStack.setAttribute("role", "region");
@@ -807,10 +810,13 @@
     });
 
     const measureCards = () => {
-      mobileStack.style.removeProperty("--stack-carousel-card-height");
-      requestAnimationFrame(() => {
+      cancelAnimationFrame(measureFrame);
+      measureFrame = requestAnimationFrame(() => {
+        measuredWidth = mobileStack.clientWidth;
+        mobileStack.style.removeProperty("--stack-carousel-card-height");
         const tallestCard = Math.max(...mobileStackCards.map((card) => card.scrollHeight));
         mobileStack.style.setProperty("--stack-carousel-card-height", `${tallestCard}px`);
+        measureFrame = 0;
       });
     };
 
@@ -821,7 +827,7 @@
 
     const scheduleAutoplay = () => {
       stopAutoplay();
-      if (prefersReducedMotion || !carouselVisible || document.hidden) return;
+      if (prefersReducedMotion || userControlled || !carouselVisible || document.hidden) return;
       autoTimer = window.setTimeout(() => {
         setActiveCard(activeCard + 1, false);
       }, 4800);
@@ -853,6 +859,7 @@
     };
 
     function setActiveCard(nextIndex, userInitiated = false) {
+      if (userInitiated) userControlled = true;
       activeCard = (nextIndex + cardCount) % cardCount;
       renderCards();
       if (userInitiated) stopAutoplay();
@@ -914,8 +921,12 @@
 
     document.addEventListener("visibilitychange", scheduleAutoplay);
     window.addEventListener("resize", () => {
+      if (Math.abs(mobileStack.clientWidth - measuredWidth) < 1) return;
       window.clearTimeout(resizeTimer);
       resizeTimer = window.setTimeout(measureCards, 180);
+    });
+    mobileStack.querySelectorAll("img").forEach((image) => {
+      if (!image.complete) image.addEventListener("load", measureCards, {once:true});
     });
 
     renderCards();

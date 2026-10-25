@@ -9,6 +9,15 @@ for (const file of (await fs.readdir('.')).filter(name => name.endsWith('.html')
   const edits = [];
   const replace = (node, text) => edits.push({start:node.sourceCodeLocation.startOffset,end:node.sourceCodeLocation.endOffset,text});
   const insert = (node, text) => { const start=node.sourceCodeLocation.endTag.startOffset; edits.push({start,end:start,text}); };
+  $('.foot__bottom > span').each((_,node)=>{
+    if($(node).text().includes('работаем')) replace(node,'<span>работаем по&nbsp;всей России</span>');
+  });
+  $('.foot__brand').each((_,node)=>{
+    const {startOffset,endOffset}=node.sourceCodeLocation;
+    const lineStart=html.lastIndexOf('\n',startOffset)+1;
+    const start=/^[\t ]*$/.test(html.slice(lineStart,startOffset))?lineStart:startOffset;
+    edits.push({start,end:html[endOffset]==='\n'?endOffset+1:endOffset,text:''});
+  });
   if (['index.html','services.html','portfolio.html'].includes(file)) {
     const body=$('body');
     body.addClass('surface-soft');
@@ -19,18 +28,19 @@ for (const file of (await fs.readdir('.')).filter(name => name.endsWith('.html')
   if ($('[data-footer-reveal]').length) replace($('[data-footer-reveal]')[0], signature);
   else insert($('footer.foot')[0], signature);
   for (const [selector, markup, parent] of [
-    ['link[href^="/page-finish.css"]','<link rel="stylesheet" href="/page-finish.css?v=20261011-3">','head'],
+    ['link[href^="/page-finish.css"]','<link rel="stylesheet" href="/page-finish.css?v=20261011-4">','head'],
     ['script[src^="/footer-reveal.js"]','<script src="/footer-reveal.js?v=20261011-2" defer></script>','body']
   ]) {
     if ($(selector).length) replace($(selector)[0],markup);
     else insert($(parent)[0],markup);
   }
   for (const name of ['home-scenes','hero-focus','service-posters']) {
-    const version=name==='service-posters'?'20261011-4':'20261011-3';
+    const version=name==='hero-focus'?'20261011-8':'20261011-4';
     $(`link[href^="/${name}.css"]`).each((_,node)=>replace(node,`<link rel="stylesheet" href="/${name}.css?v=${version}">`));
   }
   let result=html;
   for (const e of edits.sort((a,b)=>b.start-a.start)) result=result.slice(0,e.start)+e.text+result.slice(e.end);
+  result=result.replace(/(<div class="foot__inner">\n)[\t ]+\n/g,'$1');
   await fs.writeFile(file,result);
 }
 console.log('Shared footer and page finishes generated.');

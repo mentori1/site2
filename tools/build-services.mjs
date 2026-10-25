@@ -2,6 +2,20 @@ import fs from 'node:fs/promises';
 import { load } from 'cheerio';
 import { services, renderServicePage, renderHomeServices } from '../src/service-catalog.mjs';
 import { homeScenes } from '../src/home-scenes.mjs';
+import { servicePages } from '../src/seo-services.mjs';
+
+const heroPreview=process.env.MENTORI_HERO_PREVIEW==='1';
+const hero = load(await fs.readFile(heroPreview?'src/hero.html':'src/hero-published.html','utf8'),{},false);
+if(heroPreview) for (const [id,file] of Object.entries({
+  arrow:'arrow-up-right',globe:'globe',home:'house',inbox:'inbox',users:'users',
+  layers:'layers',folder:'folder',check:'check',wallet:'wallet',box:'box',
+  network:'network',chart:'chart-no-axes-combined',search:'search',bell:'bell',settings:'settings'
+})) {
+  const icon=load(await fs.readFile(`assets/icons/system/${file}.svg`,'utf8'),{xmlMode:true});
+  const symbol=hero('<symbol></symbol>').attr({id:`system-${id}`,viewBox:icon('svg').attr('viewBox')});
+  symbol.append(icon('svg').children().toArray());
+  hero('[data-system-icons]').append(symbol);
+}
 
 // Source offsets keep the existing menu, footer and consent code untouched.
 for (const file of ['services.html','index.html']) {
@@ -18,7 +32,7 @@ for (const file of ['services.html','index.html']) {
     const offset=$('head')[0].sourceCodeLocation.endTag.startOffset;
     edits.push({start:offset,end:offset,text:css+'\n'});
   }
-  const version=file==='index.html'?'59':'57';
+  const version=file==='index.html'?'60':'57';
   $('script[src^="main.min.js"]').each((_,node)=>replace(node,'<script src="main.min.js?v='+version+'" defer></script>'));
   const posters='<link rel="stylesheet" href="/service-posters.css?v=20261010-4">';
   if($('link[href^="/service-posters.css"]').length) replace($('link[href^="/service-posters.css"]')[0],posters);
@@ -49,11 +63,12 @@ for (const file of ['services.html','index.html']) {
       name:'Системы, сайты и боты для бизнеса',
       url:'https://mentorios.tech/services',description,
       provider:{'@id':'https://mentorios.tech/#organization'},
+      areaServed:{'@type':'Country',name:'Россия'},
       serviceType:['Системы учёта для бизнеса',...services.map(s=>s.title)],
       hasOfferCatalog:{'@type':'OfferCatalog',name:'Услуги MENTORI TECHNOLOGIES',
         itemListElement:[
           {'@type':'Offer',name:'Система учёта для бизнеса',description:'Индивидуальная стоимость после согласования задачи.'},
-          ...services.map(s=>({'@type':'Offer',name:s.title,price:s.priceValue,priceCurrency:'RUB',url:'https://mentorios.tech/services#'+s.id,description:s.price+'. '+s.terms}))
+          ...services.map(s=>({'@type':'Offer',name:s.title,price:s.priceValue,priceCurrency:'RUB',url:'https://mentorios.tech/'+servicePages.find(p=>p.id===s.id).slug,description:s.price+'. '+s.terms}))
         ]},
       inLanguage:'ru-RU'
     };
@@ -77,15 +92,15 @@ for (const file of ['services.html','index.html']) {
     }
     replace($('script[type="application/ld+json"]')[0],'<script type="application/ld+json">'+JSON.stringify(schema,null,2)+'</script>');
     replace($('.home-offers,#internal-ops')[0],renderHomeServices());
-    replace($('#hero')[0],(await fs.readFile('src/hero.html','utf8')).trim());
+    replace($('#hero')[0],hero.root().html().trim());
     if ($('#brandIntro').length) replace($('#brandIntro')[0],'');
     if ($('#production').length) replace($('#production')[0],'');
     $('[data-stack-card] .stack__visual').each((i,node)=>replace(node,'<div class="stack__visual">'+homeScenes[i]+'</div>'));
     const sceneCss='<link rel="stylesheet" href="/home-scenes.css?v=20261010-4">';
     if ($('link[href^="/home-scenes.css"]').length) replace($('link[href^="/home-scenes.css"]')[0],sceneCss);
     else edits.push({start:$('head')[0].sourceCodeLocation.endTag.startOffset,end:$('head')[0].sourceCodeLocation.endTag.startOffset,text:sceneCss+'\n'});
-    const heroCss='<link rel="stylesheet" href="/hero-focus.css?v=20261011-2">';
-    if ($('link[href^="/hero-focus.css"]').length) replace($('link[href^="/hero-focus.css"]')[0],heroCss);
+    const heroCss='<link rel="stylesheet" href="/'+(heroPreview?'hero-focus.css?v=20261011-8':'hero-published.css?v=20261025-1')+'">';
+    if ($('link[href^="/hero-focus.css"],link[href^="/hero-published.css"]').length) replace($('link[href^="/hero-focus.css"],link[href^="/hero-published.css"]')[0],heroCss);
     else edits.push({start:$('head')[0].sourceCodeLocation.endTag.startOffset,end:$('head')[0].sourceCodeLocation.endTag.startOffset,text:heroCss+'\n'});
     const sceneJs='<script src="/home-scenes.js?v=20261010-2" defer></script>';
     if ($('script[src^="/home-scenes.js"]').length) replace($('script[src^="/home-scenes.js"]')[0],sceneJs);

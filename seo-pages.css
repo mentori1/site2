@@ -1,0 +1,142 @@
+.seo-theme,.seo-page { color:var(--text-primary,#fafaf7); }
+.seo-page { max-width:1320px; margin:0 auto; padding:118px var(--gutter,28px) 48px; }
+.seo-page *,.seo-geography *,.seo-old-related * { box-sizing:border-box; letter-spacing:0; }
+.seo-page a { text-underline-offset:5px; }
+.seo-breadcrumb { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:34px; color:#a39d96; font-size:11px; line-height:1.5; }
+.seo-breadcrumb a:hover { color:#ff8b4b; }
+.seo-breadcrumb > span:last-child { max-width:100%; overflow-wrap:anywhere; }
+.seo-eyebrow { margin:0 0 18px; color:#ffa167; font:400 10px/1.7 var(--font-mono,monospace); text-transform:uppercase; }
+.seo-hero { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:48px; align-items:center; }
+.seo-page h1 { margin:0; font:400 60px/1.03 var(--font-display,serif); text-wrap:balance; overflow-wrap:break-word; }
+.seo-lead { max-width:720px; margin:24px 0 0; color:#b9b4ad; font-size:18px; line-height:1.65; }
+.seo-hero .btn { margin-top:28px; font-size:14px; }
+.seo-figure { min-width:0; margin:0; }
+.seo-figure img { display:block; width:100%; height:auto; max-height:530px; object-fit:contain; border-radius:16px; }
+.seo-figure--portrait img { width:auto; max-width:100%; height:460px; margin:auto; }
+.seo-outcomes { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:32px; margin:64px 0; }
+.seo-outcomes > div { display:flex; gap:16px; align-items:flex-start; }
+.seo-outcomes > div > span { color:#ff955c; font:400 12px/1.8 var(--font-mono,monospace); }
+.seo-outcomes p { margin:0; font-size:17px; line-height:1.5; color:#ded9d2; }
+.seo-reading { display:grid; grid-template-columns:minmax(0,1fr) 275px; gap:70px; align-items:start; }
+.seo-prose { min-width:0; }
+.seo-prose > section { margin:0 0 48px; scroll-margin-top:110px; }
+.seo-prose h2,.seo-faq > h2,.seo-related > h2,.seo-contact h2 { margin:0 0 22px; font:400 36px/1.13 var(--font-display,serif); text-wrap:balance; }
+.seo-prose p { margin:0 0 18px; font-size:16px; line-height:1.85; color:#bcb7b0; }
+.seo-prose ul { padding-left:20px; margin:20px 0; }
+.seo-prose li { padding-left:4px; margin:0 0 12px; font-size:16px; line-height:1.7; color:#d5cfc7; }
+.seo-prose li::marker { color:#ff8a4b; }
+.seo-prose a { color:#ffa36b; text-decoration:underline; }
+.seo-terms { position:sticky; top:110px; padding-left:24px; border-left:1px solid #ffffff20; }
+.seo-terms > span { display:block; color:#a7a098; font-size:11px; margin-bottom:16px; }
+.seo-terms strong { display:block; font-size:27px; font-weight:500; line-height:1.25; color:#ff8a49; }
+.seo-terms p { font-size:13px; line-height:1.7; color:#afa9a0; margin:18px 0; }
+.seo-terms a { display:inline-block; color:#e6ddd4; font-size:13px; border-bottom:1px solid #a7a09870; padding-bottom:5px; }
+.seo-faq { max-width:850px; margin:28px 0 70px; }
+.seo-faq details { border-bottom:1px solid #ffffff1a; padding:0; }
+.seo-faq summary { position:relative; padding:21px 32px 21px 0; list-style:none; cursor:pointer; font-size:17px; line-height:1.5; }
+.seo-faq summary::-webkit-details-marker { display:none; }
+.seo-faq summary::after { content:"+"; position:absolute; right:0; top:19px; color:#ff8d4a; font-size:22px; }
+.seo-faq details[open] summary::after { content:"−"; }
+.seo-faq details p { padding:0 28px 22px 0; margin:0; color:#b8b2ab; font-size:15px; line-height:1.8; }
+.seo-related { margin:52px 0; }
+.seo-related > div { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:28px; }
+.seo-related > div > a { display:block; min-width:0; padding:24px; border:1px solid #ffffff1a; border-radius:8px; background:linear-gradient(135deg,#ffffff06,#ffffff02); transition:border-color .2s; }
+.seo-related > div > a:hover { border-color:#ff9a5c78; }
+.seo-related a > span { display:block; color:#a9a199; font:400 10px/1.6 var(--font-mono,monospace); text-transform:uppercase; }
+.seo-related h3 { margin:15px 0 12px; font:400 26px/1.15 var(--font-display,serif); color:#eee7e0; }
+.seo-related p { color:#b2aba4; font-size:14px; line-height:1.7; }
+.seo-related b { display:block; margin-top:18px; color:#ff9d62; font-size:12px; font-weight:500; }
+.seo-contact { padding:54px 0 20px; }
+.seo-contact > p { color:#aaa198; font-size:13px; margin:0 0 18px; }
+.seo-contact h2 { font-size:44px; }
+.seo-contact .btn { margin-top:10px; font-size:14px; }
+.seo-article-head { max-width:970px; margin-bottom:52px; }
+.seo-article-head h1 { font-size:58px; }
+.seo-author { color:#938b81; font-size:11px; margin:24px 0 0; }
+.seo-article-layout { display:grid; grid-template-columns:240px minmax(0,760px); gap:60px; align-items:start; }
+.seo-toc { position:sticky; top:108px; display:grid; max-height:calc(100svh - 130px); overflow:auto; padding-right:12px; }
+.seo-toc > span { font:400 10px/1.5 var(--font-mono,monospace); text-transform:uppercase; color:#ad9c90; margin-bottom:15px; }
+.seo-toc a { display:block; padding:9px 0; color:#a7a098; font-size:12px; line-height:1.6; }
+.seo-toc a:hover { color:#ff9c63; }
+.seo-table { width:100%; overflow:auto; margin:26px 0; }
+.seo-table table { width:100%; border-collapse:collapse; font-size:13px; line-height:1.7; text-align:left; }
+.seo-table th { font-weight:500; color:#f1e9e0; background:#ffffff06; }
+.seo-table th,.seo-table td { vertical-align:top; padding:14px 12px; border-bottom:1px solid #ffffff18; min-width:120px; }
+.seo-table td { color:#b7b0a7; }
+.seo-service-link { display:block; padding:25px 0; margin-top:34px; text-decoration:none!important; }
+.seo-service-link > span { display:block; color:#a59a8f!important; font-size:12px; line-height:1.6; }
+.seo-service-link > strong { display:block; margin:12px 0; color:#ff9b5e; font:400 28px/1.2 var(--font-display,serif); }
+.seo-sources { padding-top:20px; }
+.seo-sources h2 { font-size:25px; }
+.seo-sources p,.seo-sources li { font-size:13px; }
+.seo-sources a { overflow-wrap:anywhere; }
+.seo-page .portfolio-project { margin:0 0 44px; padding:0; background:transparent; }
+.seo-case-project .portfolio-project__body { grid-template-columns:minmax(0,1.2fr) minmax(0,1fr); gap:40px; }
+.seo-case .portfolio-mobile { margin:60px 0 0; }
+.seo-case-teaser { display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,1fr); gap:48px; align-items:center; padding:30px 0!important; }
+.seo-case-teaser__image { display:block; min-width:0; }
+.seo-case-teaser__image img { display:block; width:100%; height:auto; max-height:420px; object-fit:contain; border-radius:8px; }
+.seo-case-teaser h2 { margin:0 0 20px; font:400 38px/1.12 var(--font-display,serif); }
+.seo-case-teaser p:not(.seo-eyebrow) { color:#b6afa6; font-size:16px; line-height:1.8; }
+.seo-blog-card { display:flex; flex-direction:column; }
+.seo-blog-image { display:grid; place-items:center; height:300px; background:#ffffff03; padding:18px; }
+.seo-blog-image img { display:block; width:100%; height:100%; min-height:0; object-fit:contain; border-radius:8px; }
+.seo-blog-card .blog-feature__body { flex:1; display:flex; flex-direction:column; }
+.seo-blog-card .blog-feature__body h2 { font-size:29px; line-height:1.15; letter-spacing:0; }
+.seo-blog-card .blog-feature__read { margin-top:auto; padding-top:24px; }
+.seo-geography { max-width:1100px; margin:0 auto; padding:50px var(--gutter,28px) 70px; }
+.seo-geography h2 { font:400 35px/1.15 var(--font-display,serif); margin:0 0 20px; }
+.seo-geography p { max-width:760px; color:#b2aba3; font-size:16px; line-height:1.8; }
+.seo-geography a { display:inline-block; margin-top:18px; color:#ff9a5c; font-size:14px; }
+.seo-old-related { max-width:1120px; margin:0 auto; padding:0 var(--gutter,28px) 50px; }
+.seo-old-related .seo-related { margin-top:30px; }
+@media(max-width:1000px) {
+  .seo-hero { gap:28px; }
+  .seo-page h1,.seo-article-head h1 { font-size:48px; }
+  .seo-reading { grid-template-columns:minmax(0,1fr) 235px; gap:34px; }
+  .seo-article-layout { grid-template-columns:190px minmax(0,1fr); gap:32px; }
+  .seo-case-project .portfolio-project__body { grid-template-columns:minmax(0,1fr); }
+  .seo-case-teaser { gap:30px; }
+  .seo-case-teaser h2 { font-size:30px; }
+}
+@media(max-width:760px) {
+  .seo-page { padding:97px 22px 30px; }
+  .seo-breadcrumb { margin-bottom:25px; gap:8px; font-size:10px; }
+  .seo-hero { grid-template-columns:minmax(0,1fr); gap:30px; }
+  .seo-page h1,.seo-article-head h1 { font-size:39px; line-height:1.05; text-wrap:initial; }
+  .seo-eyebrow { font-size:9px; margin-bottom:14px; }
+  .seo-lead { font-size:16px; line-height:1.65; margin-top:20px; }
+  .seo-hero .btn { margin-top:23px; }
+  .seo-figure img { max-height:330px; border-radius:10px; }
+  .seo-figure--portrait img { height:320px; }
+  .seo-outcomes { grid-template-columns:minmax(0,1fr); margin:36px 0; gap:20px; }
+  .seo-outcomes p { font-size:16px; }
+  .seo-reading,.seo-article-layout { grid-template-columns:minmax(0,1fr); gap:30px; }
+  .seo-terms { position:static; order:-1; padding-left:20px; }
+  .seo-terms strong { font-size:25px; }
+  .seo-prose h2,.seo-faq > h2,.seo-related > h2 { font-size:29px; }
+  .seo-prose p,.seo-prose li { font-size:15px; line-height:1.85; }
+  .seo-prose > section { margin-bottom:38px; }
+  .seo-related { margin:38px 0; }
+  .seo-related > div { grid-template-columns:minmax(0,1fr); gap:18px; }
+  .seo-related > div > a { padding:22px; }
+  .seo-related h3 { font-size:26px; }
+  .seo-contact { padding-top:30px; }
+  .seo-contact h2 { font-size:34px; }
+  .seo-toc { position:static; max-height:none; border-left:1px solid #ff9b5e55; padding-left:18px; }
+  .seo-toc a { font-size:13px; padding:7px 0; }
+  .seo-article-head { margin-bottom:30px; }
+  .seo-case-teaser { grid-template-columns:minmax(0,1fr); gap:24px; }
+  .seo-case-teaser h2 { font-size:31px; }
+  .seo-blog-image { height:230px; }
+  .seo-blog-card .blog-feature__body h2 { font-size:27px; }
+  .seo-geography { padding:35px 22px 45px; }
+  .seo-geography h2 { font-size:30px; }
+  .seo-old-related { padding:0 22px 35px; }
+}
+@media(max-width:360px) {
+  .seo-page { padding-left:18px; padding-right:18px; }
+  .seo-page h1,.seo-article-head h1 { font-size:34px; }
+  .seo-lead { font-size:15px; }
+  .seo-table th,.seo-table td { min-width:110px; padding:12px 9px; }
+}

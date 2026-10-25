@@ -1,0 +1,65 @@
+/* Original Excel hero, with devices replacing the live dashboard. */
+.hero--devices { min-height:0; padding:140px var(--gutter) 70px; background:#0b0b0a; }
+.hero--devices * { box-sizing:border-box; letter-spacing:0; }
+.hero--devices .hero__inner { grid-template-columns:minmax(0,1fr) minmax(0,1.05fr); gap:48px; }
+.hero--devices .hero__copy { min-width:0; }
+.hero--devices .hero__title { font-size:76px; line-height:.98; }
+.hero--devices .hero__lead { max-width:580px; margin-top:28px; }
+.hero--devices .hero__actions { flex-wrap:wrap; }
+.hero-device { margin:0; min-width:0; width:100%; align-self:center; }
+.hero-device__desktop img { display:block; width:100%; height:auto; aspect-ratio:3/2; object-fit:contain; }
+.hero-device__mobile { display:none; }
+.hero-device figcaption { margin:8px 0 0; text-align:center; font:400 10px/1.5 var(--font-sans,sans-serif); color:#939795; }
+.hero--devices + .services-stack { padding-top:40px; }
+@media(prefers-reduced-motion:no-preference) { .hero-device { animation:hero-device-enter .65s ease-out both; } }
+@keyframes hero-device-enter { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+@media(min-width:1600px) { .hero--devices .hero__title { font-size:88px; } }
+@media(min-width:801px) and (max-width:1100px) {
+  .hero--devices { padding-top:120px; padding-bottom:48px; }
+  .hero--devices .hero__inner { gap:24px; }
+  .hero--devices .hero__title { font-size:54px; }
+  .hero--devices .hero__lead { font-size:16px; }
+  .hero--devices .hero__actions { gap:12px; }
+  .hero--devices .hero__actions .btn { padding:14px 18px; font-size:13px; }
+}
+@media(max-width:800px) {
+  .hero--devices { padding:104px 24px 26px; }
+  .hero--devices .hero__inner { grid-template-columns:minmax(0,1fr); gap:24px; max-width:600px; }
+  .hero--devices .hero__title { font-size:54px; max-width:580px; }
+  .hero--devices .hero__lead { font-size:16px; line-height:1.5; margin-top:20px; }
+  .hero--devices .hero__actions,.hero--devices .hero-device { display:none; }
+  .hero-device__desktop { display:none; }
+  .hero-device__mobile { display:flex; justify-content:center; height:280px; }
+  .hero-device__phone { position:relative; width:138px; height:280px; padding:5px; border:2px solid #93989b; border-radius:24px; background:#060708; box-shadow:inset 0 0 0 1px #303336,0 12px 22px #0006; overflow:hidden; }
+  .hero-device__status { position:relative; display:flex; align-items:center; justify-content:space-between; height:18px; padding:0 7px; background:#0e1014; font:500 6px/1 sans-serif; color:#fff; border-radius:16px 16px 0 0; }
+  .hero-device__status i { display:block; width:38px; height:10px; border-radius:10px; background:#000; }
+  .hero-device__phone img { display:block; width:100%; height:242px; object-fit:cover; object-position:top; border-radius:0 0 14px 14px; }
+  .hero-device__home { position:absolute; bottom:5px; left:33%; width:34%; height:2px; border-radius:3px; background:#e3e3e3; }
+}
+@media(max-width:480px) {
+  .hero--devices { padding:94px 20px 22px; }
+  .hero--devices .hero__inner { gap:20px; }
+  .hero--devices .hero__title { font-size:43px; }
+  .hero--devices .hero__lead { font-size:15px; margin-top:18px; }
+  .hero--devices .hero__actions { display:none; }
+  .hero--devices .hero__actions .btn { flex:1 1 0; padding:12px 8px; min-height:46px; font-size:12px; text-align:center; }
+  .hero-device__mobile { height:280px; }
+  .hero-device__phone { width:138px; height:280px; border-radius:24px; }
+  .hero-device__phone img { height:242px; }
+  .hero-device figcaption { font-size:9px; }
+}
+@media(max-width:360px) {
+  .hero--devices .hero__title { font-size:35px; }
+  .hero--devices .hero__lead { font-size:14px; }
+  .hero--devices .hero__actions .btn { font-size:11px; }
+}
+@media(max-width:600px) and (max-height:740px) {
+  .hero--devices { padding-top:86px; padding-bottom:16px; }
+  .hero--devices .hero__title { font-size:35px; }
+  .hero--devices .hero__lead { font-size:14px; margin-top:14px; }
+  .hero--devices .hero__actions { margin-top:16px; }
+  .hero--devices .hero__inner { gap:16px; }
+  .hero-device__mobile { height:178px; }
+  .hero-device__phone { transform:scale(.636); transform-origin:top center; }
+  .hero--devices + .services-stack { padding-top:24px; }
+}

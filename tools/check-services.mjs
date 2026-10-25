@@ -2,6 +2,7 @@ import fs from 'node:fs/promises';
 import assert from 'node:assert/strict';
 import { load } from 'cheerio';
 import { services } from '../src/service-catalog.mjs';
+import { servicePages } from '../src/seo-services.mjs';
 const page=load(await fs.readFile('services.html','utf8'));
 const home=load(await fs.readFile('index.html','utf8'));
 assert.equal(page('.offer-card').length,6);
@@ -17,7 +18,7 @@ for(const s of services) {
   assert.equal(page('#'+s.id+' [data-service]').attr('data-service'),s.title);
   assert.equal(page('#'+s.id+' .offer-details').length,1);
   assert.equal(page('#'+s.id+' .offer-details[open]').length,0,'Compact initial state');
-  assert.equal(home('a[href="/services#'+s.id+'"]').length,1);
+  assert.equal(home('.home-offer[href="/'+servicePages.find(p=>p.id===s.id).slug+'"]').length,1);
 }
 const schema=JSON.parse(page('script[type="application/ld+json"]').first().text());
 const offers=schema.hasOfferCatalog.itemListElement;
@@ -33,7 +34,7 @@ assert.equal(page('.offer-card__decision').length,6);
 for(const s of services) {
   const poster=page('#'+s.id+' .offer-poster');
   assert(!poster.text().includes('₽'),'Price is not repeated on the poster');
-  const teaser=home('a[href="/services#'+s.id+'"]');
+  const teaser=home('.home-offer[href="/'+servicePages.find(p=>p.id===s.id).slug+'"]');
   assert.equal(teaser.find('.offer-poster').length,1,'Homepage reuses the complete service cover');
   assert.equal(teaser.find('.home-offer__price').length,0,'Prices appear only on the services page');
   assert(!teaser.attr('aria-label').includes('₽'),'Homepage accessible labels also omit prices');
