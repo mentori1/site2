@@ -79,10 +79,15 @@ const posterCopy = {
   avito:{heading:'АВИТО<br>ПОД КЛЮЧ',accent:'ИЗ ПОИСКА В ДИАЛОГ',facts:'Упаковка · Ведение<br>Бот для ответов в бонус'},
   seo:{heading:'SEO<br>ПРОДВИЖЕНИЕ',accent:'ВАС УЖЕ ИЩУТ',facts:'Аудит · Страницы<br>Контент · Индексация'}
 };
-export function renderPoster(s) {
+export function renderPoster(s, {clean=false}={}) {
   const p=posterCopy[s.id];
   const visual=s.id==='websites'?'<div class="offer-art offer-art--websites offer-art--generated"><img class="offer-poster__device" src="/assets/services/website-phone-v3.webp" width="733" height="1100" alt="iPhone с каталогом Спектра Металла" loading="lazy" decoding="async"><span class="offer-art__caption">Визуализация сайта «Спектр Металла»</span></div>':s.visual;
-  return '<div class="offer-poster offer-poster--'+s.id+'">'+visual+'<div class="offer-poster__paper" aria-hidden="true"></div><div class="offer-poster__motif" aria-hidden="true"><i></i><i></i><i></i></div><div class="offer-poster__brand" aria-hidden="true">MENTORI <small>TECH</small></div><div class="offer-poster__copy"><strong class="offer-poster__headline">'+p.heading+'</strong><b class="offer-poster__accent">'+p.accent+'</b><p>'+p.facts+'</p></div></div>';
+  const poster='<div class="offer-poster offer-poster--'+s.id+'">'+visual+'<div class="offer-poster__paper" aria-hidden="true"></div><div class="offer-poster__motif" aria-hidden="true"><i></i><i></i><i></i></div><div class="offer-poster__brand" aria-hidden="true">MENTORI <small>TECH</small></div><div class="offer-poster__copy"><strong class="offer-poster__headline">'+p.heading+'</strong><b class="offer-poster__accent">'+p.accent+'</b><p>'+p.facts+'</p></div></div>';
+  if(!clean)return poster;
+  const $=load(poster,null,false);
+  $('.offer-art__caption').remove();
+  $('.offer-poster').addClass('offer-poster--clean');
+  return $.html();
 }
 function renderCard(s) {
   const href='/'+servicePages.find(p=>p.id===s.id).slug;
@@ -99,15 +104,9 @@ export function renderServicePage() {
   ].join('\n');
 }
 export function renderHomeServices() {
-  const cleanPoster = s => {
-    const $ = load(renderPoster(s), null, false);
-    $('.offer-art__caption').remove();
-    $('.offer-poster').addClass('offer-poster--clean');
-    return $.html();
-  };
   const links=services.map(s=>[
     '<a class="home-offer" href="/'+servicePages.find(p=>p.id===s.id).slug+'" data-service="'+s.title+'" aria-label="'+s.short+'">',
-    '<div aria-hidden="true">'+cleanPoster(s)+'</div>',
+    '<div aria-hidden="true">'+renderPoster(s,{clean:true})+'</div>',
     '<span class="home-offer__title">'+s.short+'</span></a>'
   ].join('')).join('');
   return '<section class="home-offers" id="directions" aria-labelledby="home-offers-title"><div class="home-offers__heading"><h2 id="home-offers-title">Что ещё можем<br><em>сделать для вас</em></h2><p>От записи на занятия до сайта и рекламы.<br>Конкретная задача, отдельное решение.</p></div><div class="home-offers__grid">'+links+'</div><a class="offer-case" href="/services">Все услуги и что в них входит</a></section>';

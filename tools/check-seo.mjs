@@ -79,11 +79,17 @@ for(const p of newArticles){
 }
 assert.equal(pages.get('/blog')('.seo-blog-card').length,11);
 const blog=pages.get('/blog'),catalog=pages.get('/services');
+const posterCss=await fs.readFile('service-posters.css','utf8');
+assert(posterCss.includes('.offer-poster.offer-poster--clean { padding-bottom:0; }'),'Clean-cover spacing must override the base poster rule');
 assert.equal(blog('link[data-blog-covers]').length,2);
 assert.equal(blog('.seo-blog-card .offer-poster').length,9,'Use the complete approved service covers, not raw device images');
+assert.equal(blog('.seo-blog-card .offer-poster--clean').length,9,'Every blog poster has no reserved caption strip');
+assert.equal(blog('.seo-blog-card .offer-art__caption').length,0,'No caption strips in blog covers');
 for(const node of blog('.seo-blog-card .offer-poster').toArray()){
   const cover=blog(node),kind=cover.attr('class').match(/offer-poster--(\w+)/)[1];
-  assert.equal(blog.html(node),catalog.html(catalog('#'+kind+' .offer-poster')[0]),kind+': blog cover must match the approved service poster');
+  const reference=catalog('#'+kind+' .offer-poster').clone().addClass('offer-poster--clean');
+  reference.find('.offer-art__caption').remove();
+  assert.equal(blog.html(node),catalog.html(reference),kind+': blog cover must match the approved service poster without its caption');
   assert.equal(cover.find('.offer-poster__headline').length,1);
   assert.equal(cover.find('.offer-poster__brand').length,1);
 }

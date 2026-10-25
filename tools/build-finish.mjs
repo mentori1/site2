@@ -40,7 +40,7 @@ for (const file of (await fs.readdir('.')).filter(name => name.endsWith('.html')
     else insert($(parent)[0],markup);
   }
   for (const name of ['home-scenes','hero-focus','service-posters']) {
-    const version=name==='hero-focus'?'20261011-8':'20261011-4';
+    const version=name==='hero-focus'?'20261011-8':name==='service-posters'?'20261025-2':'20261011-4';
     $(`link[href^="/${name}.css"]`).each((_,node)=>{
       $(node).attr('href',`/${name}.css?v=${version}`);
       replace(node,$.html(node));

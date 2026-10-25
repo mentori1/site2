@@ -8,7 +8,7 @@ const reportDirectory=process.env.MENTORI_REPORT_DIR||'../reports/seo-expansion-
 const report=reportDirectory+'/live-verification.json';
 const sitemap=load(await fs.readFile('sitemap.xml','utf8'),{xmlMode:true});
 const routes=sitemap('loc').toArray().map(n=>new URL(sitemap(n).text()).pathname);
-const resources=new Set(['/hero-published.css?v=20261025-1','/seo-pages.css?v=20261025-3','/favicon.svg','/assets/mentori-technologies-preview-2026.png','/assets/favicon-512.png']);
+const resources=new Set(['/hero-published.css?v=20261025-1','/seo-pages.css?v=20261025-3','/service-posters.css?v=20261025-2','/favicon.svg','/assets/mentori-technologies-preview-2026.png','/assets/favicon-512.png']);
 const result={checkedAt:new Date().toISOString(),pages:[],resources:[],redirects:[],failures:[]};
 const hash=data=>createHash('sha256').update(data).digest('hex');
 async function request(url,options={}){
@@ -48,7 +48,7 @@ for(const resource of resources){
   try{
     const {response,body}=await request(origin+resource);
     const row={resource,status:response.status,bytes:body.length,type:response.headers.get('content-type')};
-    if(['/hero-published.css','/seo-pages.css','/favicon.svg','/assets/mentori-technologies-preview-2026.png','/assets/favicon-512.png'].includes(resource.split('?')[0]))row.matchesLocal=hash(body)===hash(await fs.readFile(resource.slice(1).split('?')[0]));
+    if(['/hero-published.css','/seo-pages.css','/service-posters.css','/favicon.svg','/assets/mentori-technologies-preview-2026.png','/assets/favicon-512.png'].includes(resource.split('?')[0]))row.matchesLocal=hash(body)===hash(await fs.readFile(resource.slice(1).split('?')[0]));
     result.resources.push(row);
     assert.equal(response.status,200,resource+': resource status');
     assert(body.length>0,resource+': resource content');

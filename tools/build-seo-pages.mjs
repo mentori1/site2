@@ -109,14 +109,14 @@ await patch('services.html',($,replace,append)=>{
 });
 function blogCover(a){
   const offer=services.find(s=>s.id===a.service);
-  if(offer)return '<div class="seo-blog-cover" aria-hidden="true">'+renderPoster(offer)+'</div>';
+  if(offer)return '<div class="seo-blog-cover" aria-hidden="true">'+renderPoster(offer,{clean:true})+'</div>';
   return '<div class="seo-blog-image"><img src="'+service(a.service).image+'" alt="" width="1536" height="1024" loading="lazy" decoding="async"></div>';
 }
 const blogCard=a=>'<a class="blog-feature seo-blog-card" href="'+path(a)+'">'+blogCover(a)+'<div class="blog-feature__body"><div class="blog-feature__meta"><span>'+esc(a.category||service(a.service).h1)+'</span></div><h2>'+esc(a.h1)+'</h2><p>'+esc(a.description)+'</p><span class="blog-feature__read"><i>Читать</i></span></div></a>';
 await patch('blog.html',($,replace,append)=>{
   const ordered=[...newArticles.filter(a=>a.guide),...newArticles.filter(a=>!a.guide),...oldArticles];
   replace($('.blog-index__grid')[0],'<div class="blog-index__grid">'+ordered.map(blogCard).join('')+'</div>');addCss($,replace,append);
-  for(const [name,version] of [['service-catalog','20261010-5'],['service-posters','20261011-4']]){
+  for(const [name,version] of [['service-catalog','20261010-5'],['service-posters','20261025-2']]){
     const link='<link rel="stylesheet" href="/'+name+'.css?v='+version+'" data-blog-covers>';
     const nodes=$('link[href^="/'+name+'.css"]').toArray();
     if(nodes.length){replace(nodes[0],link);nodes.slice(1).forEach(n=>replace(n,''));}
